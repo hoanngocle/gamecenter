@@ -1,0 +1,97 @@
+<?php include('../includes/backend/header-admin.php');?>
+<?php include('../includes/backend/mysqli_connect.php'); ?>
+<?php include('../includes/functions.php'); ?>
+<?php include('../includes/backend/sidebar-admin.php'); ?>
+
+<?php 
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') { // gia tri ton tai, xu ly form
+		//tao bien luu loi
+		$errors = array();
+		// kiem tra category co gia tri hay ko
+		if(empty($_POST['category'])){
+			$errors[] = "category";
+		}else {
+			// ham nay de tranh loi MySQL Injection, tranh cac loi script khi nhap input
+			$cat_name = mysqli_real_escape_string($dbc, strip_tags($_POST['category']));
+		}
+		// kiem tra position co gia tri hay ko
+		if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+			$position = $_POST['position'];
+		}else {
+			$errors[] = "position";
+		}
+		
+		if (empty($errors)) {// neu ko co loi xay ra thi chen vao co so du lieu
+
+			// cau lenh insert category
+			$query = "INSERT INTO tblcategories (cat_name, position) VALUES ('{$cat_name}', $position)";
+			// gia tri tra ve result, hoac la die thi bao loi ra man hinhf
+			$result = mysqli_query($dbc, $query);
+			// ham tra ve ket qua co dung hay ko
+			confirm_query($result, $query);
+
+			// kiem tra xem co them thanh cong hay khong
+			if(mysqli_affected_rows($dbc) == 1){ // neu them thanh cong, in ra 
+				$messages = "<p class='success'>The category was added successfully!</p>";
+			}else {
+				$messages = "<p class='warning'>Could not added to the database due to a system error!</p>";
+			}
+
+			// co loi thi in ra dong nay
+		} else {
+			$messages =  "<p class='warning'>Please fill all the required fields!</p>";
+		}
+	} // END main IF submit condition
+?>
+
+<div id="content">
+	<h2>Create a categories</h2>
+	<?php if (!empty($messages)) echo "$messages"; ?>
+	<form id="add_cat" action="" method="post">
+		<fieldset>
+			<legend>Add a category</legend>
+				<div>
+					<label for="category">Category Name: <span class="required">*</span>
+						<?php 
+							if (isset($errors) && in_array('category', $errors)) {
+								echo "<p class='warning'>Please fill in the category name!</p>";
+							}
+						?>
+					</label>
+					<input type="text" name="category" id="category" value="<?php if(isset($_POST['category'])) echo strip_tags($_POST['category']); ?>" size="20" maxlength="150" tabindex="1">
+				</div>
+				<div>
+					<label for="position">Position: <span class="required"></span>
+						<?php 
+							if (isset($errors) && in_array('position', $errors)) {
+								echo "<p class='warning'>Please fill in the position name!</p>";
+							}
+						?>
+					</label>
+					<select name="position" tabindex='2'>
+						<?php 
+							$query = "SELECT count(cat_id) AS count FROM tblcategories";
+
+							$result = mysqli_query($dbc, $query) 
+								or 
+							die("Query {$query}\n <br> MYSQL Error: " .mysqli_error($dbc));
+
+
+							if(mysqli_num_rows($result) == 1 ){
+								list($num) = mysqli_fetch_array($result, MYSQLI_NUM);
+								for ($i=1; $i <= $num+1; $i++) { // tao vong for de tao ra option, cong them 1 de tao ra option
+									echo "<option value='{$i}'"; 
+										if (isset($_POST['position']) && $_POST['position'] == $i) echo "selected='selected'";
+									echo ">".$i."</option>";
+									
+								}
+							}
+						 ?>
+					</select>
+				</div>
+		</fieldset>
+		<p><input type="submit" name="submit" value="Add Category"></p>
+	</form>
+</div><!--end content-->
+<?php include('../includes/backend/sidebar-b.php');?>
+<?php include('../includes/backend/footer-admin.php'); ?>
