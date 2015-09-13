@@ -126,16 +126,16 @@
 
 	function get_news_by_id($id){
 		global $dbc;
-			$query = "SELECT n.news_id, n.title, n.content, n.banner, n.avatar, n.type, ";
+			$query = "SELECT n.news_id, n.title, n.content, n.banner, n.avatar, t.type_name, ";
 			$query .= " DATE_FORMAT( n.post_on, '%b') AS month, ";
 			$query .= " DATE_FORMAT( n.post_on, '%d') AS day, ";
 			$query .= " DATE_FORMAT( n.post_on, '%b %d, %Y') AS date, ";
-			$query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id, c.cat_name ";
+			$query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
 			$query .= " FROM tblnews AS n ";
 			$query .= " INNER JOIN tblusers AS u ";
 			$query .= " USING ( user_id ) ";
-			$query .= " INNER JOIN tblcategories AS c ";
-			$query .= " USING ( cat_id ) ";
+			$query .= " INNER JOIN tbltypes AS t ";
+			$query .= " USING ( type_id ) ";
 			$query .= " WHERE n.news_id={$id} LIMIT 1";
 
 			$result = mysqli_query($dbc, $query);
@@ -208,14 +208,14 @@
 	// Dung cho backend - list news #################################################################
 	function get_all_news($order_by){
 		global $dbc;
-			$query = "SELECT n.news_id, c.cat_name, n.type, n.title, n.content, ";
+			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, ";
 			$query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
 			$query .= " DATE_FORMAT(n.post_on, '%b %d %Y') AS date ";
 			$query .= " FROM tblnews AS n ";
 			$query .= " INNER JOIN tblusers AS u ";
 			$query .= " USING(user_id) ";
-			$query .= " INNER JOIN tblcategories AS c";
-			$query .= " USING(cat_id) ";
+			$query .= " INNER JOIN tbltypes AS t";
+			$query .= " USING (type_id) ";
 			$query .= " ORDER BY {$order_by} ASC ";
 
 			$result = mysqli_query($dbc, $query);
@@ -323,4 +323,16 @@
 	
 			return $result;
 	} // END of query
+
+//  Dung cho backend - show image #################################################################	
+    function get_news_id($nid){
+		global $dbc;
+			$query = "SELECT * FROM tblnews WHERE news_id = {$nid}";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+	
+			return $result;
+	} // END of query
+    
 ?> 

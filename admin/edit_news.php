@@ -54,23 +54,30 @@
 				$content = mysqli_real_escape_string($dbc, $_POST['content']);
 			}
 
+            //kiem tra trang thai bai viet co gia tri hay ko
+            if (isset($_POST['status'])) {
+                $status = $_POST['status'];
+            }else{
+                $errors[] = 'status';
+            }
+            
 			// kiem tra xem co loi hay khong
 			if (empty($errors)) {
 				// neu ko co loi xay ra bat dau chen vao CSDL
 				$result = edit_news($nid);
 				if (mysqli_affected_rows($dbc) == 1) {
-					$success = "The news was edited successfully!</p>";
+					$success = "Chỉnh sửa bài viết thành công!";
 				} else {
-					$fail = "The news was edited fail!</p>";
+					$fail = "Chỉnh sửa bài viết thất bại!";
 				} // END IF mysqli_affected_rows
 			} else {
-				$error = "Please fill in all the required fields";
+				$error = "Tất cả các trường đều phải được nhập đầy đủ!";
 			}
 		} // END main IF submit condition
 
 	}else {
 	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-	redirect_to('admin/view_pages.php');
+	redirect_to('admin/index.php');
 }
 ?>
 <?php 
@@ -84,7 +91,7 @@
 		$news = mysqli_fetch_array($result, MYSQLI_ASSOC);
 	}else {
 		// Neu khong co page tra ve
-		$messages = "The news does not exist!";
+		$messages = "Bài viết không tồn tại!";
 	}
 
 	?>
@@ -133,14 +140,7 @@
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title">Title</label>
 								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="Enter title " value="<?php if(isset($news['title'])) echo $news['title']; ?>"/>
-								<?php 
-									if (isset($errors) && in_array('title', $errors)) {
-										echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-													<p>Please fill in the title </p>
-                    							</div>";
-
-										}
-								?>
+                                <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'></div>
 								</div>
 								
 								<!-- Select Category ####################### -->
@@ -160,13 +160,8 @@
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('category', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please pick the category </p>
-	                    							</div>";
-										}
-									?>
+                                    <div style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                    </div>
 				                </div>
           
 								<!-- Select Type ####################### -->
@@ -176,28 +171,20 @@
 				                        <option value="Games"<?php if (isset($news['type']) && $news['type'] == "Games") echo "selected='selected'"; ?> >Games</option>
 				                        <option value="News" <?php if (isset($news['type']) && $news['type'] == "News") echo "selected='selected'"; ?> >News</option>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('type', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please pick the type </p>
-	                    							</div>";
-										}
-									?>
+
+                                    <div style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                    </div>
 				                </div>
+                                
 								<!-- Avatar ####################### -->
 								<div class="form-group" style="font-size: 18px">
 								    <label for="image">Images Input</label> <br>
 								    <img id="avatar" style="width: 300px; height: 300px;" />
 									<input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewBanner();" />
 								</div>
-								<?php 
-										if (isset($errors) && in_array('myAvatar', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
+                                
+								<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'></div>
 
-										}
-									?>
 								<!-- Banner ####################### -->
 
 								<div class="form-group" style="font-size: 18px">
@@ -205,26 +192,13 @@
 				                    <img id="banner" style="width: 800px; height: 200px;" />
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file"  onchange="PreviewBanner();" />
 					            </div>	
+                                <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'></div>";
 
-								<?php 
-										if (isset($errors) && in_array('myBanner', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
-
-										}
-									?>
 								<!-- Content ####################### -->	
 								<div class="form-group" style="font-size: 18px">
 								   	<label for="content">Content</label>
 								    <textarea name="content" class="form-control" rows="9" style="font-size: 15px" placeholder="Please text some content" ><?php if(isset($news['content'])) echo htmlentities($news['content'], ENT_COMPAT, 'UTF-8'); ?></textarea>
-								<?php 
-										if (isset($errors) && in_array('title', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
-										}
-									?>
+								<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'></div>
 								</div>
 								
 								<!-- Update Button -->

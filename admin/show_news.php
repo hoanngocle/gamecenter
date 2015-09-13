@@ -1,6 +1,7 @@
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
+    include('../includes/errors.php');
 	?>
 <?php
 	if( $nid = validate_id($_GET['nid'])){
@@ -25,7 +26,7 @@
                 <div class="col-md-11" style="margin-left: 48.75px">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center"><?php echo $news['type'] ?></h2>
+                            <h2 style="text-align: center"><?php echo $news['type_name'] ?></h2>
                             <h4 style="text-align: center" ><a href="view_news.php">List News & Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
@@ -48,14 +49,10 @@
 					                 	<strong style="font-size : 18px">News ID :  </strong> <?php echo $news['news_id']; ?> 
 					                </div>
 					            </div>
+					            
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Category : </strong> <?php echo $news['cat_name']; ?> 
-					                </div>
-					            </div>
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $news['type']; ?> 
+					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $news['type_name']; ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">

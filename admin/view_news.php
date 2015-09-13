@@ -2,6 +2,7 @@
 	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
+    include('../includes/errors.php');
 ?>
 
 	<!-- Script ################## -->
@@ -15,7 +16,7 @@
 
             <div class="row">
                 <div class="col-md-11" style="margin-left: 48.75px">
-                  <!--   Kitchen Sink -->
+    <!-- ============================== Table News [start] ============================== -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center">News </h2>
@@ -32,8 +33,8 @@
 							                <th style="width: 34% ; text-align:center">Content</th>
 							                <th style="width: 8% ; text-align:center"><a href="view_news.php?sort=by">Posted By</a></th>
 							                <th style="width: 10% ; text-align:center"><a href="view_news.php?sort=on">Posted On</a></th>
-                                            <th style="width: 3% ; text-align:center">Status</th>
-							                <th style="width: 9% ; text-align:center"> </th>
+                                            <th style="width: 2% ; text-align:center">Status</th>
+							                <th style="width: 10% ; text-align:center"> </th>
                                         </tr>
                                     </thead>
 
@@ -62,6 +63,10 @@
 														$order_by = 'date';
 														break;
 
+                                                    case 'stt':
+                                                        $order_by = 'status';
+                                                        break;
+                                                    
 													default:
 														$order_by = 'news_id';
 														break;
@@ -73,39 +78,46 @@
 
 										// Truy xuat csdl de hien thi category
 										$result = get_all_news($order_by);
-
 										if(mysqli_num_rows($result) > 0 ) {
 
 										// vong lap while de hien thi ket qua tu csdl ra
 									 	while($news = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
-									 		echo "
+                                            if($news['status'] == 0){
+                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                            }else {
+                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px' onClick='change_status({$news['status']});></a>";
+                                            }
+                                        ?>
+									 		
 								 				<tr>
-									                <td style='text-align:right' >{$news['news_id']}</td>
-									                <td style='text-align:left'>{$news['cat_name']}</td>
-									                <td style='text-align:left'>{$news['type']}</td>
-									                <td style='text-align:left'>{$news['title']}</td>
-									                <td style='text-align:justify'>".excerpt($news['content'])." ... </td>
-									                <td style='text-align:left'>{$news['name']}</td>
-									                <td style='text-align:right'>{$news['date']}</td>
+									                <td style='text-align:right' ><?= $news['news_id'] ?></td>
+									                <td style='text-align:left'><?= $news['type_name'] ?></td>
+									                <td style='text-align:left'><?= $news['title'] ?></td>
+									                <td style='text-align:justify'><?= excerpt($news['content']) ?>" ... </td>
+									                <td style='text-align:left'><?= $news['name'] ?></td>
+									                <td style='text-align:right'><?= $news['date'] ?></td>
+                                                    <td style='text-align:center'><?= $active ?></td>
+                                                        
 									                <td style='width : 100px'>
-									                <a class='fa fa-eye' href='show_news.php?nid={$news['news_id']}' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-pencil' href='edit_news.php?nid={$news['news_id']}' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete({$news['news_id']});'></a>
+									                <a class='fa fa-eye' href='show_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
+									                <a class='fa fa-pencil' href='edit_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
+									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete(<?= $news['news_id'] ?>);'></a>
 									                </td>
 												</tr>
-									 			";
-										 	}// END While loop
-										} else {
-										 	// Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page
-										 	$messages = "<p class='warning'>There is currently no page to display. Please create a page first!</p>";
-										}
-									?>
+									 			
+                                    <?php }// END While loop
+										} else { 
+                                    ?>
+                                        <!--Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page-->
+										 	<p class='warning'><?= $error_news_no_item?></p>
+									<?php 	}   ?>
 							    	</tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+    <!-- ============================== Table News [end] ============================== -->
     			</div>
     		</div>
 		</div>
