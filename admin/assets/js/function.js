@@ -56,13 +56,3 @@
 	}
         
 // #########################################################################################
-
-	// comfirm change status
- 	function check_delete(id){
-		var result = confirm("Do You Really Want To Change Status?");
-		if (result == true) {
-		    window.location="change_status.php?nid="+id;
-		    return true;
-		    }
-		return false;
-		}

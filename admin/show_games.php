@@ -4,12 +4,12 @@
     include('../includes/errors.php');
 	?>
 <?php
-	if( $nid = validate_id($_GET['nid'])){
-		$set = get_news_by_id($nid);
+	if( $gid = validate_id($_GET['gid'])){
+		$set = get_news_by_id($gid);
 
-		$news = array();
+		$games = array();
 		if(mysqli_num_rows($set) > 0 ) {
-		 	$news = mysqli_fetch_array($set, MYSQLI_ASSOC);
+		 	$games = mysqli_fetch_array($set, MYSQLI_ASSOC);
 		}else {
 			redirect_to('admin/view_news.php');
 		} 
@@ -26,8 +26,8 @@
                 <div class="col-md-11" style="margin-left: 48.75px">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center"><?php echo $news['title'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
+                            <h2 style="text-align: center"><?php echo $games['title'] ?></h2>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
@@ -38,7 +38,7 @@
 				                            <strong style="font-size : 18px">Avatar : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?php echo $news['image']; ?>" alt="<?php echo $news['image']; ?>">
+				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?php echo $games['image']; ?>" alt="<?php echo $games['image']; ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -46,31 +46,31 @@
 
 			                  	<div class="col-md-5" style="margin: 30px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?php echo $news['news_id']; ?> 
+					                 	<strong style="font-size : 18px">News ID :  </strong> <?php echo $games['news_id']; ?> 
 					                </div>
 					            </div>
 					            
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $news['type_name']; ?> 
+					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $games['type_name']; ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?php echo $news['title']; ?> 
+					                 	<strong style="font-size : 18px">Game: </strong> <?php echo $games['title']; ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?php echo $news['name']; ?> 
+					                 	<strong style="font-size : 18px">Posted By : </strong> <?php echo $games['name']; ?> 
 					                </div>
 					            </div>
 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?php echo $news['date']; ?>
+					                 	<strong style="font-size : 18px">Posted On : </strong> <?php echo $games['date']; ?>
 					                </div>
 					            </div>
 
@@ -80,7 +80,7 @@
 				                            <strong style="font-size : 18px">Banner : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?php echo $news['banner']; ?>" alt="<?php echo $news['banner']; ?>">
+                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?php echo $games['banner']; ?>" alt="<?php echo $games['banner']; ?>">
 				                        </div>				                        
 				                    </div>
                             	 </div>
@@ -91,7 +91,7 @@
 				                            <strong style="font-size : 18px">Content  </strong>
 				                        </div>
 				                        <div class="panel-body">
-				                            <p><?php echo $news['content']; ?> </p>
+				                            <p><?php echo $games['content']; ?> </p>
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -99,7 +99,7 @@
                                 <div class="col-md-11" style="margin-left: 43.75px">
 					                <div class="alert alert-success">
 					                 	<strong style="font-size : 18px">Status : </strong>
-                                        <?php if ($news['status'] == 0){
+                                        <?php if ($games['status'] == 0){
                                             echo "Inactive";
                                         }else{
                                             echo "Active";
@@ -110,8 +110,8 @@
                             	<div class="col-md-11">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_news.php?nid=<?= $nid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete(<?= $nid ?>)">Delete</a>
+						                 	<a href="edit_games.php?gid=<?= $gid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
+											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete(<?= $gid ?>)">Delete</a>
 						                </div>
                             		</center>   
 					            </div>

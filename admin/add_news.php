@@ -17,7 +17,7 @@
 			$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
 		}
 
-		// kiem tra xem category co gia tri hay ko
+		// kiem tra xem type co gia tri hay ko
 		if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
 			$type_id = $_POST['type'];
 		}else{
@@ -38,7 +38,7 @@
 			$myBanner = $_FILES['myBanner']['name'];
 		}
 		
-		// kiem tra position co gia tri hay ko
+		// kiem tra content co gia tri hay ko
 		if (empty($_POST['content'])) {
 			$errors[] = 'content';
 		}else {
@@ -113,13 +113,13 @@
                                     <label for="title">Title</label>
                                     <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
 								<?php 
-										if (isset($errors) && in_array('title', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Title không được bỏ trống </p>
-	                    							</div>";
+                                    if (isset($errors) && in_array('title', $errors)) {
+                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Title không được bỏ trống </p>
+                                                </div>";
 
-										}
-									?>
+                                    }
+                                ?>
 								</div>
                                 
 								<!-- ================= Type [start] ===================== -->

@@ -6,7 +6,21 @@
 
 <?php 
 	// Kiem tra gia gtri cua bien pid tu $_GET
-	if( $nid = validate_id($_GET['nid'])){
+	if( $gid = validate_id($_GET['gid'])){
+
+	// Chon news trong CSDL de hien thi ra trinh duyet
+        $query = "SELECT * FROM tblnews WHERE news_id = {$gid}";
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        if (mysqli_num_rows($result) == 1) {
+            // Neu co page tra ve
+            $games = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }else {
+            // Neu khong co page tra ve
+            $messages = "Bài viết không tồn tại!";
+        }
+
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') { // gia tri ton tai, xu ly form
 			//tao bien luu loi
@@ -26,7 +40,8 @@
                 $errors[] = 'type';
             }
 
-			// kiem tra avatar co gia tri hay khong
+			
+            // kiem tra avatar co gia tri hay khong
             if (empty($_FILES['myAvatar']['name'])) {
                 $myAvatar = $games['image'];
             } else {
@@ -38,7 +53,7 @@
                 $myBanner = $games['banner'];
             } else {
                 $myBanner =  $_FILES['myBanner']['name'];
-            }					
+            }			
 			
 			// kiem tra content co gia tri hay ko
 			if (empty($_POST['content'])) {
@@ -57,7 +72,7 @@
 			// kiem tra xem co loi hay khong
 			if (empty($errors)) {
 				// neu ko co loi xay ra bat dau chen vao CSDL
-				$result = edit_news($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
+				$result = edit_news($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
 					$success = "Chỉnh sửa bài viết thành công!";
 				} else {
@@ -73,27 +88,13 @@
 	redirect_to('admin/index.php');
 }
 ?>
-<?php 
-	// Chon news trong CSDL de hien thi ra trinh duyet
-	$query = "SELECT * FROM tblnews WHERE news_id = {$nid}";
-	$result = mysqli_query($dbc, $query);
-	confirm_query($result, $query);
 
-	if (mysqli_num_rows($result) == 1) {
-		// Neu co page tra ve
-		$news = mysqli_fetch_array($result, MYSQLI_ASSOC);
-	}else {
-		// Neu khong co page tra ve
-		$messages = "Bài viết không tồn tại!";
-	}
-
-	?>
 <!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage News</h1>
+                    <h1 class="page-head-line">Manage Games</h1>
                 </div>
         	</div>
 
@@ -101,8 +102,8 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Edit News</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
+                            <h2>Edit Games</h2>
+                            <h4><a href="index.php">Home</a> / <a href="view_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if (!empty($messages)) {
@@ -133,7 +134,7 @@
 								<!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title">Title</label>
-								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($news['title'])) echo $news['title']; ?>"/>
+								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($games['title'])) echo $games['title']; ?>"/>
                                 <?php 
                                     if (isset($errors) && in_array('title', $errors)) {
                                         echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
@@ -156,7 +157,7 @@
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
 													echo "<option value='{$types[0]}'"; 
-														if (isset($news['type_id']) && ($news['type_id'] == $types[0])) echo "selected='selected'";
+														if (isset($games['type_id']) && ($games['type_id'] == $types[0])) echo "selected='selected'";
 													echo ">".$types[1]."</option>";	
 												}
 											}
@@ -175,7 +176,7 @@
 								<div class="form-group" style="font-size: 18px">
 								    <label for="image">Images Input</label> <br>
 								    <img id="avatar" style="width: 300px; height: 300px;" />
-									<input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewBanner();" />
+                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewBanner();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>
 								</div>   
                                 
 								<!-- ================= Banner [start] ===================== -->
@@ -188,7 +189,7 @@
 								<!-- ================= Content [start] ===================== -->	
 								<div class="form-group" style="font-size: 18px">
 								   	<label for="content">Content</label>
-								    <textarea name="content" class="form-control" cols="20" rows="9" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content"><?php if(isset($news['content'])) echo htmlentities($news['content'], ENT_COMPAT, 'UTF-8'); ?></textarea>
+								    <textarea name="content" class="form-control" cols="20" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content"><?php if(isset($games['content'])) echo htmlentities($games['content'], ENT_COMPAT, 'UTF-8'); ?></textarea>
 								<?php 
                                     if (isset($errors) && in_array('type', $errors)) {
                                             echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
@@ -202,8 +203,8 @@
                                 <div class="form-group" style="font-size: 18px">
 				                    <label>Select Status</label>
 				                    <select name="status" class="form-control" style="font-size: 18px; height: 44px">										
-				                        <option value="0" <?php if (isset($news['status']) && ($news['status'] == 0 )) echo "selected='selected'"; ?>>Inactive</option>
-				                        <option value="1" <?php if (isset($news['status']) && ($news['status'] == 1 )) echo "selected='selected'"; ?>>Active</option>
+				                        <option value="0" <?php if (isset($games['status']) && ($games['status'] == 0 )) echo "selected='selected'"; ?>>Inactive</option>
+				                        <option value="1" <?php if (isset($games['status']) && ($games['status'] == 1 )) echo "selected='selected'"; ?>>Active</option>
 				                    </select>
 				                </div>
                                 

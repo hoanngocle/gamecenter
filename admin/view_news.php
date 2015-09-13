@@ -20,19 +20,19 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center">News </h2>
-                            <h4 style="text-align: center" ><a href="add_news.php">Create News</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="add_news.php">Create News</a></h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 4% ; text-align:center"><a href="view_news.php?sort=id">ID</a></th>
-							    			<th style="width: 12% ; text-align:center"><a href="view_news.php?sort=type">Type</a></th>
+                                            <th style="width: 2% ; text-align:center"><a href="view_news.php?sort=id">ID</a></th>
+							    			<th style="width: 8% ; text-align:center"><a href="view_news.php?sort=type">Type</a></th>
 							    			<th style="width: 20% ; text-align:center"><a href="view_news.php?sort=title">Title</a></th>
-							                <th style="width: 34% ; text-align:center">Content</th>
+							                <th style="width: 40% ; text-align:center">Content</th>
 							                <th style="width: 8% ; text-align:center"><a href="view_news.php?sort=by">Posted By</a></th>
-							                <th style="width: 10% ; text-align:center"><a href="view_news.php?sort=on">Posted On</a></th>
+							                <th style="width: 8% ; text-align:center"><a href="view_news.php?sort=on">Posted On</a></th>
                                             <th style="width: 2% ; text-align:center">Status</th>
 							                <th style="width: 10% ; text-align:center"> </th>
                                         </tr>
@@ -84,17 +84,16 @@
 									 	while($news = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
                                             if($news['status'] == 0){
-                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-eye' href='#' style='font-size: 20px; margin-left: 5px'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px' onClick='change_status({$news['status']});></a>";
+                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px'></a>";
                                             }
                                         ?>
-									 		
 								 				<tr>
 									                <td style='text-align:right' ><?= $news['news_id'] ?></td>
 									                <td style='text-align:left'><?= $news['type_name'] ?></td>
 									                <td style='text-align:left'><?= $news['title'] ?></td>
-									                <td style='text-align:justify'><?= excerpt($news['content']) ?>" ... </td>
+									                <td style='text-align:justify'><?= excerpt($news['content']) ?> ... </td>
 									                <td style='text-align:left'><?= $news['name'] ?></td>
 									                <td style='text-align:right'><?= $news['date'] ?></td>
                                                     <td style='text-align:center'><?= $active ?></td>

@@ -1,7 +1,7 @@
 <?php 
 
 	// xac dinh hang so cho dia chi tuyet doi
-	define ('BASE_URL', 'http://localhost/gamecenter/');
+	define ('BASE_URL', 'http://www.gamecenter.dev/');
 
 // ####################################################################################################
 
@@ -126,7 +126,7 @@
 
 	function get_news_by_id($id){
 		global $dbc;
-			$query = "SELECT n.news_id, n.title, n.content, n.banner, n.avatar, t.type_name, ";
+			$query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
 			$query .= " DATE_FORMAT( n.post_on, '%b') AS month, ";
 			$query .= " DATE_FORMAT( n.post_on, '%d') AS day, ";
 			$query .= " DATE_FORMAT( n.post_on, '%b %d, %Y') AS date, ";
@@ -208,7 +208,7 @@
 	// Dung cho backend - list news #################################################################
 	function get_all_news($order_by){
 		global $dbc;
-			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, ";
+			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, c.cat_name, ";
 			$query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
 			$query .= " DATE_FORMAT(n.post_on, '%b %d %Y') AS date ";
 			$query .= " FROM tblnews AS n ";
@@ -216,6 +216,31 @@
 			$query .= " USING(user_id) ";
 			$query .= " INNER JOIN tbltypes AS t";
 			$query .= " USING (type_id) ";
+            $query .= " INNER JOIN tblcategories AS c";
+			$query .= " USING (cat_id) ";
+            $query .= " WHERE cat_id = 1 ";
+			$query .= " ORDER BY {$order_by} ASC ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+				
+			return $result;
+	}
+    
+    // Dung cho backend - list news #################################################################
+	function get_all_games($order_by){
+		global $dbc;
+			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, c.cat_name, ";
+			$query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
+			$query .= " DATE_FORMAT(n.post_on, '%b %d %Y') AS date ";
+			$query .= " FROM tblnews AS n ";
+			$query .= " INNER JOIN tblusers AS u ";
+			$query .= " USING(user_id) ";
+			$query .= " INNER JOIN tbltypes AS t";
+			$query .= " USING (type_id) ";
+            $query .= " INNER JOIN tblcategories AS c";
+			$query .= " USING (cat_id) ";
+            $query .= " WHERE cat_id = 2 ";
 			$query .= " ORDER BY {$order_by} ASC ";
 
 			$result = mysqli_query($dbc, $query);
@@ -289,15 +314,15 @@
 
 	
 //  Dung cho backend - edit news - games #################################################################
-	function edit_news($nid){	
+	function edit_news($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status){	
 	global $dbc;
 		$query = "UPDATE tblnews SET ";
 		$query .=" title = '{$title}', ";
-		$query .=" cat_id = '{$cat_id}', ";
-		$query .=" type = '{$type}', ";
-		$query .=" avatar = '{$myAvatar}', ";
+		$query .=" type_id = '{$type_id}', ";
+		$query .=" image = '{$myAvatar}', ";
 		$query .=" banner = '{$myBanner}', ";
 		$query .=" content = '{$content}', ";
+        $query .=" status = '{$status}', ";
 		$query .=" user_id = 1, ";	
 		$query .=" post_on = NOW() ";
 		$query .=" WHERE news_id = {$nid} LIMIT 1";	
