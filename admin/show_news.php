@@ -26,7 +26,7 @@
                 <div class="col-md-11" style="margin-left: 48.75px">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center"><?php echo $news['title'] ?></h2>
+                            <h2 style="text-align: center"><?= $news['title'] ?></h2>
                             <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
@@ -38,7 +38,7 @@
 				                            <strong style="font-size : 18px">Avatar : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?php echo $news['image']; ?>" alt="<?php echo $news['image']; ?>">
+				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?= $news['image'] ?>" alt="<?= $news['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -46,31 +46,31 @@
 
 			                  	<div class="col-md-5" style="margin: 30px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?php echo $news['news_id']; ?> 
+					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $news['news_id'] ?> 
 					                </div>
 					            </div>
 					            
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $news['type_name']; ?> 
+					                 	<strong style="font-size : 18px">Type : </strong> <?= $news['type_name'] ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?php echo $news['title']; ?> 
+					                 	<strong style="font-size : 18px">Title : </strong> <?= $news['title'] ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?php echo $news['name']; ?> 
+					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $news['name'] ?> 
 					                </div>
 					            </div>
 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?php echo $news['date']; ?>
+					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $news['date'] ?>
 					                </div>
 					            </div>
 
@@ -80,7 +80,7 @@
 				                            <strong style="font-size : 18px">Banner : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?php echo $news['banner']; ?>" alt="<?php echo $news['banner']; ?>">
+                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?= $news['banner'] ?>" alt="<?= $news['banner'] ?>">
 				                        </div>				                        
 				                    </div>
                             	 </div>
@@ -91,7 +91,7 @@
 				                            <strong style="font-size : 18px">Content  </strong>
 				                        </div>
 				                        <div class="panel-body">
-				                            <p><?php echo $news['content']; ?> </p>
+				                            <p><?= $news['content'] ?> </p>
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -111,7 +111,7 @@
                             		<center>
                             			<div class="alert alert-default">
 						                 	<a href="edit_news.php?nid=<?= $nid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete(<?= $nid ?>)">Delete</a>
+											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_news(<?= $nid ?>)">Delete</a>
 						                </div>
                             		</center>   
 					            </div>

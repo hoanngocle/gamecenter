@@ -3,17 +3,17 @@
 	include('../includes/functions.php');
 	?>
 <?php
-	if( $iid = validate_id($_GET['iid'])){
-		$set = get_image_by_id($iid);
+	if( $vid = validate_id($_GET['vid'])){
+		$set = get_video_by_id($vid);
         
-		$images = array();
+		$videos = array();
 		if(mysqli_num_rows($set) > 0 ) {
-		 	$images = mysqli_fetch_array($set, MYSQLI_ASSOC);
+		 	$videos = mysqli_fetch_array($set, MYSQLI_ASSOC);
 		}else {
-			redirect_to('admin/view_images.php');
+			redirect_to('admin/view_videos.php');	
 		}
 	}else{
-		redirect_to('admin/view_images.php');		
+		redirect_to('admin/view_videos.php');	
 	}	
 
 	include('../includes/backend/header-admin.php');
@@ -25,8 +25,8 @@
                 <div class="col-md-11" style="margin-left: 48.75px">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center"><?= $images['type_name'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_images.php">List Images</a></h4>
+                            <h2 style="text-align: center"><?php echo $videos['type_name'] ?></h2>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
@@ -36,50 +36,65 @@
 
 			                  	<div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $images['image_id'] ?> 
+					                 	<strong style="font-size : 18px">Video ID :  </strong> <?php echo $videos['image_id']; ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?= $images['type_name'] ?> 
+					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $videos['type_name']; ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?= $images['title'] ?> 
+					                 	<strong style="font-size : 18px">Title : </strong> <?php echo $videos['title']; ?> 
 					                </div>
 					            </div>
 
 					            <div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $images['date'] ?>
+					                 	<strong style="font-size : 18px">Posted On : </strong> <?php echo $videos['date']; ?>
 					                </div>
 					            </div>
+                                
                                 <div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $images['name'] ?>
+					                 	<strong style="font-size : 18px">Posted By : </strong> <?php echo $videos['name']; ?>
 					                </div>
 					            </div>
+                                
                                 <div class="col-md-6" >
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Status : </strong> <?= $images['status'] ?>
+					                 	<strong style="font-size : 18px">Status : </strong> <?php echo $videos['status']; ?>
 					                </div>
 					            </div>
+                                
                                 <div class="col-md-12" style="margin-left: 65px ; max-width : 900px">
 									<div class="panel panel-success">
 				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Image : </strong> 
+				                            <strong style="font-size : 18px">Video : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" src="../images/<?= $images['image'] ?>" alt="<?= $images['image'] ?>">
+				                            <img class="img-responsive" src="../images/<?php echo $images['image']; ?>" alt="<?php echo $images['image']; ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
+                                
+                                <div class="col-md-11" style="margin-left: 43.75px">
+									<div class="panel panel-success">
+				                        <div class="panel-heading">
+				                            <strong style="font-size : 18px">Description  </strong>
+				                        </div>
+				                        <div class="panel-body">
+				                            <p><?php echo $videos['description']; ?> </p>
+				                        </div>				                        
+				                    </div>
+                            	</div>
+                                
                             	<div class="col-md-11">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_image.php?iid=<?= $iid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_image(<?= $iid ?>)">Delete</a>
+                                            <a href="edit_video.php.php?vid=<?php echo $vid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
+                                            <a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_video()(<?= $vid ?>)">Delete</a>
 						                </div>
                             		</center>   
 					            </div>						

@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PHP/htdocs/gamecenter/admin/add_news.php</file>
             <file>file:/D:/PHP/htdocs/gamecenter/includes/functions.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/admin/edit_news.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/admin/show_image.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/admin/edit_image.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/index.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/admin/show_video.php</file>
             <file>file:/D:/PHP/htdocs/gamecenter/admin/show_news.php</file>
         </group>
     </open-files>

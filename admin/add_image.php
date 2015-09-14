@@ -16,11 +16,11 @@
 			$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
 		}
 
-		// kiem tra xem category co gia tri hay ko
-		if (isset($_POST['category']) && filter_var($_POST['category'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-			$cat_id = $_POST['category'];
+		// kiem tra xem type co gia tri hay ko
+		if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+			$type_id = $_POST['type'];
 		}else{
-			$errors[] = 'category';
+			$errors[] = 'type';
 		}
 
 		// kiem tra image co gia tri hay khong
@@ -29,13 +29,19 @@
 		} else {
 			$myImage =  $_FILES['myImage']['name'];
 		}
-
+        
+        //kiem tra trang thai bai viet co gia tri hay ko
+        if (isset($_POST['status'])) {
+            $status = $_POST['status'];
+        }else{
+            $errors[] = 'status';
+        }
 
 		// kiem tra xem co loi hay khong
 		if (empty($errors)) {
 			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblimages ( cat_id, title, image,  post_on)
-						VALUES ( {$cat_id}, '{$title}','{$myImage}', NOW())";			
+			$query = "INSERT INTO tblimages (user_id, title, type_id, image, status, post_on )
+						VALUES (1, '{$title}', {$type_id}, '{$myImage}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);
@@ -43,15 +49,12 @@
 			if (mysqli_affected_rows($dbc) == 1) {
 				$success = "Thêm thành công ảnh vào cơ sở dữ liệu!</p>";
 			} else {
-				$fail = "Đã có lỗi, xin vui lòng thử lại sau!";
+				$fail = "Tạo mới ảnh thất bại do lỗi hệ thống!";
 			}
 		} else {
-			$error = "Please fill in all the required fields";
+			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
 		}
-		// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-	redirect_to('admin/view_pages.php');
-
-} // END main IF submit condition
+    } // END main IF submit condition
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">
@@ -67,7 +70,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Upload Images</h2>
-                            <h4><a href="view_news.php">List Images</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Images</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($success)) {
@@ -81,17 +84,18 @@
             							</div>";
             						}
             				if(!empty($error)) {
-								echo " <div class='alert alert-error' style='font-size: 18px; margin: 25px 35px'>
+								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$error}</p>
             							</div>";
             						}
             				?>
+    <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
-
+                                <!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title">Title</label>
-								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="Enter title " />
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>" />
 								<?php 
                                     if (isset($errors) && in_array('title', $errors)) {
                                         echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
@@ -101,39 +105,35 @@
                                     }
                                 ?>
 								</div>
-								<!-- Title ####################### -->
-
+                                
+								<!-- ================= Type [start] ===================== -->
 				     			<div class="form-group" style="font-size: 18px">
-				                    <label>Select Category</label>
+				                    <label>Select Type</label>
 				                    
-				                    <select name="category" class="form-control" style="font-size: 18px; height: 44px">
+				                    <select name="type" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
 				                        <?php 
-											$query = "SELECT cat_id, cat_name ";
-											$query .=" FROM tblcategories ";
-											$query .=" WHERE cat_id BETWEEN 8 AND 12 ";
-											$query .=" ORDER BY cat_id ASC ";
-
+											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 3 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
-												while($cats = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$cats[0]}'"; 
-														if (isset($_POST['category']) && ($_POST['category'] == $cats[0])) echo "selected='selected'";
-													echo ">".$cats[1]."</option>";	
+												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
+													echo "<option value='{$types[0]}'"; 
+														if (isset($_POST['type']) && ($_POST['type'] == $types[0])) echo "selected='selected'";
+													echo ">".$types[1]."</option>";	
 												}
 											}
 										 ?>
 				                    </select>
 				                    <?php 
-										if (isset($errors) && in_array('category', $errors)) {
-                                            echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Không được để trống category!</p>
-                                                </div>";
+										if (isset($errors) && in_array('type', $errors)) {
+												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+														<p>Type không được để trống</p>
+	                    							</div>";
 										}
 									?>
 				                </div>
 
-								<!-- Images ####################### -->
+								<!-- ================= Image [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
 								    <label for="image">Images Input</label> <br>
 								    <img id="image" style="width: 300px; height: 300px;" />
@@ -142,13 +142,23 @@
 <?php 
 										if (isset($errors) && in_array('myImage', $errors)) {
 											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Không được để trống images </p>
+														<p>Images không được để trống</p>
 	                    							</div>";
 
 										}
 									?>
 								
-								<!-- Submit & Reset Button -->
+                                <!-- ================= Status: default is 0 [start] ===================== -->
+                                <div class="form-group" style="font-size: 18px">
+				                    <label>Select Status</label>
+
+				                    <select name="status" class="form-control" style="font-size: 18px; height: 44px">
+				                        <option value="0">Inactive</option>
+				                        <option value="1">Active</option>
+				                    </select>
+				                </div>
+                                
+								<!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
 									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">
 									<button type="reset" class="btn btn-danger" style="font-size: 18px; height: 44px">Reset</button>
@@ -158,7 +168,7 @@
 		          	</div> <!-- END PANEL BODY-->
 				</div>
 
-<!-- =################################################################################################################### -->			
+    <!-- ================================== Form Add News [end] ===================================== -->		
 
 			</div>
 		</div> <!-- END ROWS -->

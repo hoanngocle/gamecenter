@@ -1,5 +1,4 @@
 <?php 
-	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
@@ -85,8 +84,10 @@
 
 	}else {
 	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-	redirect_to('admin/index.php');
-}
+        redirect_to('admin/view_games.php');
+    }
+    
+	include('../includes/backend/header-admin.php');
 ?>
 
 <!-- Script ################## -->

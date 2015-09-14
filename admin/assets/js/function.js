@@ -1,4 +1,5 @@
-	// Get image when u chosee file
+
+// Preview Image before upload ========================================================
 	function PreviewAvatar() {
 	    var oFReader = new FileReader();
 	    oFReader.readAsDataURL(document.getElementById("uploadAvatar").files[0]);
@@ -28,10 +29,8 @@
 	    };
 	};
 
-// #########################################################################################
-
-	// comfirm delete request
- 	function check_delete(id){
+// CONFIRM DELETE NEWS ======================================================== 
+ 	function check_delete_news(id){
 		var result = confirm("Do You Really Want To Delete?");
 		if (result == true) {
 		    window.location="delete_news.php?nid="+id;
@@ -39,20 +38,36 @@
 		    }
 		return false;
 		}
+                
+// CONFIRM DELETE VIDEO ======================================================== 
+ 	function check_delete_video(id){
+		var result = confirm("Do You Really Want To Delete?");
+		if (result == true) {
+		    window.location="delete_video.php?vid="+id;
+		    return true;
+		    }
+		return false;
+		}
+                
+// CONFIRM DELETE IMAGES ======================================================== 
+ 	function check_delete_image(id){
+		var result = confirm("Do You Really Want To Delete?");
+		if (result == true) {
+		    window.location="delete_image.php?iid="+id;
+		    return true;
+		    }
+		return false;
+		}
 
-// #########################################################################################
-
-	// thong bao xoa thanh cong
+// DELETE SUCCESS ======================================================== 
 	function delete_success(){
 			alert('Xóa thành công!');
 	}
         
-// #########################################################################################
+// DELETE FAIL ======================================================== 
 	
 	// thong bao xoa that bai
 	function delete_fail(){
 			alert('Xóa chưa thành công!');
 			
 	}
-        
-// #########################################################################################

@@ -4,7 +4,6 @@
 	include('../includes/functions.php');
 ?>
 
-
 <?php 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
 		//tao bien luu loi
@@ -23,26 +22,18 @@
 		}else{
 			$errors[] = 'type';
 		}
-
-		// kiem tra avatar co gia tri hay khong
-		if (empty($_FILES['myAvatar']['name'])) {
-			$errors[] = "myAvatar";
+        
+        if (empty($_POST['description'])) {
+			$errors[] = "description";
 		} else {
-			$myAvatar =  $_FILES['myAvatar']['name'];
+			$description = mysqli_real_escape_string($dbc, strip_tags($_POST['description']));
 		}
-
-		// kiem tra banner co gia tri hay khong
-		if (empty($_FILES['myBanner']['name'])) {
-			$errors[] = "myBanner";
-		} else {
-			$myBanner = $_FILES['myBanner']['name'];
-		}
-		
-		// kiem tra content co gia tri hay ko
-		if (empty($_POST['content'])) {
-			$errors[] = 'content';
+        
+        // kiem tra xem url video co gia tri hay ko
+        if (empty($_POST['url_video'])) {
+			$errors[] = 'url_video';
 		}else {
-			$content = mysqli_real_escape_string($dbc, $_POST['content']);
+			$url_video = $_POST['url_video'];
 		}
 
         //kiem tra trang thai bai viet co gia tri hay ko
@@ -51,32 +42,32 @@
         }else{
             $errors[] = 'status';
         }
-            
+
 		// kiem tra xem co loi hay khong
 		if (empty($errors)) {
 			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, post_on)
-						VALUES (1, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
+			$query = "INSERT INTO tblimages (user_id, title, type_id, description, url_video, status, post_on )
+						VALUES (1, '{$title}', {$type_id}, '{$description}', '{$url_video}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);
 
 			if (mysqli_affected_rows($dbc) == 1) {
-				$success = "Tạo mới bài viết thành công!</p>";
+				$success = "Thêm thành công video vào cơ sở dữ liệu!</p>";
 			} else {
-				$fail = "Tạo mới bài viết thất bại do lỗi hệ thống!";
+				$fail = "Tạo mới video thất bại do lỗi hệ thống!";
 			}
 		} else {
 			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
 		}
-	} // END main IF submit condition
+    } // END main IF submit condition
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage News</h1>
+                    <h1 class="page-head-line">Manage Images</h1>
                 </div>
         	</div>
 
@@ -84,12 +75,11 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Add News</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
+                            <h2>Upload Videos</h2>
+                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
-							if(!empty($messages)) 
-									if(!empty($success)) {
+							if(!empty($success)) {
 								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$success}</p>
             							</div>";
@@ -105,17 +95,17 @@
             							</div>";
             						}
             				?>
-    <!-- ================================== Form Add News [start] ===================================== -->
+    <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
                                 <!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-                                    <label for="title">Title</label>
-                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
+								   	<label for="title">Title</label>
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>" />
 								<?php 
                                     if (isset($errors) && in_array('title', $errors)) {
-                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được bỏ trống </p>
+                                        echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Không được để trống title!</p>
                                                 </div>";
 
                                     }
@@ -129,7 +119,7 @@
 				                    <select name="type" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
 				                        <?php 
-											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC";
+											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 4 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
@@ -143,56 +133,40 @@
 				                    <?php 
 										if (isset($errors) && in_array('type', $errors)) {
 												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Type không được bỏ trống</p>
+														<p>Type không được để trống</p>
 	                    							</div>";
 										}
 									?>
 				                </div>
 
-								<!-- ================= Avatar [start] ===================== -->
-								<div class="form-group" style="font-size: 18px">
-								    <label for="image">Images Input</label> <br>
-								    <img id="avatar" style="width: 300px; height: 300px;" />
-                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar(); " />
-								</div>
-<?php 
-										if (isset($errors) && in_array('myAvatar', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Image không được bỏ trống  </p>
-	                    							</div>";
-
-										}
-									?>
-                                
-								<!-- ================= Banner [start] ===================== -->
-								<div class="form-group" style="font-size: 18px">
-				                    <label for="banner">Banner Input</label> <br>
-				                    <img id="banner" style="width: 800px; height: 200px;" />
-									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file" onchange="PreviewBanner();" />
-					            </div>	
-
+								<!-- ================= Url_video [start] =================== -->
+								<div class="form-group"  style="font-size: 18px" >
+                                    <label for="title">Title</label>
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
 								<?php 
-										if (isset($errors) && in_array('myBanner', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Banner không được bỏ trống </p>
-	                    							</div>";
+                                    if (isset($errors) && in_array('title', $errors)) {
+                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Title không được bỏ trống </p>
+                                                </div>";
 
-										}
-									?>
-      
-								<!-- ================= Content [start] ===================== -->
-								<div class="form-group" style="font-size: 18px">
-								   	<label for="content">Content</label>
-								    <textarea name="content" class="form-control" rows="9" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
-								<?php 
-										if (isset($errors) && in_array('title', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Nội dung không được bỏ trống </p>
-	                    							</div>";
-										}
-									?>
+                                    }
+                                ?>
 								</div>
                                 
+                                <!-- ================= Description [start] =================== -->
+								<div class="form-group"  style="font-size: 18px" >
+                                    <label for="title">Title</label>
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
+								<?php 
+                                    if (isset($errors) && in_array('title', $errors)) {
+                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Title không được bỏ trống </p>
+                                                </div>";
+
+                                    }
+                                ?>
+								</div>
+								
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="form-group" style="font-size: 18px">
 				                    <label>Select Status</label>
@@ -203,7 +177,7 @@
 				                    </select>
 				                </div>
                                 
-                                <!-- ================= Submit & Reset Button [start] ===================== -->
+								<!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
 									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">
 									<button type="reset" class="btn btn-danger" style="font-size: 18px; height: 44px">Reset</button>
@@ -212,8 +186,9 @@
 						</div> 
 		          	</div> <!-- END PANEL BODY-->
 				</div>
-                
+
     <!-- ================================== Form Add News [end] ===================================== -->		
+
 			</div>
 		</div> <!-- END ROWS -->
     </div>

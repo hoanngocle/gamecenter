@@ -73,14 +73,12 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a class="menu-top-active" href="index.php">Home</a></li>
-                            <li><a href="view_games.php">Games </a></li>
-                            <li><a href="view_news.php">News </a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="view_games.php">News </a></li>
+                            <li><a href="view_news.php">Games </a></li>
                             <li><a href="view_images.php">Images </a></li>
                             <li><a href="view_videos.php">Videos </a></li>
-                            <li><a href="view_categories.php">Categories </a></li>
                             <li><a href="login_admin.php">Login</a></li>
-
                         </ul>
                     </div>
                 </div>

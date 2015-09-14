@@ -26,7 +26,7 @@
                 <div class="col-md-11" style="margin-left: 48.75px">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center"><?php echo $games['title'] ?></h2>
+                            <h2 style="text-align: center"><?= $games['title'] ?></h2>
                             <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
@@ -38,7 +38,7 @@
 				                            <strong style="font-size : 18px">Avatar : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?php echo $games['image']; ?>" alt="<?php echo $games['image']; ?>">
+				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?= $games['image'] ?>" alt="<?= $games['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -46,31 +46,31 @@
 
 			                  	<div class="col-md-5" style="margin: 30px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?php echo $games['news_id']; ?> 
+					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $games['news_id'] ?> 
 					                </div>
 					            </div>
 					            
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?php echo $games['type_name']; ?> 
+					                 	<strong style="font-size : 18px">Type : </strong> <?= $games['type_name'] ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Game: </strong> <?php echo $games['title']; ?> 
+					                 	<strong style="font-size : 18px">Game: </strong> <?= $games['title'] ?> 
 					                </div>
 					            </div>
                                 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?php echo $games['name']; ?> 
+					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $games['name'] ?> 
 					                </div>
 					            </div>
 
 					            <div class="col-md-5" style="margin: 5px 0 0 118px">
 					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?php echo $games['date']; ?>
+					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $games['date'] ?>
 					                </div>
 					            </div>
 
@@ -80,7 +80,7 @@
 				                            <strong style="font-size : 18px">Banner : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?php echo $games['banner']; ?>" alt="<?php echo $games['banner']; ?>">
+                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?= $games['banner'] ?>" alt="<?= $games['banner'] ?>">
 				                        </div>				                        
 				                    </div>
                             	 </div>
@@ -91,7 +91,7 @@
 				                            <strong style="font-size : 18px">Content  </strong>
 				                        </div>
 				                        <div class="panel-body">
-				                            <p><?php echo $games['content']; ?> </p>
+				                            <p><?= $games['content'] ?> </p>
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -110,12 +110,11 @@
                             	<div class="col-md-11">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_games.php?gid=<?= $gid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete(<?= $gid ?>)">Delete</a>
+						                 	<a href="edit_game.php?gid=<?= $gid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
+											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_game(<?= $gid ?>)">Delete</a>
 						                </div>
                             		</center>   
-					            </div>
-						
+					            </div>						
       						</div>
                         </div> <!-- END PANEL BODY-->
                     </div> <!-- END PANEL -->

@@ -16,7 +16,7 @@
 									<img src="images/banner/<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
 								</div>
 								<div class="banner-top banner-bottom">
-									<img src="images/banner/big/<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
+									<img src="images/banner/big_<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
 								</div>
 								<div class="clearfix"> </div>
 		   	 				</div>				   

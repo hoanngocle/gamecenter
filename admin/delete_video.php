@@ -2,16 +2,16 @@
 	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php'); 
     
-	$nid = validate_id($_GET['nid']);
+	$vid = validate_id($_GET['vid']);
 		// Neu muon delete page
-		$result = delete_news_games($nid);
+		$result = delete_videos($vid);
 		if(mysqli_affected_rows($dbc) == 1 ) {	
 			echo "
 				<script type='text/javascript'>
 					delete_success();
 				</script>      
 			";
-			redirect_to('admin/view_news.php');
+			redirect_to('admin/view_videos.php');
 		}else {
 			echo "
 				<script type='text/javascript'>

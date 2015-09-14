@@ -62,9 +62,9 @@
 			confirm_query($result, $query);
 
 			if (mysqli_affected_rows($dbc) == 1) {
-				$success = "Tạo mới bài viết thành công!</p>";
+				$success = "Tạo mới game thành công!</p>";
 			} else {
-				$fail = "Tạo mới bài viết thất bại do lỗi hệ thống!";
+				$fail = "Tạo mới game thất bại do lỗi hệ thống!";
 			}
 		} else {
 			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
@@ -76,7 +76,7 @@
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage News</h1>
+                    <h1 class="page-head-line">Manage Games</h1>
                 </div>
         	</div>
 
@@ -84,28 +84,27 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Add News</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
+                            <h2>Add Games</h2>
+                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
-							if(!empty($messages)) 
-									if(!empty($success)) {
-								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
+							if(!empty($success)) {
+								echo "<div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$success}</p>
             							</div>";
             						}
             				if(!empty($fail)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+								echo "<div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$fail}</p>
             							</div>";
             						}
             				if(!empty($error)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+								echo "<div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$error}</p>
             							</div>";
             						}
             				?>
-    <!-- ================================== Form Add News [start] ===================================== -->
+    <!-- ================================== Form Add Games [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
                                 <!-- ================= Title [start] =================== -->
@@ -115,9 +114,8 @@
 								<?php 
                                     if (isset($errors) && in_array('title', $errors)) {
                                         echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được bỏ trống </p>
+                                                    <p>Title không được để trống </p>
                                                 </div>";
-
                                     }
                                 ?>
 								</div>
@@ -129,7 +127,7 @@
 				                    <select name="type" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
 				                        <?php 
-											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC";
+											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 2 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
@@ -143,7 +141,7 @@
 				                    <?php 
 										if (isset($errors) && in_array('type', $errors)) {
 												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Type không được bỏ trống</p>
+														<p>Type không được để trống</p>
 	                    							</div>";
 										}
 									?>
@@ -158,9 +156,8 @@
 <?php 
 										if (isset($errors) && in_array('myAvatar', $errors)) {
 											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Image không được bỏ trống  </p>
+														<p>Image không được để trống  </p>
 	                    							</div>";
-
 										}
 									?>
                                 
@@ -174,20 +171,19 @@
 								<?php 
 										if (isset($errors) && in_array('myBanner', $errors)) {
 											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Banner không được bỏ trống </p>
+														<p>Banner không được để trống </p>
 	                    							</div>";
-
 										}
 									?>
       
 								<!-- ================= Content [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
 								   	<label for="content">Content</label>
-								    <textarea name="content" class="form-control" rows="9" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
+								    <textarea name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
 								<?php 
 										if (isset($errors) && in_array('title', $errors)) {
 												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Nội dung không được bỏ trống </p>
+														<p>Nội dung không được để trống </p>
 	                    							</div>";
 										}
 									?>

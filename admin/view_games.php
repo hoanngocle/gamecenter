@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage News</h1>
+                    <h1 class="page-head-line">Manage Games</h1>
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center">Games </h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="add_news.php">Create Games</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="add_game.php">Create Games</a></h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -99,9 +99,9 @@
                                                     <td style='text-align:center'><?= $active ?></td>
                                                         
 									                <td style='width : 100px'>
-									                <a class='fa fa-eye' href='show_games.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-pencil' href='edit_games.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete(<?= $games['news_id'] ?>);'></a>
+									                <a class='fa fa-eye' href='show_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
+									                <a class='fa fa-pencil' href='edit_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
+                                                    <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete_news()(<?= $games['news_id'] ?>);'></a>
 									                </td>
 												</tr>
 									 			
@@ -109,7 +109,7 @@
 										} else { 
                                     ?>
                                         <!--Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page-->
-										 	<p class='warning'><?= $error_games_no_item?></p>
+										 	<p class='alert alert-warning'><?= $error_games_no_item?></p>
 									<?php 	}   ?>
 							    	</tbody>
                                 </table>

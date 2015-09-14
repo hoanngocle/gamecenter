@@ -1,16 +1,26 @@
 <?php 
-	include('../includes/backend/header-admin.php');
+
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
 
 <?php 
-	if ($iid=validate_id($_GET['iid'])) {
-		# code...
-	
-	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
-		$errors = array();
+	if ( $iid = validate_id($_GET['iid'])) {
+		
+        // Chon image trong CSDL de hien thi ra trinh duyet
+        $query = "SELECT * FROM tblimages WHERE image_id = {$iid}";
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        if (mysqli_num_rows($result) == 1) {
+            $news = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }else {
+            $messages = "Ảnh không tồn tại!";
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // tao bien luu loi
+        $errors = array();
 
 		// kiem tra page name co gia tri hay khong
 		if (empty($_POST['title'])) {
@@ -19,40 +29,50 @@
 			$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
 		}
 
-		// kiem tra xem category co gia tri hay ko
-		if (isset($_POST['category']) && filter_var($_POST['category'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-			$cat_id = $_POST['category'];
+		// kiem tra xem type co gia tri hay ko
+		if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+			$type_id = $_POST['type'];
 		}else{
-			$errors[] = 'category';
+			$errors[] = 'type';
 		}
 
-
-		// kiem tra avatar co gia tri hay khong
+		// kiem tra image co gia tri hay khong
 		if (empty($_FILES['myImage']['name'])) {
 			$errors[] = "myImage";
 		} else {
 			$myImage =  $_FILES['myImage']['name'];
 		}
+        
+        //kiem tra trang thai bai viet co gia tri hay ko
+        if (isset($_POST['status'])) {
+            $status = $_POST['status'];
+        }else{
+            $errors[] = 'status';
+        }
 
 
 		// kiem tra xem co loi hay khong
-		if (empty($errors)) {
-			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblimages ( cat_id, title, image,  post_on)
-						VALUES ( {$cat_id}, '{$title}','{$myImage}', NOW())";			
-			$result = mysqli_query($dbc, $query);
-			// ham tra ve ket qua co dung hay ko
-			confirm_query($result, $query);
+            if (empty($errors)) {
+                // neu ko co loi xay ra bat dau chen vao CSDL
+                $result = edit_image($iid, $title, $type_id, $myImage, $status);
+                $result = mysqli_query($dbc, $query);
+                // ham tra ve ket qua co dung hay ko
+                confirm_query($result, $query);
 
-			if (mysqli_affected_rows($dbc) == 1) {
-				$success = "The news was added successfully!</p>";
-			} else {
-				$fail = "The page could not be added due to a system error!";
-			}
-		} else {
-			$error = "Please fill in all the required fields";
-		}
-    }} // END main IF submit condition
+                if (mysqli_affected_rows($dbc) == 1) {
+                    $success = "Chỉnh sửa ảnh thành công ảnh vào cơ sở dữ liệu!</p>";
+                } else {
+                    $fail = "Chỉnh sửa ảnh thất bại do lỗi hệ thống!";
+                }
+            } else {
+                $error = "Tất cả các trường đều phải được nhập đầy đủ!";
+            }
+        } // END main IF submit condition
+    }else {
+	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
+        redirect_to('admin/view_images.php');
+    }
+    include('../includes/backend/header-admin.php');
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">

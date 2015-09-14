@@ -1,4 +1,3 @@
-
 <?php
 	//Include file php function vs connect DB
 	include('includes/backend/mysqli_connect.php'); 
@@ -6,8 +5,9 @@
  	include('includes/frontend/header.php');
  	include('includes/frontend/banner.php');
 ?>
-	<!--content-->
+	
 	<div class="content">
+        <!--===================================== New game [start] =====================================-->
 		<div class="container">
 			<div class="content-top">
 				<h2 class="new">NEW GAMES</h2>
@@ -18,11 +18,11 @@
 								$result= get_new_games();
 								if(mysqli_num_rows($result) > 0){
 									while($games = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-										$content = excerpt($games['content']);
+										$content = excerpt_features($games['content']);
 							?>
 							<li>
-								<a href="single.php?nid=<?php echo $games['news_id'];  ?>" data-largesrc="images/<?php echo $games['avatar']; ?>" data-title="<?php echo $games['title']; ?>" data-description="<?php echo $content ?>...">
-									<img class="img-responsive" src="images/thumbs/<?php echo $games['avatar']; ?>" alt="img<?php echo $games['avatar']; ?>"/>
+								<a href="single.php?nid=<?php echo $games['news_id'];  ?>" data-largesrc="images/<?php echo $games['image']; ?>" data-title="<?php echo $games['title']; ?>" data-description="<?php echo $content ?>...">
+									<img class="img-responsive" src="images/<?php echo $games['image']; ?>" alt="img<?php echo $games['image']; ?>"/>
 								</a>
 							</li>
 							<?php 
@@ -41,27 +41,33 @@
 				});
 			</script>
 		</div>
-		<!--################################-->
+		<!--===================================== New game [end] =====================================-->
+        
+        <!--===================================== Feature [start] =====================================-->
 		<div class="col-mn">
+            <?php 
+                $result = get_features();
+                if (mysqli_num_rows($result) > 0) {
+                    $games = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $content = excerpt_features($games['content']);
+            ?>
 			<div class="container">
                 <div class="col-mn2">
-                    <?php 
-                        $result = get_best_features();
-                        if (mysqli_num_rows($result) > 0) {
-                            $games = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                            $content = excerpt_features($games['content']);
-                    ?>
-                    <h3><?php echo $games['title']; ?></h3>
-                    <p><?php echo $content; ?>...</p>
+                    
+                    <h3><?= $games['title']; ?></h3>
+                    <p><?= $content; ?>...</p>
                     <a class=" more-in" href="single.php?nid=<?php echo $games['news_id']; ?>">Read More</a>
                     <?php } ?>
 				</div>
 			</div>
 		</div>
-		<!--################################-->
-		<div class="featured">
+		<!--===================================== Feature [end] =====================================-->
+		
+        
+        <div class="featured">
 			<div class="container">
-				<!-- Lastest News #################################### -->
+                <!--===================================== News [start] =====================================-->
+				<!-- =============== Lastest News ============== -->
 				<div class="col-md-4 latest">						
 					<h4>Latest</h4>
 					<?php 
@@ -69,47 +75,47 @@
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-								echo "
+					?>
 									<div class='late'>
-										<a href='single.php?nid={$lastest_news['news_id']}' class='fashion'><img class='img-responsive' src='images/{$lastest_news['avatar']}' alt='{$lastest_news['avatar']}'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
-											<span>{$lastest_news['date']}</span>
-											<p><a href='single.php?nid={$lastest_news['news_id']}' >{$lastest_news['title']}</a></p>
-											<a class='comment' href='single.php?nid={$lastest_news['news_id']}'><i> </i>{$lastest_news['count']} Comments</a>
+											<span><?= $lastest_news['date'] ?></span>
+											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
+											<a class='comment' href='single.php?nid={$lastest_news['news_id']}'><i> </i><?= $lastest_news['count']?> Comments</a>
 										</div>
 									<div class='clearfix'> </div>
 									</div>
-								";
+					<?php 
 							}		
 						}
 					 ?>
 				</div>
 
-				<!-- Featured News #################################### -->
+				<!-- =============== Hotest News ============== -->
 				<div class="col-md-4 latest">
 					<h4>Hotest</h4>
 					<?php 
-						$result = get_hot_news();
+						$result = get_hotest_news();
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-								echo "
+					?>
 									<div class='late'>
-										<a href='single.php' class='fashion'><img class='img-responsive' src='images/{$lastest_news['avatar']}' alt='{$lastest_news['avatar']}'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
-											<span>{$lastest_news['date']}</span>
-											<p><a href='single.php?nid=''' >{$lastest_news['title']}</a></p>
-											<a class='comment' href='single.php'><i> </i>{$lastest_news['count']} Comments</a>
+											<span><?= $lastest_news['date'] ?></span>
+											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
+											<a class='comment' href='single.php?nid={$lastest_news['news_id']}'><i> </i><?= $lastest_news['count']?> Comments</a>
 										</div>
 									<div class='clearfix'> </div>
 									</div>
-								";
+					<?php 
 							}		
 						}
 					 ?>
-				</div>
-
-				<!-- Popular News ##################################### -->
+                </div>
+                
+				<!-- =============== Popular News ============== -->
 				<div class="col-md-4 latest">
 					<h4>Popular</h4>
 					<?php 
@@ -117,25 +123,26 @@
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-								echo "
+					?>
 									<div class='late'>
-										<a href='single.php' class='fashion'><img class='img-responsive' src='images/{$lastest_news['avatar']}' alt='{$lastest_news['avatar']}'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
-											<span>{$lastest_news['date']}</span>
-											<p><a href='single.php' >{$lastest_news['title']}</a></p>
-											<a class='comment' href='single.php'><i> </i>{$lastest_news['count']} Comments</a>
+											<span><?= $lastest_news['date'] ?></span>
+											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
+											<a class='comment' href='single.php?nid={$lastest_news['news_id']}'><i> </i><?= $lastest_news['count']?> Comments</a>
 										</div>
 									<div class='clearfix'> </div>
 									</div>
-								";
-							}				
+					<?php 
+							}		
 						}
 					 ?>
 				</div>
-				<div class="clearfix"> </div>
-				<!-- End of News ###################################### -->
-				
-				
+                
+				<div class="clearfix"></div>
+				<!--===================================== News [end] =====================================-->
+				             
+                <!--===================================== Gallery [start] =====================================-->
 				<div class="content-gallery">
 					<h2 class="new" style="padding-bottom: 14px"> GALLERY </h2>
 					<div class="wrap">
@@ -173,7 +180,9 @@
 					</div>
         		</div>
         		<div class="clearfix"> </div>
-				<!-- Gallery ##################################### -->
+				<!--===================================== Gallery [end] =====================================-->
+                
+                <!--===================================== Video [start] =====================================-->
 				<div class="content-video">
 					<h2 class="new" style="padding-bottom: 14px"> VIDEOS </h2>
 					<div class="wrap">
@@ -210,10 +219,10 @@
 						</table>
 					</div>
         		</div>
-        		<div class="clearfix"> </div>
-				
+        		<div class="clearfix"> </div>		
 			</div>
 		</div>
+        <!--===================================== Video [end] =====================================-->
 	</div>
 	<!---->
 <?php include('includes/frontend/footer.php'); ?>	

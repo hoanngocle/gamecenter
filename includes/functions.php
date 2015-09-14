@@ -3,18 +3,15 @@
 	// xac dinh hang so cho dia chi tuyet doi
 	define ('BASE_URL', 'http://www.gamecenter.dev/');
 
-// ####################################################################################################
-
-	// Kiem tra xem ket qua tra ve co dung hay khong?
+// INCLUDE - CONFIRM  =================================================================
 	function confirm_query($result, $query) {
 		global $dbc;
 		if (!$result) {
 			die ("Query {$query} \n <br> MySQL Error: " .mysqli_error($dbc));
 		}
 	}	
-
-// ####################################################################################################
-
+    
+// INCLUDE - REDIRECT =================================================================
 	// tai dinh huong nguoi dung
 	function redirect_to($page = 'index.php') {
 		$url = BASE_URL . $page;
@@ -22,13 +19,12 @@
 		exit();
 	}
 
-// ####################################################################################################
-
+// INCLUDE - EXCERPT ==========================================================
 	// ham cat chu cuoi cung cua phan content thanh doan van ngan
 	function excerpt($text) {
 		$sanitized = htmlentities($text, ENT_COMPAT, 'UTF-8');
 		if(strlen($sanitized) > 400 ) {
-			$cutString = substr($sanitized,0,400);
+			$cutString = substr($sanitized,0,500);
 			$words = substr($sanitized, 0, strrpos($cutString, ' '));
 			return $words;
 		} else {
@@ -36,14 +32,13 @@
 		}
 
 	}// END the excerpt
-
-// ####################################################################################################
-
+    
+// INCLUDE - EXCERPT FEATURE ==========================================================
 	// ham cat chu cuoi cung cua phan content thanh doan van ngan
 	function excerpt_features($text) {
 		$sanitized = htmlentities($text, ENT_COMPAT, 'UTF-8');
 		if(strlen($sanitized) > 600 ) {
-			$cutString = substr($sanitized,0,600);
+			$cutString = substr($sanitized,0,500);
 			$words = substr($sanitized, 0, strrpos($cutString, ' '));
 			return $words;
 		} else {
@@ -51,15 +46,15 @@
 		}
 
 	}// END the excerpt
-// ####################################################################################################
 
+// INCLUDE - Tao paragraph ID ==========================================================
 	// Tao paragraph tu CSDL
 	function the_content($text){
 		$sanitized = htmlentities($text, ENT_COMPAT, 'UTF-8');
 		return str_replace(array("\r\n", "\n"), array("<p>" , "</p>"), $sanitized);
 	}
-// ####################################################################################################
-
+    
+// INCLUDE - VALIDATE ID ===============================================================
 	// ham kiem tra xem GET co gia tri hay ko, $id co hop le, la dang so hay ko
 	function validate_id($id){
 		if (isset($id) && filter_var($id, FILTER_VALIDATE_INT, array('min_range' => 1 ))) {
@@ -70,61 +65,8 @@
 		}
 	} // End validate_id
 
-// ####################################################################################################
-	function get_banner(){
-		global $dbc;
-		// Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
-			$query = "SELECT i.image_id, i.image, i.title, c.cat_name, ";
-			$query .= " DATE_FORMAT(i.post_on, '%b %d, %y') AS date ";
-			$query .= " FROM tblimages as i";
-			$query .= " INNER JOIN tblcategories AS c ";
-			$query .= " USING (cat_id) WHERE c.cat_name='Banner' ";
-			$query .= " ORDER BY date LIMIT 0, 3";
-
-			// Tra ve result or bao loi ra man hinh
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-
-			return $result;
-	}
-
-// ####################################################################################################
-	function get_new_games(){
-		global $dbc;
-		// Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
-			$query = " SELECT news_id, title, content, avatar, type, ";
-			$query .= " DATE_FORMAT(post_on, '%b %d, %y') AS date ";
-			$query .= " FROM tblnews WHERE type='Games' ";
-			$query .= " ORDER BY date LIMIT 0, 8";
-
-			// Tra ve result or bao loi ra man hinh
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-
-			return $result;
-	}
-
-// Dung cho frontend  - hien thi anh bai viet hot nhat hien nay #####################################
-	function get_best_features(){
-		global $dbc;
-			$query = "SELECT n.news_id, n.title, n.content,  ";
-			$query .= " DATE_FORMAT( n.post_on, '%b %d, %Y') AS date, c.cat_name ";
-			$query .= " FROM tblnews AS n ";
-			$query .= " INNER JOIN tblcategories AS c ";
-			$query .= " USING ( cat_id ) ";
-			$query .= " WHERE c.cat_name='Best Features' ";
-			$query .= " ORDER BY date LIMIT 1";
-
-			// Tra ve result or bao loi ra man hinh
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-
-			return $result;
-
-	}
-// Dung cho single page  - tung bai viet ########################################################
-
-	function get_news_by_id($id){
+// INCLUDE - GET 1 NEW by ID ===========================================================
+	function get_news_by_id($nid){
 		global $dbc;
 			$query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
 			$query .= " DATE_FORMAT( n.post_on, '%b') AS month, ";
@@ -136,7 +78,7 @@
 			$query .= " USING ( user_id ) ";
 			$query .= " INNER JOIN tbltypes AS t ";
 			$query .= " USING ( type_id ) ";
-			$query .= " WHERE n.news_id={$id} LIMIT 1";
+			$query .= " WHERE n.news_id={$nid} LIMIT 1";
 
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -144,16 +86,79 @@
 			return $result;
 	} // END of query
 
-// Dung cho frontend  - bai viet hot nhat ##################################################
+// CLIENT SITE [start]==================================================================
+ 
+// FRONTEND - BANNER ==================================================================
+	function get_banner(){
+		global $dbc;
+		// Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
+			$query = " SELECT i.image_id, i.image, i.title, t.type_name, ";
+            $query .= " DATE_FORMAT(post_on, '%b %d, %y') AS date ";
+			$query .= " FROM tblimages as i";
+			$query .= " INNER JOIN tbltypes AS t ";
+			$query .= " USING (type_id) ";
+            $query .= " WHERE t.type_name = 'Banner' ";
+			$query .= " ORDER BY date LIMIT 0, 3";
 
-	function get_hot_news(){
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	}
+
+// FRONTEND - NEW GAME =================================================================
+	function get_new_games(){
+		global $dbc;
+		// Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
+			$query = " SELECT n.news_id, n.title, n.content, n.image, t.type_name, c.cat_name,  ";
+			$query .= " DATE_FORMAT(post_on, '%b %d, %y') AS date ";
+            $query .= " FROM tblnews AS n ";
+			$query .= " INNER JOIN tbltypes AS t ";
+			$query .= " USING ( type_id ) ";
+            $query .= " INNER JOIN tblcategories AS c ";
+			$query .= " USING ( cat_id ) ";
+			$query .= " WHERE c.cat_name = 'Games' ";
+			$query .= " ORDER BY date LIMIT 0, 8";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	}
+
+// FRONTEND - BEST FEATURE - IMAGE =====================================================
+    function get_features(){
+		global $dbc;
+			$query = "SELECT n.news_id, n.title, n.content, t.type_name,  ";
+			$query .= " DATE_FORMAT( n.post_on, '%b') AS month, ";
+			$query .= " DATE_FORMAT( n.post_on, '%d') AS day, ";
+			$query .= " DATE_FORMAT( n.post_on, '%b %d, %Y') AS date ";
+			$query .= " FROM tblnews AS n ";
+			$query .= " INNER JOIN tbltypes AS t ";
+			$query .= " USING ( type_id ) ";
+			$query .= " WHERE t.type_name = 'Feature' LIMIT 1";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+	
+			return $result;
+	} // END of query
+    
+// FRONTEND - HOTEST - NEW - comment nhieu nhat ========================================
+	function get_hotest_news(){
 		global $dbc;
 		// Query lay gia tri tu co so du lieu ra
-			$query = "SELECT n.news_id, n.avatar, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, ";
+			$query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, cat.cat_name,  ";
 			$query .= " COUNT(c.comment_id) AS count ";
 			$query .= " FROM tblnews AS n ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";
 			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";	
-			$query .= " WHERE n.type = 'Games' ";
+			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
 			$query .= " GROUP BY n.title ";
 			$query .= " ORDER BY count DESC LIMIT 0, 3 ";
 
@@ -164,16 +169,19 @@
 			return $result;
 	} // END of query
 
-// Dung cho frontend - show lastest - bai viet cuoi cung ##########################################
-
+// FRONTEND - LASTEST - NEW - bai viet moi nhat ========================================
 	function get_lastest_news(){
 		global $dbc;
 		// Query lay gia tri tu co so du lieu ra
-			$query = "SELECT n.news_id, n.avatar, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, ";
+			$query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, cat.cat_name,  ";
 			$query .= " COUNT(c.comment_id) AS count ";
 			$query .= " FROM tblnews AS n ";
-			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
-			$query .= " WHERE n.type = 'Games' ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";
+			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";	
+			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
 			$query .= " GROUP BY n.title ";
 			$query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
@@ -184,17 +192,20 @@
 			return $result;
 	} // END of query
 
-// Dung cho frontend - show popular - bai viet nhieu comment ##########################################
-
+// FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
 	function get_popular_news(){
 		global $dbc;
-			$query = "SELECT n.news_id, n.avatar, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, ";
+			$query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, cat.cat_name,  ";
 			$query .= " COUNT(c.comment_id) AS count ";
 			$query .= " FROM tblnews AS n ";
-			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
-			$query .= " WHERE n.type = 'Games' ";
-			$query .= " GROUP BY n.title ";	
-			$query .= " ORDER BY count DESC LIMIT 0, 3 ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";
+			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";	
+			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+			$query .= " GROUP BY n.title ";
+			$query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
@@ -202,10 +213,10 @@
 
 			return $result;
 	} // END of query
-
-
-
-	// Dung cho backend - list news #################################################################
+    
+// ADMIN SITE [start] ======================================================================
+    
+//  BACKEND - LIST SHOW NEW  ===============================================================
 	function get_all_news($order_by){
 		global $dbc;
 			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, c.cat_name, ";
@@ -227,7 +238,7 @@
 			return $result;
 	}
     
-    // Dung cho backend - list news #################################################################
+//  BACKEND - LIST SHOW GAME  ===============================================================
 	function get_all_games($order_by){
 		global $dbc;
 			$query = "SELECT n.news_id, t.type_name, n.title, n.content, n.status, c.cat_name, ";
@@ -249,14 +260,17 @@
 			return $result;
 	}
 	
-// Dung cho backend - list images ######################################################################
+//  BACKEND - LIST SHOW IMAGE  ==============================================================
 	function get_all_images($order_by){
 		global $dbc;
-			$query = " SELECT i.image_id, c.cat_name, i.image, i.title, ";
+			$query = " SELECT i.image_id, t.type_name, i.image, i.title, i.status,  ";
+            $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
 			$query .= " DATE_FORMAT(i.post_on, '%b %d %Y') AS date ";
 			$query .= " FROM tblimages AS i ";
-			$query .= " INNER JOIN tblcategories AS c";
-			$query .= " USING(cat_id) ";
+            $query .= " INNER JOIN tblusers AS u ";
+			$query .= " USING(user_id) ";
+			$query .= " INNER JOIN tbltypes AS t";
+			$query .= " USING(type_id) ";
 			$query .= " ORDER BY {$order_by} ASC ";
 
 			$result = mysqli_query($dbc, $query);
@@ -265,13 +279,17 @@
 			return $result;
 	}	
 
-// Dung cho backend - list videos ######################################################################
+//  BACKEND - LIST SHOW VIDEO  ==============================================================
 	function get_all_videos($order_by){
 		global $dbc;
-			$query = " SELECT v.video_id, c.cat_name, v.url_video, v.title ";
+			$query = " SELECT v.video_id, t.type_name, v.url_video, v.title, v.description, v.status,  ";
+            $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
+            $query .= " DATE_FORMAT(v.post_on, '%b %d %Y') AS date ";
 			$query .= " FROM tblvideos AS v ";
-			$query .= " INNER JOIN tblcategories AS c";
-			$query .= " USING(cat_id) ";
+            $query .= " INNER JOIN tblusers AS u ";
+			$query .= " USING(user_id) ";
+			$query .= " INNER JOIN tbltypes AS t";
+			$query .= " USING(type_id) ";
 			$query .= " ORDER BY {$order_by} ASC ";
 
 			$result = mysqli_query($dbc, $query);
@@ -280,8 +298,8 @@
 			return $result;
 	}	
 
-// Dung cho backend - delete news - games #########################################################
-	function delete_news($nid){
+//  BACKEND - DELETE NEWS - GAMES ============================================================
+	function delete_news_games($nid){
 		global $dbc;
 		$query = "DELETE FROM tblnews WHERE news_id = {$nid} LIMIT 1";
 		
@@ -291,7 +309,7 @@
 		return $result;
 	}
 
-// Dung cho backend - delete images ################################################################
+//  BACKEND - DELETE IMAGE  ===================================================================
 	function delete_images($iid){
 		global $dbc;
 		$query = "DELETE FROM tblimages WHERE image_id = {$iid} LIMIT 1";
@@ -301,20 +319,20 @@
 
 		return $result;
 	}
-// Dung cho backend - delete videos ####################################################################
+    
+//  BACKEND - DELETE VIDEO  ===================================================================
 	function delete_videos($vid){
 		global $dbc;
-		$query = "DELETE FROM tblvideos WHERE video_id = {$iid} LIMIT 1";
+		$query = "DELETE FROM tblvideos WHERE video_id = {$vid} LIMIT 1";
 		
 		$result = mysqli_query($dbc,$query);
 		confirm_query($result, $query);
 
 		return $result;
 	}
-
 	
-//  Dung cho backend - edit news - games #################################################################
-	function edit_news($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status){	
+//  BACKEND - EDIT - NEWS - GAMES  ============================================================
+	function edit_news_games($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status){	
 	global $dbc;
 		$query = "UPDATE tblnews SET ";
 		$query .=" title = '{$title}', ";
@@ -333,31 +351,81 @@
 		return $result;
 	}
     
-//  Dung cho backend - show image #################################################################	
-    function get_image_by_id($id){
-		global $dbc;
-			$query = "SELECT i.image_id, i.title, i.image, ";
-            $query .=" DATE_FORMAT( i.post_on, '%b %d, %Y') AS date, c.cat_name "; 
-            $query .=" FROM tblimages AS i ";
-            $query .=" INNER JOIN tblcategories AS c ";
-            $query .=" USING ( cat_id ) ";
-            $query .=" WHERE i.image_id={$id} ";
+//  BACKEND - EDIT - IMAGE ===================================================================
+	function edit_image($iid, $title, $type_id, $myImage, $status){	
+	global $dbc;
+		$query = "UPDATE tblimages SET ";
+		$query .=" title = '{$title}', ";
+		$query .=" type_id = '{$type_id}', ";
+		$query .=" image = '{$myImage}', ";
+        $query .=" status = '{$status}', ";
+		$query .=" user_id = 1, ";	
+		$query .=" post_on = NOW() ";
+		$query .=" WHERE image_id = {$iid} LIMIT 1";	
+		
+		$result = mysqli_query($dbc,$query);
+		confirm_query($result, $query);
 
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-	
-			return $result;
-	} // END of query
+		return $result;
+	}
+ 
+//  BACKEND - EDIT - VIDEO ===================================================================
+	function edit_video($vid, $title, $type_id, $url_video, $description, $status){	
+	global $dbc;
+		$query = "UPDATE tblimages SET ";
+		$query .=" title = '{$title}', ";
+		$query .=" type_id = '{$type_id}', ";
+		$query .=" url_video = '{$url_video}', ";
+        $query .=" description = '{$description}', ";
+        $query .=" status = '{$status}', ";
+		$query .=" user_id = 1, ";	
+		$query .=" post_on = NOW() ";
+		$query .=" WHERE video_id = {$vid} LIMIT 1";	
+		
+		$result = mysqli_query($dbc,$query);
+		confirm_query($result, $query);
 
-//  Dung cho backend - show image #################################################################	
-    function get_news_id($nid){
-		global $dbc;
-			$query = "SELECT * FROM tblnews WHERE news_id = {$nid}";
-
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-	
-			return $result;
-	} // END of query
+		return $result;
+	}
     
+//  BACKEND - SHOW IMAGE =====================================================================
+    function get_image_by_id($iid){
+		global $dbc;
+			$query = "SELECT i.image_id, t.type_name, i.image, i.title, i.status, ";
+            $query .=" DATE_FORMAT( i.post_on, '%b %d, %Y') AS date, "; 
+            $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
+            $query .=" FROM tblimages AS i ";
+            $query .=" INNER JOIN tblusers AS u ";
+            $query .=" USING ( user_id ) ";
+            $query .=" INNER JOIN tbltypes AS t ";
+            $query .=" USING ( type_id ) ";
+            $query .=" WHERE i.image_id= {$iid} ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+	
+			return $result;
+	} // END of query
+
+//  BACKEND - SHOW VIDEO =====================================================================	
+    function get_video_by_id($iid){
+		global $dbc;
+			$query = "SELECT i.image_id, t.type_name, i.image, i.title, i.status, ";
+            $query .=" DATE_FORMAT( i.post_on, '%b %d, %Y') AS date, "; 
+            $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
+            $query .=" FROM tblimages AS i ";
+            $query .=" INNER JOIN tblusers AS u ";
+            $query .=" USING ( user_id ) ";
+            $query .=" INNER JOIN tbltypes AS t ";
+            $query .=" USING ( type_id ) ";
+            $query .=" WHERE i.image_id= {$iid} ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+	
+			return $result;
+	} // END of query
+
+
+
 ?> 

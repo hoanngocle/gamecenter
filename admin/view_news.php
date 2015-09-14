@@ -101,7 +101,7 @@
 									                <td style='width : 100px'>
 									                <a class='fa fa-eye' href='show_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
 									                <a class='fa fa-pencil' href='edit_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete(<?= $news['news_id'] ?>);'></a>
+									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete_news(<?= $news['news_id'] ?>);'></a>
 									                </td>
 												</tr>
 									 			
@@ -109,7 +109,7 @@
 										} else { 
                                     ?>
                                         <!--Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page-->
-										 	<p class='warning'><?= $error_news_no_item?></p>
+										 	<p class='alert alert-warning'><?= $error_news_no_item?></p>
 									<?php 	}   ?>
 							    	</tbody>
                                 </table>

@@ -1,12 +1,23 @@
 <?php 
-	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
+    include('../includes/errors.php');
 ?>
 
 <?php 
 	// Kiem tra gia gtri cua bien pid tu $_GET
 	if( $nid = validate_id($_GET['nid'])){
+
+	// Chon news trong CSDL de hien thi ra trinh duyet
+        $query = "SELECT * FROM tblnews WHERE news_id = {$nid}";
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        if (mysqli_num_rows($result) == 1) {
+            $news = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }else {
+            $messages = "Bài viết không tồn tại!";
+        }
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') { // gia tri ton tai, xu ly form
 			//tao bien luu loi
@@ -28,14 +39,14 @@
 
 			// kiem tra avatar co gia tri hay khong
             if (empty($_FILES['myAvatar']['name'])) {
-                $myAvatar = $games['image'];
+                $myAvatar = $news['image'];
             } else {
                 $myAvatar =  $_FILES['myAvatar']['name'];
             }
             
             // kiem tra banner co gia tri hay khong
             if (empty($_FILES['myBanner']['name'])) {
-                $myBanner = $games['banner'];
+                $myBanner = $news['banner'];
             } else {
                 $myBanner =  $_FILES['myBanner']['name'];
             }					
@@ -57,7 +68,7 @@
 			// kiem tra xem co loi hay khong
 			if (empty($errors)) {
 				// neu ko co loi xay ra bat dau chen vao CSDL
-				$result = edit_news($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
+				$result = edit_news_games($nid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
 					$success = "Chỉnh sửa bài viết thành công!";
 				} else {
@@ -70,24 +81,12 @@
 
 	}else {
 	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-	redirect_to('admin/index.php');
-}
+        redirect_to('admin/view_news.php');
+    }
+    
+	include('../includes/backend/header-admin.php');
 ?>
-<?php 
-	// Chon news trong CSDL de hien thi ra trinh duyet
-	$query = "SELECT * FROM tblnews WHERE news_id = {$nid}";
-	$result = mysqli_query($dbc, $query);
-	confirm_query($result, $query);
 
-	if (mysqli_num_rows($result) == 1) {
-		// Neu co page tra ve
-		$news = mysqli_fetch_array($result, MYSQLI_ASSOC);
-	}else {
-		// Neu khong co page tra ve
-		$messages = "Bài viết không tồn tại!";
-	}
-
-	?>
 <!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
@@ -151,7 +150,7 @@
 				                    <select name="type_id" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
 				                        <?php 
-											$query = "SELECT type_id, type_name FROM tbltypes ORDER BY type_id ASC";
+											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
