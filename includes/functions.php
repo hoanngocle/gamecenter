@@ -214,6 +214,17 @@
 			return $result;
 	} // END of query
     
+    // FRONTEND : check exist username and email ========================================
+	function checkUsernameAndEmail($username, $email){
+		global $dbc;
+            $query = "SELECT user_id FROM tblusers WHERE email = '{$email}' OR username = '{$username}'";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+    
 // ADMIN SITE [start] ======================================================================
     
 //  BACKEND - LIST SHOW NEW  ===============================================================

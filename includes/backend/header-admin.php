@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script src="assets/js/function.js"></script>
+    <script language="javascript" src="../js/ckeditor/ckeditor.js" type="text/javascript"></script>
     <title>Game Center Manager </title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -74,8 +75,8 @@
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="index.php">Home</a></li>
-                            <li><a href="view_games.php">News </a></li>
-                            <li><a href="view_news.php">Games </a></li>
+                            <li><a href="view_news.php">News </a></li>
+                            <li><a href="view_games.php">Games </a></li>
                             <li><a href="view_images.php">Images </a></li>
                             <li><a href="view_videos.php">Videos </a></li>
                             <li><a href="login_admin.php">Login</a></li>

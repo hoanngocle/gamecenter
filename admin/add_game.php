@@ -179,7 +179,8 @@
 								<!-- ================= Content [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
 								   	<label for="content">Content</label>
-								    <textarea name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
+								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
+                                    <script>CKEDITOR.replace('content'); </script>
 								<?php 
 										if (isset($errors) && in_array('title', $errors)) {
 												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>

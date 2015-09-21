@@ -22,7 +22,7 @@
 						'month' => $news['month'],
 						'title' => $news['title'],
 						'name' => $news['name'],
-						'cat_name' => $news['cat_name'],
+						'type_name' => $news['type_name'],
 						'content' => $news['content']
 				);
 		}else {
@@ -51,7 +51,7 @@
 						</div>
 						<div class="top-blog">
 							<a class="fast" href="#"><?php echo $news['title']; ?></a>
-							<p>Posted by <a href="#"><?php echo $news['name']; ?></a> in <a href="#"><?php echo $news['cat_name']; ?></a></p> 
+							<p>Posted by <a href="#"><?php echo $news['name']; ?></a> in <a href="#"><?php echo $news['type_name']; ?></a></p> 
 							<p class="sed"><?php echo $news['content']; ?></p>			
 						<div class="clearfix"> </div>
 						</div>

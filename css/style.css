@@ -384,7 +384,7 @@ a.comment i{
 	height:350px;
 	border:none;
 }
-.contact-grid input[type="text"],.contact-grid textarea{
+.contact-grid input[type="text"],.contact-grid textarea, .contact-grid input[type="password"]{
 	width: 100%;
 	padding: 1em;
 	margin: 0.5em 0;
@@ -398,7 +398,14 @@ a.comment i{
 .contact-grid textarea{
 	resize:none;
 }
-.send input[type="submit"]{
+
+.send {
+    text-align: center;
+    padding-left: 250px;
+    padding-bottom: 40px;
+}
+
+.send input[type="submit"],.send input[type="reset"]{
 	width: 14%;
 	font-size: 1.1em;
 	background:#8FBF00;
@@ -409,7 +416,7 @@ a.comment i{
 	outline:none;
 	-webkit-appearance: none;
 }
-.send input[type="submit"]:hover{
+.send input[type="submit"]:hover, .send input[type="reset"]:hover{
 	background:#2d2d2d;
 }
 .contact-form {
@@ -1148,8 +1155,8 @@ ul.grid-part li a {
 .contact-form {
   padding: 1.5em 0;
 }
-.contact-grid {
-  padding: 0;
+.contact-grid { 
+    padding-left: 200px;
 }
 .contact-in {
   margin-top: 1.5em;
@@ -1195,11 +1202,11 @@ ul.grid-part li a {
 
 
 .item-chil-row1{
-	float: left;
+    float: left;
     height: 150px;
     width: 240px;
     padding-bottom: 5px;
-    padding-left: 5px;
+    padding-left: 8px;
 }
 
 .item-chil-row2{
@@ -1207,7 +1214,7 @@ ul.grid-part li a {
     height: 150px;
     width: 240px;
     padding-top: 5px;
-    padding-left: 5px;
+    padding-left: 8px;
 }
    
 .content-video {
@@ -1216,5 +1223,10 @@ ul.grid-part li a {
 
 .content-gallery {
   	padding: 4em 0 1em;
+}
+
+.register-row {
+    font-size: 1.1em;
+    margin-left: 250px;   
 }
  

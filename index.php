@@ -189,8 +189,10 @@
 						<table style="padding-top: 20px;">
 							<tbody>
 								<tr>
-									<td rowspan="2" style="width: 400px; height: 300px;">
+									<td rowspan="2" style="width: 400px; height: 350px;">
 										<img src="images/w1.jpg" alt="" width="400px" height="300px" >
+                                        <p>Title</p>
+                                        <p>Description</p>
 									</td>
 									<td >
 										<img src="images/w2.jpg" alt="" class="item-chil-row1" >
