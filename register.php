@@ -3,6 +3,8 @@
 include('includes/backend/mysqli_connect.php');
 include('includes/functions.php');
 include('includes/frontend/header.php');
+require_once ('class.phpmailer.php');
+
 ?>
 <div class="content">
     <?php
@@ -82,49 +84,58 @@ include('includes/frontend/header.php');
                     confirm_query($result2, $querytoken);
 
                     // Neu dien thong tin thanh cong, thi gui email kich hoat cho nguoi dung
+                    
                     $to = $_POST['email'];
                     $subject = 'Kích hoạt tài khoản tại GameCenter!';
                     $body = "Cảm ơn bạn đã đăng ký thành công ở website Game Center. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. 
                             Hãy click vào đường link để kích hoạt tài khoản \n\n ";
                     $body .= BASE_URL . "/activate.php?e=" . urlencode($email) . "&t={$token}";
-                    if (mail($to, $subject, $body, 'FROM: localhost')) {
+                    $mail = new PHPMailer();
+                    
+                    if (sendmail($to, $subject, $body, $from)) {
+                        // gui email thanh cong
                         redirect_to('success_active.php');
-                    } else {
+                    } else {// gui email fail
                         redirect_to('error_active.php');
                     }
                 } else {
+                    // dang ky that bai do loi he thong
                     redirect_to('404.php');
                 }
             } else {
                 // Email da ton tai, phai dang ky bang email khac.
-                $message = "<p class='warning'>Email đăng ký đã tồn tại</p>";
+                $message = "<div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                <p>Email này đã tồn tại, vui lòng chọn email khác</p>
+                            </div>";
             }
         } else {
             // Neu mot trong cac truong bi thieu gia tri
-            $error = "Tất cả các trường đều phải được nhập đầy đủ!";
+            $message =  "<div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                <p>Tất cả các trường đều phải được nhập đầy đủ!</p>
+                            </div>";
         }
     }// END main IF
     ?>
     <div class="contact">
         <h2>Register</h2>
         <div class="contact-form">
-            <?php if (!empty($message)) echo $message; ?>
+            
             <div class="col-md-10 contact-grid">
                 <form action="register.php" method="post">
                     <div class="register-row">
-                        
+                        <?php if (!empty($message)) echo $message; ?>
                         <input type="text" name="first_name" size="20" maxlength="60" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name']; ?>" tabindex='1' placeholder="Firstname *"/>
                         <?php if (isset($errors) && in_array('first name', $errors))
                                 echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                            <p>Firstname không được bỏ trống, không được chứa kí tự đặc biệt</p>
-                                        </div>"; ?>
+                                                    <p>Firstname không được bỏ trống, không được chứa kí tự đặc biệt</p>
+                                                </div>"; ?>
                         <br>
                                                   
                         <input type="text" name="last_name" size="20" maxlength="60" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name']; ?>" tabindex='1' placeholder="Lastname *"/>
                         <?php if (isset($errors) && in_array('last name', $errors))
                                 echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                            <p>Lastname không được bỏ trống, không được chứa kí tự đặc biệt</p>
-                                        </div>"; ?>
+                                                    <p>Lastname không được bỏ trống, không được chứa kí tự đặc biệt</p>
+                                                </div>"; ?>
                         <br>
                         
                         <input type="text" name="username" size="20" maxlength="60" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>" tabindex='1' placeholder="Username *" />
@@ -141,23 +152,23 @@ include('includes/frontend/header.php');
                                                     <p>Email nhập phải đúng định dạnh demo@mail.abc </p>
                                                 </div>"; ?>
                         
-                        <br>
+                    <br>
                     
-                        <input type="text" name="reemail" id="email" size="20" maxlength="255" value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" tabindex='1' placeholder="Confirm Email *" /> 
-                         <?php if (isset($errors) && in_array('email', $errors)) 
-                                 echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                        <p>Email nhập lại phải trùng nhau</p>
-                                                    </div>"; ?>
+                    <input type="text" name="reemail" id="email" size="20" maxlength="255" value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email'], ENT_COMPAT, 'UTF-8'); ?>" tabindex='1' placeholder="Confirm Email *" /> 
+                     <?php if (isset($errors) && in_array('email', $errors)) 
+                             echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Email nhập lại phải trùng nhau</p>
+                                                </div>"; ?>
+                        
+                    <br>
 
-                        <br>
-
-                        <input type="password" name="password" size="20" maxlength="60" value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>" tabindex='1' placeholder="Password *" />
-                                <?php if (isset($errors) && in_array('password', $errors)) 
-                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                        <p>Password không được bỏ trống, độ dài từ 6 đến 20 kí tự</p>
-                                                    </div>"; ?>
-
-                        <br>
+                    <input type="password" name="password" size="20" maxlength="60" value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>" tabindex='1' placeholder="Password *" />
+                            <?php if (isset($errors) && in_array('password', $errors)) 
+                                    echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Password không được bỏ trống, độ dài từ 6 đến 20 kí tự</p>
+                                                </div>"; ?>
+                    
+                    <br>
                        
                     <input type="password" name="repassword" size="20" maxlength="60" value="<?php if (isset($_POST['repassword'])) echo $_POST['repassword']; ?>" tabindex='1' placeholder="Confirm Password *"/>
                         <?php if (isset($errors) && in_array('password not match', $errors)) 
@@ -165,7 +176,6 @@ include('includes/frontend/header.php');
                                                     <p>Password nhập lại phải trùng nhau</p>
                                                 </div>";
                         ?>
-                    
                     </div>
                     <br>
 

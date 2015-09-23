@@ -1,5 +1,7 @@
 <?php 
 
+    require_once 'includes/class.phpmailer.php'; 
+    require_once 'includes/PHPMailerAutoload.php'; 
 	// xac dinh hang so cho dia chi tuyet doi
 	define ('BASE_URL', 'http://www.gamecenter.dev/');
 
@@ -191,27 +193,30 @@
 
 			return $result;
 	} // END of query
+    
 
-// FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
-	function get_popular_news(){
-		global $dbc;
-			$query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, cat.cat_name,  ";
-			$query .= " COUNT(c.comment_id) AS count ";
-			$query .= " FROM tblnews AS n ";
-            $query .= " INNER JOIN tbltypes AS t";
-            $query .= " USING (type_id)";
-            $query .= " INNER JOIN tblcategories AS cat";
-            $query .= " USING (cat_id)";
-			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";	
-			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
-			$query .= " GROUP BY n.title ";
-			$query .= " ORDER BY date DESC LIMIT 0, 3 ";
+// FRONTEND : send mail ========================================
+	function sendmail($to, $subject, $body){
+		$mail = new PHPMailer(); // create a new object
+            $mail->IsSMTP(); // enable SMTP
+            $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+            $mail->SMTPAuth = true; // authentication enabled
+            $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
+            $mail->Host = "smtp.gmail.com";
+            $mail->Port = 587; // or 587
+            $mail->IsHTML(true);
+            $mail->Username = "hoancn1.ptit@gmail.com";
+            $mail->Password = "beo05121993";
+            $mail->SetFrom("hoancn1.ptit@gmail.com", "GameMagazine");
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->AddAddress($to);
+            if (!$mail->Send()) {
+                return false;
+            } else {
+                return true;
+            }
 
-			// Tra ve result or bao loi ra man hinh
-			$result = mysqli_query($dbc, $query);
-			confirm_query($result, $query);
-
-			return $result;
 	} // END of query
     
     // FRONTEND : check exist username and email ========================================

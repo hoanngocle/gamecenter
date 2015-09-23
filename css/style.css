@@ -1230,3 +1230,22 @@ ul.grid-part li a {
     margin-left: 250px;   
 }
  
+.submit {
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.submit input[type="submit"],.submit input[type="reset"]{
+	width: 14%;
+	font-size: 1.1em;
+	background:#8FBF00;
+	padding: 0.4em 0.8em;
+	text-align: center;
+	color: #fff;
+	border: none;
+	outline:none;
+	-webkit-appearance: none;
+}
+.submit input[type="submit"]:hover, .submit input[type="reset"]:hover{
+	background:#2d2d2d;
+}

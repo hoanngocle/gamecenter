@@ -1,15 +1,20 @@
 <html>
     <head>
         <title></title>
-        
+        <?php //require_once 'includes/class.smtp.php'; ?>
+        <?php require_once 'includes/functions.php'; ?>
     </head>
     <body>
-        <?php 
-            // PHP
-            $text = "ぁ あ ぃ い ぅ う ぇ え ぉ お か が き ぎ く ぐ け ";
-            $pattern = "/[\x{3041}-\x{3096}]/u";
-            preg_match_all($pattern, $text, $matches);
-            echo $matches;
+        <?php
+           $to = "hoancn1.ptit@gmail.com";
+           $subject = "tesst";
+           $body = "meomoeoemeogm";
+        if(sendmail($to, $subject, $body) == true){
+            echo "true";
+        }  else {
+        echo "fail";    
+        }
+            
         ?>
     </body>
 </html>
