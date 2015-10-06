@@ -12,40 +12,28 @@ include('includes/frontend/header.php');
         // Mac dinh cho cac truong nhap lieu la FALSE
         $username = $password = FALSE;
 
+        
+        // kiem tra page name co gia tri hay khong
+		if (empty($_POST['username'])) {
+			$errors[] = "username";
+		} else {
+			$username = mysqli_real_escape_string($dbc, strip_tags($_POST['username']));
+		}
 
-        if (preg_match('/^[\w\'.-]{6,24}$/i', trim($_POST['username']))) {
-            $username = mysqli_real_escape_string($dbc, trim($_POST['username']));
-        } else {
-            $errors[] = 'username';
-        }
-
-
-        if (preg_match('/^[\w\'.-]{6,24}$/', trim($_POST['password']))) {
-                // Neu mat khau mot phu hop voi mat khau hai, thi luu vao csdl
-                $password = mysqli_real_escape_string($dbc, trim($_POST['password']));
-            
+        if(isset($_POST['password']) && preg_match('/^[\w]{4,20}$/', $_POST['password'])) {
+            $password = mysqli_real_escape_string($dbc, $_POST['password']);
         } else {
             $errors[] = 'password';
         }
+        
+        if(empty($errors)) {
+        $query  = "SELECT user_id, first_name, user_level FROM users WHERE (email = '{$e}' AND pass = SHA1('$p')) AND active IS NULL LIMIT 1";
+            $r = mysqli_query($dbc, $q); confirm_query($r, $q);
+            if(mysqli_num_rows($r) == 1) {
 
-        if ($username && $password) {
-            // Neu moi thu deu day du, truy van csdl
-            $result = checkUsernameAndEmail($username, $email);
-
-            if (mysqli_num_rows($result) == 0) {
-                // Luc nay email van con trong, cho phep nguoi dung dang ky
-
-                } else {
-                    redirect_to('404.php');
-                }
-            } else {
-                // Email da ton tai, phai dang ky bang email khac.
-                $message = "<p class='warning'>Email đăng ký đã tồn tại</p>";
-            }
-            // Neu mot trong cac truong bi thieu gia tri
-            $error = "Tất cả các trường đều phải được nhập đầy đủ!";
-
-    }// END main IF
+            }// END main IF
+        }
+    }
     ?>
     <div class="contact">
         <h2>Register</h2>

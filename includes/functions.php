@@ -1,7 +1,6 @@
 <?php 
 
-    require_once 'includes/PHPMailer/class.phpmailer.php'; 
-    require_once 'includes/PHPMailer/PHPMailerAutoload.php'; 
+    
 	// xac dinh hang so cho dia chi tuyet doi
 	define ('BASE_URL', 'http://www.gamecenter.dev/');
 
@@ -22,9 +21,20 @@
 	}
 
 // INCLUDE - EXCERPT ==========================================================
+// // ham cat chu cuoi cung cua phan content thanh doan van ngan
+	function excerpt_news_content($sanitized) {
+		if(strlen($sanitized) > 100 ) {
+			$cutString = substr($sanitized,0,200);
+			$words = substr($sanitized, 0, strrpos($cutString, ' '));
+			return $words;
+		} else {
+			return $sanitized;
+		}
+
+	}// END the excerpt
+
 	// ham cat chu cuoi cung cua phan content thanh doan van ngan
-	function excerpt($text) {
-		$sanitized = htmlentities($text, ENT_COMPAT, 'UTF-8');
+	function excerpt($sanitized) {
 		if(strlen($sanitized) > 400 ) {
 			$cutString = substr($sanitized,0,500);
 			$words = substr($sanitized, 0, strrpos($cutString, ' '));
@@ -194,35 +204,126 @@
 			return $result;
 	} // END of query
     
+// FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_popular_news(){
+		global $dbc;
+			$query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, cat.cat_name,  ";
+			$query .= " COUNT(c.comment_id) AS count ";
+			$query .= " FROM tblnews AS n ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";
+			$query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";	
+			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+			$query .= " GROUP BY n.title ";
+			$query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
-// FRONTEND : send mail ========================================
-	function sendmail($to, $subject, $body){
-		$mail = new PHPMailer(); // create a new object
-            $mail->IsSMTP(); // enable SMTP
-            $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-            $mail->SMTPAuth = true; // authentication enabled
-            $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
-            $mail->Host = "smtp.gmail.com";
-            $mail->Port = 587; // or 587
-            $mail->IsHTML(true);
-            $mail->Username = "hoancn1.ptit@gmail.com";
-            $mail->Password = "beo05121993";
-            $mail->SetFrom("hoancn1.ptit@gmail.com", "GameMagazine");
-            $mail->Subject = $subject;
-            $mail->Body = $body;
-            $mail->AddAddress($to);
-            if (!$mail->Send()) {
-                return false;
-            } else {
-                return true;
-            }
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
 
+			return $result;
 	} // END of query
+    
+    // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_type(){
+		global $dbc;
+			$query = "SELECT * FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC LIMIT 0, 3 ";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+    //
+    
+    
+    // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_news_by_type($type){
+		global $dbc;
+			$query = " SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, n.content, cat.cat_name ";
+			$query .= " FROM tblnews AS n ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";	
+			$query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND t.type_name = '{$type}' ";
+			$query .= " GROUP BY n.title ";
+			$query .= " ORDER BY date DESC LIMIT 0, 3 ";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+    //
+     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_tag_by_id($nid){
+		global $dbc;
+			$query = " SELECT d.tag_id, d.news_id, t.keyword";
+			$query .= " FROM tbltag_data AS d ";
+            $query .= " INNER JOIN tbltags AS t";
+            $query .= " USING (tag_id)";	
+			$query .= " WHERE  d.news_id = '{$nid}' ";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
+    
+     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_first_image_gallery(){
+		global $dbc;
+			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 1";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
+    
+     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_image_row1(){
+		global $dbc;
+			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 1,3";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
+    
+     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_image_row2(){
+		global $dbc;
+			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 4,3";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
     
     // FRONTEND : check exist username and email ========================================
 	function checkUsernameAndEmail($username, $email){
 		global $dbc;
             $query = "SELECT user_id FROM tblusers WHERE email = '{$email}' OR username = '{$username}'";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+    
+    // FRONTEND : get token ========================================
+	function getToken($token){
+		global $dbc;
+            $query = "SELECT * FROM tbltokens WHERE token = '{$token}'";
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);

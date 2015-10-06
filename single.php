@@ -28,9 +28,17 @@
 		}else {
 			$errors =  "<p>There are currently no post in this category.</p>";
 		}
+        $rs = get_tag_by_id($nid);
+        $tags = null ;
+        if (mysqli_num_rows($rs) > 0 ) {	
+			$array_tag = mysqli_fetch_array($rs, MYSQLI_ASSOC);      
+            $tags = $array_tag['keyword'];
+        }
+
+        
 	}else {
 		//neu nid ko co thi chuyen huong nguoi dung
-		redirect_to();
+		redirect_to('404.php');
 	}
 	include('includes/frontend/header.php');
 ?>
@@ -42,30 +50,25 @@
 			<div class="blog-to">
 			<!-- In ra trang 404 neu ko có page -->
 			<?php foreach ($posts as $news){ ?>
-
-					<img class="img-responsive sin-on" src="images/<?php echo $news['banner']; ?>" alt="" />
-					<div class="blog-top">
-						<div class="blog-left">
-							<b><?php echo $news['day']; ?></b>
-							<span><?php echo $news['month']; ?></span>
-						</div>
-						<div class="top-blog">
-							<a class="fast" href="#"><?php echo $news['title']; ?></a>
-							<p>Posted by <a href="#"><?php echo $news['name']; ?></a> in <a href="#"><?php echo $news['type_name']; ?></a></p> 
-							<p class="sed"><?php echo $news['content']; ?></p>			
-						<div class="clearfix"> </div>
-						</div>
-					<div class="clearfix"> </div>
-					</div>
-
-			<?php  } ?>
-	
-				
+                <img class="img-responsive sin-on" style="width: 1110px; height: 338px;" src="images/<?= $news['banner']; ?>" alt="" />
+                <div class="blog-top">
+                    <div class="blog-left">
+                        <b><?= $news['day']; ?></b>
+                        <span><?= $news['month']; ?></span>
+                    </div>
+                    <div class="top-blog">
+                        <a class="fast" href="#"><?= $news['title']; ?></a>
+                        <p>Posted by <a href="#"><?= $news['name']; ?></a> in <a href="#"><?= $news['type_name']; ?></a></p> 
+                        <p class="sed"><?= $news['content']; ?></p>			
+                        Tag: <a class="fast" href="search.php?tag=<?= $tags ?>"><?= $tags ?></a>
+                    <div class="clearfix"> </div>
+                    </div>
+                <div class="clearfix"> </div>
+                </div>
+			<?php  } ?>				
 			</div>
-
 		<!-- Comment -->
-		<?php include('includes/frontend/comment_form.php') ?>
-		
+		<?php include('includes/frontend/comment_form.php') ?>		
 		</div>
 	</div>
 <!-- goi file chua header -->

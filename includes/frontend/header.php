@@ -15,12 +15,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<!--fonts-->
-		<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-		<!--//fonts-->
+
 		<script src="js/modernizr.custom.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
+        <link rel="stylesheet" type="text/css" href="../includes/slider/engine/style.css" />
+        <script type="text/javascript" src="../includes/slider/engine/jquery.js"></script>
 	</head>
 	<!-- End of script -->
 	<body> 

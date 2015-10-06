@@ -21,8 +21,8 @@
 										$content = excerpt_features($games['content']);
 							?>
 							<li>
-								<a href="single.php?nid=<?php echo $games['news_id'];  ?>" data-largesrc="images/<?php echo $games['image']; ?>" data-title="<?php echo $games['title']; ?>" data-description="<?php echo $content ?>...">
-									<img class="img-responsive" src="images/<?php echo $games['image']; ?>" alt="img<?php echo $games['image']; ?>"/>
+								<a href="single.php?nid=<?= $games['news_id'];  ?>" data-largesrc="images/<?= $games['image']; ?>" data-title="<?= $games['title']; ?>" data-description="<?= $content ?>...">
+									<img class="img-responsive" src="images/<?= $games['image']; ?>" alt="img<?= $games['image']; ?>"/>
 								</a>
 							</li>
 							<?php 
@@ -56,7 +56,7 @@
                     
                     <h3><?= $games['title']; ?></h3>
                     <p><?= $content; ?>...</p>
-                    <a class=" more-in" href="single.php?nid=<?php echo $games['news_id']; ?>">Read More</a>
+                    <a class=" more-in" href="single.php?nid=<?= $games['news_id']; ?>">Read More</a>
                     <?php } ?>
 				</div>
 			</div>
@@ -67,7 +67,8 @@
         <div class="featured">
 			<div class="container">
                 <!--===================================== News [start] =====================================-->
-				<!-- =============== Lastest News ============== -->
+				
+                <!-- =============== Lastest News ============== -->
 				<div class="col-md-4 latest">						
 					<h4>Latest</h4>
 					<?php 
@@ -77,7 +78,7 @@
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
 									<div class='late'>
-										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
 											<span><?= $lastest_news['date'] ?></span>
 											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
@@ -101,7 +102,7 @@
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
 									<div class='late'>
-										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
 											<span><?= $lastest_news['date'] ?></span>
 											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
@@ -125,7 +126,7 @@
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
 									<div class='late'>
-										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
 										<div class='grid-product'>
 											<span><?= $lastest_news['date'] ?></span>
 											<p><a href='single.php?nid={$lastest_news['news_id']}' ><?= $lastest_news['title'] ?></a></p>
@@ -145,34 +146,47 @@
                 <!--===================================== Gallery [start] =====================================-->
 				<div class="content-gallery">
 					<h2 class="new" style="padding-bottom: 14px"> GALLERY </h2>
+                    
 					<div class="wrap">
 						<table>
 							<tbody>
 								<tr>
 									<td rowspan="2" style="width: 400px; height: 300px;">
-										<img src="images/w1.jpg" alt="" width="400px" height="300px" >
+                                        <?php 
+                                        $result = get_first_image_gallery();
+                                        if (mysqli_num_rows($result) > 0 ) {
+                                            $gallery = mysqli_fetch_array($result, MYSQLI_ASSOC);  
+                                        ?>
+                                        <a href="gallery.php?iid=<?= $gallery['image_id'] ?>" ><img src="images/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" width="400px" height="300px" ></a>
+                                        <?php } ?>
+                                    </td>
+                                    <?php 
+                                        $result = get_image_row1();
+                                        if (mysqli_num_rows($result) > 0 ) {
+                                            while ($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){             
+                                    ?>
+                                    <td>                                      
+                                        <a href="gallery.php?iid=<?= $gallery['image_id'] ?>" ><img src="images/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" class="item-chil-row1" ></a>
 									</td>
-									<td >
-										<img src="images/w2.jpg" alt="" class="item-chil-row1" >
-									</td>
-									<td >
-										<img src="images/w3.jpg" alt="" class="item-chil-row1" >
-									</td>
-									<td >
-										<img src="images/w4.jpg" alt="" class="item-chil-row1" >
-									</td>
+                                    <?php 
+                                            }
+                                        }                                       
+                                    ?>                                   
 									
 								</tr>
 								<tr>
-									<td >
-										<img src="images/w5.jpg" alt="" class="item-chil-row2" >
+									<?php 
+                                        $result = get_image_row2();
+                                        if (mysqli_num_rows($result) > 0 ) {
+                                            while ($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){             
+                                    ?>
+                                    <td>                                      
+                                        <a href="gallery.php?iid=<?= $gallery['image_id'] ?>" ><img src="images/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" class="item-chil-row1" ></a>
 									</td>
-									<td >
-										<img src="images/w6.jpg" alt="" class="item-chil-row2" >
-									</td>
-									<td >
-										<img src="images/w7.jpg" alt="" class="item-chil-row2" >
-									</td>
+                                    <?php 
+                                            }
+                                        }                                       
+                                    ?> 
 								</tr>
 
 							</tbody>

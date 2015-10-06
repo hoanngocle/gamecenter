@@ -7,8 +7,10 @@
 ?>
     <div class="four">
 		<div class="container">	
-			<p>OOPS! - Could not Find it</p>	
-			<h2>404</h2>
+            <h2>Congratulation!</h2>
+			<p>Bạn đã đăng kí thành công tài khoản ở GameCenter. <br> Vui lòng vào email để kích hoạt tài khoản.</p>	
+            <br>
+			
 			<a href="javascript:history.go(-1)" class="more">Go Back </a>
 		</div>
 	</div>

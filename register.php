@@ -3,7 +3,7 @@
 include('includes/backend/mysqli_connect.php');
 include('includes/functions.php');
 include('includes/frontend/header.php');
-require_once ('class.phpmailer.php');
+
 
 ?>
 <div class="content">
@@ -86,10 +86,10 @@ require_once ('class.phpmailer.php');
                     // Neu dien thong tin thanh cong, thi gui email kich hoat cho nguoi dung
                     
                     $to = $_POST['email'];
-                    $subject = 'Kích hoạt tài khoản tại GameCenter!';
+                    $subject = 'Thank for registering in GameCenter!';
                     $body = "Cảm ơn bạn đã đăng ký thành công ở website Game Center. Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. 
                             Hãy click vào đường link để kích hoạt tài khoản \n\n ";
-                    $body .= BASE_URL . "/activate.php?e=" . urlencode($email) . "&t={$token}";
+                    $body .= BASE_URL . "activate.php?e=" . urlencode($email) . "&t={$token}";
                     $mail = new PHPMailer();
                     
                     if (sendmail($to, $subject, $body, $from)) {

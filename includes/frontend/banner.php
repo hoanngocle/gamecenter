@@ -13,10 +13,10 @@
 						<article style="position: absolute; width: 100%; opacity: 0;"> 
 	   						<div class="banner-wrap">
 								<div class="banner-top">
-									<img src="images/banner/<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
+									<img style="width: 390px; height: 344px;" src="images/banner/<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
 								</div>
 								<div class="banner-top banner-bottom">
-									<img src="images/banner/big_<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
+									<img style="width: 612px; height: 344px;" src="images/banner/big_<?php echo $images['image']; ?>" class="img-responsive" alt="<?php echo $images['image']; ?>">
 								</div>
 								<div class="clearfix"> </div>
 		   	 				</div>				   
