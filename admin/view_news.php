@@ -84,9 +84,9 @@
 									 	while($news = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
                                             if($news['status'] == 0){
-                                                $active = "<a class='fa fa-eye' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-pencil' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px'></a>";
                                             }
                                         ?>
 								 				<tr>

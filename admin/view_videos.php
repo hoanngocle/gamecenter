@@ -15,12 +15,12 @@
             </div>
 
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-12">
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center">Videos</h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="add_video.php">Upload Videos</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="upload_video.php">Upload Videos</a></h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -81,22 +81,22 @@
 										if(mysqli_num_rows($result) > 0 ) {
 
 										// vong lap while de hien thi ket qua tu csdl ra
-									 	while($images = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+									 	while($videos = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
-                                            if($images['status'] == 0){
-                                                $active = "<a class='fa fa-eye' style='font-size: 20px; margin-left: 5px'></a>";
+                                            if($videos['status'] == 0){
+                                                $active = "<a class='fa fa-remove' style='font-size: 20px; margin-left: 5px'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-pencil' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-check' style='font-size: 20px; margin-left: 5px'></a>";
                                             }
                                         ?>
                                             <tr>
-                                                <td style='text-align:right' ><?= $images['video_id']?></td>
-                                                <td style='text-align:left'><?= $images['type_name']?></td>
-                                                <td style='text-align:left'><?= $images['title']?></td>
-                                                <td style='text-align:justify'><?= $images['description']?></td>
-                                                <td style='text-align:right'><?= $images['url_video']?></td>
-                                                <td style='text-align:right'><?= $images['name']?></td>
-                                                <td style='text-align:right'><?= $images['date']?></td>
+                                                <td style='text-align:right' ><?= $videos['video_id']?></td>
+                                                <td style='text-align:left'><?= $videos['type_name']?></td>
+                                                <td style='text-align:left'><?= $videos['title']?></td>
+                                                <td style='text-align:justify'><?= $videos['description']?></td>
+                                                <td style='text-align:right'><?= $videos['url_video']?></td>
+                                                <td style='text-align:right'><?= $videos['name']?></td>
+                                                <td style='text-align:right'><?= $videos['date']?></td>
                                                 <td style='text-align:center'><?= $active?></td>
 
                                                 <td style='width : 100px'>

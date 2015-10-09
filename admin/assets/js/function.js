@@ -1,4 +1,10 @@
+    // js logon bubble
+    $("#login-button").click(function(event){
+                    event.preventDefault();
 
+            $('form').fadeOut(500);
+            $('.wrapper').addClass('form-success');
+   });
 // Preview Image before upload ========================================================
 	function PreviewAvatar() {
 	    var oFReader = new FileReader();

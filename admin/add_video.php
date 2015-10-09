@@ -1,73 +1,83 @@
 <?php 
-	include('../includes/backend/header-admin.php');
+
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
 
-<?php 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
-		$errors = array();
-
-		// kiem tra page name co gia tri hay khong
-		if (empty($_POST['title'])) {
-			$errors[] = "title";
-		} else {
-			$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
-		}
-
-		// kiem tra xem type co gia tri hay ko
-		if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-			$type_id = $_POST['type'];
-		}else{
-			$errors[] = 'type';
-		}
+<?php    
+    $vid = $_GET['vid'];        
+    if(empty($vid)){
+        redirect_to('admin/view_videos.php');
         
-        if (empty($_POST['description'])) {
-			$errors[] = "description";
-		} else {
-			$description = mysqli_real_escape_string($dbc, strip_tags($_POST['description']));
-		}
-        
-        // kiem tra xem url video co gia tri hay ko
-        if (empty($_POST['url_video'])) {
-			$errors[] = 'url_video';
-		}else {
-			$url_video = $_POST['url_video'];
-		}
+    }else {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+            //tao bien luu loi
+            $errors = array();
 
-        //kiem tra trang thai bai viet co gia tri hay ko
-        if (isset($_POST['status'])) {
-            $status = $_POST['status'];
-        }else{
-            $errors[] = 'status';
+            // kiem tra page name co gia tri hay khong
+            if (empty($_POST['title'])) {
+                $errors[] = "title";
+            } else {
+                $title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
+            }
+
+            // kiem tra xem type co gia tri hay ko
+            if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+                $type_id = $_POST['type'];
+            }else{
+                $errors[] = 'type';
+            }
+
+            if (empty($_POST['description'])) {
+                $errors[] = "description";
+            } else {
+                $description = mysqli_real_escape_string($dbc, strip_tags($_POST['description']));
+            }
+
+            // kiem tra xem url video co gia tri hay ko
+            $url_video = "https://www.youtube.com/watch?v=$vid";
+            $url_thumbnail ="http://img.youtube.com/vi/$vid/sddefault.jpg";
+            
+            //kiem tra trang thai bai viet co gia tri hay ko
+            if (isset($_POST['status'])) {
+                $status = $_POST['status'];
+            }else{
+                $errors[] = 'status';
+            }
+
+            $thumbnail = save_thumbnail_from_url($url_thumbnail, $vid);
+            // kiem tra xem co loi hay khong
+            if (empty($errors)) {
+                // neu ko co loi xay ra bat dau chen vao CSDL
+                $query = "INSERT INTO tblvideos (user_id, title, type_id, description, thumbnail, url_video, status, post_on )
+                            VALUES (1, '{$title}', {$type_id}, '{$description}', '{$thumbnail}', '{$url_video}', '{$status}', NOW())";			
+                $result = mysqli_query($dbc, $query);
+                // ham tra ve ket qua co dung hay ko
+                confirm_query($result, $query);
+
+                if (mysqli_affected_rows($dbc) == 1) {
+                    $success = "Thêm thành công video vào cơ sở dữ liệu!</p>";
+                } else {
+                    $fail = "Tạo mới video thất bại do lỗi hệ thống!";
+                }
+            } else {
+                $error = "Tất cả các trường đều phải được nhập đầy đủ!";
+            }
         }
+    }
 
-		// kiem tra xem co loi hay khong
-		if (empty($errors)) {
-			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblimages (user_id, title, type_id, description, url_video, status, post_on )
-						VALUES (1, '{$title}', {$type_id}, '{$description}', '{$url_video}', '{$status}', NOW())";			
-			$result = mysqli_query($dbc, $query);
-			// ham tra ve ket qua co dung hay ko
-			confirm_query($result, $query);
 
-			if (mysqli_affected_rows($dbc) == 1) {
-				$success = "Thêm thành công video vào cơ sở dữ liệu!</p>";
-			} else {
-				$fail = "Tạo mới video thất bại do lỗi hệ thống!";
-			}
-		} else {
-			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
-		}
-    } // END main IF submit condition
+ 
+  	include('../includes/backend/header-admin.php');  
+    
+	
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage Images</h1>
+                    <h1 class="page-head-line">Manage Videos</h1>
                 </div>
         	</div>
 
@@ -75,8 +85,8 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Upload Videos</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Videos</a></h4>
+                            <h2>Add Videos</h2>
+                            <h4><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($success)) {
@@ -97,7 +107,7 @@
             				?>
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
-							<form id="add_news" action="" method="post" enctype="multipart/form-data">
+							<form id="add_videos" action="" method="post" >
                                 <!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title">Title</label>
@@ -141,26 +151,18 @@
 
 								<!-- ================= Url_video [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-                                    <label for="title">Title</label>
-                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
-								<?php 
-                                    if (isset($errors) && in_array('title', $errors)) {
-                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được bỏ trống </p>
-                                                </div>";
-
-                                    }
-                                ?>
+                                    <label for="title">Url Video</label>
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="url" name="url" size="20" maxlength="150" value="https://www.youtube.com/watch?v=<?= $vid ?>" disabled/>
 								</div>
                                 
                                 <!-- ================= Description [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-                                    <label for="title">Title</label>
-                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
+                                    <label for="title">Description</label>
+                                    <textarea id="description" name="description" class="form-control" rows="4" style="font-size: 18px" size="20" maxlength="1000" placeholder="Please text some description" value="<?php if(isset($description)) echo $description ?>"></textarea>
 								<?php 
-                                    if (isset($errors) && in_array('title', $errors)) {
+                                    if (isset($errors) && in_array('description', $errors)) {
                                         echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được bỏ trống </p>
+                                                    <p>Description không được bỏ trống </p>
                                                 </div>";
 
                                     }

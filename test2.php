@@ -11,8 +11,6 @@
 </form>
     <?php
     
-    
-    
     function save_thumbnail_from_url($url, $name){
         
         $ch = curl_init($url);
@@ -23,13 +21,13 @@
         curl_close($ch);
         fclose($fp);
         
-        return $name;
+        return $name.'.jpg';
     }
-    $url = 'http://img.cdn.ved.com.vn/web/lmht360/wp-content/uploads/2015/09/cloud9-groupb.jpg';
+    $url = 'http://img.youtube.com/vi/Z8L9BnSq2Lc/sddefault.jpg';
     $name = 'beo';
-    save_thumbnail_from_url($url, $name)
     
-    
+    $a = save_thumbnail_from_url($url, $name);
+
     ?>
 
 </body>

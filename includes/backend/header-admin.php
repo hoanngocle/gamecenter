@@ -9,6 +9,10 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style-admin.css" rel="stylesheet" />
+    
+    <link href="../includes/video-js/video-js.css" rel="stylesheet" type="text/css">
+    <script src="../includes/video-js/video.js"></script>
+    <script src="../includes/video-js/media.youtube.js"></script>
 
 </head>
 <body>

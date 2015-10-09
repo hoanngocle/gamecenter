@@ -543,31 +543,41 @@
 			return $result;
 	} // END of query
 
-
 //  BACKEND - get id youtube =====================================================================	
     function youtube_id_from_url($url) {
-    $pattern = 
-        '%^# Match any youtube URL
-        (?:https?://)?  # Optional scheme. Either http or https
-        (?:www\.)?      # Optional www subdomain
-        (?:             # Group host alternatives
-          youtu\.be/    # Either youtu.be,
-        | youtube\.com  # or youtube.com
-          (?:           # Group path alternatives
-            /embed/     # Either /embed/
-          | /v/         # or /v/
-          | /watch\?v=  # or /watch\?v=
-          )             # End path alternatives.
-        )               # End host alternatives.
-        ([\w-]{10,12})  # Allow 10-12 for 11 char youtube id.
-        $%x'
-        ;
-    $result = preg_match($pattern, $url, $matches);
-    if (false !== $result) {
-        return $matches[1];
-    }
+        $pattern = 
+            '%^# Match any youtube URL
+            (?:https?://)?  # Optional scheme. Either http or https
+            (?:www\.)?      # Optional www subdomain
+            (?:             # Group host alternatives
+              youtu\.be/    # Either youtu.be,
+            | youtube\.com  # or youtube.com
+              (?:           # Group path alternatives
+                /embed/     # Either /embed/
+              | /v/         # or /v/
+              | /watch\?v=  # or /watch\?v=
+              )             # End path alternatives.
+            )               # End host alternatives.
+            ([\w-]{10,12})  # Allow 10-12 for 11 char youtube id.
+            $%x'
+            ;
+        $result = preg_match($pattern, $url, $matches);
+        if (false !== $result) {
+            return $matches;
+        }
     return false;
 }
-
+//  BACKEND - get id youtube =====================================================================	
+    function save_thumbnail_from_url($url, $name){
+        $ch = curl_init($url);
+        $fp = fopen('../images/thumbnails/'.$name.'.gif', 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
+        
+        return $name.'.gif';
+    }
 
 ?> 
