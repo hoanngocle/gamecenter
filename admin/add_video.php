@@ -1,15 +1,14 @@
 <?php 
-
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
 
 <?php    
-    $vid = $_GET['vid'];        
-    if(empty($vid)){
-        redirect_to('admin/view_videos.php');
-        
+    $vid = $_GET['vid'];
+    if(empty($vid) || strlen($vid) != 11){
+        redirect_to('admin/view_videos.php');       
     }else {
+        $title_page = 'Add Video';
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
             //tao bien luu loi
             $errors = array();
@@ -65,12 +64,9 @@
             }
         }
     }
-
-
- 
-  	include('../includes/backend/header-admin.php');  
     
-	
+    include('../includes/backend/header-admin.php');
+
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">

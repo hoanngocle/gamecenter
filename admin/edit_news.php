@@ -4,7 +4,8 @@
     include('../includes/errors.php');
 ?>
 
-<?php 
+<?php
+    $title_page = 'Edit News';
 	// Kiem tra gia gtri cua bien pid tu $_GET
 	if( $nid = validate_id($_GET['nid'])){
 

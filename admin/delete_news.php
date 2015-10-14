@@ -1,6 +1,7 @@
 <?php 
-	include('../includes/backend/mysqli_connect.php');
-	include('../includes/functions.php'); 
+    include('../includes/functions.php');
+	include('../includes/backend/header-admin.php');
+	include('../includes/backend/mysqli_connect.php'); 
     
 	$nid = validate_id($_GET['nid']);
 		// Neu muon delete page

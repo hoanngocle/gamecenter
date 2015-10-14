@@ -1,11 +1,10 @@
 <?php 
-	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
 
-
-<?php 
+<?php
+    $title_page = 'Add Game';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
 		//tao bien luu loi
 		$errors = array();
@@ -42,7 +41,7 @@
 		if (empty($_POST['content'])) {
 			$errors[] = 'content';
 		}else {
-			$content = mysqli_real_escape_string($dbc, $_POST['content']);
+			$content = $_POST['content'];
 		}
 
         //kiem tra trang thai bai viet co gia tri hay ko
@@ -55,21 +54,30 @@
 		// kiem tra xem co loi hay khong
 		if (empty($errors)) {
 			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, post_on)
+            $myAvatar = "ava-".$myAvatar; 
+            $myBanner = "banner-".$myBanner;
+            
+            $targetava = '../images/'.$myAvatar;
+            $targetbanner = '../images/'.$myBanner;
+            move_uploaded_file($_FILES['myAvatar']['tmp_name'], $targetava  );
+            move_uploaded_file($_FILES['myBanner']['tmp_name'], $targetbanner  );
+            
+            $query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, post_on)
 						VALUES (1, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);
 
 			if (mysqli_affected_rows($dbc) == 1) {
-				$success = "Tạo mới game thành công!</p>";
+				redirect_to('admin/view_game.php');
 			} else {
-				$fail = "Tạo mới game thất bại do lỗi hệ thống!";
+				redirect_to('admin/view_game.php');
 			}
 		} else {
 			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
 		}
 	} // END main IF submit condition
+    include('../includes/backend/header-admin.php');    
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">

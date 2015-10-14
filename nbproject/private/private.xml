@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <coverage xmlns="http://www.netbeans.org/ns/code-coverage/1" enabled="false"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PHP/htdocs/gamecenter/includes/functions.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/test2.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/includes/frontend/header.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/index.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/playlist.php</file>
             <file>file:/D:/PHP/htdocs/gamecenter/admin/upload_video.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/admin/add_video.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/admin/view_videos.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/admin/edit_game.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/admin/add_game.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/games.php</file>
         </group>
     </open-files>
 </project-private>

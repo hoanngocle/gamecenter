@@ -1,8 +1,9 @@
-<?php 
+<?php
+    $title_page = 'Upload Video';
+    include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
-	include('../includes/backend/mysqli_connect.php'); 
-	include('../includes/functions.php');
-    
+	include('../includes/backend/mysqli_connect.php');
+    include('../includes/errors.php');
 ?>
 
 <?php 
@@ -45,7 +46,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Upload Videos</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Videos</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
             				if(!empty($fail)) {

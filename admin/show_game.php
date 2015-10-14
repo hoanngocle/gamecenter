@@ -4,6 +4,7 @@
     include('../includes/errors.php');
 	?>
 <?php
+    
 	if( $gid = validate_id($_GET['gid'])){
 		$set = get_news_by_id($gid);
 
@@ -16,7 +17,7 @@
 	}else{
 		redirect_to('admin/view_news.php');		
 	}	
-
+    $title_page = $games['type_name'];
 	include('../includes/backend/header-admin.php');
 	?>
 

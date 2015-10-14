@@ -3,7 +3,8 @@
 	include('../includes/functions.php');
 ?>
 
-<?php 
+<?php
+    $title_page = 'Edit Game';
 	// Kiem tra gia gtri cua bien pid tu $_GET
 	if( $gid = validate_id($_GET['gid'])){
 
@@ -71,7 +72,15 @@
 			// kiem tra xem co loi hay khong
 			if (empty($errors)) {
 				// neu ko co loi xay ra bat dau chen vao CSDL
-				$result = edit_news($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
+                $myAvatar = "ava-".$myAvatar; 
+                $myBanner = "banner-".$myBanner;
+
+                $targetava = '../images/'.$myAvatar;
+                $targetbanner = '../images/'.$myBanner;
+                move_uploaded_file($_FILES['myAvatar']['tmp_name'], $targetava  );
+                move_uploaded_file($_FILES['myBanner']['tmp_name'], $targetbanner  );
+                               
+				$result = edit_news_games($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
 					$success = "Chỉnh sửa bài viết thành công!";
 				} else {
@@ -177,7 +186,7 @@
 								<div class="form-group" style="font-size: 18px">
 								    <label for="image">Images Input</label> <br>
 								    <img id="avatar" style="width: 300px; height: 300px;" />
-                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewBanner();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>
+                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar()();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>
 								</div>   
                                 
 								<!-- ================= Banner [start] ===================== -->

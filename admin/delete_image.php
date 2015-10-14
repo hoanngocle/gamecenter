@@ -1,6 +1,7 @@
 <?php 
+    include('../includes/functions.php');
+	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php');
-	include('../includes/functions.php'); 
     
 	$iid = validate_id($_GET['iid']);
 		// Neu muon delete page

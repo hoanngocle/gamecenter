@@ -1,7 +1,8 @@
-<?php 
+<?php
+    $title_page = 'Gallery';
+    include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
-	include('../includes/backend/mysqli_connect.php'); 
-	include('../includes/functions.php');
+	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
 
@@ -15,7 +16,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-12">
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -27,14 +28,14 @@
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 5% ; text-align:center"><a href="view_images.php?sort=id">ID</a></th>
-							    			<th style="width: 10% ; text-align:center"><a href="view_images.php?sort=cat">Type</a></th>
+                                            <th style="width: 4% ; text-align:center"><a href="view_images.php?sort=id">ID</a></th>
+							    			<th style="width: 6% ; text-align:center"><a href="view_images.php?sort=cat">Type</a></th>
 							    			<th style="width: 25% ; text-align:center"><a href="view_images.php?sort=title">Title</a></th>
-							                <th style="width: 15% ; text-align:center">Image</th>
-							                <th style="width: 13% ; text-align:center"><a href="view_images.php?sort=by">Posted By</a></th>
-                                            <th style="width: 13% ; text-align:center"><a href="view_images.php?sort=on">Posted On</a></th>
-                                            <th style="width: 7% ; text-align:center">Status</th>
-							                <th style="width: 16% ; text-align:center"> </th>
+							                <th style="width: 28% ; text-align:center">Image</th>
+							                <th style="width: 11% ; text-align:center"><a href="view_images.php?sort=by">Posted By</a></th>
+                                            <th style="width: 11% ; text-align:center"><a href="view_images.php?sort=on">Posted On</a></th>
+                                            <th style="width: 5% ; text-align:center">Status</th>
+							                <th style="width: 10% ; text-align:center"> </th>
                                         </tr>
                                     </thead>
 
@@ -93,7 +94,7 @@
 									                <td style='text-align:right' ><?= $images['image_id']?></td>
 									                <td style='text-align:left'><?= $images['type_name']?></td>
 									                <td style='text-align:left'><?= $images['title']?></td>
-									                <td style='text-align:justify'><?= $images['image']?></td>
+                                                    <td style='text-align:justify'><img style="width: 300px; height: 169px" src="/images/<?= $images['image']?>" alt="" class="item-chil-row1" ></td>
                                                     <td style='text-align:right'><?= $images['name']?></td>
                                                     <td style='text-align:right'><?= $images['date']?></td>
                                                     <td style='text-align:center'><?= $active?></td>

@@ -12,14 +12,13 @@
     <div class="container">
         <h2 >News</h2>
         <?php
-        $rs = get_type();
+        $rs = get_type_news();
         if (mysqli_num_rows($rs) > 0) {
             while ($types = mysqli_fetch_array($rs, MYSQLI_ASSOC)) {
                 $type_name = $types['type_name'];
                 ?>
-                <div class="review-md1">                   
-                    <h3 class="new"><?= $type_name ?></h3>
-                    <br><br>
+                <div class="review-md1">                  
+                    <h3 class="new" style="padding-bottom: 30px;"><?= $type_name ?></h3>
                     <?php
                     $result = get_news_by_type($type_name);
                     if (mysqli_num_rows($result) > 0) {

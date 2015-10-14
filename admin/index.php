@@ -1,6 +1,9 @@
-<?php 
+<?php
+    $title_page = 'Home';
+    include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
-	include('../includes/functions.php'); 
+	include('../includes/backend/mysqli_connect.php');
+    include('../includes/errors.php');
 ?>
 	<!-- HEADER ####################################################################################### -->
 	<div class="content-wrapper">

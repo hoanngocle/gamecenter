@@ -1,8 +1,194 @@
+<?php 
+	include('../includes/backend/mysqli_connect.php'); 
+	include('../includes/functions.php');
+    include('../includes/errors.php');
+?>
+
 <?php
+    $title_page = 'Edit Video';
+	// Kiem tra gia gtri cua bien pid tu $_GET
+	if( $vid = validate_id($_GET['vid'])){
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+	// Chon news trong CSDL de hien thi ra trinh duyet
+        $query = "SELECT * FROM tblvideos WHERE video_id = {$vid}";
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
 
+        if (mysqli_num_rows($result) == 1) {
+            $videos = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }else {
+            $messages = "Bài viết không tồn tại!";
+        }
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') { // gia tri ton tai, xu ly form
+			//tao bien luu loi
+			$errors = array();
+
+			// kiem tra page name co gia tri hay khong
+			if (empty($_POST['title'])) {
+				$errors[] = "title";
+			} else {
+				$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
+			}   
+            // kiem tra content co gia tri hay ko
+			if (empty($_POST['description'])) {
+				$errors[] = 'description';
+			}else {
+				$description = mysqli_real_escape_string($dbc, $_POST['description']);
+			}
+            
+			// kiem tra xem type co gia tri hay ko
+            if (isset($_POST['type_id']) && filter_var($_POST['type_id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+                $type_id = $_POST['type_id'];
+            }else{
+                $errors[] = 'type';
+            }	
+
+            //kiem tra trang thai bai viet co gia tri hay ko
+            if (isset($_POST['status'])) {
+                $status = $_POST['status'];
+            }else{
+                $errors[] = 'status';
+            }
+            
+			// kiem tra xem co loi hay khong
+			if (empty($errors)) {
+				// neu ko co loi xay ra bat dau chen vao CSDL
+				$result = edit_video($vid, $type_id, $title, $description, $status);
+				if (mysqli_affected_rows($dbc) == 1) {
+					$success = "Chỉnh sửa bài viết thành công!";
+				} else {
+					$fail = "Chỉnh sửa bài viết thất bại!";
+				} // END IF mysqli_affected_rows
+			} else {
+				$error = "Tất cả các trường đều phải được nhập đầy đủ!";
+			}
+		} // END main IF submit condition
+
+	}else {
+	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
+        redirect_to('admin/view_news.php');
+    }
+    
+	include('../includes/backend/header-admin.php');
+?>
+
+<!-- Script ################## -->
+	<div class="content-wrapper">
+        <div class="container">
+    		<div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-head-line">Manage Videos</h1>
+                </div>
+        	</div>
+
+        	<div class="row">
+                <div class="col-md-11" style="margin-left: 47.25px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align: center">
+                            <h2>Edit Videos</h2>
+                            <h4><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
+                        </div> <!-- END PANEL HEADING--> 
+						<?php 
+							if (!empty($messages)) {
+								echo " <div class='alert alert-warning' style='font-size: 18px; margin: 25px 35px'>
+											<p>{$messages}</p>
+                                            
+            							</div>";
+							}
+							if(!empty($success)) {
+								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
+											<p>{$success}</p>
+            							</div>";
+            				}
+            				if(!empty($fail)) {
+								echo " <div class='alert alert-warning' style='font-size: 18px; margin: 25px 35px'>
+											<p>{$fail}</p>
+            							</div>";
+            				}
+            				if(!empty($error)) {
+								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+											<p>{$error}</p>
+            							</div>";
+            				}
+            				?>
+     <!-- ================================== Form Add News [start] ===================================== -->      
+                   		<div class="panel-body" style="margin: 0 20px 0 20px">
+							<form id="edit_news" action="" method="post" enctype="multipart/form-data"> <!-- BEGIN FORM -->								
+								<!-- ================= Title [start] =================== -->
+								<div class="form-group"  style="font-size: 18px" >
+								   	<label for="title">Title</label>
+								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($videos['title'])) echo $videos['title']; ?>"/>
+                                <?php 
+                                    if (isset($errors) && in_array('title', $errors)) {
+                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Title không được bỏ trống </p>
+                                                </div>";
+
+                                    }
+                                ?>
+                                </div>
+                                
+                                <!-- ================= Description [start] =================== -->
+								<div class="form-group"  style="font-size: 18px" >
+								   	<label for="title">Description</label>
+								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="description" name="description" size="20" maxlength="150" placeholder="Enter description " value="<?php if(isset($videos['description'])) echo $videos['description']; ?>"/>
+                                <?php 
+                                    if (isset($errors) && in_array('title', $errors)) {
+                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                                    <p>Title không được bỏ trống </p>
+                                                </div>";
+
+                                    }
+                                ?>
+                                </div>
+                                
+								<!-- ================= Type [start] =================== -->
+				     			<div class="form-group" style="font-size: 18px">
+				                    <label>Select Type</label>
+				                    
+				                    <select name="type_id" class="form-control" style="font-size: 18px; height: 44px">
+				                        <option>-------</option>
+				                        <?php 
+											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 4 ORDER BY type_id ASC";
+											$result = mysqli_query($dbc, $query);
+											if(mysqli_num_rows($result) > 0){
+												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
+													echo "<option value='{$types[0]}'"; 
+														if (isset($videos['type_id']) && ($videos['type_id'] == $types[0])) echo "selected='selected'";
+													echo ">".$types[1]."</option>";	
+												}
+											}
+										 ?>
+				                    </select>
+				                    <?php 
+										if (isset($errors) && in_array('type', $errors)) {
+												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+														<p>Type không được bỏ trống</p>
+	                    							</div>";
+										}
+									?>
+				                </div>  
+                                
+                                <!-- ================= Status: default is 0 [start] ===================== -->
+                                <div class="form-group" style="font-size: 18px">
+				                    <label>Select Status</label>
+				                    <select name="status" class="form-control" style="font-size: 18px; height: 44px">										
+				                        <option value="0" <?php if (isset($videos['status']) && ($videos['status'] == 0 )) echo "selected='selected'"; ?>>Inactive</option>
+				                        <option value="1" <?php if (isset($videos['status']) && ($videos['status'] == 1 )) echo "selected='selected'"; ?>>Active</option>
+				                    </select>
+				                </div>
+                                
+								<!-- Update Button -->
+								<center >
+									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Update">
+								</center>							
+							</form> <!-- END FORM ADD NEWS-->				 
+                        </div>
+		          	</div> <!-- END PANEL BODY-->
+				</div>
+			</div>
+		</div> <!-- END ROWS -->
+    </div>
+<!--end content-->
+<?php include('../includes/backend/footer-admin.php'); ?>

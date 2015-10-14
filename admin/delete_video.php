@@ -1,7 +1,8 @@
 <?php 
+    include('../includes/functions.php');
+	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php');
-	include('../includes/functions.php'); 
-    
+
 	$vid = validate_id($_GET['vid']);
 		// Neu muon delete page
 		$result = delete_videos($vid);

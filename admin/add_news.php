@@ -1,11 +1,11 @@
 <?php 
-	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
+
 ?>
 
-
 <?php 
+    $title_page = 'Add News';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
 		//tao bien luu loi
 		$errors = array();
@@ -70,6 +70,7 @@
 			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
 		}
 	} // END main IF submit condition
+    include('../includes/backend/header-admin.php');    
 ?>
 <!-- Script ################## -->
 	<div class="content-wrapper">

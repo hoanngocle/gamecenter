@@ -9,8 +9,7 @@
 			
 			<div class="container">
 				<h2>Contact</h2>
-			<div class="contact-form">
-				
+			<div class="contact-form">				
 				<div class="col-md-8 contact-grid">
 					<form>	
 						<input type="text" value="Name" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='Name';}">
@@ -37,19 +36,15 @@
 							<p>Tel:1115550001</p>
 							<p>Fax:190-4509-494</p>
 							<p>Email:<a href="mailto:contact@example.com"> contact@example.com</a></p>
-						</div>
-					
+						</div>		
 				</div>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
 		<div class="map">
-				<iframe src="https://www.google.com/maps/d/embed?mid=zWzk9_XzVYpk.kfh3vY2i3qf0" width="640" height="480"></iframe>
-
-			</div>
-	</div>
-
-
+            <iframe src="https://www.google.com/maps/d/embed?mid=zWzk9_XzVYpk.kfh3vY2i3qf0" width="640" height="480"></iframe>
+        </div>
+    </div>
 <!---->
 <?php include('includes/frontend/footer.php'); ?>	
 

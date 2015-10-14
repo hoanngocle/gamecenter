@@ -1,9 +1,9 @@
 /*--
-	File : style.css
-	Project Name: Game Center
-	Author: Béo Sagittarius
-	Author URI: http://www.facebook.com/beo.sagittarius.93/
-	Date Create: 15/07/2015
+    File : style.css
+    Project Name: Game Center
+    Author: Béo Sagittarius
+    Author URI: http://www.facebook.com/beo.sagittarius.93/
+    Date Create: 15/07/2015
 */
 
 .set-radius-zero {
@@ -21,9 +21,9 @@
 .page-head-line {
     font-weight: 900;
     padding-bottom: 20px;
-    border-bottom: 2px solid #F0677C;
+    border-bottom: 2px solid #2A8E57;
     text-transform: uppercase;
-    color: #F0677C;
+    color: #2A8E57;
     font-size: 20px;
     margin-bottom: 40px;
 }
@@ -50,7 +50,7 @@
     color: #fff;
     text-align: center;
     cursor:pointer;
-    background-color:#F0677C;
+    background-color:#2A8E57;
     -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
@@ -58,7 +58,7 @@
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #F0677C;
+    background-color: #44B868;
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -89,7 +89,7 @@ header {
     -moz-border-radius: 50%;
     height: 60px;
     width: 60px;
-    background-color: #F0677C;
+    background-color: #2A8E57;
     color: #fff;
 }
 
@@ -108,7 +108,7 @@ header {
 
     .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
         text-decoration: none;
-        background-color: #C36464!important;
+        background-color: #009A5A!important;
     }
 
     .user-settings-wrapper img {
@@ -149,24 +149,24 @@ header {
 }
 
 .menu-top-active {
-    background-color: #C36464;
+    background-color: #2A8E57;
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
-    background-color: #F0677C!important;
+    background-color: #2A8E57!important;
 }
 
 .menu-section .dropdown-menu > li > a:hover,.menu-section .dropdown-menu > li > a:focus {
-    background-color: #F0677C!important;
+    background-color: #2A8E57!important;
 }
 
 .navbar-inverse {
-    background-color: #C36464;
+    background-color: #64C370;
     border-color: transparent;
 }
 
 .navbar-toggle {
-    background-color: #F0677C;
+    background-color: #2A8E57;
     border: 1px solid #fff;
 }
 
@@ -180,7 +180,7 @@ footer {
     padding: 10px;
     color: #fff;
     font-size: 12px;
-    background-color: #C36464;
+    background-color: #2A8E57;
 }
 
     footer a, footer a:hover {

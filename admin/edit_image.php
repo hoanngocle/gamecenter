@@ -1,10 +1,10 @@
 <?php 
-
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
 ?>
 
 <?php 
+    $title_page = 'Edit Gallery';
 	if ( $iid = validate_id($_GET['iid'])) {
 		
         // Chon image trong CSDL de hien thi ra trinh duyet

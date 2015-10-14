@@ -16,7 +16,7 @@
 	}else{
 		redirect_to('admin/view_news.php');		
 	}	
-
+    $title_page = $news['type_name'];
 	include('../includes/backend/header-admin.php');
 	?>
 

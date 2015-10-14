@@ -26,7 +26,7 @@ h1,h2,h3,h4,h5,h6,label,p{
 }
 /*----*/
 .top-header{
-    background:#8fbf00;
+    background:#64C370;
 
 }
 .search{
@@ -92,7 +92,7 @@ ul.header-in li a:hover{
 }
 .logo h1 a span{
     text-decoration: none;
-    color:#8fbf00;
+    color:#64C370;
 }
 .top-nav{
     float:right;
@@ -166,7 +166,7 @@ ul.wmuSliderPagination {
     text-indent: -9999px;
     width:8px;
     height:8px;
-    background:#8fbf00;
+    background:#64C370;
     border-radius:50px;
 
 }
@@ -206,7 +206,7 @@ h2.new{
 }
 h2.new:after, h2.new:before{
     content:"";
-    background:#8FBF00;
+    background:#64C370;
     width:489px;
     height:2px;
     display:inline-block;
@@ -244,7 +244,7 @@ h2.new:after{
 }
 
 a.more-in{
-    background:#8fbf00;
+    background:#64C370;
     text-decoration: none;
     font-size: 1em;
     padding: 0.5em 1em;
@@ -278,7 +278,7 @@ a.fashion {
     color:#000;
 }
 .grid-product p a:hover{
-    color:#8fbf00;
+    color:#64C370;
 }
 .late {
     padding: 2em 0 0;
@@ -293,7 +293,7 @@ a.fashion {
 a.comment{
     text-decoration: none;
     font-size: 1em;
-    color:#8fbf00;
+    color:#64C370;
 }
 a.comment i{
     background:url(../images/img-sprite.png)no-repeat -41px -16px;
@@ -341,13 +341,13 @@ a.comment i{
     display:block;	 
 }
 .footer-middle-in  ul li a:hover{
-    color:#8FBF00;
+    color:#64C370;
 }
 .footer-class{
     color:#fff;
     font-size:1em;
     text-align:center;
-    background:#8FBF00;
+    background:#44B868;
     padding:1em 0;	 
 }
 .footer-class a{
@@ -408,7 +408,7 @@ a.comment i{
 .send input[type="submit"],.send input[type="reset"]{
     width: 14%;
     font-size: 1.1em;
-    background:#8FBF00;
+    background:#64C370;
     padding: 0.4em 0.8em;
     text-align: center;
     color: #fff;
@@ -442,7 +442,7 @@ a.comment i{
     color: #9A9898;
 }
 .address-more p a:hover{
-    color: #8FBF00;
+    color: #64C370;
 }
 /*--//contact--*/
 /*--four--*/
@@ -478,7 +478,7 @@ a.comment i{
 
 .review h3:after, .review h3:before{
     content:"";
-    background:#8FBF00;
+    background:#64C370;
     width:465px;
     height:2px;
     display:inline-block;
@@ -578,20 +578,20 @@ ul.men-grid li{
     color:#8fbf00;
 }
 .pagination > .active > a,.pagination > .active > a:hover{
-    background:#8FBF00;
-    border-color:#8FBF00;
+    background:#64C370;
+    border-color:#64C370;
 }
 .pagination {
     margin: 0;
 }
 .pagination > li > a:hover{
     color: #FFFFFF;
-    border-color: #8FBF00;
-    background: #8FBF00;
+    border-color: #64C370;
+    background: #64C370;
 }
 a.more {
     color: #fff;
-    background: #8FBF00;
+    background: #64C370;
     padding: 0.5em 1em;
     display: inline-block;
     text-decoration: none;
@@ -1202,7 +1202,7 @@ ul.grid-part {
 
 /*go Top*/
 #goTop {
-    background: url(../images/up-arrow.png) no-repeat scroll center center #73B700;
+    background: url(../images/up-arrow.png) no-repeat scroll center center #64C370;
     border-radius: 45px;
     bottom: 10px;
     cursor: pointer;
@@ -1216,26 +1216,70 @@ ul.grid-part {
 }
 
 #goTop:hover{
-    background: url(../images/up-arrow.png) no-repeat scroll center center #3e000b;
+    background: url(../images/up-arrow.png) no-repeat scroll center center #2A8E57;
 }
 
 /* Gallery */
-
-
-.item-chil-row1{
+.item-parent{
     float: left;
-    height: 150px;
-    width: 240px;
+    height: 225 px;
+    width: 420px;
     padding-bottom: 5px;
     padding-left: 8px;
 }
 
-.item-chil-row2{
+.item-chil-row1{
     float: left;
-    height: 150px;
-    width: 240px;
-    padding-top: 5px;
-    padding-left: 8px;
+    height: 125px;
+    width: 220px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.item-row-1 {    
+    width: 19%;  
+    float: left;
+    display: inline-block;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.item-chil-row2{
+    float: top;
+    height: 115px;
+    width: 200px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+ul {
+    position: relative;
+}
+
+li.item-images {
+    width: 18%;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.title-video{
+    margin-top: 10px;
+    color: #44B868;
+}
+
+.title-video-row1{
+    margin-top: 10px;
+    color: #44B868;
+}
+
+
+.des-video{
+    margin-top: 10px;
+    color: #3D3D3D;
+}
+
+.td-row{
+    height: 180px;
+    width: 235px;
 }
 
 .content-video {
@@ -1257,9 +1301,9 @@ ul.grid-part {
 }
 
 .submit input[type="submit"],.submit input[type="reset"]{
-    width: 14%;
+    width: 20%;
     font-size: 1.1em;
-    background:#8FBF00;
+    background:#64C370;
     padding: 0.4em 0.8em;
     text-align: center;
     color: #fff;
@@ -1269,4 +1313,9 @@ ul.grid-part {
 }
 .submit input[type="submit"]:hover, .submit input[type="reset"]:hover{
     background:#2d2d2d;
+}
+
+.login-row{
+    font-size: 1em;
+    margin-left: 100px;
 }

@@ -1,7 +1,8 @@
 <?php 
+    $title_page = 'Playlist';
+    include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
-	include('../includes/backend/mysqli_connect.php'); 
-	include('../includes/functions.php');
+	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
 
@@ -94,7 +95,7 @@
                                                 <td style='text-align:left'><?= $videos['type_name']?></td>
                                                 <td style='text-align:left'><?= $videos['title']?></td>
                                                 <td style='text-align:justify'><?= $videos['description']?></td>
-                                                <td style='text-align:right'><?= $videos['url_video']?></td>
+                                                <td style='text-align:right'><img style="width: 300px; height: 169px" src="/images/thumbnails/<?= $videos['thumbnail']?>" alt="" class="item-chil-row1" ></td>
                                                 <td style='text-align:right'><?= $videos['name']?></td>
                                                 <td style='text-align:right'><?= $videos['date']?></td>
                                                 <td style='text-align:center'><?= $active?></td>

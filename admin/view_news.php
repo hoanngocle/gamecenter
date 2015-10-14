@@ -1,7 +1,8 @@
-<?php 
+<?php
+    $title_page = 'List News';
+    include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
-	include('../includes/backend/mysqli_connect.php'); 
-	include('../includes/functions.php');
+	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
 
@@ -15,7 +16,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-12">
     <!-- ============================== Table News [start] ============================== -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -28,13 +29,13 @@
                                     <thead style="text-align:center">
                                         <tr>
                                             <th style="width: 2% ; text-align:center"><a href="view_news.php?sort=id">ID</a></th>
-							    			<th style="width: 8% ; text-align:center"><a href="view_news.php?sort=type">Type</a></th>
+							    			<th style="width: 7% ; text-align:center"><a href="view_news.php?sort=type">Type</a></th>
 							    			<th style="width: 20% ; text-align:center"><a href="view_news.php?sort=title">Title</a></th>
 							                <th style="width: 40% ; text-align:center">Content</th>
 							                <th style="width: 8% ; text-align:center"><a href="view_news.php?sort=by">Posted By</a></th>
-							                <th style="width: 8% ; text-align:center"><a href="view_news.php?sort=on">Posted On</a></th>
+							                <th style="width: 10% ; text-align:center"><a href="view_news.php?sort=on">Posted On</a></th>
                                             <th style="width: 2% ; text-align:center">Status</th>
-							                <th style="width: 10% ; text-align:center"> </th>
+							                <th style="width: 9% ; text-align:center"> </th>
                                         </tr>
                                     </thead>
 

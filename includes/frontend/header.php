@@ -9,17 +9,25 @@
 <html>
 	<head>
 		<title><?php echo (isset($title)) ? $title : "Game Center" ?></title>
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-		<script src="js/jquery.min.js"></script>
-		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="http://s16.postimg.org/9irj2l7n5/gamemagazine.png">    
+        
+        <!-- JavaScript -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
 		<script src="js/modernizr.custom.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="/includes/video-js/video.js"></script>
+        <script src="/includes/video-js/media.youtube.js"></script>
+        <script src="/js/jquery.leanModal.min.js"></script>
+
+        <!-- CSS -->
+        <link href="/includes/video-js/video-js.css" rel="stylesheet" type="text/css">        
+        <link rel="stylesheet" type="text/css" href="css/login.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link rel="stylesheet" type="text/css" href="../includes/slider/engine/style.css" />
-        <script type="text/javascript" src="../includes/slider/engine/jquery.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />	
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
+
 	</head>
 	<!-- End of script -->
 	<body> 
@@ -35,8 +43,12 @@
 						<li ><a href="#" >   How To Use</a></li>
 					</ul>
 						<div class="search">
-							<form>
-								<input type="text" value="search about something ?" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search about something ?';}" >
+                            <?php 
+                            
+                            
+                            ?>
+                            <form action="" method="post">
+								<input type="text" id="search" name="search" value="<?php ?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search about something ?';}" >
 								<input type="submit" value="" >
 							</form>
 						</div>
@@ -57,10 +69,10 @@
 						<ul>
 							<li><a class="color1" href="index.php"  >Home</a></li>
 							<li><a class="color2" href="news.php"  >News</a></li>
+                            <li><a class="color5" href="games.php"  >Games</a></li>
 							<li><a class="color3" href="gallery.php"  >Gallery</a></li>
 							<li><a class="color4" href="video.php" >Video</a></li>
-							<li><a class="color5" href="contact_us.php"  >Contact Us</a></li>
-							<li><a class="color6" href="register.php" >Register</a></li>
+							<li><a class="color6" href="contact_us.php" >Contact Us</a></li>
 							<div class="clearfix"> </div>
 						</ul>
 							<!--script-->

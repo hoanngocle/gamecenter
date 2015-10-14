@@ -1,6 +1,5 @@
 <?php 
 
-    
 	// xac dinh hang so cho dia chi tuyet doi
 	define ('BASE_URL', 'http://www.gamecenter.dev/');
 
@@ -139,6 +138,27 @@
 
 			return $result;
 	}
+    
+// FRONTEND - NEW GAME =================================================================
+	function get_games(){
+		global $dbc;
+		// Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
+			$query = " SELECT n.news_id, n.title, n.content, n.image, t.type_name, c.cat_name,  ";
+			$query .= " DATE_FORMAT(post_on, '%b %d, %y') AS date ";
+            $query .= " FROM tblnews AS n ";
+			$query .= " INNER JOIN tbltypes AS t ";
+			$query .= " USING ( type_id ) ";
+            $query .= " INNER JOIN tblcategories AS c ";
+			$query .= " USING ( cat_id ) ";
+			$query .= " WHERE c.cat_name = 'Games' ";
+			$query .= " ORDER BY date";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	}
 
 // FRONTEND - BEST FEATURE - IMAGE =====================================================
     function get_features(){
@@ -227,9 +247,23 @@
 	} // END of query
     
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
-	function get_type(){
+	function get_type_news(){
 		global $dbc;
 			$query = "SELECT * FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC LIMIT 0, 3 ";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+    //
+    
+
+    // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_type_by_id($tid){
+		global $dbc;
+			$query = "SELECT * FROM tbltypes WHERE cat_id = 3 AND type_id = '{$tid}' ORDER BY type_id ASC";
 
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
@@ -260,6 +294,26 @@
 			return $result;
 	} // END of query
     //
+    // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_games_by_type($type){
+		global $dbc;
+			$query = " SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.post_on, '%d %b, %Y') AS date, n.content, cat.cat_name ";
+			$query .= " FROM tblnews AS n ";
+            $query .= " INNER JOIN tbltypes AS t";
+            $query .= " USING (type_id)";
+            $query .= " INNER JOIN tblcategories AS cat";
+            $query .= " USING (cat_id)";	
+			$query .= " WHERE cat.cat_name = 'Games' AND n.status = 1 AND t.type_name = '{$type}' ";
+			$query .= " GROUP BY n.title ";
+			$query .= " ORDER BY date DESC LIMIT 4 ";
+
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END of query
+
      // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
 	function get_tag_by_id($nid){
 		global $dbc;
@@ -279,7 +333,7 @@
      // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
 	function get_first_image_gallery(){
 		global $dbc;
-			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 1";
+			$query = " SELECT image_id, image, title FROM tblimages WHERE type_id <= 11 AND type_id >= 9 AND status = 1 ORDER BY post_on LIMIT 1";
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -288,9 +342,9 @@
 	} // END
     
      // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
-	function get_image_row1(){
+	function get_image_row(){
 		global $dbc;
-			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 1,3";
+			$query = " SELECT image_id, image, title FROM tblimages WHERE type_id <= 11 AND type_id >= 9 AND status = 1 ORDER BY post_on LIMIT 1,6";
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -299,9 +353,31 @@
 	} // END
     
      // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
-	function get_image_row2(){
+	function get_image_by_type_id($type_id){
 		global $dbc;
-			$query = " SELECT * FROM tblimages WHERE type_id <= 12 AND type_id >= 9 ORDER BY post_on LIMIT 4,3";
+			$query = " SELECT image_id, image FROM tblimages WHERE type_id = '{$type_id}' AND status = 1 ORDER BY post_on ";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
+     
+         // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_first_thumbnail(){
+		global $dbc;
+			$query = " SELECT video_id, thumbnail, title, description FROM tblvideos WHERE type_id <= 16 AND type_id >= 12 AND status = 1 ORDER BY post_on LIMIT 1";
+			// Tra ve result or bao loi ra man hinh
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+
+			return $result;
+	} // END
+    
+     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
+	function get_thumbnail_row(){
+		global $dbc;
+			$query = " SELECT video_id, thumbnail, title FROM tblvideos WHERE type_id <= 16 AND type_id >= 12 AND status = 1 ORDER BY post_on LIMIT 1,6";
 			// Tra ve result or bao loi ra man hinh
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -399,7 +475,7 @@
 //  BACKEND - LIST SHOW VIDEO  ==============================================================
 	function get_all_videos($order_by){
 		global $dbc;
-			$query = " SELECT v.video_id, t.type_name, v.url_video, v.title, v.description, v.status,  ";
+			$query = " SELECT v.video_id, t.type_name, v.url_video, v.thumbnail, v.title, v.description, v.status,  ";
             $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, ";
             $query .= " DATE_FORMAT(v.post_on, '%b %d %Y') AS date ";
 			$query .= " FROM tblvideos AS v ";
@@ -415,6 +491,20 @@
 			return $result;
 	}	
 
+    //  BACKEND - LIST SHOW NEW  ===============================================================
+	function get_list_user(){
+		global $dbc;
+			$query = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS name, ";
+            $query .= " DATE_FORMAT(date_of_birth, '%b %d %Y') AS birthday, ";
+			$query .= " DATE_FORMAT(registration_date, '%b %d %Y') AS date ";
+			$query .= " FROM tblusers WHERE (user_level = 1 OR user_level = 9) ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+				
+			return $result;
+	}
+    
 //  BACKEND - DELETE NEWS - GAMES ============================================================
 	function delete_news_games($nid){
 		global $dbc;
@@ -459,7 +549,7 @@
 		$query .=" content = '{$content}', ";
         $query .=" status = '{$status}', ";
 		$query .=" user_id = 1, ";	
-		$query .=" post_on = NOW() ";
+		$query .=" update_on = NOW() ";
 		$query .=" WHERE news_id = {$nid} LIMIT 1";	
 		
 		$result = mysqli_query($dbc,$query);
@@ -477,7 +567,7 @@
 		$query .=" image = '{$myImage}', ";
         $query .=" status = '{$status}', ";
 		$query .=" user_id = 1, ";	
-		$query .=" post_on = NOW() ";
+		$query .=" update_on = NOW() ";
 		$query .=" WHERE image_id = {$iid} LIMIT 1";	
 		
 		$result = mysqli_query($dbc,$query);
@@ -487,16 +577,16 @@
 	}
  
 //  BACKEND - EDIT - VIDEO ===================================================================
-	function edit_video($vid, $title, $type_id, $url_video, $description, $status){	
+	function edit_video($vid, $type_id, $title, $description, $status){	
 	global $dbc;
-		$query = "UPDATE tblimages SET ";
+		$query = "UPDATE tblvideos SET ";
 		$query .=" title = '{$title}', ";
 		$query .=" type_id = '{$type_id}', ";
-		$query .=" url_video = '{$url_video}', ";
+        $query .=" title = '{$title}', ";
         $query .=" description = '{$description}', ";
         $query .=" status = '{$status}', ";
 		$query .=" user_id = 1, ";	
-		$query .=" post_on = NOW() ";
+		$query .=" update_on = NOW() ";
 		$query .=" WHERE video_id = {$vid} LIMIT 1";	
 		
 		$result = mysqli_query($dbc,$query);
@@ -525,17 +615,17 @@
 	} // END of query
 
 //  BACKEND - SHOW VIDEO =====================================================================	
-    function get_video_by_id($iid){
+    function get_video_by_id($vid){
 		global $dbc;
-			$query = "SELECT i.image_id, t.type_name, i.image, i.title, i.status, ";
-            $query .=" DATE_FORMAT( i.post_on, '%b %d, %Y') AS date, "; 
+			$query = "SELECT v.video_id, t.type_name, v.title, v.thumbnail, v.url_video, v.description, v.status, ";
+            $query .=" DATE_FORMAT( v.post_on, '%b %d, %Y') AS date, "; 
             $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
-            $query .=" FROM tblimages AS i ";
+            $query .=" FROM tblvideos AS v ";
             $query .=" INNER JOIN tblusers AS u ";
             $query .=" USING ( user_id ) ";
             $query .=" INNER JOIN tbltypes AS t ";
             $query .=" USING ( type_id ) ";
-            $query .=" WHERE i.image_id= {$iid} ";
+            $query .=" WHERE v.video_id= {$vid} ";
 
 			$result = mysqli_query($dbc, $query);
 			confirm_query($result, $query);
@@ -570,14 +660,48 @@
 //  BACKEND - get id youtube =====================================================================	
     function save_thumbnail_from_url($url, $name){
         $ch = curl_init($url);
-        $fp = fopen('../images/thumbnails/'.$name.'.gif', 'wb');
+        $fp = fopen('../images/thumbnails/'.$name.'.jpg', 'wb');
         curl_setopt($ch, CURLOPT_FILE, $fp);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
         
-        return $name.'.gif';
+        return $name.'.jpg';
     }
 
+    //  BACKEND - LIST SHOW NEW  ===============================================================
+	function login_admin($username, $password){
+		global $dbc;
+            $query  = "SELECT user_id, CONCAT_WS(' ', first_name, last_name) AS fullname , user_level, bio ";
+			$query .= " FROM tblusers WHERE username = '{$username}' AND password = SHA1('$password') ";
+            $query .= " AND ( user_level = 99 OR user_level= 9 )  ";
+			$query .= " AND status = 1 LIMIT 1 ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+				
+			return $result;
+	}   
+
+    //  BACKEND - LIST SHOW NEW  ===============================================================
+    function is_logged_in() {
+        if(!isset($_SESSION['uid'])) {
+            redirect_to('admin/login-admin.php');
+        }
+    } // END is_logged_in
+    
+    
+    //  BACKEND - LIST SHOW NEW  ===============================================================
+	function login_user($username, $password){
+		global $dbc;
+            $query  = "SELECT user_id, CONCAT_WS(' ', first_name, last_name) AS fullname , user_level, bio ";
+			$query .= " FROM tblusers WHERE username = '{$username}' AND password = SHA1('$password') ";
+			$query .= " AND status = 1 LIMIT 1 ";
+
+			$result = mysqli_query($dbc, $query);
+			confirm_query($result, $query);
+				
+			return $result;
+	}   
 ?> 

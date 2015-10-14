@@ -15,7 +15,7 @@
 	}else{
 		redirect_to('admin/view_images.php');		
 	}	
-
+    $title_page = $images['type_name'];
 	include('../includes/backend/header-admin.php');
 	?>
 
