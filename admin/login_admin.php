@@ -49,7 +49,8 @@ $title = "Login";
                             $_SESSION['fullname'] = $fullname;
                             $_SESSION['bio'] = $bio;
                             $_SESSION['user_level'] = $user_level;
-                            
+                            $_SESSION['LAST_ACTIVITY'] = time(); 
+ 
                             redirect_to('admin/index.php');
                         }else {
                             $fail = "Tên tài khoản hoặc mật khẩu nhập không đúng";

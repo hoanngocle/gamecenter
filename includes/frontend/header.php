@@ -1,11 +1,22 @@
-<?php session_start(); ?>
+<!--#####################################################################
+    #
+    #   File          : Header - Header index in website  
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #   Last Change   : 10/14/2015
+    #
+    ##################################################################### -->
+<?php 
+    session_start();
+    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (15*60))) {
+        // last login was more than 15 minutes ago
+        session_unset();     // unset $_SESSION variable for the run-time 
+        session_destroy();   // destroy session data in storage
+        redirect_to('index.php');
+    }
+    ?>
 <!DOCTYPE html>
-<!--
-	Project Name: Game Center
-	Author: Béo Sagittarius
-	Author URI: http://www.facebook.com/beo.sagittarius.93/
-	Date Create: 01/07/2015
--->
 <html>
 	<head>
 		<title><?php echo (isset($title)) ? $title : "Game Center" ?></title>
@@ -20,19 +31,28 @@
         <script src="/includes/video-js/video.js"></script>
         <script src="/includes/video-js/media.youtube.js"></script>
         <script src="/js/jquery.leanModal.min.js"></script>
-
-        <!-- CSS -->
+        <script src="/js/bootstrap.min.js"></script>
+        
+        <link href="css/login_modal.css" rel="stylesheet" type="text/css"/>
         <link href="/includes/video-js/video-js.css" rel="stylesheet" type="text/css">        
-        <link rel="stylesheet" type="text/css" href="css/login.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />	
+		<link href="css/component.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" id="bootstrap-css" />	
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-
+<!--        <script type="text/javascript">
+            window.alert = function(){};
+            var defaultCSS = document.getElementById('bootstrap-css');
+            function changeCSS(css){
+                if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
+                else $('head > link').filter(':first').replaceWith(defaultCSS); 
+            }
+            $( document ).ready(function() {
+              var iframe_height = parseInt($('html').height()); 
+              window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
+            });
+        </script>-->
 	</head>
-	<!-- End of script -->
+
 	<body> 
-
-
 	<div class="header" >
 		<div class="top-header" >		
 			<div class="container">
@@ -42,17 +62,17 @@
 						<li><a href="contact.html">   Contact Us</a></li>
 						<li ><a href="#" >   How To Use</a></li>
 					</ul>
-						<div class="search">
-                            <?php 
-                            
-                            
-                            ?>
-                            <form action="" method="post">
-								<input type="text" id="search" name="search" value="<?php ?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search about something ?';}" >
-								<input type="submit" value="" >
-							</form>
-						</div>
-						<div class="clearfix"> </div>
+                    <div class="search">
+                        <?php 
+
+
+                        ?>
+                        <form action="" method="post">
+                            <input type="text" id="search" name="search" value="<?php ?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search about something ?';}" >
+                            <input type="submit" value="" >
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
 				</div>
 			</div>
 		</div>
@@ -62,7 +82,7 @@
 			<div class="container">
 				<div class="head-top">
 					<div class="logo">
-						<h1><a href="index.php"><span> G</span>ames <span>C</span>enter</a></h1>
+						<h1><a href="index.php"><span> G</span>ames <span>M</span>agazine</a></h1>
 					</div>
 					<div class="top-nav">		
 					  	<span class="menu"><img src="images/menu.png" alt=""> </span>

@@ -1,8 +1,29 @@
-<?php 
+<!--#####################################################################
+    #
+    #   File          : Header Admin - Header index in website  
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #   Last Change   : 10/21/2015
+    #
+    ##################################################################### -->
+<?php  
     session_start();
-    if(!isset($_SESSION['fullname'])){
+    if($_SESSION['user_level'] == 1){
         redirect_to('admin/login_admin.php');
     }
+    
+    if(!isset($_SESSION['uid'])){
+        redirect_to('admin/login_admin.php');
+    }
+    
+    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (15*60))) {
+        // last login was more than 15 minutes ago
+        session_unset();     // unset $_SESSION variable for the run-time 
+        session_destroy();   // destroy session data in storage
+        redirect_to('admin/login_admin.php');
+    }
+      
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,7 +33,7 @@
     <title><?php if(isset($title_page)) echo $title_page ?> - Game Magazine Manager </title>
     
     <!-- Css -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.css" rel="stylesheet"  id="bootstrap-css"/>
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style-admin.css" rel="stylesheet" />
     <link rel="shortcut icon" href="http://s16.postimg.org/9irj2l7n5/gamemagazine.png">
@@ -23,7 +44,19 @@
     <script language="javascript" src="../js/ckeditor/ckeditor.js" type="text/javascript"></script>  
     <script src="../includes/video-js/video.js"></script>
     <script src="../includes/video-js/media.youtube.js"></script>
-    <script src="../js/bootbox.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
+            else $('head > link').filter(':first').replaceWith(defaultCSS); 
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height()); 
+          window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
+        });
+    </script>
 
 </head>
 <body>

@@ -12,7 +12,7 @@
         session_destroy(); // Destroy session da tao
         setcookie(session_name(),'', time()-36000); // Xoa cookie cua trinh duyet
 
-        redirect_to();
+        header("Refresh:0");
     }else {
         redirect_to();
     }

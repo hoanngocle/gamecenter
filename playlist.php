@@ -13,7 +13,7 @@
             <video id="example_video_1" class="video-js vjs-default-skin" controls 
                     preload="auto" width="720" height="405"
                     poster="" 
-                    data-setup='{"techOrder":["youtube"], "src":"<?= $url ?>"}' >
+                    data-setup='{"techOrder":["youtube"], "src":"<?= $url_video ?>"}' >
                 </video>
         
         </div>

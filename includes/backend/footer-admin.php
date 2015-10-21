@@ -1,4 +1,13 @@
-  <!-- CONTENT-WRAPPER SECTION END-->
+<!--#####################################################################
+    #
+    #   File          : Footer Admin - Header index in website  
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #   Last Change   : 10/14/2015
+    #
+    ##################################################################### -->
+<!-- CONTENT-WRAPPER SECTION END-->
     <footer>
         <div class="container">
             <div class="row">
