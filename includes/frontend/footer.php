@@ -127,11 +127,17 @@
                                 <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-register-msg">Sign up your account.</span>
                             </div>
-                            <div style="width: 48%; padding: 0px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="Firstname " ></div>
-                            <div style="width: 48%; margin: 10px 12.7px 0 0; float: left"><input id="register_last" class="form-control" type="text" placeholder="Lastname " ></div>
+                            <div style="width: 48%; padding-bottom: 10px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="Firstname " ></div>
+                            <div style="width: 48%; margin-left: 12px; float: left"><input id="register_lastname" class="form-control" type="text" placeholder="Lastname " ></div>
                             
-                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required="">
-                            <input id="register_password" class="form-control" type="password" placeholder="Password" required="">
+                            <input id="register_username" class="form-control" type="text" placeholder="Username">
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail">
+                            <input id="register_password" class="form-control" type="password" placeholder="Password">
+                            <div style="padding-top: 10px">
+                                <input type="radio" name="gender" id="register_gender" value="Male" checked> Male
+                                <input type="radio" name="gender" id="register_gender" value="Female"> Female
+                            </div>
+                            <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -154,6 +160,104 @@
     <!-- END # MODAL LOGIN -->
     <script type="text/javascript" src="/js/login_modal.js"></script>  
 
+<!---------------------------- Form Popup [start] --------------------------> 
+    <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+
+                    <!-- Begin # Login Form -->
+                    <form id="profile-form" >
+                        <div class="modal-body">
+                            <div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Type your username and password.</span>
+                            </div>
+                            Username : <input id="login_username" class="form-control" type="text" placeholder="Username ">
+                            <input id="login_password" class="form-control" type="password" placeholder="Password">
+                            <div class="checkbox">
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            
+                            <div>
+                                <button id="login_lost_btn" type="button" class="btn btn-link">Forgot Password?</button>
+                                <button id="login_register_btn" type="button" class="btn btn-link">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End # Login Form -->
+
+                    <!-- Begin | Forgot Password Form -->
+                    <form id="lost-form" style="display:none;" method="post">
+                        <div class="modal-body">
+                            <div id="div-lost-msg">
+                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-lost-msg">Type your e-mail.</span>
+                            </div>
+                            <input id="lost_email" class="form-control" type="text" placeholder="E-Mail" >
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                            <div>
+                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Forgot Password Form -->
+
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;" method="post">
+                        <div class="modal-body">
+                            <div id="div-register-msg">
+                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-register-msg">Sign up your account.</span>
+                            </div>
+                            <div style="width: 48%; padding-bottom: 10px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="Firstname " ></div>
+                            <div style="width: 48%; margin-left: 12px; float: left"><input id="register_lastname" class="form-control" type="text" placeholder="Lastname " ></div>
+                            
+                            <input id="register_username" class="form-control" type="text" placeholder="Username">
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail">
+                            <input id="register_password" class="form-control" type="password" placeholder="Password">
+                            <div style="padding-top: 10px">
+                                <input type="radio" name="gender" id="register_gender" value="Male" checked> Male
+                                <input type="radio" name="gender" id="register_gender" value="Female"> Female
+                            </div>
+                            <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+                            </div>
+                            <div>
+                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="register_lost_btn" type="button" class="btn btn-link">Forgot Password?</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Register Form -->
+
+                </div>
+                <!-- End # DIV Form -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END # MODAL LOGIN -->
+    <script type="text/javascript" src="/js/profile_modal.js"></script>  
+    
     <p class="footer-class">
         Copyright © 2015 - Game Magazine. All rights reserved<br>
         Design by  <a href="http://facebook.com/beo.sagittarius.93" target="_blank">Béo Sagitarius</a>

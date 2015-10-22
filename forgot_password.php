@@ -1,11 +1,3 @@
-<!--#####################################################################
-    #
-    #   Project       : Game Magazine Project
-    #   Author        : Béo Sagittarius
-    #   Created       : 07/01/2015
-    #   Last Change   : 10/14/2015
-    #
-    ##################################################################### -->
 <?php
     
     include('/includes/backend/mysqli_connect.php');

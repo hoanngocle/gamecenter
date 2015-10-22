@@ -1,3 +1,12 @@
+<!--#####################################################################
+    #
+    #   File          : Index  
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #   Last Change   : 10/21/2015
+    #
+    ##################################################################### -->
     <?php
 	//Include file php function vs connect DB
 	include('includes/backend/mysqli_connect.php'); 
@@ -66,6 +75,8 @@
         
         <div class="featured">
 			<div class="container">
+                <a href="" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"> &nbsp;NEWS &nbsp;</h2></a>
+                <br>
                 <!--===================================== News [start] =====================================-->
 				
                 <!-- =============== Lastest News ============== -->

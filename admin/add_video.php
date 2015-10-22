@@ -10,8 +10,9 @@
     }else {
         $title_page = 'Add Video';
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-            //tao bien luu loi
+            // create variable error
             $errors = array();
+            $uid = $_SESSION['uid'];
 
             // kiem tra page name co gia tri hay khong
             if (empty($_POST['title'])) {
@@ -48,8 +49,8 @@
             // kiem tra xem co loi hay khong
             if (empty($errors)) {
                 // neu ko co loi xay ra bat dau chen vao CSDL
-                $query = "INSERT INTO tblvideos (user_id, title, type_id, description, thumbnail, url_video, status, post_on )
-                            VALUES (1, '{$title}', {$type_id}, '{$description}', '{$thumbnail}', '{$url_video}', '{$status}', NOW())";			
+                $query = "INSERT INTO tblvideos (user_id, title, type_id, description, thumbnail, url_video, status, create_date )
+                            VALUES ({$uid}, '{$title}', {$type_id}, '{$description}', '{$thumbnail}', '{$url_video}', '{$status}', NOW())";			
                 $result = mysqli_query($dbc, $query);
                 // ham tra ve ket qua co dung hay ko
                 confirm_query($result, $query);

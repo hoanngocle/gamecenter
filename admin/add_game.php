@@ -6,31 +6,31 @@
 <?php
     $title_page = 'Add Game';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
+		// create variable error
 		$errors = array();
-
-		// kiem tra page name co gia tri hay khong
+        $uid = $_SESSION['uid'];
+		// validate title
 		if (empty($_POST['title'])) {
 			$errors[] = "title";
 		} else {
 			$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
 		}
 
-		// kiem tra xem type co gia tri hay ko
+		// validate type
 		if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
 			$type_id = $_POST['type'];
 		}else{
 			$errors[] = 'type';
 		}
 
-		// kiem tra avatar co gia tri hay khong
+		// validate Avatar
 		if (empty($_FILES['myAvatar']['name'])) {
 			$errors[] = "myAvatar";
 		} else {
 			$myAvatar =  $_FILES['myAvatar']['name'];
 		}
 
-		// kiem tra banner co gia tri hay khong
+		// validate Banner
 		if (empty($_FILES['myBanner']['name'])) {
 			$errors[] = "myBanner";
 		} else {
@@ -62,8 +62,8 @@
             move_uploaded_file($_FILES['myAvatar']['tmp_name'], $targetava  );
             move_uploaded_file($_FILES['myBanner']['tmp_name'], $targetbanner  );
             
-            $query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, post_on)
-						VALUES (1, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
+            $query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, create_date)
+						VALUES ({$uid}, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);

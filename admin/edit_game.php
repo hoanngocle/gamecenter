@@ -82,9 +82,9 @@
                                
 				$result = edit_news_games($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
-					$success = "Chỉnh sửa bài viết thành công!";
+					redirect_to('admin/view_games.php');
 				} else {
-					$fail = "Chỉnh sửa bài viết thất bại!";
+					redirect_to('admin/view_games.php');
 				} // END IF mysqli_affected_rows
 			} else {
 				$error = "Tất cả các trường đều phải được nhập đầy đủ!";

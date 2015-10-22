@@ -36,12 +36,10 @@ $(function () {
                         cache: false,
                         success: function (data) {
                             if (data){
-       msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-remove", "Username and password is incorrect");
- 
-//                                location.href = 'index.php';
-//                                $('#login-modal').modal('hide');                               
-                            }else {
-                                
+                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-remove", "Username and password is successfully");
+                                location.href = 'index.php';
+                                $('#login-modal').modal('hide');                               
+                            }else {                                
                                 msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is incorrect");
                             }
                         }
@@ -82,13 +80,51 @@ $(function () {
                 break;
                 
             case "register-form":
+                var $rg_firstname = $('#register_firstname').val();
+                var $rg_lastname = $('#register_lastname').val();
                 var $rg_username = $('#register_username').val();
                 var $rg_email = $('#register_email').val();
                 var $rg_password = $('#register_password').val();
-                if ($rg_username == "ERROR") {
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
-                } else {
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                var $rg_gender = $('#register_gender').val();
+                var $rg_dateofbirth = $('#register_date_of_birth').val();
+                var dataString = 'firstname=' + $rg_firstname
+                                + '&lastname=' + $rg_lastname 
+                                + '&username=' + $rg_username
+                                + '&email=' + $rg_email
+                                + '&password=' + $rg_password
+                                + '&gender=' + $rg_gender
+                                + '&dateofbirth=' + $rg_dateofbirth;
+                if ($rg_firstname == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Firstname is required");
+                } else if ($rg_lastname == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Lastname is required");
+                } else if ($rg_username == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is required");
+                } else if ($rg_email == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email is required");
+                } else if ($rg_password == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Password is required");
+                }
+                
+                
+                //==========================
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "register.php",
+                        dataType: "json",
+                        data: dataString,
+                        success: function (response) {
+                            if (response.status == "OK" ){
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-remove", "OK");
+//                                location.href = 'index.php';
+//                                $('#login-modal').modal('hide');             
+                            } else if(response.status == "FAIL"){              
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "FAIL");
+
+                            }
+                        }
+                    }); 
                 }
                 return false;
                 break;

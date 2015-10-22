@@ -7,9 +7,9 @@
 <?php 
     $title_page = 'Add News';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
+		// create variable error
 		$errors = array();
-
+        $uid = $_SESSION['uid'];
 		// kiem tra page name co gia tri hay khong
 		if (empty($_POST['title'])) {
 			$errors[] = "title";
@@ -55,8 +55,8 @@
 		// kiem tra xem co loi hay khong
 		if (empty($errors)) {
 			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, post_on)
-						VALUES (1, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
+			$query = "INSERT INTO tblnews ( user_id, type_id, title, image, banner, content, status, create_date)
+						VALUES ({$uid}, {$type_id}, '{$title}','{$myAvatar}','{$myBanner}','{$content}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);

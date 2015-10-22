@@ -6,9 +6,9 @@
 <?php 
     $title_page = 'Add Gallery';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
+		// create variable error
 		$errors = array();
-
+        $uid = $_SESSION['uid'];
 		// kiem tra page name co gia tri hay khong
 		if (empty($_POST['title'])) {
 			$errors[] = "title";
@@ -40,8 +40,8 @@
 		// kiem tra xem co loi hay khong
 		if (empty($errors)) {
 			// neu ko co loi xay ra bat dau chen vao CSDL
-			$query = "INSERT INTO tblimages (user_id, title, type_id, image, status, post_on )
-						VALUES (1, '{$title}', {$type_id}, '{$myImage}', '{$status}', NOW())";			
+			$query = "INSERT INTO tblimages (user_id, title, type_id, image, status, create_date )
+						VALUES ({$uid}, '{$title}', {$type_id}, '{$myImage}', '{$status}', NOW())";			
 			$result = mysqli_query($dbc, $query);
 			// ham tra ve ket qua co dung hay ko
 			confirm_query($result, $query);
