@@ -38,18 +38,7 @@
 		<link href="css/component.css" rel="stylesheet" type="text/css" />
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" id="bootstrap-css" />	
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--        <script type="text/javascript">
-            window.alert = function(){};
-            var defaultCSS = document.getElementById('bootstrap-css');
-            function changeCSS(css){
-                if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
-                else $('head > link').filter(':first').replaceWith(defaultCSS); 
-            }
-            $( document ).ready(function() {
-              var iframe_height = parseInt($('html').height()); 
-              window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
-            });
-        </script>-->
+
 	</head>
 
 	<body> 
@@ -58,9 +47,9 @@
 			<div class="container">
 				<div class="top-head" >	
 					<ul class="header-in">
-						<li ><a href="#" >  Help</a></li>
-						<li><a href="contact.html">   Contact Us</a></li>
-						<li ><a href="#" >   How To Use</a></li>
+						<li><a href="help.php" >  Help</a></li>
+						<li><a href="contact_us.php">   Contact Us</a></li>
+						<li><a href="how_to_use.php" >   How To Use</a></li>
 					</ul>
                     <div class="search">
                         <?php 

@@ -124,7 +124,7 @@
         $query .= " WHERE t.type_name = 'Banner' ";
         $query .= " ORDER BY date LIMIT 0, 3";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -145,7 +145,7 @@
         $query .= " WHERE c.cat_name = 'Games' ";
         $query .= " ORDER BY date LIMIT 0, 8";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -166,7 +166,7 @@
         $query .= " WHERE c.cat_name = 'Games' ";
         $query .= " ORDER BY date";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -208,7 +208,7 @@
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY count DESC LIMIT 0, 3 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -232,7 +232,7 @@
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -255,7 +255,7 @@
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -266,9 +266,12 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_type_news() {
         global $dbc;
-        $query = "SELECT * FROM tbltypes WHERE cat_id = 1 ORDER BY type_id ASC LIMIT 0, 3 ";
+        $query = "SELECT * "
+                . "FROM tbltypes "
+                . "WHERE cat_id = 1 "
+                . "ORDER BY type_id ASC LIMIT 0, 3 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -284,7 +287,7 @@
         global $dbc;
         $query = "SELECT * FROM tbltypes WHERE cat_id = 3 AND type_id = '{$tid}' ORDER BY type_id ASC";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -308,7 +311,7 @@
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY date DESC LIMIT 0, 3 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -331,7 +334,7 @@
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY date DESC LIMIT 4 ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -348,7 +351,7 @@
         $query .= " USING (tag_id)";
         $query .= " WHERE  d.news_id = '{$nid}' ";
 
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -359,8 +362,13 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_first_image_gallery() {
         global $dbc;
-        $query = " SELECT image_id, image, title FROM tblimages WHERE type_id <= 11 AND type_id >= 9 AND status = 1 ORDER BY create_date LIMIT 1";
-        // Tra ve result or bao loi ra man hinh
+        $query = " SELECT * "
+                . "FROM tblimages AS i "
+                . "INNER JOIN tbltypes AS t "
+                . "WHERE i.type_id = t.type_id and T.type_id != 17 "
+                . "AND i.status = 1 AND t.cat_id = 3 "
+                . "ORDER BY i.create_date LIMIT 1";
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -371,8 +379,13 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_image_row() {
         global $dbc;
-        $query = " SELECT image_id, image, title FROM tblimages WHERE type_id <= 11 AND type_id >= 9 AND status = 1 ORDER BY create_date LIMIT 1,6";
-        // Tra ve result or bao loi ra man hinh
+        $query = " SELECT * "
+                . "FROM tblimages AS i "
+                . "INNER JOIN tbltypes AS t "
+                . "WHERE i.type_id = t.type_id and T.type_id != 17 "
+                . "AND i.status = 1 AND t.cat_id = 3 "
+                . "ORDER BY i.create_date LIMIT 1,6";
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -383,8 +396,13 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_image_by_type_id($type_id) {
         global $dbc;
-        $query = " SELECT image_id, image FROM tblimages WHERE type_id = '{$type_id}' AND status = 1 ORDER BY create_date ";
-        // Tra ve result or bao loi ra man hinh
+        $query = " SELECT i.image_id, i.image, t.type_name "
+                . "FROM tblimages AS i "
+                . "INNER JOIN tbltypes AS t "
+                . "USING ( type_id ) "
+                . "WHERE type_id = '{$type_id}' AND status = 1 "
+                . "ORDER BY create_date LIMIT 6 ";
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -395,8 +413,13 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_first_thumbnail() {
         global $dbc;
-        $query = " SELECT video_id, thumbnail, title, description FROM tblvideos WHERE type_id <= 16 AND type_id >= 12 AND status = 1 ORDER BY create_date LIMIT 1";
-        // Tra ve result or bao loi ra man hinh
+        $query = " SELECT * "
+                . " FROM tblvideos AS v "
+                . " INNER JOIN tbltypes AS t "
+                . " WHERE v.type_id = t.type_id  "
+                . " AND v.status = 1 AND t.cat_id = 4 "
+                . " ORDER BY v.create_date LIMIT 1";
+ 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -407,8 +430,13 @@
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_thumbnail_row() {
         global $dbc;
-        $query = " SELECT video_id, thumbnail, title FROM tblvideos WHERE type_id <= 16 AND type_id >= 12 AND status = 1 ORDER BY create_date LIMIT 1,6";
-        // Tra ve result or bao loi ra man hinh
+        $query = " SELECT * "
+                . " FROM tblvideos AS v "
+                . " INNER JOIN tbltypes AS t "
+                . " WHERE v.type_id = t.type_id  "
+                . " AND v.status = 1 AND t.cat_id = 4 "
+                . " ORDER BY v.create_date LIMIT 1,6";
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -419,8 +447,10 @@
     // FRONTEND : check exist username and email ========================================
     function checkUsernameAndEmail($username, $email) {
         global $dbc;
-        $query = "SELECT user_id FROM tblusers WHERE email = '{$email}' OR username = '{$username}'";
-        // Tra ve result or bao loi ra man hinh
+        $query = "SELECT user_id "
+                . "FROM tblusers "
+                . "WHERE email = '{$email}' OR username = '{$username}'";
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -432,7 +462,7 @@
     function getToken($token) {
         global $dbc;
         $query = "SELECT * FROM tbltokens WHERE token = '{$token}'";
-        // Tra ve result or bao loi ra man hinh
+        
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
@@ -729,7 +759,7 @@
     //  BACKEND - LIST SHOW NEW  ===============================================================
     function login_user($username, $password) {
         global $dbc;
-        $query = "SELECT user_id, CONCAT_WS(' ', first_name, last_name) AS fullname , user_level, bio ";
+        $query = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS fullname ";
         $query .= " FROM tblusers WHERE username = '{$username}' AND password = SHA1('$password') ";
         $query .= " AND status = 1 LIMIT 1 ";
 
@@ -742,8 +772,10 @@
     //  FRONTEND - SHOW COMMENT  ===============================================================
     function show_comment($nid) {
         global $dbc;
-        $query = " SELECT author, comment, user_id, DATE_FORMAT(comment_date, '%b %d, %y') AS date ";
-        $query .=" FROM tblcomment WHERE news_id ='{$nid}'";
+        $query = " SELECT author, comment, user_id, "
+                . " DATE_FORMAT(comment_date, '%b %d, %y') AS date "
+                . " FROM tblcomment "
+                . " WHERE news_id ='{$nid}'";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);

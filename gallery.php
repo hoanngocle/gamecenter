@@ -140,7 +140,7 @@
                                 while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
                         ?>
                             <div>
-                                <a href="slideshow.php?tid=9" ><img u="image" src="images/gallery/<?= $gallery['image']?>" /></a>
+                                <a href="slideshow.php?tid=9" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
                         <?php 
                                 }
@@ -167,7 +167,7 @@
                                 while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
                         ?>
                             <div>
-                                <a href="slideshow.php?tid=10" ><img u="image" src="images/gallery/<?= $gallery['image']?>" /></a>
+                                <a href="slideshow.php?tid=10" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
                         <?php 
                                 }
@@ -195,21 +195,19 @@
                                 while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
                         ?>
                             <div>
-                                <a href="slideshow.php?tid=11" ><img u="image" src="images/gallery/<?= $gallery['image']?>" /></a>
+                                <a href="slideshow.php?tid=11" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
                         <?php 
                                 }
                             }
                         ?>
                     </div>
-                    <!--#region Bullet Navigator Skin Begin -->
-                    <!-- Help: http://www.jssor.com/development/slider-with-bullet-navigator-jquery.html -->
-                    <!-- bullet navigator container -->
+                    
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <!-- bullet navigator item prototype -->
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
-                    <!--#endregion Bullet Navigator Skin End -->
+                    
                 </div>
             </div>
             <div>
@@ -225,21 +223,19 @@
                                 while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
                         ?>
                             <div>
-                                <a href="slideshow.php?tid=19" ><img u="image" src="images/gallery/<?= $gallery['image']?>" /></a>
+                                <a href="slideshow.php?tid=19" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
                         <?php 
                                 }
                             }
                         ?>
-                    </div>
-                    <!--#region Bullet Navigator Skin Begin -->
-                    <!-- Help: http://www.jssor.com/development/slider-with-bullet-navigator-jquery.html -->
-                    <!-- bullet navigator container -->
+                    </div>                    
+
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <!-- bullet navigator item prototype -->
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
-                    <!--#endregion Bullet Navigator Skin End -->
+                    
                 </div>
             </div>
         </div>

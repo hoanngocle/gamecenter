@@ -12,8 +12,9 @@ include('includes/functions.php');?>
 
     <?php
 
-$rs = register('bvvv', 'b', 'vbvv', 'd', 'e', 'd', 'a');
-var_dump($rs);die;
+$rs = login_user('beosagittarius', '12345678');
+ $user = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+var_dump($user);die;
 ?>
 
 </body>
