@@ -209,13 +209,13 @@
                         <div class="modal-body">
                             <div id="div-lost-msg">
                                 <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-lost-msg">Ypdate your profile.</span>
+                                <span id="text-lost-msg">Update your profile.</span>
                             </div>
                             <div style="width: 48%; padding-bottom: 10px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="Firstname " ></div>
                             <div style="width: 48%; margin-left: 12px; float: left"><input id="register_lastname" class="form-control" type="text" placeholder="Lastname " ></div>
                             
-                            <input id="change_website" class="form-control" type="text" placeholder="E-Mail">
-                            <input id="change_bio" class="form-control" type="password" placeholder="Password">
+                            <input id="change_website" class="form-control" type="text" placeholder="Website">
+                            <input id="change_bio" class="form-control" type="password" placeholder="Bio">
                             
                             <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
                         </div>

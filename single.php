@@ -1,10 +1,8 @@
-<!-- goi file chua header -->
 <?php 
 	//Include file php function vs connect DB
 	include('includes/backend/mysqli_connect.php'); 
 	include('includes/functions.php');
 	
-	// Ham lay gia tri tu csdl ra, tao dynamite title
 	if($nid = validate_id($_GET['nid'])) {
 		//Neu nid hop le thi tien hanh truy van co so du lieu
 		$set = get_news_by_id($nid);
@@ -34,8 +32,7 @@
 			$array_tag = mysqli_fetch_array($rs, MYSQLI_ASSOC);      
             $tags = $array_tag['keyword'];
         }
-
-        
+       
 	}else {
 		//neu nid ko co thi chuyen huong nguoi dung
 		redirect_to('404.php');

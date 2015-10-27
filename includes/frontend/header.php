@@ -9,7 +9,7 @@
     ##################################################################### -->
 <?php 
     session_start();
-    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (15*60))) {
+    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (60*60))) {
         // last login was more than 15 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time 
         session_destroy();   // destroy session data in storage
@@ -35,7 +35,7 @@
         <!-- JavaScript -->
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script src="js/modernizr.custom.js"></script>
-        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-1.11.1.js"></script>
         <script src="/includes/video-js/video.js"></script>
         <script src="/includes/video-js/media.youtube.js"></script>
         <script src="/js/jquery.leanModal.min.js"></script>
