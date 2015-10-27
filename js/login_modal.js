@@ -37,9 +37,14 @@ $(function () {
                         success: function (response) {
                             if (response.status == "OK"){
 //                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
+                                interval = setInterval(
+                                        function(){
+                                            $('#login-modal').modal('hide');
+                                            location.href = 'index.php';
+                                            clearInterval(interval);
+                                        }
+                                , 3000);
 
-                                $('#login-modal').modal('hide');  
-                                location.href = 'index.php';
                             }else if (response.status == "FAIL"){                                
                                 msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
 

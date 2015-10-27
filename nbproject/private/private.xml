@@ -4,8 +4,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/PHP/htdocs/gamecenter/comment.php</file>
             <file>file:/D:/PHP/htdocs/gamecenter/includes/functions.php</file>
-            <file>file:/D:/PHP/htdocs/gamecenter/blog.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/includes/frontend/footer.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/js/comment.js</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/index.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/js/profile_modal.js</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/includes/frontend/comment_form.php</file>
+            <file>file:/D:/PHP/htdocs/gamecenter/js/login_modal.js</file>
         </group>
     </open-files>
 </project-private>

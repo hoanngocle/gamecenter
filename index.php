@@ -30,7 +30,7 @@
 										$content = excerpt_features($games['content']);
 							?>
 							<li>
-								<a href="single.php?nid=<?= $games['news_id'];  ?>" data-largesrc="images/<?= $games['image']; ?>" data-title="<?= $games['title']; ?>" data-description="<?= $content ?>...">
+								<a href="single.php?nid=<?= $games['news_id'];  ?>" data-largesrc="images/news/<?= $games['image']; ?>" data-title="<?= $games['title']; ?>" data-description="<?= $content ?>...">
                                     <img style="width: 252px; height: 252px;" class="img-responsive" src="images/news/<?= $games['image']; ?>" alt="img<?= $games['title']; ?>"/>
 								</a>
 							</li>
