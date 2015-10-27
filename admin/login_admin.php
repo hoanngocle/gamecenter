@@ -44,12 +44,21 @@ $title = "Login";
                     
                     $result = login_admin($username, $password);
                         if(mysqli_num_rows($result) == 1) {
-                            list($uid, $fullname, $user_level, $bio) = mysqli_fetch_array($result, MYSQLI_NUM);
-                            $_SESSION['uid'] = $uid;
-                            $_SESSION['fullname'] = $fullname;
-                            $_SESSION['bio'] = $bio;
-                            $_SESSION['user_level'] = $user_level;
-                            $_SESSION['LAST_ACTIVITY'] = time(); 
+                            $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            
+                            $_SESSION['uid'] = $user['user_id'];
+                            $_SESSION['username'] = $user['username'];
+                            $_SESSION['email'] = $user['email'];
+                            $_SESSION['first_name'] = $user['first_name'];
+                            $_SESSION['last_name'] = $user['last_name'];
+                            $_SESSION['fullname'] = $user['fullname'];
+                            $_SESSION['date_of_birth'] = $user['date_of_birth'];
+                            $_SESSION['gender'] = $user['gender'];
+                            $_SESSION['website'] = $user['website'];
+                            $_SESSION['bio'] = $user['bio'];
+                            $_SESSION['avatar'] = $user['avatar'];
+                            $_SESSION['user_level'] = $user['user_level'];
+                            $_SESSION['LAST_ACTIVITY'] = time();
  
                             redirect_to('admin/index.php');
                         }else {

@@ -94,7 +94,7 @@
 									                <td style='text-align:right' ><?= $images['image_id']?></td>
 									                <td style='text-align:left'><?= $images['type_name']?></td>
 									                <td style='text-align:left'><?= $images['title']?></td>
-                                                    <td style='text-align:justify'><img style="width: 300px; height: 169px" src="/images/<?= $images['image']?>" alt="" class="item-chil-row1" ></td>
+                                                    <td style='text-align:justify'><img style="width: 300px; height: 169px" src="/images/gallery/<?= $images['image']?>" alt="" class="item-chil-row1" ></td>
                                                     <td style='text-align:right'><?= $images['name']?></td>
                                                     <td style='text-align:right'><?= $images['date']?></td>
                                                     <td style='text-align:center'><?= $active?></td>

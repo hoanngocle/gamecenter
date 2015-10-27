@@ -182,15 +182,17 @@
                                 <span id="text-login-msg">Welcome to Game Magazine</span>
                             </div>
                             
-                            <img class="img-circle" style="width: 100px; height: 100px" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
-                            <label>Fullname :</label> <label><?= $_SESSION['fullname'] ?></label><br>
-                            <label>Username :</label> <label><?= $_SESSION['username'] ?></label><br>
-                            <label>Email :</label> <label><?= $_SESSION['email'] ?></label><br>
-                            <label>Gender :</label> <label><?= $_SESSION['gender'] ?></label><br>
-                            <label>Date Of Birth :</label> <label><?= date('Y-m-d', strtotime($_SESSION['date_of_birth'])) ?></label><br>
-                            <label>Website :</label> <label><?= $_SESSION['website'] ?></label><br>
-                            <label>Bio :</label> <label><?= $_SESSION['bio'] ?></label><br>
+                            <img class="img-circle" style="width: 100px; height: 100px" id="img_logo" src="<?=$user['avatar']?>">
+                            <label>Fullname :</label> <label><?= $user['fullname'] ?></label><br>
+                            <label>Username :</label> <label><?= $user['username'] ?></label><br>
+                            <label>Email :</label> <label><?= $user['email'] ?></label><br>
+                            <label>Gender :</label> <label><?= $user['gender'] ?></label><br>
+                            <label>Date Of Birth :</label> <label><?= date('Y-m-d', strtotime($user['date_of_birth'])) ?></label><br>
+                            <label>Website :</label> <label><?= $user['website'] ?></label><br>
+                            <label>Bio :</label> <label><?= $user['bio'] ?></label><br>
+                            <?php 
                                 
+                            ?>   
                             </div>
                         <div class="modal-footer">
                             
@@ -207,23 +209,19 @@
                         <div class="modal-body">
                             <div id="div-lost-msg">
                                 <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-lost-msg">Type your e-mail.</span>
+                                <span id="text-lost-msg">Ypdate your profile.</span>
                             </div>
                             <div style="width: 48%; padding-bottom: 10px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="Firstname " ></div>
                             <div style="width: 48%; margin-left: 12px; float: left"><input id="register_lastname" class="form-control" type="text" placeholder="Lastname " ></div>
                             
-                            <input id="register_username" class="form-control" type="text" placeholder="Username">
-                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail">
-                            <input id="register_password" class="form-control" type="password" placeholder="Password">
-                            <div style="padding-top: 10px">
-                                <input type="radio" name="gender" id="register_gender" value="Male" checked> Male
-                                <input type="radio" name="gender" id="register_gender" value="Female"> Female
-                            </div>
+                            <input id="change_website" class="form-control" type="text" placeholder="E-Mail">
+                            <input id="change_bio" class="form-control" type="password" placeholder="Password">
+                            
                             <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Send</button>
                             </div>
                             <div>
                                 <button id="update_view_btn" type="button" class="btn btn-link">View Profile</button>
@@ -236,17 +234,17 @@
                     <!-- Begin | Change Password Form -->
                     <form id="changepass-form" style="display:none;" method="post">
                         <div class="modal-body">
-                            <div id="div-register-msg">
-                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-register-msg">Change your password</span>
+                            <div id="div-change-msg">
+                                <div id="icon-change-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-change-msg">Change your password</span>
                             </div>
                             <input id="old_pass" class="form-control" type="text" placeholder="Old Password" >
                             <input id="new_pass" class="form-control" type="text" placeholder="New Password" >
-                            <input id="renew_pass" class="form-control" type="text" placeholder="Confirm New Password" >
+                            <input id="renew_pass" class="form-control" type="text" placeholder="Confirm New Password" > 
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Change</button>
                             </div>
                             <div>
                                 <button id="changepass_view_btn" type="button" class="btn btn-link">View Profile</button>

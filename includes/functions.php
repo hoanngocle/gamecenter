@@ -1,4 +1,4 @@
-    <?php
+<?php
 
     // xac dinh hang so cho dia chi tuyet doi
     define('BASE_URL', 'http://www.gamecenter.dev/');
@@ -32,7 +32,7 @@
     }
 
     // INCLUDE - EXCERPT ==========================================================
-    // // ham cat chu cuoi cung cua phan content thanh doan van ngan
+    // ham cat chu cuoi cung cua phan content thanh doan van ngan
     function excerpt_news_content($sanitized) {
         if (strlen($sanitized) > 100) {
             $cutString = substr($sanitized, 0, 200);
@@ -43,7 +43,6 @@
         }
     }
 
-    // END the excerpt
     // ham cat chu cuoi cung cua phan content thanh doan van ngan
     function excerpt($sanitized) {
         if (strlen($sanitized) > 400) {
@@ -55,7 +54,6 @@
         }
     }
 
-    // END the excerpt
     // INCLUDE - EXCERPT FEATURE ==========================================================
     // ham cat chu cuoi cung cua phan content thanh doan van ngan
     function excerpt_features($text) {
@@ -69,7 +67,6 @@
         }
     }
 
-    // END the excerpt
     // INCLUDE - Tao paragraph ID ==========================================================
     // Tao paragraph tu CSDL
     function the_content($text) {
@@ -110,7 +107,7 @@
         return $result;
     }
 
-    // END of query
+
     // CLIENT SITE [start]==================================================================
     // FRONTEND - BANNER ==================================================================
     function get_banner() {
@@ -191,7 +188,7 @@
         return $result;
     }
 
-    // END of query
+
     // FRONTEND - HOTEST - NEW - comment nhieu nhat ========================================
     function get_hotest_news() {
         global $dbc;
@@ -215,7 +212,7 @@
         return $result;
     }
 
-    // END of query
+
     // FRONTEND - LASTEST - NEW - bai viet moi nhat ========================================
     function get_lastest_news() {
         global $dbc;
@@ -239,7 +236,7 @@
         return $result;
     }
 
-    // END of query
+
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_popular_news() {
         global $dbc;
@@ -262,7 +259,7 @@
         return $result;
     }
 
-    // END of query
+
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_type_news() {
         global $dbc;
@@ -278,7 +275,7 @@
         return $result;
     }
 
-    // END of query
+
     //
 
 
@@ -294,7 +291,7 @@
         return $result;
     }
 
-    // END of query
+
     //
 
 
@@ -318,8 +315,6 @@
         return $result;
     }
 
-    // END of query
-    //
         // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
 
     function get_games_by_type($type) {
@@ -341,7 +336,6 @@
         return $result;
     }
 
-    // END of query
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_tag_by_id($nid) {
         global $dbc;
@@ -358,7 +352,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_first_image_gallery() {
         global $dbc;
@@ -375,7 +368,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_image_row() {
         global $dbc;
@@ -392,7 +384,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_image_by_type_id($type_id) {
         global $dbc;
@@ -409,7 +400,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_first_thumbnail() {
         global $dbc;
@@ -426,7 +416,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_thumbnail_row() {
         global $dbc;
@@ -443,7 +432,6 @@
         return $result;
     }
 
-    // END
     // FRONTEND : check exist username and email ========================================
     function checkUsernameAndEmail($username, $email) {
         global $dbc;
@@ -457,7 +445,6 @@
         return $result;
     }
 
-    // END of query
     // FRONTEND : get token ========================================
     function getToken($token) {
         global $dbc;
@@ -469,7 +456,6 @@
         return $result;
     }
 
-    // END of query
     // ADMIN SITE [start] ======================================================================
     //  BACKEND - LIST SHOW NEW  ===============================================================
     function get_all_news($order_by) {
@@ -676,7 +662,7 @@
         return $result;
     }
 
-    // END of query
+
     //  BACKEND - SHOW VIDEO =====================================================================	
     function get_video_by_id($vid) {
         global $dbc;
@@ -696,7 +682,7 @@
         return $result;
     }
 
-    // END of query
+
     //  BACKEND - get id youtube =====================================================================	
     function youtube_id_from_url($url) {
         $pattern = '%^# Match any youtube URL
@@ -737,10 +723,12 @@
     //  BACKEND - LIST SHOW NEW  ===============================================================
     function login_admin($username, $password) {
         global $dbc;
-        $query = "SELECT user_id, CONCAT_WS(' ', first_name, last_name) AS fullname , user_level, bio ";
-        $query .= " FROM tblusers WHERE username = '{$username}' AND password = SHA1('$password') ";
-        $query .= " AND ( user_level = 99 OR user_level= 9 )  ";
-        $query .= " AND status = 1 LIMIT 1 ";
+        $query = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS fullname "
+                . " FROM tblusers "
+                . " WHERE username = '{$username}' "
+                . " AND password = SHA1('$password') "
+                . " AND ( user_level = 99 OR user_level= 9 )  "
+                . " AND status = 1 LIMIT 1 ";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
@@ -755,7 +743,6 @@
         }
     }
 
-    // END is_logged_in
     //  BACKEND - LIST SHOW NEW  ===============================================================
     function login_user($username, $password) {
         global $dbc;
@@ -788,11 +775,44 @@
 
         global $dbc;
 
-            $query = "INSERT INTO tblusers (username, password, email, first_name, last_name, date_of_birth, gender, status, registration_date) ";
-            $query .= " VALUES ('{$username}', SHA1('$password'), '{$email}', '{$firstname}', '{$lastname}', '{$dateofbirth}', '{$gender}', '0', NOW())";
+        $query = "INSERT INTO tblusers (username, password, email, first_name, last_name, date_of_birth, gender, status, registration_date) ";
+        $query .= " VALUES ('{$username}', SHA1('$password'), '{$email}', '{$firstname}', '{$lastname}', '{$dateofbirth}', '{$gender}', '0', NOW())";
 
-            $result = mysqli_query($dbc, $query);
-            confirm_query($result, $query);
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
 
         return $result;
     }
+
+    // Change Pass - 
+    function checkOldPass($password, $user_id){
+        global $dbc;
+        $query = "SELECT * FROM tblusers WHERE password = SHA1('{$password}') AND user_id = '{$user_id}' LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }
+    
+    function changePass($password, $user_id) {
+        global $dbc;
+        $query = " UPDATE tblusers SET password = SHA1('{$password}') WHERE user_id = '{$user_id}' LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;   
+    }
+    
+    function get_user_by_id($uid) {
+        global $dbc;
+        $query = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS fullname ";
+        $query .= " FROM tblusers WHERE user_id = {$uid} ";
+        $query .= " AND status = 1 LIMIT 1 ";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+}

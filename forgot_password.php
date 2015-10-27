@@ -27,5 +27,3 @@
             echo json_encode(['status' => 'FAIL']);;
         }
     }
-	
-	

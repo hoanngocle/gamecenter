@@ -31,7 +31,7 @@
 							?>
 							<li>
 								<a href="single.php?nid=<?= $games['news_id'];  ?>" data-largesrc="images/<?= $games['image']; ?>" data-title="<?= $games['title']; ?>" data-description="<?= $content ?>...">
-                                    <img width="250" height="250" class="img-responsive" src="images/<?= $games['image']; ?>" alt="img<?= $games['image']; ?>"/>
+                                    <img style="width: 252px; height: 252px;" class="img-responsive" src="images/news/<?= $games['image']; ?>" alt="img<?= $games['title']; ?>"/>
 								</a>
 							</li>
 							<?php 
@@ -81,7 +81,7 @@
 				
                 <!-- =============== Lastest News ============== -->
 				<div class="col-md-4 latest">						
-					<h4>Latest</h4>
+                    <a href="blog.php?t=newest" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Newest </h4></a>
 					<?php 
 						$result = get_lastest_news();
 						if (mysqli_num_rows($result) > 0 ) {
@@ -89,7 +89,7 @@
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
 									<div class="late">
-										<a href="single.php?nid=<?= $lastest_news['news_id'] ?>" class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
+										<a href="single.php?nid=<?= $lastest_news['news_id'] ?>" class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/news/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['title'] ?>'></a>
 										<div class='grid-product'>
 											<span><?= $lastest_news['date'] ?></span>
 											<p><a href="single.php?nid=<?= $lastest_news['news_id'] ?>"><?= $lastest_news['title'] ?></a></p>
@@ -105,7 +105,7 @@
 
 				<!-- =============== Hotest News ============== -->
 				<div class="col-md-4 latest">
-					<h4>Hotest</h4>
+                    <a href="blog.php?t=topmonth" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Hotest</h4></a>
 					<?php 
 						$result = get_hotest_news();
 						if (mysqli_num_rows($result) > 0 ) {
@@ -113,7 +113,7 @@
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
 									<div class='late'>
-										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
+										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/news/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['title'] ?>'></a>
 										<div class='grid-product'>
 											<span><?= $lastest_news['date'] ?></span>
 											<p><a href='single.php?nid=<?= $lastest_news['news_id'] ?>' ><?= $lastest_news['title'] ?></a></p>
@@ -128,23 +128,23 @@
                 </div>
                 
 				<!-- =============== Popular News ============== -->
-				<div class="col-md-4 latest">
-					<h4>Popular</h4>
+				<div class="col-md-4 latest">					
+                    <a href="blog.php?t=hotweek" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Top week </h4></a>
 					<?php 
 						$result = get_popular_news();
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					?>
-									<div class='late'>
-										<a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['image'] ?>'></a>
-										<div class='grid-product'>
-											<span><?= $lastest_news['date'] ?></span>
-											<p><a href='single.php?nid=<?= $lastest_news['news_id'] ?>'><?= $lastest_news['title'] ?></a></p>
-											<a class='comment' href='single.php?nid=<?= $lastest_news['news_id'] ?>'><i> </i><?= $lastest_news['count']?> Comments</a>
-										</div>
-									<div class='clearfix'> </div>
-									</div>
+                                <div class='late'>
+                                    <a href='single.php?nid=<?= $lastest_news['news_id'] ?>' class='fashion'><img class='img-responsive' style="width: 120px; height: 120px;" src='images/news/<?= $lastest_news['image'] ?>' alt='<?= $lastest_news['title'] ?>'></a>
+                                    <div class='grid-product'>
+                                        <span><?= $lastest_news['date'] ?></span>
+                                        <p><a href='single.php?nid=<?= $lastest_news['news_id'] ?>'><?= $lastest_news['title'] ?></a></p>
+                                        <a class='comment' href='single.php?nid=<?= $lastest_news['news_id'] ?>'><i> </i><?= $lastest_news['count']?> Comments</a>
+                                    </div>
+                                <div class='clearfix'> </div>
+                                </div>
 					<?php 
 							}		
 						}

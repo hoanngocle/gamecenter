@@ -15,6 +15,14 @@
         session_destroy();   // destroy session data in storage
         redirect_to('index.php');
     }
+    if(isset($_SESSION['uid'])){
+        $rsuser= get_user_by_id($_SESSION['uid']);
+        $user = array();
+        if(mysqli_num_rows($rsuser) == 1){
+            $user = mysqli_fetch_array($rsuser, MYSQLI_ASSOC);
+        }
+    }
+    
     ?>
 <!DOCTYPE html>
 <html>

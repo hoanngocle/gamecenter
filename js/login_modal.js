@@ -32,20 +32,23 @@ $(function () {
                     $.ajax({
                         type: "POST",
                         url: "login.php",
+                        dataType: "json",
                         data: dataString,
-                        cache: false,
-                        success: function (data) {
-                            if (data){
-                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-remove", "Username and password is successfully");
+                        success: function (response) {
+                            if (response.status == "OK"){
+//                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
+
+                                $('#login-modal').modal('hide');  
                                 location.href = 'index.php';
-                                $('#login-modal').modal('hide');                               
-                            }else {                                
-                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is incorrect");
+                            }else if (response.status == "FAIL"){                                
+                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
+
                             }
                         }
                     });
-                    return false;
+                
                 }
+                return false;                    
                 break;
                 
             case "lost-form":
@@ -66,11 +69,10 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK" ){
-                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-ok", "Send ERROR");
-                                location.href = 'index.php';
-                                $('#login-modal').modal('hide');             
-                            }
-                            if(response.status == "FAIL"){              
+                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send SUCCESS");
+//                                location.href = 'index.php';
+//                                $('#login-modal').modal('hide');             
+                            }else if(response.status == "FAIL"){              
                                 msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-ok", "Send ERROR");
                             }
                         }

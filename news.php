@@ -1,9 +1,6 @@
-<!-- goi file chua header -->
 <?php
-    //Include file php function vs connect DB
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
-
     include('includes/frontend/header.php');
 ?>
 
@@ -44,5 +41,4 @@
                 <div class="clearfix"> </div>
             </div>
         </div>
-    <!-- goi file chua header -->
 <?php include('includes/frontend/footer.php'); ?>

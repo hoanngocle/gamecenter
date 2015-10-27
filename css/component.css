@@ -173,6 +173,8 @@
 
 .og-fullimg img {
 	display: inline-block;
+        height: 400px;
+        width: 400px;
 	max-height: 100%;
 	max-width: 100%;
 }
