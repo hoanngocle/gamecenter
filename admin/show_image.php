@@ -71,7 +71,7 @@
 				                            <strong style="font-size : 18px">Image : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" src="../images/<?= $images['image'] ?>" alt="<?= $images['image'] ?>">
+                                            <img class="img-responsive" style="margin: auto;" src="../images/gallery/<?= $images['image'] ?>" alt="<?= $images['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>

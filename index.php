@@ -209,7 +209,7 @@
                                 if (mysqli_num_rows($result) > 0 ) {
                                     while ($video = mysqli_fetch_array($result, MYSQLI_ASSOC)){             
                             ?>
-                            <li class="item-row-1">                               
+                            <li class="item-row-1" style="height: 200px">                               
                                 <a href="playlist.php?vid=<?= $video['video_id'] ?>" ><img src="images/thumbnails/<?= $video['thumbnail']?>" alt="<?= $video['title']?>" width="200" height="135"></a>
                             <h5 class="title-video-row1"><?= $video['title']?></h5>
                             </li>

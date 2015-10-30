@@ -85,9 +85,9 @@
 									 	while($images = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
                                             if($images['status'] == 0){
-                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_image({$images['image_id']},{$images['status']})'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_image({$images['image_id']},{$images['status']})'></a>";
                                             }
                                         ?>
 								 				<tr>
@@ -100,9 +100,9 @@
                                                     <td style='text-align:center'><?= $active?></td>
 									                
 									                <td style='width : 100px'>
-									                <a class='fa fa-eye' href='show_image.php?iid=<?= $images['image_id']?>' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-pencil' href='edit_image.php?iid=<?= $images['image_id']?>' style='font-size: 20px; margin-left: 5px'></a>
-                                                    <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete_image((<?= $images['image_id'] ?>));'></a>
+									                <a class='fa fa-eye' href='show_image.php?iid=<?= $images['image_id']?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+									                <a class='fa fa-pencil' href='edit_image.php?iid=<?= $images['image_id']?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+                                                    <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' value='' onClick='check_delete_image((<?= $images['image_id'] ?>));'></a>
 									                </td>
 												</tr>
 									 			

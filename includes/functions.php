@@ -945,3 +945,67 @@
 
         return $result;
 }
+
+    function change_status_user($uid, $stt){
+        global $dbc;
+        
+        if($stt == 1){
+            $status = 0;
+        }else {
+            $status = 1;
+        }
+        $query = " UPDATE tblusers SET status = {$status} WHERE user_id = {$uid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;   
+    }
+    
+    function change_status_news($nid, $stt){
+        global $dbc;
+        
+        if($stt == 1){
+            $status = 0;
+        }else {
+            $status = 1;
+        }
+        
+        $query = " UPDATE tblnews SET status = {$status} WHERE news_id = {$nid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;   
+    }
+    
+        function change_status_video($vid, $stt){
+        global $dbc;
+        if($stt == 1){
+            $status = 0;
+        }else {
+            $status = 1;
+        }
+        $query = " UPDATE tblvideos SET status = {$status} WHERE video_id = {$vid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;   
+    }
+    
+        function change_status_image($iid, $stt){
+        global $dbc;
+        if($stt == 1){
+            $status = 0;
+        }else {
+            $status = 1;
+        }
+        $query = " UPDATE tblimages SET status = {$status} WHERE image_id = {$iid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;   
+    }
+    

@@ -84,9 +84,9 @@
 									 	while($games = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
                                             if($games['status'] == 0){
-                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_news({$games['news_id']},{$games['status']})'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_news({$games['news_id']},{$games['status']})'></a>";
                                             }
                                         ?>
 								 				<tr>
@@ -99,9 +99,9 @@
                                                     <td style='text-align:center'><?= $active ?></td>
                                                         
 									                <td style='width : 100px'>
-									                <a class='fa fa-eye' href='show_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
-									                <a class='fa fa-pencil' href='edit_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px'></a>
-                                                    <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete_news()(<?= $games['news_id'] ?>);'></a>
+									                <a class='fa fa-eye' href='show_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+									                <a class='fa fa-pencil' href='edit_game.php?gid=<?= $games['news_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+                                                    <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' value='' onClick='check_delete_news()(<?= $games['news_id'] ?>);'></a>
 									                </td>
 												</tr>
 									 			

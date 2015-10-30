@@ -85,9 +85,9 @@
 									 	while($videos = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 									 		// in ra cac cot cua bang
                                             if($videos['status'] == 0){
-                                                $active = "<a class='fa fa-remove' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-remove' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_video({$videos['video_id']},{$videos['status']})'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-check' style='font-size: 20px; margin-left: 5px'></a>";
+                                                $active = "<a class='fa fa-check' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_video({$videos['video_id']},{$videos['status']})'></a>";
                                             }
                                         ?>
                                             <tr>
@@ -101,9 +101,9 @@
                                                 <td style='text-align:center'><?= $active?></td>
 
                                                 <td style='width : 100px'>
-                                                <a class='fa fa-eye' href='show_video.php?vid=<?= $videos['video_id']?>' style='font-size: 20px; margin-left: 5px'></a>
-                                                <a class='fa fa-pencil' href='edit_video.php?vid=<?= $videos['video_id']?>' style='font-size: 20px; margin-left: 5px'></a>
-                                                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px' value='' onClick='check_delete_video(<?= $videos['video_id'] ?>);'></a>
+                                                <a class='fa fa-eye' href='show_video.php?vid=<?= $videos['video_id']?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+                                                <a class='fa fa-pencil' href='edit_video.php?vid=<?= $videos['video_id']?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+                                                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' value='' onClick='check_delete_video(<?= $videos['video_id'] ?>);'></a>
                                                 </td>
                                             </tr>
 									<?php 
