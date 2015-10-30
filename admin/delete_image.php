@@ -12,7 +12,7 @@
 					delete_success();
 				</script>      
 			";
-			redirect_to('admin/view_images.php');
+			redirect_to('admin/list_images.php');
 		}else {
 			echo "
 				<script type='text/javascript'>

@@ -28,13 +28,13 @@
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 3% ; text-align:center"><a href="view_videos.php.php?sort=id">ID</a></th>
-							    			<th style="width: 5% ; text-align:center"><a href="view_videos.php?sort=cat">Type</a></th>
-							    			<th style="width: 15% ; text-align:center"><a href="view_videos.php?sort=title">Title</a></th>
+                                            <th style="width: 3% ; text-align:center"><a href="list_videos.php.php?sort=id">ID</a></th>
+							    			<th style="width: 5% ; text-align:center"><a href="list_videos.php?sort=cat">Type</a></th>
+							    			<th style="width: 15% ; text-align:center"><a href="list_videos.php?sort=title">Title</a></th>
 							                <th style="width: 15% ; text-align:center">Description</th>
                                             <th style="width: 28% ; text-align:center">Video</th>
-							                <th style="width: 10% ; text-align:center"><a href="view_videos.php?sort=by">Posted By</a></th>
-                                            <th style="width: 10% ; text-align:center"><a href="view_videos.php?sort=on">Posted On</a></th>
+							                <th style="width: 10% ; text-align:center"><a href="list_videos.php?sort=by">Posted By</a></th>
+                                            <th style="width: 10% ; text-align:center"><a href="list_videos.php?sort=on">Posted On</a></th>
                                             <th style="width: 4% ; text-align:center">Status</th>
 							                <th style="width: 10% ; text-align:center"> </th>
                                         </tr>

@@ -24,7 +24,7 @@
 	        	<!-- News Manager ###################### -->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-one">
-                        <a href="view_news.php"><i  class="fa fa-newspaper-o dashboard-div-icon" ></i></a>
+                        <a href="list_news.php"><i  class="fa fa-newspaper-o dashboard-div-icon" ></i></a>
                          <h5>News Manager </h5>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 				<!-- Games Manager ###################### -->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-two">
-                        <a href="view_games.php"><i  class="fa fa-gamepad dashboard-div-icon" ></i></a>
+                        <a href="list_games.php"><i  class="fa fa-gamepad dashboard-div-icon" ></i></a>
                          <h5>Games Manager  </h5>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
 				<!-- Gallery Manager ###################### -->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-three">
-                        <a href="view_images.php"><i  class="fa fa-picture-o dashboard-div-icon" ></i></a>
+                        <a href="list_images.php"><i  class="fa fa-picture-o dashboard-div-icon" ></i></a>
                         <h5>Gallery Manager  </h5>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
 				<!-- Videos Manager ###################### -->
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-four">
-                        <a href="view_videos.php"><i  class="fa fa-youtube-play dashboard-div-icon" ></i></a>
+                        <a href="list_videos.php"><i  class="fa fa-youtube-play dashboard-div-icon" ></i></a>
                          <h5>Videos Manager  </h5>
                     </div>
                 </div>

@@ -86,7 +86,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Add News</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List News</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="list_news.php">List News</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($messages)) 

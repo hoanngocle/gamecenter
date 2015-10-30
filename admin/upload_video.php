@@ -46,7 +46,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Upload Videos</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="list_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
             				if(!empty($fail)) {
@@ -109,7 +109,7 @@
 								<!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
 									<input type="button" onclick="location.href='/admin/add_video.php?vid=<?= $id_url[1]?>';" name="send" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">
-									<button type="button" onclick="location.href='/admin/view_games.php';" class="btn btn-danger" style="font-size: 18px; height: 44px">Cancel</button>
+									<button type="button" onclick="location.href='/admin/list_games.php';" class="btn btn-danger" style="font-size: 18px; height: 44px">Cancel</button>
                                 <?php     
                                     }  
                                 ?>

@@ -10,10 +10,10 @@
 		if(mysqli_num_rows($set) > 0 ) {
 		 	$images = mysqli_fetch_array($set, MYSQLI_ASSOC);
 		}else {
-			redirect_to('admin/view_images.php');
+			redirect_to('admin/list_images.php');
 		}
 	}else{
-		redirect_to('admin/view_images.php');		
+		redirect_to('admin/list_images.php');		
 	}	
     $title_page = $images['type_name'];
 	include('../includes/backend/header-admin.php');
@@ -26,7 +26,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $images['type_name'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_images.php">List Images</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_images.php">List Images</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">

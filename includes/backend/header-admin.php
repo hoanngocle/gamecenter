@@ -123,12 +123,14 @@
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="index.php">Home</a></li>
-                            <li><a href="view_news.php">News </a></li>
-                            <li><a href="view_games.php">Games </a></li>
-                            <li><a href="view_images.php">Images </a></li>
-                            <li><a href="view_videos.php">Videos </a></li>
+                            <li><a href="list_news.php">News </a></li>
+                            <li><a href="list_games.php">Games </a></li>
+                            <li><a href="list_images.php">Images </a></li>
+                            <li><a href="list_videos.php">Videos </a></li>
                             <?php if(isset($_SESSION['user_level']) && $_SESSION['user_level'] == 99) { ?>
                             <li><a href="list_user.php">User</a></li>
+                            <li><a href="list_type.php">Type</a></li>
+                            <li><a href="list_tag.php">Tag</a></li>
                             <?php } ?>
                         </ul>
                     </div>

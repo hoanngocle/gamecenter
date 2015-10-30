@@ -82,9 +82,9 @@
                                
 				$result = edit_news_games($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
-					redirect_to('admin/view_games.php');
+					redirect_to('admin/list_games.php');
 				} else {
-					redirect_to('admin/view_games.php');
+					redirect_to('admin/list_games.php');
 				} // END IF mysqli_affected_rows
 			} else {
 				$error = "Tất cả các trường đều phải được nhập đầy đủ!";
@@ -93,7 +93,7 @@
 
 	}else {
 	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-        redirect_to('admin/view_games.php');
+        redirect_to('admin/list_games.php');
     }
     
 	include('../includes/backend/header-admin.php');
@@ -113,7 +113,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Edit Games</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_games.php">List Games</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="list_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if (!empty($messages)) {

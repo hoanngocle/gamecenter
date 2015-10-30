@@ -12,7 +12,7 @@
 					delete_success();
 				</script>      
 			";
-			redirect_to('admin/view_news.php');
+			redirect_to('admin/list_news.php');
 		}else {
 			echo "
 				<script type='text/javascript'>

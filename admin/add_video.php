@@ -6,7 +6,7 @@
 <?php    
     $vid = $_GET['vid'];
     if(empty($vid) || strlen($vid) != 11){
-        redirect_to('admin/view_videos.php');       
+        redirect_to('admin/list_videos.php');       
     }else {
         $title_page = 'Add Video';
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
@@ -83,7 +83,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Add Videos</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href="list_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($success)) {

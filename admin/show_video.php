@@ -10,10 +10,10 @@
 		if(mysqli_num_rows($set) > 0 ) {
 		 	$videos = mysqli_fetch_array($set, MYSQLI_ASSOC);
 		}else {
-			//redirect_to('admin/view_videos.php');	
+			redirect_to('admin/list_videos.php');	
 		}
 	}else{
-		//redirect_to('admin/view_videos.php');	
+		redirect_to('admin/list_videos.php');	
 	}	
     $title_page = $videos['type_name'];
 	include('../includes/backend/header-admin.php');
@@ -26,7 +26,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $videos['type_name'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_videos.php">List Videos</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_videos.php">List Videos</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">

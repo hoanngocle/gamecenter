@@ -12,10 +12,10 @@
 		if(mysqli_num_rows($set) > 0 ) {
 		 	$games = mysqli_fetch_array($set, MYSQLI_ASSOC);
 		}else {
-			redirect_to('admin/view_news.php');
+			redirect_to('admin/list_games.php');
 		} 
 	}else{
-		redirect_to('admin/view_news.php');		
+		redirect_to('admin/list_games.php');		
 	}	
     $title_page = $games['type_name'];
 	include('../includes/backend/header-admin.php');
@@ -28,7 +28,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $games['title'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="view_games.php">List Games</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">

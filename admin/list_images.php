@@ -28,12 +28,12 @@
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 4% ; text-align:center"><a href="view_images.php?sort=id">ID</a></th>
-							    			<th style="width: 6% ; text-align:center"><a href="view_images.php?sort=cat">Type</a></th>
-							    			<th style="width: 25% ; text-align:center"><a href="view_images.php?sort=title">Title</a></th>
+                                            <th style="width: 4% ; text-align:center"><a href="list_images.php?sort=id">ID</a></th>
+							    			<th style="width: 6% ; text-align:center"><a href="list_images.php?sort=cat">Type</a></th>
+							    			<th style="width: 25% ; text-align:center"><a href="list_images.php?sort=title">Title</a></th>
 							                <th style="width: 28% ; text-align:center">Image</th>
-							                <th style="width: 11% ; text-align:center"><a href="view_images.php?sort=by">Posted By</a></th>
-                                            <th style="width: 11% ; text-align:center"><a href="view_images.php?sort=on">Posted On</a></th>
+							                <th style="width: 11% ; text-align:center"><a href="list_images.php?sort=by">Posted By</a></th>
+                                            <th style="width: 11% ; text-align:center"><a href="list_images.php?sort=on">Posted On</a></th>
                                             <th style="width: 5% ; text-align:center">Status</th>
 							                <th style="width: 10% ; text-align:center"> </th>
                                         </tr>

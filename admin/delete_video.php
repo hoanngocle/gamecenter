@@ -12,7 +12,7 @@
 					delete_success();
 				</script>      
 			";
-			redirect_to('admin/view_videos.php');
+			redirect_to('admin/list_videos.php');
 		}else {
 			echo "
 				<script type='text/javascript'>

@@ -27,12 +27,12 @@
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 2% ; text-align:center"><a href="view_games.php?sort=id">ID</a></th>
-							    			<th style="width: 7% ; text-align:center"><a href="view_games.php?sort=type">Type</a></th>
-							    			<th style="width: 15% ; text-align:center"><a href="view_games.php?sort=title">Game</a></th>
+                                            <th style="width: 2% ; text-align:center"><a href="list_games.php?sort=id">ID</a></th>
+							    			<th style="width: 7% ; text-align:center"><a href="list_games.php?sort=type">Type</a></th>
+							    			<th style="width: 15% ; text-align:center"><a href="list_games.php?sort=title">Game</a></th>
 							                <th style="width: 45% ; text-align:center">Content</th>
-							                <th style="width: 8% ; text-align:center"><a href="view_games.php?sort=by">Posted By</a></th>
-							                <th style="width: 10% ; text-align:center"><a href="view_games.php?sort=on">Posted On</a></th>
+							                <th style="width: 8% ; text-align:center"><a href="list_games.php?sort=by">Posted By</a></th>
+							                <th style="width: 10% ; text-align:center"><a href="list_games.php?sort=on">Posted On</a></th>
                                             <th style="width: 2% ; text-align:center">Status</th>
 							                <th style="width: 9% ; text-align:center"> </th>
                                         </tr>

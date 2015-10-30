@@ -93,7 +93,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Add Games</h2>
-                            <h4><a href="index.php">Home</a> / <a href="view_news.php">List Games</a></h4>
+                            <h4><a href="index.php">Home</a> / <a href=list_games.php">List Games</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($success)) {

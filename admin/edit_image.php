@@ -70,7 +70,7 @@
         } // END main IF submit condition
     }else {
 	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
-        redirect_to('admin/view_images.php');
+        redirect_to('admin/list_images.php');
     }
     include('../includes/backend/header-admin.php');
 ?>
@@ -88,7 +88,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2>Upload Images</h2>
-                            <h4><a href="view_news.php">List Images</a></h4>
+                            <h4><a href="list_news.php">List Images</a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
 							if(!empty($success)) {
