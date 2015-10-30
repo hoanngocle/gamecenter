@@ -15,7 +15,7 @@
                 $type_name = $types['type_name'];
                 ?>
                 <div class="review-md1">                  
-                    <h3 class="new" style="padding-bottom: 30px;"><?= $type_name ?></h3>
+                    <a href='blog.php?t=<?= $type_name?>' style="text-decoration: none"><h3 class="new" style="padding-bottom: 30px;"><?= $type_name ?></h3></a>
                     <?php
                     $result = get_news_by_type($type_name);
                     if (mysqli_num_rows($result) > 0) {

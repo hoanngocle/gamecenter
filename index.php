@@ -79,11 +79,11 @@
                 <br>
                 <!--===================================== News [start] =====================================-->
 				
-                <!-- =============== Lastest News ============== -->
+                <!-- =============== Newest News ============== -->
 				<div class="col-md-4 latest">						
                     <a href="blog.php?t=newest" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Newest </h4></a>
 					<?php 
-						$result = get_lastest_news();
+						$result = get_newest_news();
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -129,9 +129,9 @@
                 
 				<!-- =============== Popular News ============== -->
 				<div class="col-md-4 latest">					
-                    <a href="blog.php?t=hotweek" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Top week </h4></a>
+                    <a href="blog.php?t=topweek" style="text-decoration:none;"><h4 class="new" style="padding-bottom: 14px"> Top week </h4></a>
 					<?php 
-						$result = get_popular_news();
+						$result = get_topweek_news();
 						if (mysqli_num_rows($result) > 0 ) {
 							// Neu co post de hien thi thi in ra
 							while ($lastest_news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {

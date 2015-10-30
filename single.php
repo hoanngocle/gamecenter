@@ -4,13 +4,11 @@
 	include('includes/functions.php');
 	
 	if($nid = validate_id($_GET['nid'])) {
-		//Neu nid hop le thi tien hanh truy van co so du lieu
+		
 		$set = get_news_by_id($nid);
-		$posts = array(); // Tao 1 array trong de luu gia tri vao su dung sau nay cho phan noi dung
+		$posts = array(); // create array to save data
 
-		// kiem tra co gia tri tra ve ko
 		if (mysqli_num_rows($set) > 0 ) {
-			// Neu co page thi hien thi ra ngoai
 			$news = mysqli_fetch_array($set, MYSQLI_ASSOC);
 			$title = $news['title'];
 
@@ -26,15 +24,16 @@
 		}else {
 			$errors =  "<p>There are currently no post in this category.</p>";
 		}
-        $rs = get_tag_by_id($nid);
+        
+        $result2 = get_tag_by_id($nid);
         $tags = null ;
-        if (mysqli_num_rows($rs) > 0 ) {	
-			$array_tag = mysqli_fetch_array($rs, MYSQLI_ASSOC);      
+        if (mysqli_num_rows($result2) > 0 ) {	
+			$array_tag = mysqli_fetch_array($result2, MYSQLI_ASSOC);      
             $tags = $array_tag['keyword'];
         }
        
 	}else {
-		//neu nid ko co thi chuyen huong nguoi dung
+		//if dont have nid, redirect user
 		redirect_to('404.php');
 	}
 	include('includes/frontend/header.php');

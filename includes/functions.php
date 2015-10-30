@@ -45,8 +45,8 @@
 
     // ham cat chu cuoi cung cua phan content thanh doan van ngan
     function excerpt($sanitized) {
-        if (strlen($sanitized) > 400) {
-            $cutString = substr($sanitized, 0, 500);
+        if (strlen($sanitized) > 800) {
+            $cutString = substr($sanitized, 0, 700);
             $words = substr($sanitized, 0, strrpos($cutString, ' '));
             return $words;
         } else {
@@ -188,6 +188,28 @@
         return $result;
     }
 
+    // FRONTEND - LASTEST - NEW - bai viet moi nhat ========================================
+    function get_newest_news() {
+        global $dbc;
+        // Query lay gia tri tu co so du lieu ra
+        $query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.create_date, '%d %b, %Y') AS date, cat.cat_name,  ";
+        $query .= " COUNT(c.comment_id) AS count ";
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tbltypes AS t";
+        $query .= " USING (type_id)";
+        $query .= " INNER JOIN tblcategories AS cat";
+        $query .= " USING (cat_id)";
+        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+        $query .= " GROUP BY n.title ";
+        $query .= " ORDER BY date DESC LIMIT 0, 3 ";
+
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }
 
     // FRONTEND - HOTEST - NEW - comment nhieu nhat ========================================
     function get_hotest_news() {
@@ -201,7 +223,7 @@
         $query .= " INNER JOIN tblcategories AS cat";
         $query .= " USING (cat_id)";
         $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
-        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND n.create_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
         $query .= " GROUP BY n.title ";
         $query .= " ORDER BY count DESC LIMIT 0, 3 ";
 
@@ -212,33 +234,8 @@
         return $result;
     }
 
-
-    // FRONTEND - LASTEST - NEW - bai viet moi nhat ========================================
-    function get_lastest_news() {
-        global $dbc;
-        // Query lay gia tri tu co so du lieu ra
-        $query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.create_date, '%d %b, %Y') AS date, cat.cat_name,  ";
-        $query .= " COUNT(c.comment_id) AS count ";
-        $query .= " FROM tblnews AS n ";
-        $query .= " INNER JOIN tbltypes AS t";
-        $query .= " USING (type_id)";
-        $query .= " INNER JOIN tblcategories AS cat";
-        $query .= " USING (cat_id)";
-        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
-        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
-        $query .= " GROUP BY n.title ";
-        $query .= " ORDER BY date DESC LIMIT 0, 3 ";
-
-        
-        $result = mysqli_query($dbc, $query);
-        confirm_query($result, $query);
-
-        return $result;
-    }
-
-
     // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
-    function get_popular_news() {
+    function get_topweek_news() {
         global $dbc;
         $query = "SELECT n.news_id, n.image, n.title, DATE_FORMAT(n.create_date, '%d %b, %Y') AS date, cat.cat_name,  ";
         $query .= " COUNT(c.comment_id) AS count ";
@@ -248,9 +245,9 @@
         $query .= " INNER JOIN tblcategories AS cat";
         $query .= " USING (cat_id)";
         $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
-        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND n.create_date >= DATE_SUB(NOW(), INTERVAL 1 WEEK) ";
         $query .= " GROUP BY n.title ";
-        $query .= " ORDER BY date DESC LIMIT 0, 3 ";
+        $query .= " ORDER BY count DESC LIMIT 0, 3 ";
 
         
         $result = mysqli_query($dbc, $query);
@@ -276,9 +273,6 @@
     }
 
 
-    //
-
-
         // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
     function get_type_by_id($tid) {
         global $dbc;
@@ -290,9 +284,6 @@
 
         return $result;
     }
-
-
-    //
 
 
         // FRONTEND : POPULAR - NEW - chu de duoc yeu thich ========================================
@@ -811,6 +802,144 @@
         $query .= " FROM tblusers WHERE user_id = {$uid} ";
         $query .= " AND status = 1 LIMIT 1 ";
         
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+}
+
+    function get_newest($start, $display) {
+        global $dbc;
+        
+        $query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b') AS month, ";
+        $query .= " DATE_FORMAT( n.create_date, '%d') AS day, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b %d, %Y') AS date, ";
+        $query .= " COUNT(c.comment_id) AS count, ";
+        $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tblusers AS u ";
+        $query .= " USING ( user_id ) ";
+        $query .= " INNER JOIN tbltypes AS t ";
+        $query .= " USING ( type_id ) ";
+        $query .= " INNER JOIN tblcategories AS cat ";
+        $query .= " USING ( cat_id ) ";
+        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 ";
+        $query .= " GROUP BY n.title ";
+        $query .= " ORDER BY n.create_date DESC LIMIT {$start}, {$display} ";
+        
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }
+
+    function get_topmonth($start, $display) {
+        global $dbc;
+        
+        $query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b') AS month, ";
+        $query .= " DATE_FORMAT( n.create_date, '%d') AS day, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b %d, %Y') AS date, ";
+        $query .= " COUNT(n.news_id) AS record, ";
+        $query .= " COUNT(c.comment_id) AS count, ";
+        $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tblusers AS u ";
+        $query .= " USING ( user_id ) ";
+        $query .= " INNER JOIN tbltypes AS t ";
+        $query .= " USING ( type_id ) ";
+        $query .= " INNER JOIN tblcategories AS cat ";
+        $query .= " USING ( cat_id ) ";
+        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND n.create_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
+        $query .= " GROUP BY n.title ";
+        $query .= " ORDER BY count DESC LIMIT  {$start}, {$display}";
+        
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }
+    
+    function get_top_week($start, $display) {
+        global $dbc;
+        
+        $query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b') AS month, ";
+        $query .= " DATE_FORMAT( n.create_date, '%d') AS day, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b %d, %Y') AS date, ";
+        $query .= " COUNT(n.news_id) AS record, ";        
+        $query .= " COUNT(c.comment_id) AS count, ";
+        $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id ";
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tblusers AS u ";
+        $query .= " USING ( user_id ) ";
+        $query .= " INNER JOIN tbltypes AS t ";
+        $query .= " USING ( type_id ) ";
+        $query .= " INNER JOIN tblcategories AS cat ";
+        $query .= " USING ( cat_id ) ";
+        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND n.create_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
+        $query .= " GROUP BY n.title ";
+        $query .= " ORDER BY count DESC LIMIT  {$start}, {$display} ";
+        
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }
+
+    function get_news_type($type, $start, $display) {
+        global $dbc;
+        
+        $query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b') AS month, ";
+        $query .= " DATE_FORMAT( n.create_date, '%d') AS day, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b %d, %Y') AS date, ";
+        $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id, ";
+        $query .= " COUNT(n.news_id) AS record, ";
+        $query .= " COUNT(c.comment_id) AS count ";
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tblusers AS u ";
+        $query .= " USING ( user_id ) ";
+        $query .= " INNER JOIN tbltypes AS t ";
+        $query .= " USING ( type_id ) ";
+        $query .= " INNER JOIN tblcategories AS cat ";
+        $query .= " USING ( cat_id ) ";
+        $query .= " LEFT JOIN tblcomment AS c ON n.news_id = c.news_id ";
+        $query .= " WHERE cat.cat_name = 'News' AND n.status = 1 AND t.type_name = '{$type}' ";
+        $query .= " GROUP BY n.title ";
+        $query .= " ORDER BY n.create_date DESC LIMIT  {$start}, {$display} ";
+             
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+
+    }
+        
+    
+    function get_type() {
+        global $dbc;
+        
+        $query = "SELECT t.type_id, t.type_name, c.cat_name FROM tbltypes AS t INNER JOIN tblcategories AS c USING (cat_id)";
+                 
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+}
+
+    function get_tag() {
+        global $dbc;
+        
+        $query = "SELECT * FROM tbltags ORDER BY tag_id ASC";
+                 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
