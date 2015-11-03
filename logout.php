@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $title_page = 'Logout';
 	include('/includes/backend/mysqli_connect.php'); 
 	include('/includes/functions.php');   

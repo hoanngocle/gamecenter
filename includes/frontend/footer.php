@@ -134,8 +134,29 @@
                             <input id="register_email" class="form-control" type="text" placeholder="E-Mail">
                             <input id="register_password" class="form-control" type="password" placeholder="Password">
                             <div style="padding-top: 10px">
-                                <input type="radio" name="gender" id="register_gender" value="Male" checked> Male
-                                <input type="radio" name="gender" id="register_gender" value="Female"> Female
+                                <div class="form-group">
+                                            <label>Select Example</label>
+                                            <select class="form-control">
+                                                <option>One Vale</option>
+                                                <option>Two Vale</option>
+                                                <option>Three Vale</option>
+                                                <option>Four Vale</option>
+                                            </select>
+                                        </div>
+                                <input type="radio" name="gender" id="register_gender" value="Male" checked /> Male
+                                <input type="radio" name="gender" id="register_gender2" value="Female" /> Female
+<!--                                <div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+    Option one is this and that—be sure to include why it's great
+  </label>
+</div>
+                                <div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="">
+    Option one is this and that—be sure to include why it's great
+  </label>
+</div>-->
                             </div>
                             <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
                         </div>
@@ -181,7 +202,7 @@
                                 <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-login-msg">Welcome to Game Magazine</span>
                             </div>
-                            
+                            <?php if(isset($user)):?>
                             <img class="img-circle" style="width: 100px; height: 100px" id="img_logo" src="<?=$user['avatar']?>">
                             <label>Fullname :</label> <label><?= $user['fullname'] ?></label><br>
                             <label>Username :</label> <label><?= $user['username'] ?></label><br>
@@ -191,7 +212,7 @@
                             <label>Website :</label> <label><?= $user['website'] ?></label><br>
                             <label>Bio :</label> <label><?= $user['bio'] ?></label><br>
                             <?php 
-                                
+                                endif;
                             ?>   
                             </div>
                         <div class="modal-footer">

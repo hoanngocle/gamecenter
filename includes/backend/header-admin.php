@@ -8,7 +8,6 @@
     #
     ##################################################################### -->
 <?php  
-    session_start();
     if($_SESSION['user_level'] == 1){
         redirect_to('admin/login_admin.php');
     }
@@ -44,7 +43,7 @@
     <script language="javascript" src="../js/ckeditor/ckeditor.js" type="text/javascript"></script>  
     <script src="../includes/video-js/video.js"></script>
     <script src="../includes/video-js/media.youtube.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+<!--    <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
         window.alert = function(){};
         var defaultCSS = document.getElementById('bootstrap-css');
@@ -56,7 +55,7 @@
           var iframe_height = parseInt($('html').height()); 
           window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
         });
-    </script>
+    </script>-->
 
 </head>
 <body>

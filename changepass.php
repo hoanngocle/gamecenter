@@ -1,6 +1,4 @@
 <?php
-
-    session_start();
     include('/includes/backend/mysqli_connect.php');
     include('/includes/functions.php');
 

@@ -4,7 +4,7 @@
 
 ?>
 
-<?php 
+<?php
     $title_page = 'Add News';
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
 		// create variable error

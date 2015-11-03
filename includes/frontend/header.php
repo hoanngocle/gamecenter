@@ -8,7 +8,6 @@
     #
     ##################################################################### -->
 <?php 
-    session_start();
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (60*60))) {
         // last login was more than 15 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time 
@@ -38,7 +37,6 @@
         <script src="js/jquery.min.js"></script>
         <script src="/includes/video-js/video.js"></script>
         <script src="/includes/video-js/media.youtube.js"></script>
-        <script src="/js/jquery.leanModal.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         
         <link href="css/login_modal.css" rel="stylesheet" type="text/css"/>

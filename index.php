@@ -7,7 +7,7 @@
     #   Last Change   : 10/21/2015
     #
     ##################################################################### -->
-    <?php
+<?php
 	//Include file php function vs connect DB
 	include('includes/backend/mysqli_connect.php'); 
 	include('includes/functions.php');

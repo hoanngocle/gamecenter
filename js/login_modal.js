@@ -36,7 +36,7 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK"){
-//                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
+                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-remove", "SUCCESS");
                                 interval = setInterval(
                                         function(){
                                             $('#login-modal').modal('hide');
@@ -111,7 +111,7 @@ $(function () {
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email is required");
                 } else if ($rg_password == ""){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Password is required");
-                }
+                } 
                 
                 
                 //==========================

@@ -1,18 +1,66 @@
 <?php
+    session_start();
 
-    // xac dinh hang so cho dia chi tuyet doi
+    if (isset($_GET['lang'])) {
+        $lang = $_GET['lang'];
+
+        $_SESSION['lang'] = $lang;
+        setcookie('lang', $lang, time() + (3600 * 24 * 30));
+        
+    } else if (isSet($_SESSION['lang'])) {
+        $lang = $_SESSION['lang'];
+    } else if (isSet($_COOKIE['lang'])) {
+        $lang = $_COOKIE['lang'];   
+    } else {
+        $lang = 'vi';
+    }
+
+    switch ($lang) {
+        case 'en':
+            $lang_file = 'lang.en.php';
+            break;
+
+        case 'vi':
+            $lang_file = 'lang.vi.php';
+            break;
+
+        default:
+            $lang_file = 'lang.vi.php';
+    }
+    include_once 'languages/' . $lang_file;
+
+// xac dinh hang so cho dia chi tuyet doi
     define('BASE_URL', 'http://www.gamecenter.dev/');
-
+    define('LIVE', FALSE); // FALSE la dang trong qua trinh phat trien | TRUE la dang trong production
     // INCLUDE - CONFIRM  =================================================================
     function confirm_query($result, $query) {
         global $dbc;
-        if (!$result) {
+        if (!$result && !LIVE) {
             die("Query {$query} \n <br> MySQL Error: " . mysqli_error($dbc));
         }
     }
 
+    // Tao function de bao loi rieng
+    function custom_error_handler($e_number, $e_message, $e_files, $e_line, $e_vars) {
+        $message = "<p class='warning'>Có lỗi xảy ra ở file {$e_files} tại dòng {$e_line}: {$e_message} \n";
+
+
+        if(!LIVE) {
+            // In DEV
+            echo "<pre>". $message ."</pre><br/>\n";
+        } else {
+            // LIVE in host
+            echo "<p class='warning'>Oops! something went wrong, we are so sorry for the inconvenice.</p>";
+        }
+    }// End
+
+    // use our custom handler
+    set_error_handler('custom_error_handler');
+
+    
+    
     // INCLUDE - REDIRECT =================================================================
-    // tai dinh huong nguoi dung
+
     function redirect_to($page = 'index.php') {
         $url = BASE_URL . $page;
         header("Location: {$url}");
@@ -149,7 +197,7 @@
         return $result;
     }
 
-    // FRONTEND - NEW GAME =================================================================
+    // FRONTEND - NEW GAME BY TYPE=================================================================
     function get_games() {
         global $dbc;
         // Cau lenh SQL goi tu CSDL sap xep theo ngay thang va gioi han 8 result
@@ -161,7 +209,7 @@
         $query .= " INNER JOIN tblcategories AS c ";
         $query .= " USING ( cat_id ) ";
         $query .= " WHERE c.cat_name = 'Games' ";
-        $query .= " ORDER BY date";
+        $query .= " ORDER BY date LIMIT 4";
 
         
         $result = mysqli_query($dbc, $query);

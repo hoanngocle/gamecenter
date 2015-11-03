@@ -1,5 +1,4 @@
 <?php 
-session_start();
 $title = "Login";
 ?>
 <!DOCTYPE html>
@@ -21,13 +20,9 @@ $title = "Login";
             ?>
             <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    // Bat dau xu ly form
                     $errors = array();
-                    // Mac dinh cho cac truong nhap lieu la FALSE
                     $username = $password = FALSE;
 
-
-                    // kiem tra page name co gia tri hay khong
                     if (empty($_POST['username'])) {
                         $errors[] = "username";
                     } else {
