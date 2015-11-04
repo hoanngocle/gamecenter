@@ -25,7 +25,7 @@
                         if (mysqli_affected_rows($dbc) == 1) {
                             echo "<p class='success'>Tài khoản của bạn đã được kích hoạt thành công. Bạn có thể click vào <a href='" . BASE_URL . "/login.php'> đây </a> để đăng nhập ngay.</p>";
                         } else {
-                            echo "<p class='warning'>Tài khoản của bạn vẫn chưa được kích hoạt thành công. Rất xin lỗi bì sự bất tiện này/</p>";
+                            echo "<p class='warning'>Tài khoản của bạn vẫn chưa được kích hoạt thành công. Rất xin lỗi bì sự bất tiện này.</p>";
                         }
                         
                     }else {

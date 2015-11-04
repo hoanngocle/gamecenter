@@ -12,36 +12,36 @@
     <div class="footer-middle">
         <div class="container">
             <div class="footer-middle-in">
-                <h6>About us</h6>
+                <h6><?= $lang['FOOTER_ABOUTUS']?></h6>
                 <p style="text-align: justify">Posts and Telecommunications Institute of Technology - D11CNPM4 - Lê Ngọc Hoàn - Béo Sagittarius</p>
             </div>
             <div class="footer-middle-in">
                 <h6>Information</h6>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Delivery Information</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#"><?= $lang['FOOTER_News'] ?></a></li>
+                    <li><a href="#"><?= $lang['FOOTER_Games'] ?></a></li>
+                    <li><a href="#"><?= $lang['FOOTER_Gallery'] ?></a></li>
+                    <li><a href="#"><?= $lang['FOOTER_Videos'] ?></a></li>
                 </ul>
             </div>
             <div class="footer-middle-in">
                 <h6>Customer Service</h6>
                 <ul>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="contact_us.php">Contact Us</a></li>
                     <li><a href="#">Returns</a></li>
-                    <li><a href="contact.html">Site Map</a></li>
+                    <li><a href="contact_us.php">Site Map</a></li>
                 </ul>
             </div>
             <div class="footer-middle-in">
-                <h6>My Account</h6>
+                <h6><?= $lang['FOOTER_ACCOUNT'] ?></h6>
                 <ul>
                     <?php if (isset($_SESSION['fullname'])) { ?>
                         <li><a href="#" >Hi, <?= $_SESSION['fullname'] ?></a></li>    
-                        <li><a href="#" role="button" data-toggle="modal" data-target="#profile-modal">Full Profile</a></li>
-                        <li><a href="logout.php">Log Out</a></li>
+                        <li><a href="#" role="button" data-toggle="modal" data-target="#profile-modal"><?= $lang['FOOTER_Profile'] ?></a></li>
+                        <li><a href="logout.php"><?= $lang['FOOTER_LogOut'] ?></a></li>
                     <?php } else { ?>
                         <li><a href="#" >Hi, Anonymous!</a></li>
-                        <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal">Log In</a></li>
+                        <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal"><?= $lang['FOOTER_LogIn'] ?></a></li>
                     <?php } ?>
 
 
@@ -49,10 +49,11 @@
                 </ul>
             </div>
             <div class="footer-middle-in">
-                <h6>Extras</h6>
+                <h6><?= $lang['FOOTER_SOCIAL'] ?></h6>
                 <ul>
-                    <li><a href="#">Affiliates</a></li>
-                    <li><a href="#">Specials</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Google+</a></li>
                 </ul>
             </div>
             <div class="clearfix"> </div>
@@ -63,7 +64,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" align="center">
-                    <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+                    <img class="img-circle" id="img_logo" src="../images/web/logo.png">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>
@@ -81,19 +82,14 @@
                             </div>
                             <input id="login_username" class="form-control" type="text" placeholder="Username ">
                             <input id="login_password" class="form-control" type="password" placeholder="Password">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember me
-                                </label>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-success btn-lg btn-block">Log In</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block"><?= $lang['FOOTER_LogIn'] ?></button>
                             </div>
                             <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link">Forgot Password?</button>
-                                <button id="login_register_btn" type="button" class="btn btn-link">Sign Up</button>
+                                <button id="login_lost_btn" type="button" class="btn btn-link"><?= $lang['LOGIN_ForgotPass'] ?>?</button>
+                                <button id="login_register_btn" type="button" class="btn btn-link"><?= $lang['LOGIN_SignUp'] ?></button>
                             </div>
                         </div>
                     </form>
@@ -104,17 +100,17 @@
                         <div class="modal-body">
                             <div id="div-lost-msg">
                                 <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-lost-msg">Type your e-mail.</span>
+                                <span id="text-lost-msg"><?= $lang['FORGOT_Email'] ?></span>
                             </div>
                             <input id="lost_email" class="form-control" type="text" placeholder="E-Mail" >
                         </div>
                         <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-success btn-lg btn-block">Send</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block"><?= $lang['Send'] ?></button>
                             </div>
                             <div>
-                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
-                                <button id="lost_register_btn" type="button" class="btn btn-link">Sign Up</button>
+                                <button id="lost_login_btn" type="button" class="btn btn-link"><?= $lang['FOOTER_LogIn'] ?></button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link"><?= $lang['LOGIN_SignUp'] ?></button>
                             </div>
                         </div>
                     </form>
@@ -122,7 +118,7 @@
 
                     <!-- Begin | Register Form -->
                     <form id="register-form" style="display:none;" method="post">
-                        <div class="modal-body">
+                        <div class="modal-body"  style="height: 350px">
                             <div id="div-register-msg">
                                 <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-register-msg">Sign up your account.</span>
@@ -133,32 +129,65 @@
                             <input id="register_username" class="form-control" type="text" placeholder="Username">
                             <input id="register_email" class="form-control" type="text" placeholder="E-Mail">
                             <input id="register_password" class="form-control" type="password" placeholder="Password">
-                            <div style="padding-top: 10px">
+                            
+                            <div style="width: 25%; margin-top: 10px; float: left; ">
                                 <div class="form-group">
-                                            <label>Select Example</label>
-                                            <select class="form-control">
-                                                <option>One Vale</option>
-                                                <option>Two Vale</option>
-                                                <option>Three Vale</option>
-                                                <option>Four Vale</option>
-                                            </select>
-                                        </div>
-                                <input type="radio" name="gender" id="register_gender" value="Male" checked /> Male
-                                <input type="radio" name="gender" id="register_gender2" value="Female" /> Female
-<!--                                <div class="radio">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-    Option one is this and that—be sure to include why it's great
-  </label>
-</div>
-                                <div class="radio">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="">
-    Option one is this and that—be sure to include why it's great
-  </label>
-</div>-->
+                                    <select class="form-control" name="day" id="day">
+                                        <option value=''>Day</option>
+                                    <?php
+                                        for($i=1; $i<=31; $i++) {
+                                    ?>
+                                        <option value='<?= $i ?>'><?= $i ?></option>
+                                    <?php 
+                                        }
+                                    ?>
+                                    </select>
+                                </div>
                             </div>
-                            <input type="text" name="date_of_birth" id="register_date_of_birth" placeholder="Date Of Birth" class="form-control" style="width: 50%; margin-top: 10px">
+                            <div style="width: 30%; margin-top: 10px; float: left; margin-left: 5px ">
+                                <div class="form-group">
+                                    <select class="form-control" name="month" id="month">
+                                        <option value=''>Month</option>
+                                        <option value='1'>Jan</option>
+                                        <option value='2'>Feb</option>
+                                        <option value='3'>Mar</option>
+                                        <option value='4'>Apr</option>
+                                        <option value='5'>May</option>
+                                        <option value='6'>June</option>
+                                        <option value='7'>July</option>
+                                        <option value='8'>Aug</option>
+                                        <option value='9'>Sept</option>
+                                        <option value='10'>Oct</option>
+                                        <option value='11'>Nov</option>
+                                        <option value='12'>Dec</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="padding-top: 10px; width: 40%; margin-left: 5px; float: left">
+                                <div class="form-group">
+                                    <select class="form-control" name="year" id="year">
+                                        <option value=''>Year</option>
+                                    <?php
+                                        for($i=1905; $i<=2015; $i++) {
+                                    ?>
+                                        <option value='<?= $i ?>'><?= $i ?></option>
+                                    <?php 
+                                        }
+                                    ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="width: 40%; margin-top: 10px; float: left;">
+                                <div class="form-group">
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -186,7 +215,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" align="center">
-                    <img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+                    <img class="img-circle" id="img_logo" src="../images/web/logo.png">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </button>

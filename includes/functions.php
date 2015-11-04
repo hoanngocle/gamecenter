@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     if (isset($_GET['lang'])) {
         $lang = $_GET['lang'];
 
@@ -12,7 +11,7 @@
     } else if (isSet($_COOKIE['lang'])) {
         $lang = $_COOKIE['lang'];   
     } else {
-        $lang = 'vi';
+        $lang = 'en';
     }
 
     switch ($lang) {
@@ -25,7 +24,7 @@
             break;
 
         default:
-            $lang_file = 'lang.vi.php';
+            $lang_file = 'lang.en.php';
     }
     include_once 'languages/' . $lang_file;
 
@@ -1027,7 +1026,7 @@
         return $result;   
     }
     
-        function change_status_video($vid, $stt){
+    function change_status_video($vid, $stt){
         global $dbc;
         if($stt == 1){
             $status = 0;
@@ -1042,7 +1041,7 @@
         return $result;   
     }
     
-        function change_status_image($iid, $stt){
+    function change_status_image($iid, $stt){
         global $dbc;
         if($stt == 1){
             $status = 0;
@@ -1055,5 +1054,29 @@
         confirm_query($result, $query);
 
         return $result;   
+    }
+    
+    function checkUsername($username) {
+        global $dbc;
+        $query = "SELECT username "
+                . "FROM tblusers "
+                . "WHERE username = '{$username}'";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;      
+    }
+    
+    function checkEmail($email) {
+        global $dbc;
+        $query = "SELECT username "
+                . "FROM tblusers "
+                . "WHERE email = '{$email}'";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;      
     }
     
