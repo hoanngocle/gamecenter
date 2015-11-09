@@ -8,7 +8,6 @@
     #
     ##################################################################### -->
 <?php
-	//Include file php function vs connect DB
 	include('includes/backend/mysqli_connect.php'); 
 	include('includes/functions.php');
  	include('includes/frontend/header.php');
@@ -19,7 +18,7 @@
         <!--===================================== New game [start] =====================================-->
 		<div class="container">
 			<div class="content-top">
-				<a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>
+				<a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"><?= $lang['HEADER_GAME']?></h2></a>
 				<div class="wrap">	
 					<div class="main">
 						<ul id="og-grid" class="og-grid">
@@ -166,7 +165,7 @@
                                 if (mysqli_num_rows($result) > 0 ) {
                                     $gallery = mysqli_fetch_array($result, MYSQLI_ASSOC);  
                             ?>
-                                <a href="slideshow.php?iid=<?= $gallery['image_id'] ?>" ><img src="images/gallery/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" width="455" height="260" ></a>
+                                <a href="slideshow.php?tid=<?= $gallery['type_id'] ?>" ><img src="images/gallery/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" width="455" height="260" ></a>
                             <?php } ?>
                             </div>
                             <?php 
@@ -175,7 +174,7 @@
                                     while ($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){             
                             ?>
                             <li class="item-row-1">                                   
-                                <a href="slideshow.php?iid=<?= $gallery['image_id'] ?>" ><img src="images/gallery/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" width="200" height="125"></a>
+                                <a href="slideshow.php?tid=<?= $gallery['type_id'] ?>" ><img src="images/gallery/<?= $gallery['image']?>" alt="<?= $gallery['title']?>" width="200" height="125"></a>
                             </li>
                             <?php 
                                     }

@@ -1337,3 +1337,16 @@ li.item-images {
     font-size: 1em;
     margin-left: 100px;
 }
+
+.video_embed {
+    background: #1b1b1b;
+    margin-top: -15px;
+    border-top: 1px solid #333;
+    padding: 20px 0;
+}
+
+#embed_player{
+    width: 854px;
+    height: 510px;
+    margin: 0px auto;
+}

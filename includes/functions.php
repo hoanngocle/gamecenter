@@ -810,9 +810,7 @@
 
     // Register - 
     function register($username, $password, $email, $firstname, $lastname, $dateofbirth, $gender) {
-
         global $dbc;
-
         $query = "INSERT INTO tblusers (username, password, email, first_name, last_name, date_of_birth, gender, status, registration_date) ";
         $query .= " VALUES ('{$username}', SHA1('$password'), '{$email}', '{$firstname}', '{$lastname}', '{$dateofbirth}', '{$gender}', '0', NOW())";
 
@@ -1100,4 +1098,14 @@
         confirm_query($result, $query);
 
         return $result;    
+}
+    
+    function change_profile($uid, $first_name, $last_name, $website, $bio, $dateofbirth) {
+        global $dbc;
+        $query = " UPDATE tblusers SET first_name = '{$first_name}', last_name = '{$last_name}', website = '{$website}',bio = '{$bio}', date_of_birth = '{$dateofbirth}', update_date = NOW() WHERE user_id = {$uid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;  
 }

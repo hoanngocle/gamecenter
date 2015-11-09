@@ -8,15 +8,19 @@
 ?>
 <div class="container">
      <div class="content-top">
-        <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>
-        <div class="col-lg-8">
-            <video id="example_video_1" class="video-js vjs-default-skin" controls 
-                    preload="auto" width="720" height="405"
+        <!--<a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>-->
+        <div class="video_embed" style="width: 125%; height: 510px; left: -150px; position: relative;">
+            <div class="col-lg-8" id="embed_player" style="margin: auto" >
+            <video style=" left: 33%;"id="example_video_1" class="video-js vjs-default-skin" controls 
+                    preload="auto" width="854" height="480"
                     poster="" 
                     data-setup='{"techOrder":["youtube"], "src":"<?= $url_video ?>"}' >
                 </video>
         
         </div>
+            
+        </div>
+        
         <div class="col-lg-4">
             <ul>
              <?php 

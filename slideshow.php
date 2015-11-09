@@ -3,74 +3,52 @@
     include('includes/functions.php');
     include('includes/frontend/header.php');
 ?>
-
     <script type="text/javascript" src="js/jssor.js"></script>
     <script type="text/javascript" src="js/jssor.slider.js"></script>
     <script>
-
         jQuery(document).ready(function ($) {
-
             var _SlideshowTransitions = [
-            //Fade in L
-                {$Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade out R
-                , { $Duration: 1200, x: -0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade in R
-                , { $Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade out L
-                , { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-
-            //Fade in T
-                , { $Duration: 1200, y: 0.3, $During: { $Top: [0.3, 0.7] }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade out B
-                , { $Duration: 1200, y: -0.3, $SlideOut: true, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade in B
-                , { $Duration: 1200, y: -0.3, $During: { $Top: [0.3, 0.7] }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade out T
-                , { $Duration: 1200, y: 0.3, $SlideOut: true, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-
-            //Fade in LR
-                , { $Duration: 1200, x: 0.3, $Cols: 2, $During: { $Left: [0.3, 0.7] }, $ChessMode: { $Column: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade out LR
-                , { $Duration: 1200, x: 0.3, $Cols: 2, $SlideOut: true, $ChessMode: { $Column: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade in TB
-                , { $Duration: 1200, y: 0.3, $Rows: 2, $During: { $Top: [0.3, 0.7] }, $ChessMode: { $Row: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade out TB
-                , { $Duration: 1200, y: 0.3, $Rows: 2, $SlideOut: true, $ChessMode: { $Row: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-
-            //Fade in LR Chess
-                , { $Duration: 1200, y: 0.3, $Cols: 2, $During: { $Top: [0.3, 0.7] }, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade out LR Chess
-                , { $Duration: 1200, y: -0.3, $Cols: 2, $SlideOut: true, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade in TB Chess
-                , { $Duration: 1200, x: 0.3, $Rows: 2, $During: { $Left: [0.3, 0.7] }, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade out TB Chess
-                , { $Duration: 1200, x: -0.3, $Rows: 2, $SlideOut: true, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-
-            //Fade in Corners
-                , { $Duration: 1200, x: 0.3, y: 0.3, $Cols: 2, $Rows: 2, $During: { $Left: [0.3, 0.7], $Top: [0.3, 0.7] }, $ChessMode: { $Column: 3, $Row: 12 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-            //Fade out Corners
-                , { $Duration: 1200, x: 0.3, y: 0.3, $Cols: 2, $Rows: 2, $During: { $Left: [0.3, 0.7], $Top: [0.3, 0.7] }, $SlideOut: true, $ChessMode: { $Column: 3, $Row: 12 }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
-
-            //Fade Clip in H
-                , { $Duration: 1200, $Delay: 20, $Clip: 3, $Assembly: 260, $Easing: { $Clip: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade Clip out H
-                , { $Duration: 1200, $Delay: 20, $Clip: 3, $SlideOut: true, $Assembly: 260, $Easing: { $Clip: $JssorEasing$.$EaseOutCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade Clip in V
-                , { $Duration: 1200, $Delay: 20, $Clip: 12, $Assembly: 260, $Easing: { $Clip: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade Clip out V
-                , { $Duration: 1200, $Delay: 20, $Clip: 12, $SlideOut: true, $Assembly: 260, $Easing: { $Clip: $JssorEasing$.$EaseOutCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-                ];
+                //Fade Twins
+                { $Duration: 700, $Opacity: 2, $Brother: { $Duration: 1000, $Opacity: 2 } },
+                //Rotate Overlap
+                { $Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: { $Zoom: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 0.5 }, $Brother: { $Duration: 1200, $Zoom: 1, $Rotate: 1, $Easing: $JssorEasing$.$EaseSwing, $Opacity: 2, $Round: { $Rotate: 0.5 }, $Shift: 90 } },
+                //Switch
+                { $Duration: 1400, x: 0.25, $Zoom: 1.5, $Easing: { $Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1400, x: -0.25, $Zoom: 1.5, $Easing: { $Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine }, $Opacity: 2, $ZIndex: -10 } },
+                //Rotate Relay
+                { $Duration: 1200, $Zoom: 11, $Rotate: 1, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 1 }, $ZIndex: -10, $Brother: { $Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 1 }, $ZIndex: -10, $Shift: 600 } },
+                //Doors
+                { $Duration: 1500, x: 0.5, $Cols: 2, $ChessMode: { $Column: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutCubic }, $Opacity: 2, $Brother: { $Duration: 1500, $Opacity: 2 } },
+                //Rotate in+ out-
+                { $Duration: 1500, x: -0.3, y: 0.5, $Zoom: 1, $Rotate: 0.1, $During: { $Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4], $Zoom: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, $Zoom: 11, $Rotate: -0.5, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Shift: 200 } },
+                //Fly Twins
+                { $Duration: 1500, x: 0.3, $During: { $Left: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true, $Brother: { $Duration: 1000, x: -0.3, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+                //Rotate in- out+
+                { $Duration: 1500, $Zoom: 11, $Rotate: 0.5, $During: { $Left: [0.4, 0.6], $Top: [0.4, 0.6], $Rotate: [0.4, 0.6], $Zoom: [0.4, 0.6] }, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, $Zoom: 1, $Rotate: -0.5, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Shift: 200 } },
+                //Rotate Axis up overlap
+                { $Duration: 1200, x: 0.25, y: 0.5, $Rotate: -0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1200, x: -0.1, y: -0.7, $Rotate: 0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2 } },
+                //Chess Replace TB
+                { $Duration: 1600, x: 1, $Rows: 2, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1600, x: -1, $Rows: 2, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+                //Chess Replace LR
+                { $Duration: 1600, y: -1, $Cols: 2, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1600, y: 1, $Cols: 2, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+                //Shift TB
+                { $Duration: 1200, y: 1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+                //Shift LR
+                { $Duration: 1200, x: 1, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1200, x: -1, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+                //Return TB
+                { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Shift: -100 } },
+                //Return LR
+                { $Duration: 1200, x: 1, $Delay: 40, $Cols: 6, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1200, x: 1, $Delay: 40, $Cols: 6, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Shift: -100 } },
+                //Rotate Axis down
+                { $Duration: 1500, x: -0.1, y: -0.7, $Rotate: 0.1, $During: { $Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, x: 0.2, y: 0.5, $Rotate: -0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2 } },
+                //Extrude Replace
+                { $Duration: 1600, x: -0.2, $Delay: 40, $Cols: 12, $During: { $Left: [0.4, 0.6] }, $SlideOut: true, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 260, $Easing: { $Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad }, $Opacity: 2, $Outside: true, $Round: { $Top: 0.5 }, $Brother: { $Duration: 1000, x: 0.2, $Delay: 40, $Cols: 12, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 1028, $Easing: { $Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad }, $Opacity: 2, $Round: { $Top: 0.5 } } }
+            ];
 
             var options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlayInterval: 1500,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-                $PauseOnHover: 1,                                //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-
+                $FillMode: 1,                                       //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
                 $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
-                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-                $SlideDuration: 800,                                //Specifies default duration (swipe) for slide in milliseconds
-
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
                 $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
                     $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
                     $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
@@ -78,29 +56,26 @@
                     $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
                 },
 
-                $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
-                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
-                    $ChanceToShow: 1                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-                },
-
-                $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
-                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
                     $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-
-                    $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
-                    $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-                    $DisplayPieces: 10,                             //[Optional] Number of pieces to display, default value is 1
-                    $ParkingPosition: 360                          //[Optional] The offset position to park thumbnail
+                    $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                    $SpacingX: 10,                                  //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 10,                                  //[Optional] Vertical space between each item in pixel, default value is 0
+                    $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
                 }
             };
 
             var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
             //responsive code begin
             //you can remove responsive code if you don't want the slider scales while window resizes
             function ScaleSlider() {
                 var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
                 if (parentWidth)
-                    jssor_slider1.$ScaleWidth(Math.max(Math.min(parentWidth, 1000), 400));
+                    jssor_slider1.$ScaleWidth(Math.min(parentWidth, 800));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
@@ -112,8 +87,7 @@
             //responsive code end
         });
     </script>
-
-    <div class="container" style="padding-bottom: 70px">
+<div class="container" style="padding-bottom: 70px">
         <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;"> 
             <?php 
                 $rs = get_type_by_id($_GET['tid']);
@@ -121,25 +95,24 @@
                     $type = mysqli_fetch_array($rs, MYSQLI_ASSOC);
                     echo $type['type_name'];
                 }
-            
-            
             ?>
         </h2>
-    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
-        height: 456px; background: #191919; overflow: hidden; margin: auto">
+   
+    <div id="slider1_container" style="position: relative;  margin: auto; width: 600px; height: 500px; background-color: #000; overflow: hidden;">
 
         <!-- Loading Screen -->
         <div u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
-                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
-            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+            <div style="position: absolute; display: block; background: url(../images/web/loading.gif) no-repeat center center;
                 top: 0px; left: 0px;width: 100%;height:100%;">
             </div>
         </div>
 
         <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 500px;
+            overflow: hidden;">
             <?php
             $type_id = $_GET['tid'];
                 $rs = get_image_by_type_id($type_id);
@@ -153,137 +126,32 @@
             <?php    }
                 }?>
         </div>
-        
-        <!--#region Arrow Navigator Skin Begin -->
+
         <style>
-            .jssora05l, .jssora05r {
-                display: block;
+            .jssorb13 {
                 position: absolute;
-                /* size of arrow element */
-                width: 40px;
-                height: 40px;
-                cursor: pointer;
-                background: url(images/web/a17.png) no-repeat;
+            }
+            .jssorb13 div, .jssorb13 div:hover, .jssorb13 .av {
+                position: absolute;
+                /* size of bullet elment */
+                width: 21px;
+                height: 21px;
+                background: url(../images/web/b13.png) no-repeat;
                 overflow: hidden;
+                cursor: pointer;
             }
-            .jssora05l { background-position: -10px -40px; }
-            .jssora05r { background-position: -70px -40px; }
-            .jssora05l:hover { background-position: -130px -40px; }
-            .jssora05r:hover { background-position: -190px -40px; }
-            .jssora05l.jssora05ldn { background-position: -250px -40px; }
-            .jssora05r.jssora05rdn { background-position: -310px -40px; }
-        </style>
-        <!-- Arrow Left -->
-        <span u="arrowleft" class="jssora05l" style="top: 158px; left: 8px;">
-        </span>
-        <!-- Arrow Right -->
-        <span u="arrowright" class="jssora05r" style="top: 158px; right: 8px">
-        </span>
-        <!--#endregion Arrow Navigator Skin End -->
-        <!--#region Thumbnail Navigator Skin Begin -->
-        <!-- Help: http://www.jssor.com/development/slider-with-thumbnail-navigator-jquery.html -->
-        <style>
-            /* jssor slider thumbnail navigator skin 01 css */
-            /*
-            .jssort01 .p            (normal)
-            .jssort01 .p:hover      (normal mouseover)
-            .jssort01 .p.pav        (active)
-            .jssort01 .p.pdn        (mousedown)
-            */
-
-            .jssort01 {
-                position: absolute;
-                /* size of thumbnail navigator container */
-                width: 800px;
-                height: 100px;
-            }
-
-                .jssort01 .p {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 72px;
-                    height: 72px;
-                }
-
-                .jssort01 .t {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-
-                .jssort01 .w {
-                    position: absolute;
-                    top: 0px;
-                    left: 0px;
-                    width: 100%;
-                    height: 100%;
-                }
-
-                .jssort01 .c {
-                    position: absolute;
-                    top: 0px;
-                    left: 0px;
-                    width: 68px;
-                    height: 68px;
-                    border: #000 2px solid;
-                    box-sizing: content-box;
-                    background: url(images/web/t01.png) -800px -800px no-repeat;
-                    _background: none;
-                }
-
-                .jssort01 .pav .c {
-                    top: 2px;
-                    _top: 0px;
-                    left: 2px;
-                    _left: 0px;
-                    width: 68px;
-                    height: 68px;
-                    border: #000 0px solid;
-                    _border: #fff 2px solid;
-                    background-position: 50% 50%;
-                }
-
-                .jssort01 .p:hover .c {
-                    top: 0px;
-                    left: 0px;
-                    width: 70px;
-                    height: 70px;
-                    border: #fff 1px solid;
-                    background-position: 50% 50%;
-                }
-
-                .jssort01 .p.pdn .c {
-                    background-position: 50% 50%;
-                    width: 68px;
-                    height: 68px;
-                    border: #000 2px solid;
-                }
-
-                * html .jssort01 .c, * html .jssort01 .pdn .c, * html .jssort01 .pav .c {
-                    /* ie quirks mode adjust */
-                    width /**/: 72px;
-                    height /**/: 72px;
-                }
+            .jssorb13 div { background-position: -5px -5px; }
+            .jssorb13 div:hover, .jssorb13 .av:hover { background-position: -35px -5px; }
+            .jssorb13 .av { background-position: -65px -5px; }
+            .jssorb13 .dn, .jssorb13 .dn:hover { background-position: -95px -5px; }
         </style>
 
-        <!-- thumbnail navigator container -->
-        <div u="thumbnavigator" class="jssort01" style="left: 0px; bottom: 0px;">
-            <!-- Thumbnail Item Skin Begin -->
-            <div u="slides" style="cursor: default;">
-                <div u="prototype" class="p">
-                    <div class=w><div u="thumbnailtemplate" class="t"></div></div>
-                    <div class=c></div>
-                </div>
-            </div>
-            <!-- Thumbnail Item Skin End -->
+        <div u="navigator" class="jssorb13" style="bottom: 16px; right: 6px;">
+
+            <div u="prototype"></div>
         </div>
-        <!--#endregion Thumbnail Navigator Skin End -->
-        <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
     </div>
-    </div>
+    <!-- Jssor Slider End -->
+</div>
     <?php include('includes/frontend/footer.php'); ?>
 

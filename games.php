@@ -41,12 +41,12 @@
 
     <div class="container">
         <div class="content-top">
-            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">MMORPG</h2></a>
+            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">Adventure</h2></a>
             <div class="wrap">	
                 <div class="main">
                     <ul id="og-grid" class="og-grid">
                         <?php
-                        $result = get_games_by_type('MMORPG');
+                        $result = get_games_by_type('Adventure');
                         if (mysqli_num_rows($result) > 0) {
                             while ($games = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                 $content = excerpt_features($games['content']);
@@ -75,12 +75,12 @@
 
     <div class="container">
         <div class="content-top">
-            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>
+            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">Sport</h2></a>
             <div class="wrap">	
                 <div class="main">
                     <ul id="og-grid" class="og-grid">
                         <?php
-                        $result = get_games();
+                        $result = get_games_by_type('Sport');
                         if (mysqli_num_rows($result) > 0) {
                             while ($games = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                 $content = excerpt_features($games['content']);
@@ -109,12 +109,12 @@
 
     <div class="container">
         <div class="content-top">
-            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>
+            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">Racing</h2></a>
             <div class="wrap">	
                 <div class="main">
                     <ul id="og-grid" class="og-grid">
                         <?php
-                        $result = get_games();
+                        $result = get_games_by_type('Racing');
                         if (mysqli_num_rows($result) > 0) {
                             while ($games = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                 $content = excerpt_features($games['content']);
@@ -143,12 +143,12 @@
 
     <div class="container">
         <div class="content-top">
-            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>
+            <a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">Strategy</h2></a>
             <div class="wrap">	
                 <div class="main">
                     <ul id="og-grid" class="og-grid">
                         <?php
-                        $result = get_games();
+                        $result = get_games_by_type('Strategy');
                         if (mysqli_num_rows($result) > 0) {
                             while ($games = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                 $content = excerpt_features($games['content']);

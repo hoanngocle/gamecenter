@@ -53,13 +53,13 @@
 			<div class="container">
 				<div class="top-head" >	
 					<ul class="header-in">
-						<li><a href="help.php" >  Help</a></li>
-						<li><a href="contact_us.php">   Contact Us</a></li>
-						<li><a href="how_to_use.php" >   How To Use</a></li>
+<!--						<li><a href="help.php" >  Language</a></li>-->
+						<li><a href="contact_us.php"><?= $lang['FOOTER_Eng']?></a></li>
+						<li><a href="how_to_use.php" ><?= $lang['FOOTER_Viet']?></a></li>
 					</ul>
                     <div class="search">
                         <form name="search-form" id="search-form" action="" method="post">
-                            <input type="text" id="search" name="search" value="<?php if(isset($_POST['search'])) echo $_POST['search']?>" placeholder="search about something ?">
+                            <input type="text" id="search" name="search" value="<?php if(isset($_POST['search'])) echo $_POST['search']?>" placeholder="<?= $lang['HEADER_SEARCH'] ?>">
                             <button type="submit" ></button>
                         </form>
                         <script type="text/javascript">
@@ -84,12 +84,12 @@
 					<div class="top-nav">		
 					  	<span class="menu"><img src="images/menu.png" alt=""> </span>
 						<ul>
-							<li><a class="color1" href="index.php"  >Home</a></li>
-							<li><a class="color2" href="news.php"  >News</a></li>
-                            <li><a class="color5" href="games.php"  >Games</a></li>
-							<li><a class="color3" href="gallery.php"  >Gallery</a></li>
-							<li><a class="color4" href="video.php" >Video</a></li>
-							<li><a class="color6" href="contact_us.php" >Contact Us</a></li>
+							<li><a class="color1" href="index.php"  ><?= $lang['MENU_HOME']?></a></li>
+							<li><a class="color2" href="news.php"  ><?= $lang['MENU_NEWS']?></a></li>
+                            <li><a class="color5" href="games.php"  ><?= $lang['MENU_GAME']?></a></li>
+							<li><a class="color3" href="gallery.php"  ><?= $lang['MENU_GALLERY']?></a></li>
+							<li><a class="color4" href="playlist.php" ><?= $lang['MENU_VIDEO']?></a></li>
+							<li><a class="color6" href="contact_us.php" ><?= $lang['MENU_CONTACT_US']?></a></li>
 							<div class="clearfix"> </div>
 						</ul>
 							<!--script-->
