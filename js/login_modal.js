@@ -142,12 +142,15 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK" ){
-                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-remove", "OK");
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register Successfully");
 //                                location.href = 'index.php';
 //                                $('#login-modal').modal('hide');             
                             } else if(response.status == "FAIL"){              
-                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "FAIL");
-
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register Failed");
+                            } else if(response.status == "USER"){              
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is already exits");
+                            }else if(response.status == "EMAIL"){              
+                                msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email is already exits");
                             }
                         }
                     }); 

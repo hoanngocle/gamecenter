@@ -58,14 +58,16 @@
 						<li><a href="how_to_use.php" >   How To Use</a></li>
 					</ul>
                     <div class="search">
-                        <?php 
-
-
-                        ?>
-                        <form action="" method="post">
-                            <input type="text" id="search" name="search" value="<?php ?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search about something ?';}" >
-                            <input type="submit" value="" >
+                        <form name="search-form" id="search-form" action="" method="post">
+                            <input type="text" id="search" name="search" value="<?php if(isset($_POST['search'])) echo $_POST['search']?>" placeholder="search about something ?">
+                            <button type="submit" ></button>
                         </form>
+                        <script type="text/javascript">
+                            $("#search-form").submit(function(){
+                                var keyword = $('#search').val();
+                                location.href = "result.php?keyword=" + keyword;
+                            });
+                        </script> 
                     </div>
                     <div class="clearfix"> </div>
 				</div>

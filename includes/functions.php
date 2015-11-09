@@ -1080,3 +1080,24 @@
         return $result;      
     }
     
+    function search($keyword) {
+    global $dbc;
+        $query = "SELECT n.news_id, n.title, n.content, n.banner, n.image, t.type_name, n.status, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b') AS month, ";
+        $query .= " DATE_FORMAT( n.create_date, '%d') AS day, ";
+        $query .= " DATE_FORMAT( n.create_date, '%b %d, %Y') AS date, ";
+        $query .= " CONCAT_WS(' ', u.first_name, u.last_name) AS name, u.user_id "; 
+        $query .= " FROM tblnews AS n ";
+        $query .= " INNER JOIN tblusers AS u ";
+        $query .= " USING ( user_id ) ";
+        $query .= " INNER JOIN tbltypes AS t ";
+        $query .= " USING ( type_id ) ";
+        $query .= " INNER JOIN tblcategories AS cat ";
+        $query .= " USING ( cat_id ) ";
+        $query .= " WHERE MATCH( title, content ) AGAINST('{$keyword}' WITH QUERY EXPANSION )";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;    
+}

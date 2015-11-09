@@ -77,6 +77,7 @@ include('includes/frontend/header.php');
                                     <a class="fast" href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['title'] ?></a>
                                     <p>Posted by <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['post_by'] ?></a> in <a href="#"><?= $posts['type_name'] ?></a> | <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['count'] ?> Comments</a></p> 
                                     <p class="sed"><?php echo excerpt($posts['content']) ?></p> 
+                                    <br>
                                     <a  href="single.php?nid=<?= $posts['news_id'] ?>" class="more">Readmore<span> </span></a>
 
                                 </div>

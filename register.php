@@ -16,7 +16,7 @@
         
         $checkuser = checkUsername($username);
         $checkemail = checkEmail($email);
-        if(mysql_num_rows($checkuser) > 0 ){
+        if(mysqli_num_rows($checkuser) > 0 ){
             echo json_encode(['status' => 'USER']);
         } else if (mysqli_num_rows($checkemail) > 0){
             echo json_encode(['status' => 'EMAIL']);
@@ -39,11 +39,13 @@
 
                 // send mail active
                 $subject = 'Thank for registering in GameCenter!';
-                $body = "Cảm ơn bạn đã đăng ký thành công ở website Game Center.<br>
-                        Một email kích hoạt đã được gửi tới địa chỉ email mà bạn cung cấp. <br>
-                        Hãy click vào đường link để kích hoạt tài khoản <br>";
-
+                $body = "Hi, <br>
+                        Thanks for registering on Game Magazine.<br>
+                        You can activate your account on the following link: <br>";                        
                 $body .= BASE_URL . "activate.php?e=" . urlencode($email) . "&t={$token}";
+                $body .= "<br>
+                        All the best,<br>
+                        GameMagazine.com<br>";
                 $mail = new PHPMailer();
                 sendmail($email, $subject, $body);
 

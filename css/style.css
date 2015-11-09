@@ -5,11 +5,29 @@
         Author URI: http://www.facebook.com/beo.sagittarius.93/
         Date Create: 15/07/2015
 */
+
+::-webkit-input-placeholder {
+    color:    #fff;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #fff;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff;  
+}
+
+:-ms-input-placeholder {  
+   color: #fff;  
+}
+
 body{
     background:#fff;
     font-family: 'PT Sans', sans-serif;
 
 }
+
 body a{
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
@@ -45,7 +63,7 @@ h1,h2,h3,h4,h5,h6,label,p{
     color: #fff;
     font-style: italic;	
 }
-.search input[type="submit"] {	
+.search button[type="submit"] {	
     border: none;
     cursor: pointer;
     position: absolute;

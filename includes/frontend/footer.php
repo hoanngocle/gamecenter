@@ -16,20 +16,20 @@
                 <p style="text-align: justify">Posts and Telecommunications Institute of Technology - D11CNPM4 - Lê Ngọc Hoàn - Béo Sagittarius</p>
             </div>
             <div class="footer-middle-in">
-                <h6>Information</h6>
+                <h6><?= $lang['FOOTER_SOCIAL'] ?></h6>
                 <ul>
-                    <li><a href="#"><?= $lang['FOOTER_News'] ?></a></li>
-                    <li><a href="#"><?= $lang['FOOTER_Games'] ?></a></li>
-                    <li><a href="#"><?= $lang['FOOTER_Gallery'] ?></a></li>
-                    <li><a href="#"><?= $lang['FOOTER_Videos'] ?></a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Google+</a></li>
                 </ul>
             </div>
+            
             <div class="footer-middle-in">
-                <h6>Customer Service</h6>
+                <h6><?= $lang['FOOTER_SERVICE'] ?></h6>
                 <ul>
-                    <li><a href="contact_us.php">Contact Us</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="contact_us.php">Site Map</a></li>
+                    <li><a href="contact_us.php"><?= $lang['FOOTER_ContactUs'] ?></a></li>
+                    <li><a href="#"><?= $lang['FOOTER_ContactUs'] ?></a></li>
+                    <li><a href="contact_us.php"><?= $lang['FOOTER_MAP'] ?></a></li>
                 </ul>
             </div>
             <div class="footer-middle-in">
@@ -43,17 +43,15 @@
                         <li><a href="#" >Hi, Anonymous!</a></li>
                         <li><a href="#" role="button" data-toggle="modal" data-target="#login-modal"><?= $lang['FOOTER_LogIn'] ?></a></li>
                     <?php } ?>
-
-
-
                 </ul>
             </div>
             <div class="footer-middle-in">
-                <h6><?= $lang['FOOTER_SOCIAL'] ?></h6>
+                <h6><?= $lang['FOOTER_MENU'] ?></h6>
                 <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Google+</a></li>
+                    <li><a href="news.php"><?= $lang['FOOTER_News'] ?></a></li>
+                    <li><a href="games.php"><?= $lang['FOOTER_Games'] ?></a></li>
+                    <li><a href="gallery.php"><?= $lang['FOOTER_Gallery'] ?></a></li>
+                    <li><a href="video.php"><?= $lang['FOOTER_Videos'] ?></a></li>
                 </ul>
             </div>
             <div class="clearfix"> </div>
