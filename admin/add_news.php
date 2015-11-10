@@ -96,13 +96,11 @@
                             <h2><?= $lang['Add News']?></h2>
                             <h4><a href="index.php"><?= $lang['Home'] ?></a> / <a href="list_news.php"><?= $lang['List News']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
-						<?php 
-            				if(!empty($error)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$error}</p>
-            							</div>";
-            						}
-            				?>
+						<?php if(!empty($error)) : ?>
+                            <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+                                <p><?= $error?></p>
+                            </div>
+            			<?php endif; ?>
     <!-- ================================== Form Add News [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
@@ -110,15 +108,11 @@
 								<div class="form-group"  style="font-size: 18px" >
                                     <label for="title"><?= $lang['Title'] ?></label>
                                     <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="<?= $lang['Enter_title']?> " value="<?php if(isset($title)) echo $title ?>"/>
-								<?php 
-                                    if (isset($errors) && in_array('title', $errors)) {
-                                ?>
+								<?php if(isset($errors) && in_array('title', $errors)) : ?>
                                     <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                        <p><?= $lang['AD_Title_required'] ?> </p>
+                                        <p><?= $lang['AD_Title_required'] ?></p>
                                     </div>
-                                <?php
-                                    }
-                                ?>
+                                <?php endif; ?>
 								</div>
                                 
 								<!-- ================= Type [start] ===================== -->
@@ -139,15 +133,11 @@
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('type', $errors)) {
-                                    ?>
+				                    <?php if (isset($errors) && in_array('type', $errors)) : ?>
 										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
 											<p><?= $lang['AD_Type_required'] ?></p>
 	                    				</div>
-                                    <?php
-										}
-									?>
+                                    <?php endif; ?>
 				                </div>
 
 								<!-- ================= Avatar [start] ===================== -->
@@ -156,15 +146,11 @@
 								    <img id="avatar" style="width: 300px; height: 300px;" />
                                     <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar(); " />
 								</div>
-                                <?php 
-									if (isset($errors) && in_array('myAvatar', $errors)) {
-								?>
+                                <?php if (isset($errors) && in_array('myAvatar', $errors)) :	?>
                                     <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                         <p><?= $lang['AD_image_required'] ?></p>
                                     </div>
-                                <?php
-                                    }
-                                ?>
+                                <?php endif; ?>
                                 
 								<!-- ================= Banner [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
@@ -173,30 +159,22 @@
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file" onchange="PreviewBanner();" />
 					            </div>	
 
-								<?php 
-									if (isset($errors) && in_array('myBanner', $errors)) {
-                                ?>
+								<?php if (isset($errors) && in_array('myBanner', $errors)) : ?>
 									<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                         <p><?= $lang['AD_Banner_required']?></p>
                                     </div>
-                                <?php
-                                    }
-                                ?>
+                                <?php endif; ?>
       
 								<!-- ================= Content [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
 								   	<label for="content"><?= $lang['Content'] ?></label>
 								    <textarea id="content" name="content" class="form-control" rows="9" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['Place_content']?> " value="<?php if(isset($content)) echo $content ?>"></textarea>
                                     <script>CKEDITOR.replace('content'); </script>
-								<?php 
-                                    if (isset($errors) && in_array('content', $errors)) {
-                                ?>
+								<?php if (isset($errors) && in_array('content', $errors)) : ?>
                                     <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                         <p><?= $lang['AD_Content_required']?></p>
                                     </div>
-                                <?php
-                                    }
-                                ?>
+                                <?php endif; ?>
 								</div>
                                 
                                 <!-- ================= Status: default is 0 [start] ===================== -->

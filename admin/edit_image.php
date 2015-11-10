@@ -60,16 +60,23 @@
                 confirm_query($result, $query);
 
                 if (mysqli_affected_rows($dbc) == 1) {
-                    $success = "Chỉnh sửa ảnh thành công ảnh vào cơ sở dữ liệu!</p>";
-                } else {
-                    $fail = "Chỉnh sửa ảnh thất bại do lỗi hệ thống!";
-                }
+					echo "<script type='text/javascript'>
+                            alert('{$lang['EDIT_OK']}');
+                            window.location = 'list_images.php';
+                            </script>      
+                        ";
+				} else {
+                    echo "<script type='text/javascript'>
+                            alert('{$lang['EDIT_FAIL']}');
+                            window.location = 'list_images.php';
+                            </script>      
+                        ";
+				}
             } else {
-                $error = "Tất cả các trường đều phải được nhập đầy đủ!";
+                $error = $lang['AD_REQUIRED'];
             }
         } // END main IF submit condition
     }else {
-	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
         redirect_to('admin/list_images.php');
     }
     include('../includes/backend/header-admin.php');
@@ -79,7 +86,7 @@
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage Images</h1>
+                    <h1 class="page-head-line"><?= $lang['Manage Images']?></h1>
                 </div>
         	</div>
 
@@ -87,88 +94,59 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Upload Images</h2>
-                            <h4><a href="list_news.php">List Images</a></h4>
+                            <h2><?= $lang['Edit Image']?></h2>
+                            <h4><a href="index.php"><?= $lang['Home']?></a> / <a href="list_images.php"><?= $lang['List Images']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
-						<?php 
-							if(!empty($success)) {
-								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$success}</p>
-            							</div>";
-            						}
-            				if(!empty($fail)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$fail}</p>
-            							</div>";
-            						}
-            				if(!empty($error)) {
-								echo " <div class='alert alert-error' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$error}</p>
-            							</div>";
-            						}
-            				?>
+						<?php if(!empty($error)) : ?>
+                            <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+                                <p><?= $error?></p>
+                            </div>
+            			<?php endif; ?>
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
 
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title">Title</label>
 								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="Enter title " />
-								<?php 
-										if (isset($errors) && in_array('title', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
-
-										}
-									?>
+								<?php if(isset($errors) && in_array('title', $errors)) : ?>
+                                    <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Title_required'] ?></p>
+                                    </div>
+                                <?php endif; ?>
 								</div>
 								<!-- Title ####################### -->
 
 				     			<div class="form-group" style="font-size: 18px">
-				                    <label>Select Category</label>
+				                    <label><?= $lang['Select_Type']?></label>
 				                    
-				                    <select name="category" class="form-control" style="font-size: 18px; height: 44px">
+				                    <select name="type_id" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
 				                        <?php 
-											$query = "SELECT cat_id, cat_name ";
-											$query .=" FROM tblcategories ";
-											$query .=" WHERE cat_id BETWEEN 8 AND 12 ";
-											$query .=" ORDER BY cat_id ASC ";
-
+											$query = "SELECT type_id, type_name FROM tbltypes ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
-												while($cats = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$cats[0]}'"; 
-														if (isset($_POST['category']) && ($_POST['category'] == $cats[0])) echo "selected='selected'";
-													echo ">".$cats[1]."</option>";	
+												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
+													echo "<option value='{$types[0]}'"; 
+														if (isset($games['type_id']) && ($games['type_id'] == $types[0])) echo "selected='selected'";
+													echo ">".$types[1]."</option>";	
 												}
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('category', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
-										}
-									?>
-				                </div>
+				                    <?php if (isset($errors) && in_array('type', $errors)) : ?>
+										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+											<p><?= $lang['AD_Type_required'] ?></p>
+	                    				</div>
+                                    <?php endif; ?>
+				                </div>  
 
 								<!-- Avatar ####################### -->
 								<div class="form-group" style="font-size: 18px">
-								    <label for="image">Images Input</label> <br>
+								    <label for="image"><?= $lang['Images Input'] ?></label> <br>
 								    <img id="image" style="width: 300px; height: 300px;" />
 									<input  name="myImage"  style="margin-top: 15px" id="uploadImage" type="file" onchange="PreviewImage();" />
 								</div>
-<?php 
-										if (isset($errors) && in_array('myImage', $errors)) { 
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Please fill in the title </p>
-	                    							</div>";
 
-										}
-									?>
-								
 								<!-- Submit & Reset Button -->
 								<center >
 									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">

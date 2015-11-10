@@ -1,39 +1,30 @@
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
-?>
 
-<?php
     $title_page = 'Edit Game';
-	// Kiem tra gia gtri cua bien pid tu $_GET
 	if( $gid = validate_id($_GET['gid'])){
-
-	// Chon news trong CSDL de hien thi ra trinh duyet
         $query = "SELECT * FROM tblnews WHERE news_id = {$gid}";
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
 
         if (mysqli_num_rows($result) == 1) {
-            // Neu co page tra ve
             $games = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        }else {
-            // Neu khong co page tra ve
-            $messages = "Bài viết không tồn tại!";
+        } else {
+            redirect_to('admin/list_games.php');
         }
 
-
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') { // gia tri ton tai, xu ly form
-			//tao bien luu loi
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$errors = array();
 
-			// kiem tra page name co gia tri hay khong
+            // validate title null
 			if (empty($_POST['title'])) {
 				$errors[] = "title";
 			} else {
 				$title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
 			}
 
-			// kiem tra xem type co gia tri hay ko
+			// validate type null
             if (isset($_POST['type_id']) && filter_var($_POST['type_id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
                 $type_id = $_POST['type_id'];
             }else{
@@ -41,37 +32,35 @@
             }
 
 			
-            // kiem tra avatar co gia tri hay khong
+            // validate avatar null
             if (empty($_FILES['myAvatar']['name'])) {
                 $myAvatar = $games['image'];
             } else {
                 $myAvatar =  $_FILES['myAvatar']['name'];
             }
             
-            // kiem tra banner co gia tri hay khong
+            // validate banner null
             if (empty($_FILES['myBanner']['name'])) {
                 $myBanner = $games['banner'];
             } else {
                 $myBanner =  $_FILES['myBanner']['name'];
             }			
 			
-			// kiem tra content co gia tri hay ko
+			// validate content null
 			if (empty($_POST['content'])) {
 				$errors[] = 'content';
 			}else {
 				$content = mysqli_real_escape_string($dbc, $_POST['content']);
 			}
 
-            //kiem tra trang thai bai viet co gia tri hay ko
+            // validate status null
             if (isset($_POST['status'])) {
                 $status = $_POST['status'];
             }else{
                 $errors[] = 'status';
             }
             
-			// kiem tra xem co loi hay khong
 			if (empty($errors)) {
-				// neu ko co loi xay ra bat dau chen vao CSDL
                 $myAvatar = "ava-".$myAvatar; 
                 $myBanner = "banner-".$myBanner;
 
@@ -82,20 +71,26 @@
                                
 				$result = edit_news_games($gid, $title, $type_id, $myAvatar, $myBanner, $content, $status);
 				if (mysqli_affected_rows($dbc) == 1) {
-					redirect_to('admin/list_games.php');
+					echo "<script type='text/javascript'>
+                            alert('{$lang['EDIT_OK']}');
+                            window.location = 'list_games.php';
+                            </script>      
+                        ";
 				} else {
-					redirect_to('admin/list_games.php');
-				} // END IF mysqli_affected_rows
+                    echo "<script type='text/javascript'>
+                            alert('{$lang['EDIT_FAIL']}');
+                            window.location = 'list_games.php';
+                            </script>      
+                        ";
+				} 
 			} else {
-				$error = "Tất cả các trường đều phải được nhập đầy đủ!";
+				$error = $lang['AD_REQUIRED'];
 			}
 		} // END main IF submit condition
 
 	}else {
-	// Neu nid khong ton tai, redirect nguoi dung ve trang admin
         redirect_to('admin/list_games.php');
     }
-    
 	include('../includes/backend/header-admin.php');
 ?>
 
@@ -104,7 +99,7 @@
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage Games</h1>
+                    <h1 class="page-head-line"><?= $lang['Manage Games']?></h1>
                 </div>
         	</div>
 
@@ -112,52 +107,30 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Edit Games</h2>
-                            <h4><a href="index.php">Home</a> / <a href="list_games.php">List Games</a></h4>
+                            <h2><?= $lang['Edit Games']?></h2>
+                            <h4><a href="index.php"><?= $lang['Home']?></a> / <a href="list_games.php"><?= $lang['List Games']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
-						<?php 
-							if (!empty($messages)) {
-								echo " <div class='alert alert-warning' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$messages}</p>
-                                            
-            							</div>";
-							}
-							if(!empty($success)) {
-								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$success}</p>
-            							</div>";
-            				}
-            				if(!empty($fail)) {
-								echo " <div class='alert alert-warning' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$fail}</p>
-            							</div>";
-            				}
-            				if(!empty($error)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$error}</p>
-            							</div>";
-            				}
-            				?>
+						<?php if(!empty($error)) : ?>
+                            <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+                                <p><?= $error?></p>
+                            </div>
+            			<?php endif; ?>
      <!-- ================================== Form Add News [start] ===================================== -->      
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
-							<form id="edit_news" action="" method="post" enctype="multipart/form-data"> <!-- BEGIN FORM -->								
-								<!-- ================= Title [start] =================== -->
+							<form id="edit_news" action="" method="post" enctype="multipart/form-data"> 								<!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-								   	<label for="title">Title</label>
-								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($games['title'])) echo $games['title']; ?>"/>
-                                <?php 
-                                    if (isset($errors) && in_array('title', $errors)) {
-                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được bỏ trống </p>
-                                                </div>";
-
-                                    }
-                                ?>
-                                </div>
+								   	<label for="title"><?= $lang['Title'] ?></label>
+								    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="<?= $lang['Enter_title']?>" value="<?php if(isset($games['title'])) echo $games['title']; ?>"/>
+                                <?php if(isset($errors) && in_array('title', $errors)) : ?>
+                                    <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Title_required'] ?></p>
+                                    </div>
+                                <?php endif; ?>
+								</div>
                                 
 								<!-- ================= Type [start] =================== -->
 				     			<div class="form-group" style="font-size: 18px">
-				                    <label>Select Type</label>
+				                    <label><?= $lang['Select_Type']?></label>
 				                    
 				                    <select name="type_id" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
@@ -173,18 +146,16 @@
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('type', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Type không được bỏ trống</p>
-	                    							</div>";
-										}
-									?>
+				                    <?php if (isset($errors) && in_array('type', $errors)) : ?>
+										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+											<p><?= $lang['AD_Type_required'] ?></p>
+	                    				</div>
+                                    <?php endif; ?>
 				                </div>  
                                 
 								<!-- ================= Avatar [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
-								    <label for="image">Images Input</label> <br>
+								    <label for="image"><?= $lang['Images Input'] ?></label> <br>
 								    <img id="avatar" style="width: 300px; height: 300px;" />
                                     <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar()();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>
 								</div>   
@@ -201,27 +172,25 @@
 								   	<label for="content">Content</label>
 								    <textarea id="content" name="content" class="form-control" cols="20" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content"><?php if(isset($games['content'])) echo htmlentities($games['content'], ENT_COMPAT, 'UTF-8'); ?></textarea>
                                     <script>CKEDITOR.replace('content'); </script>
-								<?php 
-                                    if (isset($errors) && in_array('type', $errors)) {
-                                            echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Nội dung không được bỏ trống </p>
-                                                </div>";
-                                    }
-                                ?>
+								<?php if (isset($errors) && in_array('content', $errors)) : ?>
+                                    <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Content_required']?></p>
+                                    </div>
+                                <?php endif; ?>								
 								</div>
 								
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="form-group" style="font-size: 18px">
-				                    <label>Select Status</label>
+				                    <label><?= $lang['Select_Status']?></label>
 				                    <select name="status" class="form-control" style="font-size: 18px; height: 44px">										
-				                        <option value="0" <?php if (isset($games['status']) && ($games['status'] == 0 )) echo "selected='selected'"; ?>>Inactive</option>
-				                        <option value="1" <?php if (isset($games['status']) && ($games['status'] == 1 )) echo "selected='selected'"; ?>>Active</option>
+				                        <option value="0" <?php if (isset($games['status']) && ($games['status'] == 0 )) echo "selected='selected'"; ?>><?= $lang['Inactive']?></option>
+				                        <option value="1" <?php if (isset($games['status']) && ($games['status'] == 1 )) echo "selected='selected'"; ?>><?= $lang['Active']?></option>
 				                    </select>
 				                </div>
                                 
 								<!-- Update Button -->
 								<center >
-									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Update">
+									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="<?= $lang['Update']?>">
 								</center>							
 							</form> <!-- END FORM ADD NEWS-->				 
                         </div>

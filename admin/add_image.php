@@ -81,18 +81,11 @@
                             <h2><?= $lang['Upload Images']?></h2>
                             <h4><a href="index.php"><?= $lang['Home']?></a> / <a href="list_images.php"><?= $lang['List Images']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
-						<?php 
-                            if(!empty($fail)) {
-                                echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-                                            <p>{$fail}</p>
-                                        </div>";
-                                    }
-                            if(!empty($error)) {
-                                echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-                                            <p>{$error}</p>
-                                        </div>";
-                                    }
-                        ?>
+						<?php if(!empty($error)) : ?>
+                            <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+                                <p><?= $error?></p>
+                            </div>
+            			<?php endif; ?>
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
@@ -100,15 +93,11 @@
 								<div class="form-group"  style="font-size: 18px" >
 								   	<label for="title"><?= $lang['Title'] ?></label>
                                     <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" placeholder="<?= $lang['Enter_title']?>  " value="<?php if(isset($title)) echo $title ?>" />
-								<?php 
-                                    if (isset($errors) && in_array('title', $errors)) {
-                                ?>
-                                    <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+								<?php if(isset($errors) && in_array('title', $errors)) : ?>
+                                    <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                         <p><?= $lang['AD_Title_required'] ?></p>
                                     </div>
-                                <?php
-                                    }
-                                ?>
+                                <?php endif; ?>
 								</div>
                                 
 								<!-- ================= Type [start] ===================== -->
@@ -129,15 +118,11 @@
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('type', $errors)) {
-                                    ?>
+				                    <?php if (isset($errors) && in_array('type', $errors)) : ?>
 										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-											p><?= $lang['AD_Type_required'] ?></p>
+											<p><?= $lang['AD_Type_required'] ?></p>
 	                    				</div>
-                                    <?php
-										}
-									?>
+                                    <?php endif; ?>
 				                </div>
 
 								<!-- ================= Image [start] ===================== -->
@@ -145,16 +130,13 @@
 								    <label for="image"><?= $lang['Images Input'] ?></label> <br>
 								    <img id="image" style="width: 300px; height: 300px;" />
 									<input  name="myImage"  style="margin-top: 15px" id="uploadImage" type="file" onchange="PreviewImage();" />
-								</div>
-                                    <?php 
-										if (isset($errors) && in_array('myImage', $errors)) {
-                                    ?>
+                                    <?php if (isset($errors) && in_array('myImage', $errors)) : ?>
 										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                             <p><?= $lang['AD_image_required'] ?></p>
                                         </div>
-                                    <?php                
-										}
-									?>
+                                    <?php endif; ?>
+								</div>
+                                    
 								
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="form-group" style="font-size: 18px">

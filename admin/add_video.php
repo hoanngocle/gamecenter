@@ -90,24 +90,12 @@
                         <div class="panel-heading" style="text-align: center">
                             <h2><?= $lang['Add_Videos']?></h2>
                             <h4><a href="index.php"><?= $lang['Home']?></a> / <a href="list_videos.php"><?= $lang['List_Videos']?></a></h4>
-                        </div> <!-- END PANEL HEADING--> 
-						<?php 
-							if(!empty($exist)) {
-								echo " <div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$exist}</p>
-            							</div>";
-            						}
-            				if(!empty($fail)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$fail}</p>
-            							</div>";
-            						}
-            				if(!empty($error)) {
-								echo " <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$error}</p>
-            							</div>";
-            						}
-            				?>
+                        </div> <!-- END PANEL HEADING-->  
+                        <?php if(!empty($error)) : ?>
+                            <div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
+                                <p><?= $error?></p>
+                            </div>
+            			<?php endif; ?>
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_videos" action="" method="post" >
@@ -135,15 +123,11 @@
 											}
 										 ?>
 				                    </select>
-				                    <?php 
-										if (isset($errors) && in_array('type', $errors)) {
-                                    ?>
-                                            <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-												<p><?= $lang['AD_Type_required'] ?></p>
-	                    					</div>
-                                    <?php
-										}
-									?>
+				                    <?php if (isset($errors) && in_array('type', $errors)) : ?>
+										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+											<p><?= $lang['AD_Type_required'] ?></p>
+	                    				</div>
+                                    <?php endif; ?>
 				                </div>
 
 								<!-- ================= Url_video [start] =================== -->
@@ -156,15 +140,11 @@
 								<div class="form-group"  style="font-size: 18px" >
                                     <label for="title"><?= $lang['Description']?></label>
                                     <textarea id="description" name="description" class="form-control" rows="4" style="font-size: 18px" size="20" maxlength="1000" placeholder="<?= $lang['Place_Des']?>" value="<?php if(isset($description)) echo $description ?>"></textarea>
-								<?php 
-                                    if (isset($errors) && in_array('description', $errors)) {
-                                ?>
+								<?php if (isset($errors) && in_array('description', $errors)) : ?>
                                     <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
                                         <p><?= $lang['AD_Description_required']?></p>
                                     </div>
-                                <?php 
-                                    }
-                                ?>
+                                <?php endif; ?>
 								</div>
 								
                                 <!-- ================= Status: default is 0 [start] ===================== -->
