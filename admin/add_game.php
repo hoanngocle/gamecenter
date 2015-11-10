@@ -69,12 +69,20 @@
 			confirm_query($result, $query);
 
 			if (mysqli_affected_rows($dbc) == 1) {
-				redirect_to('admin/view_game.php');
-			} else {
-				redirect_to('admin/view_game.php');
-			}
+                echo "<script type='text/javascript'>
+                        alert('{$lang['ADD_OK']}');
+                        window.location = 'list_games.php';
+                        </script>      
+                    ";
+            } else {
+                echo "<script type='text/javascript'>
+                        alert('{$lang['ADD_FAIL']}');
+                        window.location = 'list_games.php';
+                        </script>      
+                    ";
+            }
 		} else {
-			$error = "Tất cả các trường đều phải được nhập đầy đủ!";
+			$error = $lang['AD_REQUIRED'];
 		}
 	} // END main IF submit condition
     include('../includes/backend/header-admin.php');    
@@ -84,7 +92,7 @@
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage Games</h1>
+                    <h1 class="page-head-line"><?= $lang['Manage Games']?></h1>
                 </div>
         	</div>
 
@@ -92,15 +100,10 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Add Games</h2>
-                            <h4><a href="index.php">Home</a> / <a href=list_games.php">List Games</a></h4>
+                            <h2><?= $lang['Add Games']?></h2>
+                            <h4><a href="index.php"><?= $lang['Home'] ?></a> / <a href=list_games.php"><?= $lang['List Games']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
-							if(!empty($success)) {
-								echo "<div class='alert alert-success' style='font-size: 18px; margin: 25px 35px'>
-											<p>{$success}</p>
-            							</div>";
-            						}
             				if(!empty($fail)) {
 								echo "<div class='alert alert-danger' style='font-size: 18px; margin: 25px 35px'>
 											<p>{$fail}</p>
@@ -111,26 +114,28 @@
 											<p>{$error}</p>
             							</div>";
             						}
-            				?>
+                        ?>
     <!-- ================================== Form Add Games [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
                                 <!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-                                    <label for="title">Title</label>
-                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="Enter title " value="<?php if(isset($title)) echo $title ?>"/>
+                                    <label for="title"><?= $lang['Title'] ?></label>
+                                    <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="title" name="title" size="20" maxlength="150" placeholder="<?= $lang['Enter_title']?>  " value="<?php if(isset($title)) echo $title ?>"/>
 								<?php 
                                     if (isset($errors) && in_array('title', $errors)) {
-                                        echo " <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Title không được để trống </p>
-                                                </div>";
+                                ?>
+                                    <div class='alert alert-warning' style='font-size: 16px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Title_required'] ?></p>
+                                    </div>
+                                <?php
                                     }
                                 ?>
 								</div>
                                 
 								<!-- ================= Type [start] ===================== -->
 				     			<div class="form-group" style="font-size: 18px">
-				                    <label>Select Type</label>
+				                    <label><?= $lang['Select_Type']?></label>
 				                    
 				                    <select name="type" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
@@ -148,79 +153,86 @@
 				                    </select>
 				                    <?php 
 										if (isset($errors) && in_array('type', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Type không được để trống</p>
-	                    							</div>";
+                                    ?>
+										<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+											<p><?= $lang['AD_Type_required'] ?></p>
+	                    				</div>
+                                    <?php
 										}
 									?>
 				                </div>
 
 								<!-- ================= Avatar [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
-								    <label for="image">Images Input</label> <br>
+								    <label for="image"><?= $lang['Images Input'] ?></label> <br>
 								    <img id="avatar" style="width: 300px; height: 300px;" />
                                     <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar(); " />
 								</div>
-<?php 
-										if (isset($errors) && in_array('myAvatar', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Image không được để trống  </p>
-	                    							</div>";
-										}
-									?>
+                                <?php 
+									if (isset($errors) && in_array('myAvatar', $errors)) {
+								?>
+                                    <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_image_required'] ?></p>
+                                    </div>
+                                <?php
+                                    }
+                                ?>
                                 
 								<!-- ================= Banner [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
-				                    <label for="banner">Banner Input</label> <br>
+				                    <label for="banner"><?= $lang['Banner Input'] ?></label> <br>
 				                    <img id="banner" style="width: 800px; height: 200px;" />
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file" onchange="PreviewBanner();" />
 					            </div>	
 
 								<?php 
-										if (isset($errors) && in_array('myBanner', $errors)) {
-											echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Banner không được để trống </p>
-	                    							</div>";
-										}
-									?>
+									if (isset($errors) && in_array('myBanner', $errors)) {
+                                ?>
+									<div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Banner_required']?></p>
+                                    </div>
+                                <?php
+                                    }
+                                ?>
       
 								<!-- ================= Content [start] ===================== -->
 								<div class="form-group" style="font-size: 18px">
-								   	<label for="content">Content</label>
-								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="Please text some content" value="<?php if(isset($content)) echo $content ?>"></textarea>
+								   	<label for="content"><?= $lang['Content'] ?></label>
+								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['Place_content']?>" value="<?php if(isset($content)) echo $content ?>"></textarea>
                                     <script>CKEDITOR.replace('content'); </script>
 								<?php 
-										if (isset($errors) && in_array('title', $errors)) {
-												echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-														<p>Nội dung không được để trống </p>
-	                    							</div>";
-										}
-									?>
+                                    if (isset($errors) && in_array('content', $errors)) {
+                                ?>
+                                    <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                        <p><?= $lang['AD_Content_required']?></p>
+                                    </div>
+                                <?php
+                                    }
+                                ?>
 								</div>
                                 
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="form-group" style="font-size: 18px">
-				                    <label>Select Status</label>
+				                    <label><?= $lang['Select_Status']?></label>
 
 				                    <select name="status" class="form-control" style="font-size: 18px; height: 44px">
-				                        <option value="0">Inactive</option>
-				                        <option value="1">Active</option>
+				                        <option value="0"><?= $lang['Inactive']?></option>
+				                        <option value="1"><?= $lang['Active']?></option>
 				                    </select>
 				                </div>
                                 
                                 <!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
-									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">
-									<button type="reset" class="btn btn-danger" style="font-size: 18px; height: 44px">Reset</button>
+									<input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="<?= $lang['Submit']?>">
+									<button type="reset" class="btn btn-danger" style="font-size: 18px; height: 44px"><?= $lang['Reset']?></button>
 								</center>							
-							</form> <!-- END FORM ADD NEWS-->				 
+							</form> <!-- END FORM ADD GAMES-->				 
 						</div> 
 		          	</div> <!-- END PANEL BODY-->
-				</div>
-                
-    <!-- ================================== Form Add News [end] ===================================== -->		
+				</div>               
+    <!-- ================================== Form Add GAME [end] ===================================== -->		
 			</div>
-		</div> <!-- END ROWS -->
+		</div> 
     </div>
 <!--end content-->
 <?php include('../includes/backend/footer-admin.php'); ?>

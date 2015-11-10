@@ -7,21 +7,21 @@
     include('includes/frontend/header.php');
 ?>
 <div class="container">
-     <div class="content-top">
-        <!--<a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px">NEW GAMES</h2></a>-->
+     <div class="content-top">       
         <div class="video_embed" style="width: 125%; height: 510px; left: -150px; position: relative;">
             <div class="col-lg-8" id="embed_player" style="margin: auto" >
-            <video style=" left: 33%;"id="example_video_1" class="video-js vjs-default-skin" controls 
+                <video style=" left: 33%;"id="example_video_1" class="video-js vjs-default-skin" controls 
                     preload="auto" width="854" height="480"
                     poster="" 
                     data-setup='{"techOrder":["youtube"], "src":"<?= $url_video ?>"}' >
-                </video>
-        
+                </video>      
+            </div>  
         </div>
-            
-        </div>
-        
-        <div class="col-lg-4">
+         <div class="col-lg-6" style="float: left">
+             meo
+             
+         </div>
+         <div class="col-lg-4" style="float: right">
             <ul>
              <?php 
                 $result = get_thumbnail_row();

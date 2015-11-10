@@ -7,37 +7,39 @@
 ?>
 
 <?php 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // gia tri ton tai, xu ly form
-		//tao bien luu loi
+	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$errors = array();
 
-		// kiem tra page name co gia tri hay khong
 		if (empty($_POST['url'])) {
 			$errors[] = "url";
-		} else {
-			$url = mysqli_real_escape_string($dbc, $_POST['url']);
-            if(!youtube_id_from_url($url)){  
-                $id_url = null;
-                $fail = "Không có video nào được tìm thấy để upload.";
-            }else {
-                $id_url = youtube_id_from_url($url);
-            }
-		}
-        
-        // kiem tra xem co loi hay khong
-		if (empty($errors)) {
+		}else{
+            $url = mysqli_real_escape_string($dbc, $_POST['url']);
+            $check = checkIDVideo($url);
             
-		} else {
-			$error = "Tất cả các trường đều phải được nhập đầy đủ.";
-		}
+            if(mysqli_num_rows($check) == 1){
+                $errors[] = "exist";     
+            }else{
+                if(!youtube_id_from_url($url)){  
+                    $id_url = null;
+                    $fail = $lang['AD_video_msg_fail'];
+                }else {
+                    $id_url = youtube_id_from_url($url);
+                }
+            }
+        } 
+        if (isset($errors) && in_array('url', $errors)){
+            $error = $lang['AD_REQUIRED'];
+        }else if (isset($errors) && in_array('exist', $errors)){
+            $error = $lang['AD_Exist'];
+        }
+		
     } // END main IF submit condition
 ?>
-<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
     		<div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Upload Videos</h1>
+                    <h1 class="page-head-line"><?= $lang['Upload_Videos'] ?></h1>
                 </div>
         	</div>
 
@@ -45,8 +47,8 @@
                 <div class="col-md-11" style="margin-left: 47.25px">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
-                            <h2>Upload Videos</h2>
-                            <h4><a href="index.php">Home</a> / <a href="list_videos.php">List Videos</a></h4>
+                            <h2><?= $lang['Upload_Videos'] ?></h2>
+                            <h4><a href="index.php"><?= $lang['Home']?></a> / <a href="list_videos.php"><?= $lang['List_Videos']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 						<?php 
             				if(!empty($fail)) {
@@ -59,71 +61,75 @@
 											<p>{$error}</p>
             							</div>";
             						}
-            				?>
+                        ?>
+                        
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
-							<form id="add_news" action="" method="post" enctype="multipart/form-data">
+							<form id="add_videos" action="" method="post" enctype="multipart/form-data">
+                                
                                 <!-- ================= Title [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-								   	<label for="title">Check Url</label>
-                                    <input style="font-size: 18px; height: 44px;" type="text" class="form-control" id="url" name="url" placeholder="Enter Url" value="<?php if(isset($url)) echo $url ?>" />
+								   	<label for="title"><?= $lang['Check_Url']?></label>
+                                    <input style="font-size: 18px; height: 44px;" type="text" class="form-control" id="url" name="url" placeholder="<?= $lang['Enter_Url']?>" value="<?php if(isset($url)) echo $url ?>" />
                                     <br>
                                     <center>
-                                    <input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Check">
+                                    <input type="submit" name="submit" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="<?= $lang['Check']?>">
                                     </center>
 								<?php 
                                     if (isset($errors) && in_array('title', $errors)) {
-                                        echo " <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
-                                                    <p>Url không được để trống title!</p>
-                                                </div>";
+                                ?>
+                                        <div class='alert alert-warning' style='font-size: 14px; padding: 5px 5px 5px 12px; margin-top: 15px'>
+                                            <p><?= $lang['AD_Url_required']?></p>
+                                        </div>
+                                <?php
                                     }
                                 ?>
 								</div>
                                 
+                                <!-- ================= ID Url [start] =================== -->
                                 <?php 
                                     if(!empty($id_url)){
-                                ?>
-                                <!-- ================= ID Url [start] =================== -->
+                                ?>                               
 								<div class="form-group"  style="font-size: 18px" >
-								   	<label for="title">ID Video</label>
+                                    <label for="title"><?= $lang['ID_Video']?></label>
                                     <input style="font-size: 18px; height: 44px" type="text" class="form-control" id="url" name="url" value="<?php if(isset($id_url[1])) echo $id_url[1] ?>" disabled/>
 								</div>      
                                 
                                 <!-- ================= Video [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-								   	<label for="title">Video</label>
-                                    <video id="example_video_1" class="video-js vjs-default-skin" controls 
+								   	<label for="title"><?= $lang['Video'] ?></label>   
+                                    <div style="margin-left: 17%; margin-top: 2%">
+                                        <video id="example_video_1" class="video-js vjs-default-skin" controls 
                                         preload="auto" width="640" height="360"
                                         poster="" 
                                         data-setup='{"techOrder":["youtube"], "src":"<?= $url ?>"}' >
-                                    </video>
-								</div>  
-                                
+                                        </video>
+                                    </div>   								
+                                </div>  
+                                                               
                                 <!-- ================= Thumbnail [start] =================== -->
 								<div class="form-group"  style="font-size: 18px" >
-								   	<label for="title">Thumbnail</label>
+								   	<label for="title"><?= $lang['Thumbnail']?></label>
                                     <br>
-                                    <img style="width: 640px; height: 480px; " src="http://img.youtube.com/vi/<?= $id_url[1] ?>/sddefault.jpg" alt="thumbnail" title="thumbnail" id="wows1_0"/>
+                                    <img style="width: 640px; height: 480px; margin-left: 17%; margin-top: 2%" src="http://img.youtube.com/vi/<?= $id_url[1] ?>/sddefault.jpg" alt="thumbnail" title="thumbnail" id="wows1_0"/>
 								</div>  
                                                         
 								<!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
-									<input type="button" onclick="location.href='/admin/add_video.php?vid=<?= $id_url[1]?>';" name="send" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="Submit">
-									<button type="button" onclick="location.href='/admin/list_games.php';" class="btn btn-danger" style="font-size: 18px; height: 44px">Cancel</button>
+									<input type="button" onclick="location.href='/admin/add_video.php?vid=<?= $id_url[1]?>';" name="send" class="btn btn-success" style="font-size: 18px; height: 44px; margin-right: 10px"  value="<?= $lang['Submit']?>">
+									<button type="button" onclick="location.href='/admin/list_games.php';" class="btn btn-danger" style="font-size: 18px; height: 44px"><?= $lang['Cancel']?></button>
                                 <?php     
                                     }  
                                 ?>
-                                
 								</center>							
-							</form> <!-- END FORM ADD NEWS-->				 
+							</form> <!-- END FORM ADD VIDEO-->				 
 						</div> 
 		          	</div> <!-- END PANEL BODY-->
 				</div>
 
-    <!-- ================================== Form Add News [end] ===================================== -->		
-
+    <!-- ================================== Form Upload Video [end] ===================================== -->		
 			</div>
-		</div> <!-- END ROWS -->
+		</div> <!-- END CONTAINER-->
     </div>
 <!--end content-->
 <?php include('../includes/backend/footer-admin.php'); ?>

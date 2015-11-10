@@ -745,6 +745,17 @@
         return false;
     }
 
+    function get_youtube($id){
+        
+        $youtube = "http://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=". $id ."&format=json";
+
+        $curl = curl_init($youtube);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $return = curl_exec($curl);
+        curl_close($curl);
+        return json_decode($return, true);
+
+        }
     //  BACKEND - get id youtube =====================================================================	
     function save_thumbnail_from_url($url, $name) {
         $ch = curl_init($url);
@@ -1098,11 +1109,21 @@
         confirm_query($result, $query);
 
         return $result;    
-}
+    }
     
     function change_profile($uid, $first_name, $last_name, $website, $bio, $dateofbirth) {
         global $dbc;
         $query = " UPDATE tblusers SET first_name = '{$first_name}', last_name = '{$last_name}', website = '{$website}',bio = '{$bio}', date_of_birth = '{$dateofbirth}', update_date = NOW() WHERE user_id = {$uid} LIMIT 1";
+        
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;  
+    }
+    
+    function checkIDVideo($url) {
+        global $dbc;
+        $query = " SELECT * FROM tblvideos WHERE url_video = '{$url}'";
         
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);

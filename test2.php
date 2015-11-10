@@ -12,9 +12,10 @@ include('includes/functions.php');?>
 
     <?php
 
-$rs = login_user('beosagittarius', '12345678');
- $user = mysqli_fetch_array($rs, MYSQLI_ASSOC);
-var_dump($user);die;
+$id = 'm-M1AtrxztU';
+
+// Display Data 
+print_r(get_youtube($id));;
 ?>
 
 </body>
