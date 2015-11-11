@@ -1,3 +1,9 @@
+<!-- 
+    File       : delete_video.php
+    Created on : Jul 11, 2015, 10:26:53 AM
+    Updated on : Nov 11, 2015, 10:26:53 AM   
+    Author     : Béo
+-->
 <?php 
     include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
@@ -9,15 +15,15 @@
 		if(mysqli_affected_rows($dbc) == 1 ) {	
 			echo "
 				<script type='text/javascript'>
-					delete_success();
+					alert('{$lang['AD_DEL_SUCCESS']}');
+                    window.location = 'list_videos.php';
 				</script>      
 			";
-			redirect_to('admin/list_videos.php');
 		}else {
 			echo "
 				<script type='text/javascript'>
-					delete_fail();
+					alert('{$lang['AD_DEL_FAIL']}');
+                    window.location = 'list_videos.php';
 				</script>      
 			";
-			redirect_to('admin/index.php');	
 		}
