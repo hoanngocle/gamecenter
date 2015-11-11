@@ -1,3 +1,9 @@
+<!-- 
+    File       : add_game.php
+    Created on : Jul 11, 2015, 10:26:53 AM
+    Updated on : Nov 11, 2015, 10:26:53 AM   
+    Author     : Béo
+-->
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
@@ -158,7 +164,7 @@
 								<!-- ================= Banner [start] ===================== -->
 								<div class="label-fontsize form-group">
 				                    <label for="banner"><?= $lang['ADD_GAME_FORM_BANNER'] ?></label> <br>
-				                    <img id="banner" class="banner"  />
+				                    <img id="banner" class="banner" />
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file" onchange="PreviewBanner();" />
 					            </div>	
 
@@ -171,7 +177,7 @@
 								<!-- ================= Content [start] ===================== -->
 								<div class="label-fontsize form-group" >
 								   	<label for="content"><?= $lang['ADD_GAME_FORM_CONTENT'] ?></label>
-								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['ADD_GAME_FORM_CONTENT_TEXT'] ?>" value="<?php if(isset($content)) echo $content ?>"></textarea>
+								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['ADD_GAME_FORM_CONTENT_TEXT'] ?>" value="<?php if(isset($content)) : echo $content; endif;?>"></textarea>
                                     <script>CKEDITOR.replace('content'); </script>
 								<?php if (isset($errors) && in_array('content', $errors)) : ?>
                                     <div class='message alert alert-warning'>
