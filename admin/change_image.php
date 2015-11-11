@@ -1,3 +1,9 @@
+<!-- 
+    File       : change_image.php
+    Created on : Jul 11, 2015, 10:26:53 AM
+    Updated on : Nov 11, 2015, 10:26:53 AM   
+    Author     : Béo
+-->
 <?php 
     include('../includes/functions.php');
 	include('../includes/backend/mysqli_connect.php');
