@@ -14,6 +14,7 @@
         session_destroy();   // destroy session data in storage
         redirect_to('index.php');
     }
+    $_SESSION['LAST_ACTIVITY'] = time(); 
     if(isset($_SESSION['uid'])){
         $rsuser= get_user_by_id($_SESSION['uid']);
         $user = array();

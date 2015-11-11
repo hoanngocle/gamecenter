@@ -16,12 +16,14 @@
         redirect_to('admin/login_admin.php');
     }
     
-    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (60*60))) {
+    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (15*60))) {
         // last login was more than 15 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time 
         session_destroy();   // destroy session data in storage
         redirect_to('admin/login_admin.php');
     }
+    
+    $_SESSION['LAST_ACTIVITY'] = time(); 
       
 ?>
 <!DOCTYPE html>
@@ -35,6 +37,7 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet"  id="bootstrap-css"/>
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style-admin.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
     <link rel="shortcut icon" href="http://s16.postimg.org/9irj2l7n5/gamemagazine.png">
     <link href="../includes/video-js/video-js.css" rel="stylesheet" type="text/css">
     

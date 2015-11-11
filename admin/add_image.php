@@ -1,3 +1,9 @@
+<!-- 
+    File       : add_image.php
+    Created on : Jul 11, 2015, 10:26:53 AM
+    Updated on : Nov 11, 2015, 10:26:53 PM   
+    Author     : Béo
+-->
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
@@ -137,8 +143,7 @@
 										<div class='message alert alert-warning'>
                                             <p><?= $lang['ADD_IMAGE_FORM_IMG_REQUIRED'] ?></p>
                                         </div>
-                                    <?php endif; ?>
-                                    <?php if(isset($errors) && in_array('existIMG', $errors)) : ?>
+                                    <?php elseif(isset($errors) && in_array('existIMG', $errors)) : ?>
                                         <div class='message alert alert-warning'>
                                             <p><?= $lang['ADD_IMAGE_FORM_IMG_EXIST'] ?></p>
                                         </div>
