@@ -47,7 +47,6 @@
             $errors[] = 'status';
         }
 
-        
 		if (empty($errors)) {
             // upload img      
             $targetimg = '../images/gallery/'.$myImage;                  

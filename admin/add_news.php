@@ -57,6 +57,11 @@
         }
             
 		if (empty($errors)) {
+            $targetava = '../images/'.$myAvatar;
+            $targetbanner = '../images/'.$myBanner;
+                      
+            move_uploaded_file($_FILES['myAvatar']['tmp_name'], $targetava  );
+            move_uploaded_file($_FILES['myBanner']['tmp_name'], $targetbanner  );
             // add record
 			$result = addNews($uid, $type_id, $title, $myAvatar, $myBanner, $content, $status);
 

@@ -1,8 +1,7 @@
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
-	?>
-<?php
+
 	if( $iid = validate_id($_GET['iid'])){
 		$set = get_image_by_id($iid);
         
@@ -22,64 +21,73 @@
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-11" style="margin-left: 4.2%">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $images['type_name'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_images.php">List Images</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_IMAGE_LINK_HOME']?></a> / <a href="list_images.php"><?= $lang['ADD_IMAGE_LINK_LIST']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
-                            <div class="row" style="font-size : 18px">   
+                            <div class="row" class="show-fontsize">   
 					            
-								<!-- END HEADER PANEL -->
-
 			                  	<div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $images['image_id'] ?> 
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong>News ID :  </strong> <?= $images['image_id'] ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?= $images['type_name'] ?> 
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong ><?= $lang['TABLE_TYPE']?> : </strong> <?= $images['type_name'] ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?= $images['title'] ?> 
-					                </div>
-					            </div>
-
-					            <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $images['date'] ?>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong ><?= $lang['TABLE_TITLE']?> : </strong> <?= $images['title'] ?> 
 					                </div>
 					            </div>
                                 <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $images['name'] ?>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong ><?= $lang['TABLE_POST_BY'] ?> : </strong> <?= $images['name'] ?>
 					                </div>
 					            </div>
+					            <div class="col-md-6" >
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong ><?= $lang['TABLE_POST_ON']?> : </strong> <?= $images['date'] ?>
+					                </div>
+					            </div>
+                                
                                 <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Status : </strong> <?= $images['status'] ?>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong >Status : </strong> <?= $images['status'] ?>
 					                </div>
 					            </div>
                                 <div class="col-md-12" style="margin-left: 65px ; max-width : 900px">
 									<div class="panel panel-success">
 				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Image : </strong> 
+				                            <strong class="show-fontsize">Image : </strong> 
 				                        </div>
 				                        <div class="panel-body">
                                             <img class="img-responsive" style="margin: auto;" src="../images/gallery/<?= $images['image'] ?>" alt="<?= $images['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
-                            	<div class="col-md-11">
+                                <div class="col-md-11" style="margin-left: 4%">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_STATUS']?> : </strong>
+                                        <?php if ($images['status'] == 0){
+                                            echo "Inactive";
+                                        }else{
+                                            echo "Active";
+                                        } ?> 
+					                </div>
+					            </div>
+                            	<div class="col-md-12">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_image.php?iid=<?= $iid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_image(<?= $iid ?>)">Delete</a>
+						                 	<input type="button" class="btncustom btn btn-success" onclick="window.location='edit_image.php?iid=<?= $iid ?>';" value="<?= $lang['BUTTON_EDIT'] ?>">
+                                            <input type="button" class="btncustom btn btn-warning" onClick="check_delete_image(<?= $iid ?>)" value="<?= $lang['BUTTON_DELETE'] ?>">
+                                            <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 						                </div>
                             		</center>   
 					            </div>						

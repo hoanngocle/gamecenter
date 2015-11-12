@@ -5,8 +5,6 @@
 	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
-
-	<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -20,28 +18,27 @@
     <!-- ============================== Table News [start] ============================== -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 style="text-align: center">News </h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="add_news.php">Create News</a></h4>
+                            <h2 style="text-align: center"><?= $lang['TITLE_NEWS']?></h2>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_NEWS_LINK_HOME']?></a> / <a href="add_news.php"><?= $lang['ADD_NEWS_LINK_UPLOAD']?></a></h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" style="text-align:center">
                                     <thead style="text-align:center">
                                         <tr>
-                                            <th style="width: 2% ; text-align:center"><a href="list_news.php?sort=id">ID</a></th>
-							    			<th style="width: 7% ; text-align:center"><a href="list_news.php?sort=type">Type</a></th>
-							    			<th style="width: 20% ; text-align:center"><a href="list_news.php?sort=title">Title</a></th>
-							                <th style="width: 40% ; text-align:center">Content</th>
-							                <th style="width: 8% ; text-align:center"><a href="list_news.php?sort=by">Posted By</a></th>
-							                <th style="width: 10% ; text-align:center"><a href="list_news.php?sort=on">Posted On</a></th>
-                                            <th style="width: 2% ; text-align:center">Status</th>
+                                            <th style="width: 3% ; text-align:center"><a href="list_news.php?sort=id"><?=$lang['TABLE_ID']?></a></th>
+							    			<th style="width: 7% ; text-align:center"><a href="list_news.php?sort=type"><?= $lang['TABLE_TYPE'] ?></a></th>
+							    			<th style="width: 20% ; text-align:center"><a href="list_news.php?sort=title"><?= $lang['TABLE_TITLE']?></a></th>
+							                <th style="width: 40% ; text-align:center"><?= $lang['TABLE_CONTENT']?></th>
+							                <th style="width: 8% ; text-align:center"><a href="list_news.php?sort=by"><?= $lang['TABLE_POST_BY']?></a></th>
+							                <th style="width: 10% ; text-align:center"><a href="list_news.php?sort=on"><?= $lang['TABLE_POST_ON']?></a></th>
+                                            <th style="width: 3% ; text-align:center"><?= $lang['TABLE_STATUS']?></th>
 							                <th style="width: 9% ; text-align:center"> </th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 									<?php 
-										 // Sap xep theo thu tu cua table head
 											if(isset($_GET['sort'])){
 												switch ($_GET['sort']) {
 													case 'id':
@@ -77,39 +74,35 @@
 												$order_by = 'news_id';
 											}
 
-										// Truy xuat csdl de hien thi category
 										$result = get_all_news($order_by);
 										if(mysqli_num_rows($result) > 0 ) {
 
-										// vong lap while de hien thi ket qua tu csdl ra
 									 	while($news = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-									 		// in ra cac cot cua bang
                                             if($news['status'] == 0){
-                                                $active = "<a class='fa fa-remove' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_news({$news['news_id']},{$news['status']})'></a>";
+                                                $active = "<a class='btn-action fa fa-remove' href='#' style='text-decoration: none' onClick='change_status_news({$news['news_id']},{$news['status']})'></a>";
                                             }else {
-                                                $active = "<a class='fa fa-check' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' onClick='change_status_news({$news['news_id']},{$news['status']})' ></a>";
+                                                $active = "<a class='btn-action fa fa-check' href='#' style='text-decoration: none' onClick='change_status_news({$news['news_id']},{$news['status']})' ></a>";
                                             }
                                         ?>
-								 				<tr>
-									                <td style='text-align:right' ><?= $news['news_id'] ?></td>
-									                <td style='text-align:left'><?= $news['type_name'] ?></td>
-									                <td style='text-align:left'><?= $news['title'] ?></td>
-									                <td style='text-align:justify'><?= excerpt($news['content']) ?> ... </td>
-									                <td style='text-align:left'><?= $news['name'] ?></td>
-									                <td style='text-align:right'><?= $news['date'] ?></td>
-                                                    <td style='text-align:center'><?= $active ?></td>
-                                                        
-									                <td style='width : 100px'>
-									                <a class='fa fa-eye' href='show_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none' ></a>
-									                <a class='fa fa-pencil' href='edit_news.php?nid=<?= $news['news_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
-									                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='font-size: 20px; margin-left: 5px; text-decoration: none' value='' onClick='check_delete_news(<?= $news['news_id'] ?>);'></a>
-									                </td>
-												</tr>
+                                            <tr>
+                                                <td style='text-align:right' ><?= $news['news_id'] ?></td>
+                                                <td style='text-align:left'><?= $news['type_name'] ?></td>
+                                                <td style='text-align:left'><?= $news['title'] ?></td>
+                                                <td style='text-align:justify'><?= excerpt($news['content']) ?> ... </td>
+                                                <td style='text-align:left'><?= $news['name'] ?></td>
+                                                <td style='text-align:right'><?= $news['date'] ?></td>
+                                                <td style='text-align:center'><?= $active ?></td>
+
+                                                <td style='width : 100px'>
+                                                <a class='btn-action fa fa-eye' href='show_news.php?nid=<?= $news['news_id'] ?>' style='text-decoration: none' ></a>
+                                                <a class='btn-action fa fa-pencil' href='edit_news.php?nid=<?= $news['news_id'] ?>' style='text-decoration: none'></a>
+                                                <a class='btn-action fa fa-trash-o' id='delete' name='delete' href='#' style=' text-decoration: none' onClick='check_delete_news(<?= $news['news_id'] ?>);'></a>
+                                                </td>
+                                            </tr>
 									 			
                                     <?php }// END While loop
 										} else { 
                                     ?>
-                                        <!--Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page-->
 										 	<p class='alert alert-warning'><?= $error_news_no_item?></p>
 									<?php 	}   ?>
 							    	</tbody>

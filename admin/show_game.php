@@ -2,9 +2,7 @@
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
     include('../includes/errors.php');
-	?>
-<?php
-    
+
 	if( $gid = validate_id($_GET['gid'])){
 		$set = get_news_by_id($gid);
 
@@ -24,61 +22,61 @@
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-11" style="margin-left: 4.1%">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $games['title'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_games.php">List Games</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_GAME_LINK_HOME']?></a> / <a href="list_games.php"><?= $lang['ADD_GAME_LINK_LIST']?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
-                            <div class="row" style="font-size : 18px">   
-					            <div class="col-md-11" style="margin: 30px 0 0 43.75px ; max-width : 400px">
+                            <div class="row" class="show-fontsize ">   
+					            <div class="show-img col-md-11" style="margin-left: 4%;">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Avatar : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_AVATAR']?>  : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?= $games['image'] ?>" alt="<?= $games['image'] ?>">
+                                            <img class="img-responsive" style="height: 23vw" src="../images/<?= $games['image'] ?>" alt="<?= $games['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
 								<!-- END HEADER PANEL -->
 
-			                  	<div class="col-md-5" style="margin: 30px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $games['news_id'] ?> 
+			                  	<div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong style="font-size : 18px">Game ID :  </strong> <?= $games['news_id'] ?> 
 					                </div>
 					            </div>
 					            
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?= $games['type_name'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_TYPE']?> : </strong> <?= $games['type_name'] ?> 
 					                </div>
 					            </div>
                                 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Game: </strong> <?= $games['title'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong>Game: </strong> <?= $games['title'] ?> 
 					                </div>
 					            </div>
                                 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $games['name'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_BY']?> : </strong> <?= $games['name'] ?> 
 					                </div>
 					            </div>
 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $games['date'] ?>
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_ON'] ?> : </strong> <?= $games['date'] ?>
 					                </div>
 					            </div>
 
-					            <div class="col-md-11" style="margin-left: 43.75px">
+					            <div class="col-md-11" style="margin-left: 4%">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Banner : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_BANNER']?>  : </strong> 
 				                        </div>
 				                        <div class="panel-body">
                                             <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?= $games['banner'] ?>" alt="<?= $games['banner'] ?>">
@@ -86,10 +84,10 @@
 				                    </div>
                             	 </div>
 					                
-					            <div class="col-md-11" style="margin-left: 43.75px">
+					            <div class="col-md-11" style="margin-left: 4%">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Content  </strong>
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_CONTENT']?></strong>
 				                        </div>
 				                        <div class="panel-body">
 				                            <p><?= $games['content'] ?> </p>
@@ -97,9 +95,9 @@
 				                    </div>
                             	</div>
 
-                                <div class="col-md-11" style="margin-left: 43.75px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Status : </strong>
+                                <div class="col-md-11" style="margin-left: 4%">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_STATUS']?> : </strong>
                                         <?php if ($games['status'] == 0){
                                             echo "Inactive";
                                         }else{
@@ -111,8 +109,9 @@
                             	<div class="col-md-11">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_game.php?gid=<?= $gid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_game(<?= $gid ?>)">Delete</a>
+                                            <input type="button" class="btncustom btn btn-success" onclick="window.location='edit_game.php?gid=<?= $gid ?>';" value="<?= $lang['BUTTON_EDIT'] ?>">
+                                            <input type="button" class="btncustom btn btn-warning" onClick="check_delete_game(<?= $gid ?>)" value="<?= $lang['BUTTON_DELETE'] ?>">
+                                            <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 						                </div>
                             		</center>   
 					            </div>						

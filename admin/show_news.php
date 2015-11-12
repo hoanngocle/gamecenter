@@ -2,8 +2,7 @@
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
     include('../includes/errors.php');
-	?>
-<?php
+
 	if( $nid = validate_id($_GET['nid'])){
 		$set = get_news_by_id($nid);
 
@@ -23,72 +22,72 @@
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-11" style="margin-left: 4.1%">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $news['title'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_news.php">List News</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_NEWS_LINK_HOME']?></a> / <a href="list_news.php"><?= $lang['ADD_NEWS_LINK_LIST'] ?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
-                            <div class="row" style="font-size : 18px">   
-					            <div class="col-md-11" style="margin: 30px 0 0 43.75px ; max-width : 400px">
+                            <div class="row"  class="show-fontsize">   
+					            <div class="show-img col-md-11" style="margin-left: 4% ;">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Avatar : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_AVATAR']?> : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-				                            <img class="img-responsive" style="width: 400px; height: 330px;" src="../images/<?= $news['image'] ?>" alt="<?= $news['image'] ?>">
+                                            <img class="img-responsive" style="height: 23vw" src="../images/<?= $news['image'] ?>" alt="<?= $news['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
 								<!-- END HEADER PANEL -->
 
-			                  	<div class="col-md-5" style="margin: 30px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">News ID :  </strong> <?= $news['news_id'] ?> 
+                                <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong>News ID :  </strong> <?= $news['news_id'] ?> 
 					                </div>
 					            </div>
 					            
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?= $news['type_name'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_TYPE']?> : </strong> <?= $news['type_name'] ?> 
 					                </div>
 					            </div>
                                 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?= $news['title'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_TITLE']?> : </strong> <?= $news['title'] ?> 
 					                </div>
 					            </div>
                                 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $news['name'] ?> 
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_BY']?> : </strong> <?= $news['name'] ?> 
 					                </div>
 					            </div>
 
-					            <div class="col-md-5" style="margin: 5px 0 0 118px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $news['date'] ?>
+					            <div class="show-left col-md-5">
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_ON'] ?> : </strong> <?= $news['date'] ?>
 					                </div>
 					            </div>
 
-					            <div class="col-md-11" style="margin-left: 43.75px">
+					            <div class="col-md-11" style="margin-left: 4%">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Banner : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_BANNER']?> : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?= $news['banner'] ?>" alt="<?= $news['banner'] ?>">
+                                            <img class="banner img-responsive" src="../images/<?= $news['banner'] ?>" alt="<?= $news['banner'] ?>">
 				                        </div>				                        
 				                    </div>
                             	 </div>
 					                
-					            <div class="col-md-11" style="margin-left: 43.75px">
+					            <div class="col-md-11" style="margin-left: 4%">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Content  </strong>
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_CONTENT']?></strong>
 				                        </div>
 				                        <div class="panel-body">
 				                            <p><?= $news['content'] ?> </p>
@@ -97,8 +96,8 @@
                             	</div>
 
                                 <div class="col-md-11" style="margin-left: 43.75px">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Status : </strong>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_STATUS']?> : </strong>
                                         <?php if ($news['status'] == 0){
                                             echo "Inactive";
                                         }else{
@@ -107,11 +106,12 @@
 					                </div>
 					            </div>
                                 
-                            	<div class="col-md-11">
+                            	<div class="col-md-12">
                             		<center>
                             			<div class="alert alert-default">
-						                 	<a href="edit_news.php?nid=<?= $nid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-											<a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_news(<?= $nid ?>)">Delete</a>
+                                            <input type="button" class="btncustom btn btn-success" onclick="window.location='edit_news.php?nid=<?= $nid ?>';" value="<?= $lang['BUTTON_EDIT'] ?>">
+                                            <input type="button" class="btncustom btn btn-warning" onClick="check_delete_news(<?= $nid ?>)" value="<?= $lang['BUTTON_DELETE'] ?>">
+                                            <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 						                </div>
                             		</center>   
 					            </div>

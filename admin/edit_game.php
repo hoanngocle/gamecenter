@@ -10,10 +10,8 @@
 
     $title_page = 'Edit Game';
 	if( $gid = validate_id($_GET['gid'])){
-        $query = "SELECT * FROM tblnews WHERE news_id = {$gid}";
-        $result = mysqli_query($dbc, $query);
-        confirm_query($result, $query);
-
+        
+        $result = get_news_item($gid);
         if (mysqli_num_rows($result) == 1) {
             $games = mysqli_fetch_array($result, MYSQLI_ASSOC);
         } else {
@@ -41,25 +39,15 @@
             // validate avatar null
             if (empty($_FILES['myAvatar']['name'])) {
                 $myAvatar = $games['image'];
-            } else {
-                $check = checkImgGame($_FILES['myAvatar']['name']);
-                if(mysqli_num_rows($check) > 0){
-                    $errors[] = 'existIMG';
-                }else {
-                    $myAvatar =  $_FILES['myAvatar']['name']; 
-                }               
+            } else { 
+                $myAvatar =  $_FILES['myAvatar']['name'];               
             }
             
             // validate banner null
             if (empty($_FILES['myBanner']['name'])) {
                 $myBanner = $games['banner'];
             } else {
-                $check = checkBannerGame($_FILES['myBanner']['name']);
-                if(mysqli_num_rows($check) > 0){
-                    $errors[] = 'existBanner';
-                }else {
-                    $myBanner =  $_FILES['myBanner']['name']; 
-                }  
+                $myBanner =  $_FILES['myBanner']['name'];                   
             }			
 			
 			// validate content null
@@ -174,28 +162,18 @@
                                     <?php else: ?>
 				                    <img id="avatar" class="avatar" />
                                     <?php endif; ?>
-                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar()();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>
-                                    <?php if (isset($errors) && in_array('existImg', $errors)) : ?>
-										<div class='message alert alert-warning'>
-                                            <p><?= $lang['ADD_IMAGE_FORM_IMG_REQUIRED'] ?></p>
-                                        </div>
-                                    <?php endif;?>
+                                    <input  name="myAvatar"  style="margin-top: 15px" id="uploadAvatar" type="file" onchange="PreviewAvatar()();" value="<?php if(isset($games['image'])) echo $games['image'];  ?>"/>    
 								</div>   
                                 
 								<!-- ================= Banner [start] ===================== -->
 								<div class="label-fontsize form-group">
 				                    <label for="banner"><?= $lang['ADD_GAME_FORM_BANNER']?></label> <br>
                                     <?php if(isset($games['banner'])): ?>
-                                    <img id="banner" class="banner" src="../images/gallery/<?= $games['banner']?>"/>       
+                                    <img id="banner" class="banner" src="../images/gallery/<?= $games['banner']?>"/>     
                                     <?php else : ?>
                                     <img id="banner" class="banner" />
                                     <?php endif; ?>
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file"  onchange="PreviewBanner();" value="<?php if(isset($games['banner'])) echo $games['banner'];  ?>"/>
-                                    <?php if (isset($errors) && in_array('existBanner', $errors)) : ?>
-										<div class='message alert alert-warning'>
-                                            <p><?= $lang['ADD_IMAGE_FORM_IMG_REQUIRED'] ?></p>
-                                        </div>
-                                    <?php endif;?>
 					            </div>	
                                 
 								<!-- ================= Content [start] ===================== -->	
@@ -221,8 +199,8 @@
                                 
 								<!-- Button -->
 								<center >
-									<input type="submit" name="submit" class="btncustom btn btn-success" style="margin-right: 5px"  value="<?= $lang['BUTTON_UPDATE']?>">
-                                    <input type="reset" class="btncustom btn btn-warning" style="margin-right: 5px" value="<?= $lang['BUTTON_RESET'] ?>">
+									<input type="submit" name="submit" class="btncustom btn btn-success" value="<?= $lang['BUTTON_UPDATE']?>">
+                                    <input type="reset" class="btncustom btn btn-warning" value="<?= $lang['BUTTON_RESET'] ?>">
                                     <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 								</center>							
 							</form> <!-- END FORM EDIT GAME-->				 

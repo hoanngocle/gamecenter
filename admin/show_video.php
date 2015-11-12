@@ -1,8 +1,7 @@
 <?php 
 	include('../includes/backend/mysqli_connect.php'); 
 	include('../includes/functions.php');
-	?>
-<?php
+
 	if( $vid = validate_id($_GET['vid'])){
 		$set = get_video_by_id($vid);
         
@@ -22,51 +21,48 @@
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-11" style="margin-left: 48.75px">
+                <div class="col-md-11" style="margin-left: 4.1%">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $videos['type_name'] ?></h2>
-                            <h4 style="text-align: center" ><a href="index.php">Home</a> / <a href="list_videos.php">List Videos</a></h4>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_VIDEO_LINK_HOME']?></a> / <a href="list_videos.php"><?= $lang['ADD_VIDEO_LINK_LIST'] ?></a></h4>
                         </div> <!-- END PANEL HEADING--> 
 
                         <div class="panel-body">
-                            <div class="row" style="font-size : 18px">   
-					            
-								<!-- END HEADER PANEL -->
-
+                            <div class="show-fontsize row">   
 			                  	<div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Video ID :  </strong> <?=$videos['video_id']; ?> 
+					                <div class="show-fontsize alert alert-success">
+                                        <strong>Video ID :  </strong> <?=$videos['video_id']; ?> 
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Type : </strong> <?= $videos['type_name']; ?> 
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_TYPE']?> : </strong> <?= $videos['type_name']; ?> 
 					                </div>
 					            </div>
                                 <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted By : </strong> <?= $videos['name']; ?>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_BY'] ?> : </strong> <?= $videos['name']; ?>
 					                </div>
 					            </div>
 					            
 
 					            <div class="col-md-6" >
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Posted On : </strong> <?= $videos['date']; ?>
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong><?= $lang['TABLE_POST_ON']?> : </strong> <?= $videos['date']; ?>
 					                </div>
 					            </div>
                                                             
                                 <div class="col-md-12">
-					                <div class="alert alert-success">
-					                 	<strong style="font-size : 18px">Title : </strong> <?= $videos['title']; ?> 
+					                <div class="show-fontsize alert alert-success">
+					                 	<strong class="show-fontsize"><?= $lang['TABLE_TITLE']?> : </strong> <?= $videos['title']; ?> 
 					                </div>
 					            </div>
                                 
                                 <div class="col-md-12">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Description  </strong>
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_DESCRIPTION'] ?>  </strong>
 				                        </div>
 				                        <div class="panel-body">
 				                            <p><?= $videos['description']; ?> </p>
@@ -76,8 +72,8 @@
                                 
                                 <div class="col-md-6">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Video : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_VIDEO']?> : </strong> 
 				                        </div>
 				                        <div class="panel-body">
                                             <video id="example_video_1" class="video-js vjs-default-skin" controls 
@@ -91,20 +87,32 @@
                                 
                                  <div class="col-md-6">
 									<div class="panel panel-success">
-				                        <div class="panel-heading">
-				                            <strong style="font-size : 18px">Thumbnail : </strong> 
+				                        <div class="show-fontsize panel-heading">
+				                            <strong><?= $lang['TABLE_THUMBNAIL']?> : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 480px; height: 360px" src="/images/thumbnails/<?php echo $videos['thumbnail']; ?>" alt="<?php echo $videos['thumbnail']; ?>">
+                                            <img class="img-responsive" style="width: 480px; height: 340px" src="/images/thumbnails/<?php echo $videos['thumbnail']; ?>" alt="<?php echo $videos['thumbnail']; ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
+                                
+                                <div class="col-md-11" style="margin-left: 43.75px">
+					                <div class="alert alert-success">
+					                 	<strong style="font-size : 18px"><?= $lang['TABLE_STATUS']?> : </strong>
+                                        <?php if ($videos['status'] == 0){
+                                            echo "Inactive";
+                                        }else{
+                                            echo "Active";
+                                        } ?> 
+					                </div>
+					            </div>
                                                                
-                            	<div class="col-md-11">
+                            	<div class="col-md-12">
                             		<center>
                             			<div class="alert alert-default">
-                                            <a href="edit_video.php.php?vid=<?php echo $vid ?>" class="btn btn-success btn-lg" style="padding: 10px 35px"> Edit </a>
-                                            <a href="#" id="delete" name="delete" class="btn btn-danger btn-lg" style="padding: 10px 25px ; margin-left: 40px" onClick="check_delete_video(<?= $vid ?>)">Delete</a>
+                                            <input type="button" class="btncustom btn btn-success" onclick="window.location='edit_video.php?vid=<?= $vid ?>';" value="<?= $lang['BUTTON_EDIT'] ?>">
+                                            <input type="button" class="btncustom btn btn-warning" onClick="check_delete_video(<?= $vid ?>);" value="<?= $lang['BUTTON_DELETE'] ?>">
+                                            <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 						                </div>
                             		</center>   
 					            </div>						

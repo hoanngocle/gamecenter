@@ -57,9 +57,7 @@
         }
             
 		if (empty($errors)) {
-            // upload img
-            $myAvatar = "ava-".$myAvatar; 
-            $myBanner = "banner-".$myBanner;          
+            // upload img         
             $targetava = '../images/'.$myAvatar;
             $targetbanner = '../images/'.$myBanner;
                       
