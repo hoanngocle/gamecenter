@@ -31,13 +31,17 @@
 		// validate Avatar
 		if (empty($_FILES['myAvatar']['name'])) {
 			$errors[] = "myAvatar";
-		} else {
+		}  else if(($_FILES['myAvatar']['type'] != 'image/jpeg') || ($_FILES['myAvatar']['type'] != 'image/png') || ($_FILES['myAvatar']['type'] != 'image/bmp')){
+			$errors[] = "errorimg_type";
+		}else {
 			$myAvatar =  $_FILES['myAvatar']['name'];
 		}
 
 		// validate Banner
 		if (empty($_FILES['myBanner']['name'])) {
 			$errors[] = "myBanner";
+		} else if(($_FILES['myBanner']['type'] != 'image/jpeg') || ($_FILES['myBanner']['type'] != 'image/png') || ($_FILES['myBanner']['type'] != 'image/bmp')){
+			$errors[] = "errorbanner_type";
 		} else {
 			$myBanner = $_FILES['myBanner']['name'];
 		}
@@ -157,6 +161,10 @@
                                     <div class='message alert alert-warning'>
                                         <p><?= $lang['ADD_GAME_FORM_IMG_REQUIRED'] ?></p>
                                     </div>
+                                <?php elseif (isset($errors) && in_array('errorimg_type', $errors)) :	?>
+                                    <div class='message alert alert-warning'>
+                                        <p><?= $lang['ADD_NEWS_FORM_IMG_TYPE'] ?></p>
+                                    </div>
                                 <?php endif; ?>
                                 
 								<!-- ================= Banner [start] ===================== -->
@@ -169,6 +177,10 @@
 								<?php if (isset($errors) && in_array('myBanner', $errors)) : ?>
 									<div class='message alert alert-warning'>
                                         <p><?= $lang['ADD_GAME_FORM_BANNER_REQUIRED']?></p>
+                                    </div>
+                                <?php elseif (isset($errors) && in_array('errorbanner_type', $errors)) :	?>
+                                    <div class='message alert alert-warning'>
+                                        <p><?= $lang['ADD_NEWS_FORM_IMG_TYPE'] ?></p>
                                     </div>
                                 <?php endif; ?>
       

@@ -49,7 +49,7 @@
 
 		if (empty($errors)) {
             // upload img      
-            $targetimg = '../images/gallery/'.$myImage;                  
+            $targetimg = '../images/uploads/'.$myImage;                  
             move_uploaded_file($_FILES['myImage']['tmp_name'], $targetimg  );
             
 			$result = addImage($uid, $type_id, $title, $myImage, $status);
