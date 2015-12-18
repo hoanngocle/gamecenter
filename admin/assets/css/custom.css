@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    File       : custom.css
+    Created on : Nov 11, 2015, 10:26:53 AM
+    Author     : Béo
+*/
+
+.avatar{
+    display: block;
+    width: 25vw;
+    height: 25vw;    
+}
+
+.banner {
+    display: block;
+    width: 70vw;
+    height: 20vw;    
+}
+
+.image{
+    display: block;
+    width: 70vw;
+    height: 39vw;    
+}
+
+.message {
+    font-size: 0.97vw;
+    padding: 5px 5px 5px 12px;
+    margin-top: 15px;
+}
+
+.message-error{
+    font-size: 1.25vw; 
+    margin: 25px 35px;
+}
+
+.label-fontsize {
+    font-size: 1.25vw;
+}
+
+.btncustom {
+    padding: 0.5vw;
+    font-size: 1.25vw;
+    width: 8.5%;
+    margin-right: 5px;
+}
+
+.btn-action{
+    font-size: 20px;
+    margin-left: 5px;
+}
+.img-list{
+    width: 300px;
+    height: 169px;
+}
+
+.show-left{
+    margin: 5px 0 0 8.5vw;
+}
+
+.show-fontsize {
+    font-size: 18px;
+}
+
+.show-img {
+    max-width: 30vw;
+}
+
+.show-banner {
+    
+}

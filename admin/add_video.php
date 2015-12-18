@@ -1,21 +1,23 @@
-<!-- 
-    File       : add_video.php
-    Created on : Jul 11, 2015, 10:26:53 AM
-    Updated on : Nov 11, 2015, 10:26:53 PM   
-    Author     : Béo
--->
-<?php 
-	include('../includes/backend/mysqli_connect.php'); 
+<!--#####################################################################
+    #
+    #   File          : ADD VIDEO
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
+	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php');
-   
-    $vid = $_GET['vid'];         
+
+    $vid = $_GET['vid'];
     if(empty($vid) || strlen($vid) != 11){
-        redirect_to('admin/list_videos.php');       
+        redirect_to('admin/list_videos.php');
     }else {
         $title_page = 'Add Video';
         $video = get_youtube($vid);
         $title = $video['title'];
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             // create variable error
             $errors = array();
             $uid = $_SESSION['uid'];
@@ -46,27 +48,27 @@
 
             $thumbnail = save_thumbnail_from_url($url_thumbnail, $vid);
             if (empty($errors)) {
-                		
+
                 $result = addVideo($uid, $type_id, $title, $description, $thumbnail, $url_video, $status);
 
                 if (mysqli_affected_rows($dbc) == 1) {
                     echo "<script type='text/javascript'>
                             alert('{$lang['AD_VIDEO_SUCCESS']}');
                             window.location = 'list_videos.php';
-                            </script>      
+                            </script>
                         ";
                 } else {
                     echo "<script type='text/javascript'>
                             alert('{$lang['AD_FAIL']}');
                             window.location = 'list_videos.php';
-                            </script>      
+                            </script>
                         ";
                 }
             } else {
                 $error = $lang['AD_REQUIRED'];
             }
         }
-    }  
+    }
     include('../includes/backend/header-admin.php');
 ?>
 	<div class="content-wrapper">
@@ -83,7 +85,7 @@
                         <div class="panel-heading" style="text-align: center">
                             <h2><?= $lang['ADD_VIDEO_H2']?></h2>
                             <h4><a href="index.php"><?= $lang['ADD_VIDEO_LINK_HOME']?></a> / <a href="list_videos.php"><?= $lang['ADD_VIDEO_LINK_LIST']?></a></h4>
-                        </div> <!-- END PANEL HEADING-->  
+                        </div> <!-- END PANEL HEADING-->
                         <?php if(!empty($error)) : ?>
                             <div class='message-error alert alert-danger'>
                                 <p><?= $error?></p>
@@ -92,27 +94,27 @@
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_videos" action="" method="post" >
-                                
+
                                 <!-- ================= Title [start] =================== -->
 								<div class="label-fontsize form-group">
 								   	<label for="title"><?= $lang['ADD_VIDEO_FORM_TITLE_LABEL'] ?></label>
                                     <input style="height: 44px" type="text" class="label-fontsize form-control" id="title" name="title" placeholder="<?= $lang['ADD_VIDEO_FORM_TITLE_TEXT']?> " value="<?= $video['title'] ?>"/>
 								</div>
-                                
+
 								<!-- ================= Type [start] ===================== -->
 				     			<div class="label-fontsize form-group" >
 				                    <label><?= $lang['ADD_VIDEO_FORM_TYPE']?></label>
-				                    
+
 				                    <select name="type" class="form-control" style="font-size: 18px; height: 44px">
 				                        <option>-------</option>
-				                        <?php 
+				                        <?php
 											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 4 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$types[0]}'"; 
+													echo "<option value='{$types[0]}'";
 														if (isset($_POST['type']) && ($_POST['type'] == $types[0])) echo "selected='selected'";
-													echo ">".$types[1]."</option>";	
+													echo ">".$types[1]."</option>";
 												}
 											}
 										 ?>
@@ -129,7 +131,7 @@
                                     <label for="title"><?= $lang['ADD_VIDEO_FORM_URL']?></label>
                                     <input style="height: 44px" type="text" class="label-fontsize form-control" id="url" name="url" size="20" maxlength="150" value="https://www.youtube.com/watch?v=<?= $vid ?>" disabled/>
 								</div>
-                                
+
                                 <!-- ================= Description [start] =================== -->
 								<div class="label-fontsize form-group" >
                                     <label for="title"><?= $lang['ADD_VIDEO_FORM_DES'] ?></label>
@@ -140,7 +142,7 @@
                                     </div>
                                 <?php endif; ?>
 								</div>
-								
+
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="label-fontsize form-group" >
 				                    <label><?= $lang['ADD_VIDEO_FORM_STATUS']?></label>
@@ -150,21 +152,21 @@
 				                        <option value="1"><?= $lang['ADD_VIDEO_FORM_STATUS_VAL_1']?></option>
 				                    </select>
 				                </div>
-                                
+
 								<!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
 									<input type="submit" name="submit" class="btncustom btn btn-success" style="margin-right: 5px"  value="<?= $lang['BUTTON_ADD'] ?>">
                                     <input type="reset" class="btncustom btn btn-warning" style="margin-right: 5px" value="<?= $lang['BUTTON_RESET'] ?>">
                                     <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 								</center>
-                                
-							</form> <!-- END FORM ADD VIDEOS-->				 
-						</div> 
+
+							</form> <!-- END FORM ADD VIDEOS-->
+						</div>
 		          	</div> <!-- END PANEL BODY-->
 				</div>
-    <!-- ================================== Form Add Videos [end] ===================================== -->		
+    <!-- ================================== Form Add Videos [end] ===================================== -->
 			</div>
-		</div> 
+		</div>
     </div>
 <!--end content-->
 <?php include('../includes/backend/footer-admin.php'); ?>

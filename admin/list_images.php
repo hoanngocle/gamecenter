@@ -1,3 +1,11 @@
+<!--#####################################################################
+    #
+    #   File          : LIST IMAGE
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     $title_page = 'Gallery';
     include('../includes/functions.php');
@@ -5,8 +13,6 @@
 	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
-
-	<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -17,7 +23,6 @@
 
             <div class="row">
                 <div class="col-md-12">
-                  <!--   Kitchen Sink -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $lang['TITLE_GALLERY']?></h2>
@@ -40,13 +45,13 @@
                                     </thead>
 
                                     <tbody>
-									<?php 
+									<?php
 											if(isset($_GET['sort'])){
 												switch ($_GET['sort']) {
 													case 'id':
 														$order_by = 'image_id';
 														break;
-													
+
 													case 'type':
 														$order_by = 'type_name';
 														break;
@@ -62,7 +67,7 @@
                                                     case 'on':
 														$order_by = 'date';
 														break;
-                                                    
+
 													case 'stt':
 														$order_by = 'status';
 														break;
@@ -98,9 +103,9 @@
                                                 <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='text-decoration: none' onClick='check_delete_image(<?= $images['image_id'] ?>);'></a>
                                                 </td>
                                             </tr>
-									 			
+
 									<?php }// END While loop
-										} else { 
+										} else {
                                     ?>
 										 	<p class='alert alert-warning'><?= $error_image_no_item?></p>
 									<?php 	}   ?>

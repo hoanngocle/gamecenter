@@ -19,12 +19,12 @@
 }
 
 .page-head-line {
-    font-weight: 900;
+    font-weight: 700;
     padding-bottom: 20px;
     border-bottom: 2px solid #2A8E57;
     text-transform: uppercase;
     color: #2A8E57;
-    font-size: 20px;
+    font-size: 25px;
     margin-bottom: 40px;
 }
 
@@ -292,3 +292,10 @@ footer {
 .btn-google {
     background-color: #c32f10;
 }
+
+.language {
+    margin-right: 10px;
+    color: #FFF;
+    text-decoration: none;
+}
+    

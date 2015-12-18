@@ -2,5 +2,5 @@
 Options All -Indexes
 
 # Khong cho phep hien thi thu muc.
-IndexIgnore * 
+IndexIgnore *
 

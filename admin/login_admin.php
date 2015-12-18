@@ -1,21 +1,29 @@
-<?php 
+<!--#####################################################################
+    #
+    #   File          : LOGIN ADMIN
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
 $title = "Login";
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">        
-            
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
         <title><?= $title ?> - Game Magazine Manager </title>
-        
+
         <link rel="shortcut icon" href="http://s16.postimg.org/9irj2l7n5/gamemagazine.png">
         <link href="assets/css/login-style.css" rel="stylesheet" />
     </head>
     <body>
         <div class="content">
-            <?php 
-                include('../includes/backend/mysqli_connect.php'); 
+            <?php
+                include('../includes/backend/mysqli_connect.php');
                 include('../includes/functions.php');
             ?>
             <?php
@@ -36,11 +44,11 @@ $title = "Login";
                     }
 
                     if(empty($errors)) {
-                    
+
                     $result = login_admin($username, $password);
                         if(mysqli_num_rows($result) == 1) {
                             $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                            
+
                             $_SESSION['uid'] = $user['user_id'];
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['email'] = $user['email'];
@@ -54,37 +62,37 @@ $title = "Login";
                             $_SESSION['avatar'] = $user['avatar'];
                             $_SESSION['user_level'] = $user['user_level'];
                             $_SESSION['LAST_ACTIVITY'] = time();
- 
+
                             redirect_to('admin/index.php');
                         }else {
-                            $fail = "Tên tài khoản hoặc mật khẩu nhập không đúng";
-                        }       
+                            $fail = $lang['BACKEND_INVALID'];
+                        }
                     }
                 }
                 ?>
-           
+
             <form action="" name="login-admin" method="post">
                 <div class="mat-in">
                     <input type="text" size="20" maxlength="60" tabindex="1" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>"  placeholder="Username"></input>
                     <span class="bar"></span>
                 </div>
-                <?php if (isset($errors) && in_array('username', $errors)) 
-                    echo "<p class=error>Tên tài khoản không được để trống</p>";
+                <?php if (isset($errors) && in_array('username', $errors))
+                    echo "<p class=error>".$lang['BACKEND_LOGINADMIN']."</p>";
                 ?>
-                
+
                 <div class="mat-in">
                     <input type="password" size="20" maxlength="60" tabindex="1" name="password" value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>"  placeholder="Password"></input>
-                    <span class="bar"></span>   
+                    <span class="bar"></span>
                 </div>
-                <?php if (isset($errors) && in_array('password', $errors)) 
-                    echo "<p class=error>Mật khẩu không được để trống</p>"
+                <?php if (isset($errors) && in_array('password', $errors))
+                    echo "<p class=error>".$lang['BACKEND_MATKHAU']."</p>"
                 ?>
-                
+
                 <?php if (!empty($fail))
                     echo "<p class=error>{$fail}</p>"
                 ?>
-                
-                <input id="login" type="submit" name=submit" value="Login" >
+
+                <input id="login" type="submit" name="submit" value="Login">
 
             </form>
         </div>

@@ -1,11 +1,13 @@
-<!-- 
-    File       : add_game.php
-    Created on : Jul 11, 2015, 10:26:53 AM
-    Updated on : Nov 11, 2015, 10:26:53 AM   
-    Author     : Béo
--->
-<?php 
-	include('../includes/backend/mysqli_connect.php'); 
+<!--#####################################################################
+    #
+    #   File          : ADD GAME
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
+	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php');
 
     $title_page = 'Add Game';
@@ -13,7 +15,7 @@
 		// create variable error
 		$errors = array();
         $uid = $_SESSION['uid'];
-        
+
 		// validate title
 		if (empty($_POST['title'])) {
 			$errors[] = "title";
@@ -31,21 +33,21 @@
 		// validate Avatar
 		if (empty($_FILES['myAvatar']['name'])) {
 			$errors[] = "myAvatar";
-		}  else if(($_FILES['myAvatar']['type'] != 'image/jpeg') || ($_FILES['myAvatar']['type'] != 'image/png') || ($_FILES['myAvatar']['type'] != 'image/bmp')){
-			$errors[] = "errorimg_type";
-		}else {
+		}  else if(($_FILES['myAvatar']['type'] == 'image/jpeg') || ($_FILES['myAvatar']['type'] == 'image/png') || ($_FILES['myAvatar']['type'] == 'image/bmp')){
 			$myAvatar =  $_FILES['myAvatar']['name'];
+		}else {
+			$errors[] = "errorimg_type";
 		}
 
 		// validate Banner
 		if (empty($_FILES['myBanner']['name'])) {
 			$errors[] = "myBanner";
-		} else if(($_FILES['myBanner']['type'] != 'image/jpeg') || ($_FILES['myBanner']['type'] != 'image/png') || ($_FILES['myBanner']['type'] != 'image/bmp')){
-			$errors[] = "errorbanner_type";
-		} else {
+		} else if(($_FILES['myBanner']['type'] == 'image/jpeg') || ($_FILES['myBanner']['type'] == 'image/png') || ($_FILES['myBanner']['type'] == 'image/bmp')){
 			$myBanner = $_FILES['myBanner']['name'];
+		} else {
+            $errors[] = "errorbanner_type";
 		}
-		
+
 		// validate content
 		if (empty($_POST['content'])) {
 			$errors[] = 'content';
@@ -59,38 +61,92 @@
         }else{
             $errors[] = 'status';
         }
-            
+
+        // validate tag
+        if (isset($_POST['tag'])) {
+        	$tag = $_POST['tag'];
+        }else{
+        	$errors[] = 'tag';
+        }
+
 		if (empty($errors)) {
-            // upload img         
-            $targetava = '../images/'.$myAvatar;
-            $targetbanner = '../images/'.$myBanner;
-                      
+			// upload img
+            $targetava = '../images/news/'.$myAvatar;
+            $targetbanner = '../images/news/'.$myBanner;
+
             move_uploaded_file($_FILES['myAvatar']['tmp_name'], $targetava  );
             move_uploaded_file($_FILES['myBanner']['tmp_name'], $targetbanner  );
-            
+
             // add record
             $result = addGames($uid, $type_id, $title, $myAvatar, $myBanner, $content, $status);
 
 			if (mysqli_affected_rows($dbc) == 1) {
+                // add tag
+				$result = get_last_rc();
+                if(mysqli_num_rows($result) == 1 ){
+                    $news = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $news_id = $news['news_id'];
+                }
+                // split tag
+                $tags = explode(',', $tag);
+                for ($i = 0; $i < count($tags); $i++) {
+                    $tag = trim($tags[$i]);
+                    // check tag exist
+                    $rs = get_tag_item_by_key($tag);
+                    // tag not exist
+                    if(mysqli_num_rows($rs) == 0){
+                        // add tag
+                        $rsadd = addTag($tag);
+                        if(mysqli_affected_rows($dbc) == 1){ // add tag success
+                            // get tag id by last record
+                            $result = get_last_rc_tag();
+                            $last_tag = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            $tag_id = $last_tag['tag_id'];
+
+                            // add tag data
+                            $query = add_tag_data($news_id, $tag_id);
+                            if(mysqli_affected_rows($dbc) == 1){
+
+                            }else {
+                                $errors[] = 'tag_error';
+                            }
+                        } else { // add tag failed
+                            $errors[] = 'tag_error';
+                        }
+                    // tag exist
+                    }else {
+                        // get tag id by keyword
+                        $rs = get_tag_id_by_key($tag);
+                        $tag = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+                        $tag_id = $tag['tag_id'];
+
+                        // add tag data
+                        $query = add_tag_data($news_id, $tag_id);
+                        if(mysqli_affected_rows($dbc) == 1){
+
+                        }else {
+                            $errors[] = 'tag_error';
+                        }
+                    }
+                }
                 echo "<script type='text/javascript'>
                         alert('{$lang['AD_GAME_SUCCESS']}');
                         window.location = 'list_games.php';
-                        </script>      
+                        </script>
                     ";
             } else {
                 echo "<script type='text/javascript'>
                         alert('{$lang['AD_FAIL']}');
                         window.location = 'list_games.php';
-                        </script>      
+                        </script>
                     ";
             }
 		} else {
 			$error = $lang['AD_REQUIRED'];
 		}
 	} // END main IF submit condition
-    include('../includes/backend/header-admin.php');    
+    include('../includes/backend/header-admin.php');
 ?>
-<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
     		<div class="row">
@@ -104,8 +160,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">
                             <h2><?= $lang['ADD_GAME_H2'] ?></h2>
-                            <h4><a href="index.php"><?= $lang['ADD_GAME_LINK_HOME'] ?></a> / <a href=list_games.php"><?= $lang['ADD_GAME_LINK_LIST']?></a></h4>
-                        </div> <!-- END PANEL HEADING--> 
+                            <h4><a href="index.php"><?= $lang['ADD_GAME_LINK_HOME'] ?></a> / <a href="list_games.php"><?= $lang['ADD_GAME_LINK_LIST']?></a></h4>
+                        </div> <!-- END PANEL HEADING-->
 						<?php if(!empty($error)) : ?>
                             <div class='message-error alert alert-danger' >
                                 <p><?= $error?></p>
@@ -114,7 +170,7 @@
     <!-- ================================== Form Add Games [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_games" action="" method="post" enctype="multipart/form-data">
-                                
+
                                 <!-- ================= Title [start] =================== -->
 								<div class="label-fontsize form-group"  >
                                     <label for="title"><?= $lang['ADD_GAME_FORM_TITLE_LABEL']?></label>
@@ -125,21 +181,21 @@
                                         </div>
                                     <?php endif; ?>
 								</div>
-                                
+
 								<!-- ================= Type [start] ===================== -->
 				     			<div class="label-fontsize form-group">
 				                    <label for="title"><?= $lang['ADD_GAME_FORM_TYPE']?></label>
-				                    
+
 				                    <select name="type" class="label-fontsize form-control" style=" height: 44px">
 				                        <option>-------</option>
-				                        <?php 
+				                        <?php
 											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 2 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$types[0]}'"; 
+													echo "<option value='{$types[0]}'";
 														if (isset($_POST['type']) && ($_POST['type'] == $types[0])) echo "selected='selected'";
-													echo ">".$types[1]."</option>";	
+													echo ">".$types[1]."</option>";
 												}
 											}
 										?>
@@ -166,13 +222,13 @@
                                         <p><?= $lang['ADD_NEWS_FORM_IMG_TYPE'] ?></p>
                                     </div>
                                 <?php endif; ?>
-                                
+
 								<!-- ================= Banner [start] ===================== -->
 								<div class="label-fontsize form-group">
 				                    <label for="banner"><?= $lang['ADD_GAME_FORM_BANNER'] ?></label> <br>
 				                    <img id="banner" class="banner" />
 									<input name="myBanner" style="margin-top: 15px" id="uploadBanner" type="file" onchange="PreviewBanner();" />
-					            </div>	
+					            </div>
 
 								<?php if (isset($errors) && in_array('myBanner', $errors)) : ?>
 									<div class='message alert alert-warning'>
@@ -183,11 +239,11 @@
                                         <p><?= $lang['ADD_NEWS_FORM_IMG_TYPE'] ?></p>
                                     </div>
                                 <?php endif; ?>
-      
+
 								<!-- ================= Content [start] ===================== -->
 								<div class="label-fontsize form-group" >
 								   	<label for="content"><?= $lang['ADD_GAME_FORM_CONTENT'] ?></label>
-								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['ADD_GAME_FORM_CONTENT_TEXT'] ?>" value="<?php if(isset($content)) : echo $content; endif;?>"></textarea>
+								    <textarea id="content" name="content" class="form-control" rows="15" style="font-size: 15px" size="20" maxlength="2000" placeholder="<?= $lang['ADD_GAME_FORM_CONTENT_TEXT'] ?>" value="<?php if(isset($content)) : echo $content; endif;?>"><?php if(isset($content)) : echo $content; endif;?></textarea>
                                     <script>CKEDITOR.replace('content'); </script>
 								<?php if (isset($errors) && in_array('content', $errors)) : ?>
                                     <div class='message alert alert-warning'>
@@ -195,7 +251,18 @@
                                     </div>
                                 <?php endif; ?>
 								</div>
-                                
+
+                                <!-- ================= Tag [start] ===================== -->
+				     			<div class="label-fontsize form-group"  >
+									<label for="tag"><?= $lang['ADD_GAME_FORM_TAG']?></label>
+									<input style="height: 44px" type="text" class="label-fontsize form-control" id="tag" name="tag" size="20" maxlength="150" placeholder="<?= $lang['ADD_TAG_FORM_TAG_TEXT'] ?>  " value="<?php if(isset($tag)) : echo $tag; endif; ?>"/>
+								<?php if(isset($errors) && in_array('tag', $errors)) : ?>
+									<div class='message alert alert-warning' >
+										<p><?= $lang['ADD_TAG_FORM_TAG_REQUIRED'] ?></p>
+									</div>
+								<?php endif; ?>
+								</div>
+
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="label-fontsize form-group">
 				                    <label><?= $lang['ADD_GAME_FORM_STATUS'] ?></label>
@@ -205,20 +272,20 @@
 				                        <option value="1"><?= $lang['ADD_GAME_FORM_STATUS_VAL_1'] ?></option>
 				                    </select>
 				                </div>
-                                
+
                                 <!-- ================= Submit & Reset Button [start] ===================== -->
 								<center >
 									<input type="submit" name="submit" class="btncustom btn btn-success" style="margin-right: 5px"  value="<?= $lang['BUTTON_ADD'] ?>">
                                     <input type="reset" class="btncustom btn btn-warning" style="margin-right: 5px" value="<?= $lang['BUTTON_RESET'] ?>">
                                     <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
-								</center>							
-							</form> <!-- END FORM ADD GAMES-->				 
-						</div> 
+								</center>
+							</form> <!-- END FORM ADD GAMES-->
+						</div>
 		          	</div> <!-- END PANEL BODY-->
-				</div>               
-    <!-- ================================== Form Add GAME [end] ===================================== -->		
+				</div>
+    <!-- ================================== Form Add GAME [end] ===================================== -->
 			</div>
-		</div> 
+		</div>
     </div>
 <!--end content-->
 <?php include('../includes/backend/footer-admin.php'); ?>

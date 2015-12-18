@@ -1,3 +1,11 @@
+<!--#####################################################################
+    #
+    #   File          : CHANGE PASS - AJAX
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     include('/includes/backend/mysqli_connect.php');
     include('/includes/functions.php');
@@ -8,7 +16,7 @@
         $result = checkOldPass($oldpass, $_SESSION['uid']);
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            
+
             $rs2 = changePass($newpass, $_SESSION['uid']);
             if (mysqli_affected_rows($dbc) == 1) {
                 echo json_encode(['status' => 'OK']);

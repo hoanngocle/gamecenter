@@ -12,6 +12,8 @@ $("#comment-form").submit(function(e)
             {
                 if(response.status == "OK"){
                     location.reload();
+                } else if (response.status == "NULL"){
+                    location.reload();
                 } else if (response.status == "FAIL"){
 
                 }

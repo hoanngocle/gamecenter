@@ -1,9 +1,16 @@
+<!--#####################################################################
+    #
+    #   File          : GALLERY
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
     include('includes/frontend/header.php');
 ?>
-
     <script type="text/javascript" src="js/jssor.js"></script>
     <script type="text/javascript" src="js/jssor.slider.js"></script>
     <script>
@@ -93,10 +100,8 @@
         //responsive code end
     });
 </script>
-
 <!-- sliderh style begin -->
 <style>
-
     .jssorb03 {
         position: absolute;
     }
@@ -122,7 +127,7 @@
 
 <!--content-->
 <div class="container" style="padding-bottom: 70px">
-    <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;"> Gallery</h2>
+    <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;"><?=$lang['FRONT_MENU_GALLERY']?></h2>
     <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 456px; overflow: hidden; ">
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 456px;
@@ -130,56 +135,52 @@
             <div>
                 <div id="sliderh1_container" style="position: relative; top: 0px; left: 0px; width: 809px;
                      height: 150px;">
-
                     <!-- Slides Container -->
                     <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px;
                          overflow: hidden;">
-                        <?php    
+                        <?php
                             $result = get_image_by_type_id(9);
                             if(mysqli_num_rows($result) > 0){
-                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
+                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         ?>
                             <div>
                                 <a href="slideshow.php?tid=9" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
-                        <?php 
+                        <?php
                                 }
                             }
                         ?>
                     </div>
-
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
                 </div>
             </div>
-            
             <div>
                 <div id="sliderh2_container" style="position: relative; top: 0px; left: 0px; width: 809px;
                      height: 150px;">
-
                     <!-- Slides Container -->
                     <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px;
                          overflow: hidden;">
-                        <?php    
+                        <?php
                             $result = get_image_by_type_id(10);
                             if(mysqli_num_rows($result) > 0){
-                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
+                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         ?>
                             <div>
                                 <a href="slideshow.php?tid=10" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
-                        <?php 
+                        <?php
                                 }
                             }
                         ?>
                     </div>
-                  
+
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <!-- bullet navigator item prototype -->
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
- 
+
                 </div>
             </div>
             <div>
@@ -189,25 +190,25 @@
                     <!-- Slides Container -->
                     <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px;
                          overflow: hidden;">
-                        <?php    
+                        <?php
                             $result = get_image_by_type_id(11);
                             if(mysqli_num_rows($result) > 0){
-                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
+                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         ?>
                             <div>
                                 <a href="slideshow.php?tid=11" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
-                        <?php 
+                        <?php
                                 }
                             }
                         ?>
                     </div>
-                    
+
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <!-- bullet navigator item prototype -->
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
-                    
+
                 </div>
             </div>
             <div>
@@ -217,25 +218,25 @@
                     <!-- Slides Container -->
                     <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px;
                          overflow: hidden;">
-                        <?php    
+                        <?php
                             $result = get_image_by_type_id(19);
                             if(mysqli_num_rows($result) > 0){
-                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){			
+                                while($gallery = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         ?>
                             <div>
                                 <a href="slideshow.php?tid=19" ><img u="image" title="<?= $gallery['type_name']?>" src="images/gallery/<?= $gallery['image']?>" /></a>
                             </div>
-                        <?php 
+                        <?php
                                 }
                             }
                         ?>
-                    </div>                    
+                    </div>
 
                     <div u="navigator" class="jssorb03" style="bottom: 10px; right: 10px;">
                         <!-- bullet navigator item prototype -->
                         <div u="prototype"><div u="numbertemplate"></div></div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

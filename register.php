@@ -1,8 +1,16 @@
+<!--#####################################################################
+    #
+    #   File          : REGISTER ACCOUNT
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
     include('/includes/PHPMailer/send_mail.php');
-    
+
     if (isset($_POST)) {
         $firstname = mysqli_real_escape_string($dbc, $_POST['firstname']);
         $lastname = mysqli_real_escape_string($dbc, $_POST['lastname']);
@@ -13,7 +21,7 @@
         $datepost = $_POST['dateofbirth'];
         $date = DateTime::createFromFormat('d-m-Y', $datepost);
         $dateofbirth = $date->format('Y-m-d H:i:s');
-        
+
         $checkuser = checkUsername($username);
         $checkemail = checkEmail($email);
         if(mysqli_num_rows($checkuser) > 0 ){
@@ -41,7 +49,7 @@
                 $subject = 'Thank for registering in GameCenter!';
                 $body = "Hi, <br>
                         Thanks for registering on Game Magazine.<br>
-                        You can activate your account on the following link: <br>";                        
+                        You can activate your account on the following link: <br>";
                 $body .= BASE_URL . "activate.php?e=" . urlencode($email) . "&t={$token}";
                 $body .= "<br>
                         All the best,<br>
@@ -52,6 +60,6 @@
                 echo json_encode(['status' => 'OK']);
             }else {
                 echo json_encode(['status' => 'FAIL']);
-            } 
-        }       
+            }
+        }
     }

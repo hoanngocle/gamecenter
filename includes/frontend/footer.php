@@ -1,13 +1,12 @@
 <!--#####################################################################
     #
-    #   File          : Footer - Footer index in website  
+    #   File          : Footer - Footer index in website
     #   Project       : Game Magazine Project
     #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
-    #   Last Change   : 10/14/2015
     #
     ##################################################################### -->
-<!-- Footer -->	
+<!-- Footer -->
 <div class="footer">
     <div class="footer-middle">
         <div class="container">
@@ -23,12 +22,11 @@
                     <li><a href="#">Google+</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-middle-in">
                 <h6><?= $lang['FOOTER_SERVICE'] ?></h6>
                 <ul>
                     <li><a href="contact_us.php"><?= $lang['FOOTER_ContactUs'] ?></a></li>
-                    <li><a href="#"><?= $lang['FOOTER_ContactUs'] ?></a></li>
                     <li><a href="contact_us.php"><?= $lang['FOOTER_MAP'] ?></a></li>
                 </ul>
             </div>
@@ -36,7 +34,7 @@
                 <h6><?= $lang['FOOTER_ACCOUNT'] ?></h6>
                 <ul>
                     <?php if (isset($_SESSION['fullname'])) { ?>
-                        <li><a href="#" >Hi, <?= $_SESSION['fullname'] ?></a></li>    
+                        <li><a href="#" >Hi, <?= $_SESSION['fullname'] ?></a></li>
                         <li><a href="#" role="button" data-toggle="modal" data-target="#profile-modal"><?= $lang['FOOTER_Profile'] ?></a></li>
                         <li><a href="logout.php"><?= $lang['FOOTER_LogOut'] ?></a></li>
                     <?php } else { ?>
@@ -48,14 +46,14 @@
             <div class="footer-middle-in">
                 <h6><?= $lang['FOOTER_LANGUAGE'] ?></h6>
                 <ul>
-                    <li><a href="news.php"><?= $lang['FOOTER_Eng']?></a></li>
-                    <li><a href="games.php"><?= $lang['FOOTER_Viet']?></a></li>
+                    <li><a href="?lang=en"><?= $lang['FOOTER_Eng']?></a></li>
+                    <li><a href="?lang=vi"><?= $lang['FOOTER_Viet']?></a></li>
                 </ul>
             </div>
             <div class="clearfix"> </div>
         </div>
-    </div>	
-    <!---------------------------- MODAL LOGIN POPUP [start] --------------------------> 
+    </div>
+    <!---------------------------- MODAL LOGIN POPUP [start] -------------------------->
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -121,11 +119,11 @@
                             </div>
                             <div style="width: 48%; padding-bottom: 10px; float: left"><input id="register_firstname" class="form-control" type="text" placeholder="<?= $lang['FIRST_NAME'] ?> " ></div>
                             <div style="width: 48%; margin-left: 12px; float: left"><input id="register_lastname" class="form-control" type="text" placeholder="<?= $lang['LAST_NAME'] ?> " ></div>
-                            
+
                             <input id="register_username" class="form-control" type="text" placeholder="<?= $lang['LOGIN_Username'] ?>">
-                            <input id="register_email" class="form-control" type="text" placeholder="<?= $lang['Email'] ?>">
                             <input id="register_password" class="form-control" type="password" placeholder="<?= $lang['LOGIN_Password'] ?>">
-                            
+                            <input id="register_email" class="form-control" type="text" placeholder="<?= $lang['Email'] ?>">
+
                             <div style="width: 25%; margin-top: 10px; float: left; ">
                                 <div class="form-group">
                                     <select class="form-control" name="day" id="day">
@@ -134,7 +132,7 @@
                                         for($i=1; $i<=31; $i++) {
                                     ?>
                                         <option value='<?= $i ?>'><?= $i ?></option>
-                                    <?php 
+                                    <?php
                                         }
                                     ?>
                                     </select>
@@ -167,7 +165,7 @@
                                         for($i=1905; $i<=2015; $i++) {
                                     ?>
                                         <option value='<?= $i ?>'><?= $i ?></option>
-                                    <?php 
+                                    <?php
                                         }
                                     ?>
                                     </select>
@@ -181,9 +179,9 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                            
-                            
+
+
+
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -204,9 +202,9 @@
         </div>
     </div>
     <!-- END # MODAL LOGIN -->
-    <script type="text/javascript" src="/js/login_modal.js"></script>  
+    <script type="text/javascript" src="/js/login_modal.js"></script>
 
-<!---------------------------- PROFILE POPUP [start] --------------------------> 
+<!---------------------------- PROFILE POPUP [start] -------------------------->
     <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -236,12 +234,12 @@
                             <label class="col-xs-5"><?= $lang['Date_Of_Birth'] ?> :</label> <label><?= date('Y-m-d', strtotime($user['date_of_birth'])) ?></label><br>
                             <label class="col-xs-5"><?= $lang['Website']?> :</label> <label><?= $user['website'] ?></label><br>
                             <label class="col-xs-5"><?= $lang['Bio']?> :</label> <label><?= $user['bio'] ?></label><br>
-                            <?php 
+                            <?php
                                 endif;
-                            ?>   
+                            ?>
                             </div>
                         <div class="modal-footer">
-                            
+
                             <div>
                                 <button id="profile_update_btn" type="button" class="btn btn-link"><?= $lang['Update_Profile']?></button>
                                 <button id="profile_changepass_btn" type="button" class="btn btn-link"><?= $lang['Change_pass']?></button>
@@ -258,10 +256,10 @@
                                 <span id="text-update-msg"><?= $lang['UPD_msg']?></span>
                             </div>
                             <div style="width: 48%; padding-bottom: 10px; float: left"><input id="change_firstname" class="form-control" type="text" value="<?php if(isset($user['first_name'])) echo $user['first_name'] ?>" placeholder="<?= $lang['FIRST_NAME'] ?> " ></div>
-                            <div style="width: 48%; margin-left: 12px; float: left"><input id="change_lastname" class="form-control" type="text" value="<?php if(isset($user['last_name'])) echo $user['last_name'] ?>" placeholder="<?= $lang['LAST_NAME'] ?>  " ></div>                        
+                            <div style="width: 48%; margin-left: 12px; float: left"><input id="change_lastname" class="form-control" type="text" value="<?php if(isset($user['last_name'])) echo $user['last_name'] ?>" placeholder="<?= $lang['LAST_NAME'] ?>  " ></div>
                             <input id="change_website" class="form-control" type="text" value="<?php if(isset($user['website'])) echo $user['website'] ?>" placeholder="<?= $lang['Website'] ?>">
                             <input id="change_bio" class="form-control" type="text" value="<?php if(isset($user['bio'])) echo $user['bio'] ?>" placeholder="<?= $lang['Bio']?>">
-                            
+
                             <div style="width: 25%; margin-top: 10px; float: left; ">
                                 <div class="form-group">
                                     <select class="form-control" name="changeday" id="changeday">
@@ -270,7 +268,7 @@
                                         for($i=1; $i<=31; $i++) {
                                     ?>
                                         <option value='<?= $i ?>'><?= $i ?></option>
-                                    <?php 
+                                    <?php
                                         }
                                     ?>
                                     </select>
@@ -303,7 +301,7 @@
                                         for($i=1905; $i<=2015; $i++) {
                                     ?>
                                         <option value='<?= $i ?>'><?= $i ?></option>
-                                    <?php 
+                                    <?php
                                         }
                                     ?>
                                     </select>
@@ -331,7 +329,7 @@
                             </div>
                             <input id="old_pass" class="form-control" type="text" placeholder="<?= $lang['old_pass']?>" >
                             <input id="new_pass" class="form-control" type="text" placeholder="<?= $lang['new_pass']?>" >
-                            <input id="renew_pass" class="form-control" type="text" placeholder="<?= $lang['re_pass']?>" > 
+                            <input id="renew_pass" class="form-control" type="text" placeholder="<?= $lang['re_pass']?>" >
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -352,15 +350,15 @@
         </div>
     </div>
     <!-- END # MODAL LOGIN -->
-    <script type="text/javascript" src="/js/profile_modal.js"></script>  
-    
+    <script type="text/javascript" src="/js/profile_modal.js"></script>
+
     <p class="footer-class">
         Copyright © 2015 - Game Magazine. All rights reserved<br>
         Design by  <a href="http://facebook.com/beo.sagittarius.93" target="_blank">Béo Sagitarius</a>
     </p>
 
     <!-------------------------------- onTop Button ------------------------------->
-    <div id="goTop">  	
+    <div id="goTop">
         <script type="text/javascript">
             $(function () {
                 $(window).scroll(function () {
@@ -377,6 +375,6 @@
     </div>
 
     <!-------------------------------- onTop Button ------------------------------->
-</div> 
+</div>
 </body>
 </html>

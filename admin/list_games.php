@@ -1,11 +1,18 @@
-<?php 
+<!--#####################################################################
+    #
+    #   File          : LIST GAME
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
     $title_page = 'List Games';
     include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
-	<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -39,7 +46,7 @@
                                     </thead>
 
                                     <tbody>
-									<?php 
+									<?php
                                         if(isset($_GET['sort'])):
                                             switch ($_GET['sort']) {
                                                 case 'id':
@@ -92,14 +99,14 @@
 									                <td style='text-align:left'><?= $games['name'] ?></td>
 									                <td style='text-align:right'><?= $games['date'] ?></td>
                                                     <td style='text-align:center'><?= $active ?></td>
-                                                        
+
 									                <td style='width : 100px'>
 									                <a class='btn-action fa fa-eye' style='text-decoration: none' href='show_game.php?gid=<?= $games['news_id'] ?>'></a>
 									                <a class='btn-action fa fa-pencil' style='text-decoration: none' href='edit_game.php?gid=<?= $games['news_id'] ?>'></a>
                                                     <a class='btn-action fa fa-trash-o' style='text-decoration: none' id='delete' name='delete' href='#' value='' onClick='check_delete_games(<?= $games['news_id'] ?>);'></a>
 									                </td>
 												</tr>
-									 			
+
                                     <?php } else : ?>
 										<p class='message-error alert alert-warning'><?= $error_games_no_item?></p>
 									<?php endif; ?>

@@ -1,3 +1,11 @@
+<!--#####################################################################
+    #
+    #   File          : SLIDE SHOW
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
@@ -88,8 +96,8 @@
         });
     </script>
 <div class="container" style="padding-bottom: 70px">
-        <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;"> 
-            <?php 
+        <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;">
+            <?php
                 $rs = get_type_by_id($_GET['tid']);
                 if(mysqli_num_rows($rs) == 1 ){
                     $type = mysqli_fetch_array($rs, MYSQLI_ASSOC);
@@ -97,7 +105,7 @@
                 }
             ?>
         </h2>
-   
+
     <div id="slider1_container" style="position: relative;  margin: auto; width: 600px; height: 500px; background-color: #000; overflow: hidden;">
 
         <!-- Loading Screen -->
@@ -117,7 +125,7 @@
             $type_id = $_GET['tid'];
                 $rs = get_image_by_type_id($type_id);
                 if(mysqli_num_rows($rs) > 0){
-                    while($img = mysqli_fetch_array($rs, MYSQLI_ASSOC)){   
+                    while($img = mysqli_fetch_array($rs, MYSQLI_ASSOC)){
             ?>
             <div>
                 <img u="image" src="images/gallery/<?= $img['image'] ?>" />
@@ -153,5 +161,4 @@
     </div>
     <!-- Jssor Slider End -->
 </div>
-    <?php include('includes/frontend/footer.php'); ?>
-
+<?php include('includes/frontend/footer.php'); ?>

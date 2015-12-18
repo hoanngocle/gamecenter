@@ -1,3 +1,11 @@
+<!--#####################################################################
+    #
+    #   File          : LIST NEWS
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     $title_page = 'List News';
     include('../includes/functions.php');
@@ -9,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-head-line">Manage News</h1>
+                    <h1 class="page-head-line"><?= $lang['ADD_NEWS_PAGE_HEADER']?></h1>
                 </div>
             </div>
 
@@ -38,7 +46,7 @@
                                     </thead>
 
                                     <tbody>
-									<?php 
+									<?php
 											if(isset($_GET['sort'])){
 												switch ($_GET['sort']) {
 													case 'id':
@@ -64,7 +72,7 @@
                                                     case 'stt':
                                                         $order_by = 'status';
                                                         break;
-                                                    
+
 													default:
 														$order_by = 'news_id';
 														break;
@@ -99,11 +107,11 @@
                                                 <a class='btn-action fa fa-trash-o' id='delete' name='delete' href='#' style=' text-decoration: none' onClick='check_delete_news(<?= $news['news_id'] ?>);'></a>
                                                 </td>
                                             </tr>
-									 			
+
                                     <?php }// END While loop
-										} else { 
+										} else {
                                     ?>
-										 	<p class='alert alert-warning'><?= $error_news_no_item?></p>
+										<p class='alert alert-warning'><?= $error_news_no_item?></p>
 									<?php 	}   ?>
 							    	</tbody>
                                 </table>

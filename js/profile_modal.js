@@ -40,10 +40,6 @@ $(function () {
                     msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Firstname is required");
                 } else if ($upd_lastname == ""){
                     msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Lastname is required");
-                } else if ($upd_website == ""){
-                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Username is required");
-                } else if ($upd_bio == ""){
-                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Email is required");
                 }  else if ($upd_day == "" || $upd_month == "" || $upd_year == ""){
                     msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is required");
                 } else if ($upd_day == "31" && ( $upd_month == "4" || $upd_month == "6" || $upd_month == "9" || $upd_month == "11" )){
@@ -61,16 +57,16 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK" ){
-                                msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "success", "glyphicon-remove", "OK");
+                                msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "success", "glyphicon-ok", "Update profile successfully.");
                                 interval = setInterval(
                                         function(){
-                                            $('#login-modal').modal('hide');
+                                            $('#profile-modal').modal('hide');
                                             location.href = 'index.php';
                                             clearInterval(interval);
                                         }
                                 , 1500);             
                             } else if(response.status == "FAIL"){              
-                                msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "FAIL");
+                                msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Update profile failed.");
 
                             }
                         }

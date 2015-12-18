@@ -37,7 +37,7 @@
 				                            <strong><?= $lang['TABLE_AVATAR']?>  : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="height: 23vw" src="../images/<?= $games['image'] ?>" alt="<?= $games['image'] ?>">
+                                            <img class="img-responsive" style="height: 23vw" src="../images/news/<?= $games['image'] ?>" alt="<?= $games['image'] ?>">
 				                        </div>				                        
 				                    </div>
                             	</div>
@@ -79,7 +79,7 @@
 				                            <strong><?= $lang['TABLE_BANNER']?>  : </strong> 
 				                        </div>
 				                        <div class="panel-body">
-                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/<?= $games['banner'] ?>" alt="<?= $games['banner'] ?>">
+                                            <img class="img-responsive" style="width: 880px; height: 250px;" src="../images/news/<?= $games['banner'] ?>" alt="<?= $games['banner'] ?>">
 				                        </div>				                        
 				                    </div>
                             	 </div>

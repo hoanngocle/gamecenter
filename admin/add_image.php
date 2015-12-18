@@ -1,11 +1,13 @@
-<!-- 
-    File       : add_image.php
-    Created on : Jul 11, 2015, 10:26:53 AM
-    Updated on : Nov 11, 2015, 10:26:53 PM   
-    Author     : Béo
--->
-<?php 
-	include('../includes/backend/mysqli_connect.php'); 
+<!--#####################################################################
+    #
+    #   File          : ADD IMAGE
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
+	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php');
 
     $title_page = 'Add Gallery';
@@ -13,7 +15,7 @@
 		// create variable error
 		$errors = array();
         $uid = $_SESSION['uid'];
-        
+
 		// validate title
 		if (empty($_POST['title'])) {
 			$errors[] = "title";
@@ -36,10 +38,10 @@
             if(mysqli_num_rows($check) > 0){
                 $errors[] = 'existIMG';
             }else {
-              $myImage =  $_FILES['myImage']['name'];  
+              $myImage =  $_FILES['myImage']['name'];
             }
 		}
-        
+
         // validate status
         if (isset($_POST['status'])) {
             $status = $_POST['status'];
@@ -48,30 +50,30 @@
         }
 
 		if (empty($errors)) {
-            // upload img      
-            $targetimg = '../images/uploads/'.$myImage;                  
+            // upload img
+            $targetimg = '../images/uploads/'.$myImage;
             move_uploaded_file($_FILES['myImage']['tmp_name'], $targetimg  );
-            
+
 			$result = addImage($uid, $type_id, $title, $myImage, $status);
-            
+
 			if (mysqli_affected_rows($dbc) == 1) {
                 echo "<script type='text/javascript'>
                         alert('{$lang['AD_IMG_SUCCESS']}');
                         window.location = 'list_images.php';
-                        </script>      
+                        </script>
                     ";
             } else {
                 echo "<script type='text/javascript'>
                         alert('{$lang['ADD_FAIL']}');
                         window.location = 'list_images.php';
-                        </script>      
+                        </script>
                     ";
             }
 		} else {
 			$error = $lang['AD_REQUIRED'];
 		}
     } // END main IF submit condition
-	include('../includes/backend/header-admin.php');    
+	include('../includes/backend/header-admin.php');
 ?>
 	<div class="content-wrapper">
         <div class="container">
@@ -87,7 +89,7 @@
                         <div class="panel-heading" style="text-align: center">
                             <h2><?= $lang['ADD_IMAGE_H2'] ?></h2>
                             <h4><a href="index.php"><?= $lang['ADD_IMAGE_LINK_HOME'] ?></a> / <a href="list_images.php"><?= $lang['ADD_IMAGE_LINK_LIST']?></a></h4>
-                        </div> <!-- END PANEL HEADING--> 
+                        </div> <!-- END PANEL HEADING-->
 						<?php if(!empty($error)) : ?>
                             <div class='message-error alert alert-danger'>
                                 <p><?= $error?></p>
@@ -96,7 +98,7 @@
     <!-- ================================== Form Add Images [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
-                                
+
                                 <!-- ================= Title [start] =================== -->
 								<div class="label-fontsize form-group" >
 								   	<label for="title"><?= $lang['ADD_IMAGE_FORM_TITLE_LABEL']?></label>
@@ -107,21 +109,21 @@
                                     </div>
                                 <?php endif; ?>
 								</div>
-                                
+
 								<!-- ================= Type [start] ===================== -->
 				     			<div class="label-fontsize form-group" >
 				                    <label><?= $lang['ADD_IMAGE_FORM_TYPE'] ?></label>
-				                    
+
 				                    <select name="type" class="label-fontsize form-control" style="height: 44px">
 				                        <option>-------</option>
-				                        <?php 
+				                        <?php
 											$query = "SELECT type_id, type_name FROM tbltypes WHERE cat_id = 3 ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$types[0]}'"; 
+													echo "<option value='{$types[0]}'";
 														if (isset($_POST['type']) && ($_POST['type'] == $types[0])) echo "selected='selected'";
-													echo ">".$types[1]."</option>";	
+													echo ">".$types[1]."</option>";
 												}
 											}
 										 ?>
@@ -148,7 +150,7 @@
                                         </div>
                                     <?php endif; ?>
 								</div>
-                                    	
+
                                 <!-- ================= Status: default is 0 [start] ===================== -->
                                 <div class="label-fontsize form-group" >
 				                    <label><?= $lang['ADD_IMAGE_FORM_STATUS']?></label>
@@ -158,18 +160,18 @@
 				                        <option value="1"><?= $lang['ADD_IMAGE_FORM_STATUS_VAL_1']?></option>
 				                    </select>
 				                </div>
-                                
+
 								<!-- ================= Submit, Reset & Back Button [start] ===================== -->
 								<center >
 									<input type="submit" name="submit" class="btncustom btn btn-success" style="margin-right: 5px"  value="<?= $lang['BUTTON_ADD'] ?>">
                                     <input type="reset" class="btncustom btn btn-warning" style="margin-right: 5px" value="<?= $lang['BUTTON_RESET'] ?>">
                                     <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
-								</center>							
-							</form> <!-- END FORM ADD VIDEO-->				 
-						</div> 
+								</center>
+							</form> <!-- END FORM ADD VIDEO-->
+						</div>
 		          	</div> <!-- END PANEL BODY-->
 				</div>
-    <!-- ================================== FORM ADD VIDEO [end] ===================================== -->		
+    <!-- ================================== FORM ADD VIDEO [end] ===================================== -->
 			</div>
 		</div> >
     </div>

@@ -1,30 +1,29 @@
 <!--#####################################################################
     #
-    #   File          : Header Admin - Header index in website  
+    #   File          : Header Admin - Header index in website
     #   Project       : Game Magazine Project
     #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
-    #   Last Change   : 10/21/2015
     #
     ##################################################################### -->
-<?php  
+<?php
     if($_SESSION['user_level'] == 1){
         redirect_to('admin/login_admin.php');
     }
-    
+
     if(!isset($_SESSION['uid'])){
         redirect_to('admin/login_admin.php');
     }
-    
+
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (15*60))) {
         // last login was more than 15 minutes ago
-        session_unset();     // unset $_SESSION variable for the run-time 
+        session_unset();     // unset $_SESSION variable for the run-time
         session_destroy();   // destroy session data in storage
         redirect_to('admin/login_admin.php');
     }
-    
-    $_SESSION['LAST_ACTIVITY'] = time(); 
-      
+
+    $_SESSION['LAST_ACTIVITY'] = time();
+
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,40 +31,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title><?php if(isset($title_page)) echo $title_page ?> - Game Magazine Manager </title>
-    
-    <!-- Css -->
+
+    <!-- CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet"  id="bootstrap-css"/>
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style-admin.css" rel="stylesheet" />
     <link href="assets/css/custom.css" rel="stylesheet" />
     <link rel="shortcut icon" href="http://s16.postimg.org/9irj2l7n5/gamemagazine.png">
     <link href="../includes/video-js/video-js.css" rel="stylesheet" type="text/css">
-    
+
     <!-- Javascript -->
     <script src="assets/js/function.js"></script>
-    <script language="javascript" src="../js/ckeditor/ckeditor.js" type="text/javascript"></script>  
+    <script language="javascript" src="../js/ckeditor/ckeditor.js" type="text/javascript"></script>
     <script src="../includes/video-js/video.js"></script>
     <script src="../includes/video-js/media.youtube.js"></script>
-<!--    <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        window.alert = function(){};
-        var defaultCSS = document.getElementById('bootstrap-css');
-        function changeCSS(css){
-            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
-            else $('head > link').filter(':first').replaceWith(defaultCSS); 
-        }
-        $( document ).ready(function() {
-          var iframe_height = parseInt($('html').height()); 
-          window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
-        });
-    </script>-->
-
 </head>
 <body>
-    <header>       
+    <header>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-2">
+                    <a class="language" style="text-decoration: none; color: #FFF" href="?lang=en"><?= $lang['FOOTER_Eng']?></a>
+                    &nbsp;&nbsp;
+                    <a class="language" style="text-decoration: none; color: #FFF" href="?lang=vi"><?= $lang['FOOTER_Viet']?></a>
+                </div>
+                <div class="col-md-10" style="padding-right: 30px;">
                     <strong>Email: </strong>hoancn1.ptit@gmail.com
                     &nbsp;&nbsp;
                     <strong>Support: </strong>+0166 702 5648
@@ -73,7 +63,7 @@
             </div>
         </div>
     </header>
- <!-- HEADER END #####################################################################-->
+ <!-- ===================================== HEADER END ======================================-->
     <div class="navbar navbar-inverse set-radius-zero">
         <div class="container">
             <div class="navbar-header">
@@ -96,7 +86,7 @@
                             <div class="dropdown-menu dropdown-settings">
                                 <div class="media">
                                     <a class="media-left" href="#">
-                                        <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
+                                        <img src="/images/avatar/<?= $_SESSION['avatar']?>" alt="" class="img-rounded" />
                                     </a>
                                     <div class="media-body">
                                         <h4 class="media-heading"><?= $_SESSION['fullname'] ?></h4>
@@ -105,10 +95,12 @@
                                 </div>
                                 <hr />
                                 <h5><strong>Personal Bio : </strong></h5>
-                                <?= $_SESSION['bio'] ?>
+                                	<?= $_SESSION['bio'] ?>
+                                <h5><strong>Website : </strong></h5>
+                                	<?= $_SESSION['website'] ?> <br>
                                 <hr />
                                 <center>
-                                <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="logout_admin.php" class="btn btn-danger btn-sm">Logout</a>
+                                	<a href="logout_admin.php" class="btn btn-danger btn-sm"><?=$lang['FOOTER_LogOut']?></a>
                                 </center>
                             </div>
                         </li>
@@ -117,22 +109,22 @@
             </div>
         </div>
     </div>
-    <!-- LOGO HEADER END ######################################################################-->
+    <!-- ===================================LOGO HEADER END ======================================-->
      <section class="menu-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>
-                            <li><a href="list_news.php">News </a></li>
-                            <li><a href="list_games.php">Games </a></li>
-                            <li><a href="list_images.php">Images </a></li>
-                            <li><a href="list_videos.php">Videos </a></li>
+                            <li><a href="index.php"><?= $lang['Home']?></a></li>
+                            <li><a href="list_news.php"><?= $lang['MENU_NEWS']?></a></li>
+                            <li><a href="list_games.php"><?= $lang['MENU_GAMES']?> </a></li>
+                            <li><a href="list_images.php"><?= $lang['MENU_GALLERY']?> </a></li>
+                            <li><a href="list_videos.php"><?= $lang['MENU_VIDEOS']?> </a></li>
                             <?php if(isset($_SESSION['user_level']) && $_SESSION['user_level'] == 99) { ?>
-                            <li><a href="list_user.php">User</a></li>
-                            <li><a href="list_type.php">Type</a></li>
-                            <li><a href="list_tag.php">Tag</a></li>
+                            <li><a href="list_user.php"><?= $lang['MENU_USER']?></a></li>
+                            <li><a href="list_type.php"><?= $lang['MENU_TYPE']?></a></li>
+                            <li><a href="list_tag.php"><?= $lang['MENU_TAG']?></a></li>
                             <?php } ?>
                         </ul>
                     </div>

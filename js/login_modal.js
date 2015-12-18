@@ -26,9 +26,12 @@ $(function () {
                 
                 var dataString = 'username=' + $lg_username + '&password=' + $lg_password;
 
-                if ($lg_username == "" || $lg_password == "") {
-                    msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is required");
-                } else {
+                if ($lg_username == "") {
+                    msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username is required");
+                }else if ( $lg_password == "") {
+                    msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Password is required");
+                } 
+                else {
                     $.ajax({
                         type: "POST",
                         url: "login.php",
@@ -36,7 +39,7 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK"){
-                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "LOGIN Successfully");
+                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login Successfully");
                                 interval = setInterval(
                                         function(){
                                             $('#login-modal').modal('hide');
@@ -46,7 +49,7 @@ $(function () {
                                 , 3000);
 
                             }else if (response.status == "FAIL"){                                
-                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username and password is invalid");
+                                msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login Failed. Username or password is incorrect");
 
                             }
                         }
@@ -74,11 +77,16 @@ $(function () {
                         data: dataString,
                         success: function (response) {
                             if (response.status == "OK" ){
-                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send SUCCESS");
-//                                location.href = 'index.php';
-//                                $('#login-modal').modal('hide');             
+                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send Password Successfully.");
+                                interval = setInterval(
+                                    function(){
+                                        $('#login-modal').modal('hide');
+                                        location.href = 'index.php';
+                                        clearInterval(interval);
+                                    }
+                                , 3000);           
                             }else if(response.status == "FAIL"){              
-                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-ok", "Send ERROR");
+                                msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send Password Failed.");
                             }
                         }
                     });                  
@@ -119,13 +127,13 @@ $(function () {
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username must be between 6 and 22 character");                    
                 } else if (!username.test($rg_username)){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is invalid");
+                } else if ($rg_password == ""){
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Password is required");
                 } else if ($rg_email == ""){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email address is required");
                 } else if (!email.test($rg_email)){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email address is invalid");
-                } else if ($rg_password == ""){
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Password is required");
-                }  else if ($rg_day == "" || $rg_month == "" || $rg_year == ""){
+                } else if ($rg_day == "" || $rg_month == "" || $rg_year == ""){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is required");
                 } else if ($rg_day == "31" && ( $rg_month == "4" || $rg_month == "6" || $rg_month == "9" || $rg_month == "11" )){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");                    
@@ -143,8 +151,13 @@ $(function () {
                         success: function (response) {
                             if (response.status == "OK" ){
                                 msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register Successfully");
-//                                location.href = 'index.php';
-//                                $('#login-modal').modal('hide');             
+                                interval = setInterval(
+                                    function(){
+                                        $('#login-modal').modal('hide');
+                                        location.href = 'index.php';
+                                        clearInterval(interval);
+                                    }
+                                , 3000);           
                             } else if(response.status == "FAIL"){              
                                 msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register Failed");
                             } else if(response.status == "USER"){              

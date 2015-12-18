@@ -60,18 +60,15 @@
         }
         return false;
     }
-
-    // DELETE SUCCESS ======================================================== 
-    function delete_success() {
-        alert('Xóa thành công!');
-    }
-
-    // DELETE FAIL ======================================================== 
-
-    // thong bao xoa that bai
-    function delete_fail() {
-        alert('Xóa chưa thành công!');
-
+    
+    // CONFIRM DELETE NEWS ======================================================== 
+    function check_delete_games(id) {
+        var result = confirm("Do You Really Want To Delete?");
+        if (result == true) {
+            window.location = "delete_games.php?gid=" + id;
+            return true;
+        }
+        return false;
     }
 
     // CHANGE STATUS USER ======================================================== 

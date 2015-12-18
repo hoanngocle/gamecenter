@@ -1,4 +1,12 @@
-<?php 
+<!--#####################################################################
+    #
+    #   File          : LIST VIDEO
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
     $title_page = 'Playlist';
     include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
@@ -39,7 +47,7 @@
                                     </thead>
 
                                     <tbody>
-									<?php 
+									<?php
                                         if(isset($_GET['sort'])){
                                             switch ($_GET['sort']) {
                                                 case 'id':
@@ -93,16 +101,15 @@
                                                 <td style='text-align:left'><?= $videos['name']?></td>
                                                 <td style='text-align:right'><?= $videos['date']?></td>
                                                 <td style='text-align:center'><?= $active?></td>
-
                                                 <td style='width : 100px'>
                                                 <a class='btn-action fa fa-eye' href='show_video.php?vid=<?= $videos['video_id']?>' style='text-decoration: none'></a>
                                                 <a class='btn-action fa fa-pencil' href='edit_video.php?vid=<?= $videos['video_id']?>' style='text-decoration: none'></a>
                                                 <a class='btn-action fa fa-trash-o' id='delete' name='delete' href='#' style='text-decoration: none' value='' onClick='check_delete_video(<?= $videos['video_id'] ?>);'></a>
                                                 </td>
                                             </tr>
-									<?php 
+									<?php
                                             }// END While loop
-										} else { 
+										} else {
                                     ?>
 										 	<p class='alert alert-warning'><?= $error_videos_no_item?></p>
 									<?php 	}   ?>

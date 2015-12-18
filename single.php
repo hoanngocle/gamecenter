@@ -1,10 +1,17 @@
-<?php 
-	//Include file php function vs connect DB
-	include('includes/backend/mysqli_connect.php'); 
+<!--#####################################################################
+    #
+    #   File          : SINGLE NEWS
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
+	include('includes/backend/mysqli_connect.php');
 	include('includes/functions.php');
-	
+
 	if($nid = validate_id($_GET['nid'])) {
-		
+
 		$set = get_news_by_id($nid);
 		$posts = array(); // create array to save data
 
@@ -22,31 +29,19 @@
 						'content' => $news['content']
 				);
 		}else {
-			$errors =  "<p>There are currently no post in this category.</p>";
+			$errors =  $lang['FRONT_VIDEO_NEW_SINGLE'];
 		}
-        
-        $result2 = get_tag_by_id($nid);
-        $tags = null ;
-        if (mysqli_num_rows($result2) > 0 ) {	
-			$array_tag = mysqli_fetch_array($result2, MYSQLI_ASSOC);      
-            $tags = $array_tag['keyword'];
-        }
-       
 	}else {
-		//if dont have nid, redirect user
 		redirect_to('404.php');
 	}
 	include('includes/frontend/header.php');
 ?>
 
-<!--content-->
 	<div class="container">
 		<div class="single">
-			<!-- Show content -->
 			<div class="blog-to">
-			<!-- In ra trang 404 neu ko có page -->
 			<?php foreach ($posts as $news){ ?>
-                <img class="img-responsive sin-on" style="width: 1110px; height: 338px;" src="images/<?= $news['banner']; ?>" alt="" />
+                <img class="img-responsive sin-on" style="width: 1110px; height: 320px;" src="images/news/<?= $news['banner']; ?>" alt="" />
                 <div class="blog-top">
                     <div class="blog-left">
                         <b><?= $news['day']; ?></b>
@@ -54,17 +49,28 @@
                     </div>
                     <div class="top-blog">
                         <a class="fast" href="#"><?= $news['title']; ?></a>
-                        <p>Posted by <a href="#"><?= $news['name']; ?></a> in <a href="#"><?= $news['type_name']; ?></a></p> 
-                        <p class="sed"><?= $news['content']; ?></p>			
-                        Tag: <a class="fast" href="search.php?tag=<?= $tags ?>"><?= $tags ?></a>
+                        <p><?= $lang['FRONT_VIDEO_POST_BY']?><a href="#"><?= $news['name']; ?></a> in <a href="#"><?= $news['type_name']; ?></a></p>
+                        <p class="sed"><?= $news['content']; ?></p>
+                        <b>Tag:</b>
+                        <?php
+                         	$rs = get_tag_by_id($nid);
+					        if (mysqli_num_rows($rs) > 0 ) {
+								while($array_tag = mysqli_fetch_array($rs, MYSQLI_ASSOC)){
+								$tags = $array_tag['keyword'];
+					            ?>
+                        <a class="fast" href="result.php?keyword=<?= $tags ?>"><?= $tags ?></a>,
+			            <?php
+				        	}
+				        }
+				        ?>
                     <div class="clearfix"> </div>
                     </div>
                 <div class="clearfix"> </div>
                 </div>
-			<?php  } ?>				
+			<?php  } ?>
 			</div>
 		<!-- Comment -->
-		<?php include('includes/frontend/comment_form.php') ?>		
+		<?php include('includes/frontend/comment_form.php') ?>
 		</div>
 	</div>
 <!-- goi file chua header -->

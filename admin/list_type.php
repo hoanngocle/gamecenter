@@ -1,16 +1,22 @@
+<!--#####################################################################
+    #
+    #   File          : LIST TYPE
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     $title_page = 'List Type';
     include('../includes/functions.php');
 	include('../includes/backend/header-admin.php');
 	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
-    
+
     if ($_SESSION['user_level'] != 99){
         redirect_to('admin/404.php');
     }
 ?>
-
-	<!-- Script ################## -->
 	<div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -21,7 +27,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-    <!-- ============================== Table News [start] ============================== -->
+    <!-- ============================== Table TYPE [start] ============================== -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center">List Type </h2>
@@ -39,35 +45,28 @@
                                     </thead>
 
                                     <tbody>
-									<?php 
-
-										// Truy xuat csdl de hien thi category
+									<?php
+                                        // get TYPE in DB
 										$result = get_type();
 										if(mysqli_num_rows($result) > 0 ) {
-
-										// vong lap while de hien thi ket qua tu csdl ra
-									 	while($list = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+									 		while($list = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                                         ?>
-								 				<tr>
-									                <td style='text-align:center' ><?= $list['type_id'] ?></td>
-									                <td style='text-align:left'><?= $list['cat_name'] ?></td>
-									                <td style='text-align:left'><?= $list['type_name'] ?></td>
-                                                        
-									                </td>
-												</tr>
-									 			
-                                    <?php }// END While loop
-										} else { 
+						 				<tr>
+							                <td style='text-align:center' ><?= $list['type_id'] ?></td>
+							                <td style='text-align:left'><?= $list['cat_name'] ?></td>
+							                <td style='text-align:left'><?= $list['type_name'] ?></td>
+										</tr>
+                                    <?php }	// END WHILE loop
+										} else {
                                     ?>
-                                        <!--Neu khong co page de hien thi, bao loi hoac noi nguoi dung tao page-->
-										 	<p class='alert alert-warning'><?= $error_list_user_no_item ?></p>
-									<?php 	}   ?>
+									 	<p class='alert alert-warning'><?= $error_list_user_no_item ?></p>
+									<?php 	} // END IF   ?>
 							    	</tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-    <!-- ============================== Table News [end] ============================== -->
+    <!-- ============================== Table TYPE [end] ============================== -->
     			</div>
     		</div>
 		</div>

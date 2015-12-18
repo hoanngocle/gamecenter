@@ -1,3 +1,11 @@
+<!--#####################################################################
+    #
+    #   File          : INDEX - HOME
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     $title_page = 'Home';
     include('../includes/functions.php');
@@ -5,18 +13,11 @@
 	include('../includes/backend/mysqli_connect.php');
     include('../includes/errors.php');
 ?>
-	<!-- HEADER ####################################################################################### -->
 	<div class="content-wrapper">
 	    <div class="container">
-<!-- 	    <div class="row">
-	            <div class="col-md-12">
-	                <h4 class="page-head-line">Dashboard</h4>
-	            </div>
-	        </div>
- -->
 	        <div class="row">
 	            <div class="col-md-12">
-	                <h4 class="page-head-line"> Website Manager </h4>
+	                <h4 class="page-head-line"><?= $lang['HOME_MANAGE'] ?></h4>
 	            </div>
 	        </div>
 
@@ -25,7 +26,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-one">
                         <a href="list_news.php"><i  class="fa fa-newspaper-o dashboard-div-icon" ></i></a>
-                         <h5>News Manager </h5>
+                         <h5><?= $lang['ADD_NEWS_PAGE_HEADER']?></h5>
                     </div>
                 </div>
 
@@ -33,7 +34,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-two">
                         <a href="list_games.php"><i  class="fa fa-gamepad dashboard-div-icon" ></i></a>
-                         <h5>Games Manager  </h5>
+                         <h5><?= $lang['ADD_GAME_PAGE_HEADER']?> </h5>
                     </div>
                 </div>
 
@@ -41,7 +42,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-three">
                         <a href="list_images.php"><i  class="fa fa-picture-o dashboard-div-icon" ></i></a>
-                        <h5>Gallery Manager  </h5>
+                        <h5><?= $lang['ADD_IMAGE_PAGE_HEADER']?></h5>
                     </div>
                 </div>
 
@@ -49,14 +50,14 @@
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <div class="dashboard-div-wrapper bk-clr-four">
                         <a href="list_videos.php"><i  class="fa fa-youtube-play dashboard-div-icon" ></i></a>
-                         <h5>Videos Manager  </h5>
+                         <h5><?= $lang['ADD_VIDEO_PAGE_HEADER']?></h5>
                     </div>
                 </div>
 		    </div>
 
 			<div class="row">
 	            <div class="col-md-12">
-	                <h4 class="page-head-line"> Notice </h4>
+	                <h4 class="page-head-line"> <?= $lang['HOME_NOTICE']  ?></h4>
 	            </div>
 	        </div>
 

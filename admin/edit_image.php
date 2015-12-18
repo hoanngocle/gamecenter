@@ -1,9 +1,17 @@
-<?php 
-	include('../includes/backend/mysqli_connect.php'); 
+<!--#####################################################################
+    #
+    #   File          : EDIT IMAGE
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
+<?php
+	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php');
 
     $title_page = 'Edit Gallery';
-	if ( $iid = validate_id($_GET['iid'])) {		
+	if ( $iid = validate_id($_GET['iid'])) {
         $result = get_image_item($iid);
 
         if (mysqli_num_rows($result) == 1) {
@@ -11,7 +19,7 @@
         }else {
             redirect_to('admin/list_images.php');
         }
-        
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors = array();
 
@@ -22,7 +30,7 @@
                 $title = mysqli_real_escape_string($dbc, strip_tags($_POST['title']));
             }
 
-            // validate type 
+            // validate type
             if (isset($_POST['type']) && filter_var($_POST['type'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
                 $type_id = $_POST['type'];
             }else{
@@ -43,13 +51,13 @@
 					echo "<script type='text/javascript'>
                             alert('{$lang['AD_EDIT_IMG_SUCCESS']}');
                             window.location = 'list_images.php';
-                            </script>      
+                            </script>
                         ";
 				} else {
                     echo "<script type='text/javascript'>
                             alert('{$lang['AD_EDIT_FAIL']}');
                             window.location = 'list_images.php';
-                            </script>      
+                            </script>
                         ";
 				}
             } else {
@@ -75,13 +83,13 @@
                         <div class="panel-heading" style="text-align: center">
                             <h2><?= $lang['EDIT_IMAGE_H2'] ?></h2>
                             <h4><a href="index.php"><?= $lang['ADD_IMAGE_LINK_HOME']?></a> / <a href="list_images.php"><?= $lang['ADD_IMAGE_LINK_LIST']?></a></h4>
-                        </div> <!-- END PANEL HEADING--> 
+                        </div> <!-- END PANEL HEADING-->
 						<?php if(!empty($error)) : ?>
                             <div class='message-error alert alert-danger'>
                                 <p><?= $error?></p>
                             </div>
             			<?php endif; ?>
-     <!-- ================================== FORM EDIT GAME [start] ===================================== -->         
+     <!-- ================================== FORM EDIT GAME [start] ===================================== -->
                    		<div class="panel-body" style="margin: 0 20px 0 20px">
 							<form id="add_news" action="" method="post" enctype="multipart/form-data">
                             <!-- ================= Title [start] =================== -->
@@ -94,21 +102,21 @@
                                     </div>
                                 <?php endif; ?>
 								</div>
-                            
+
                                 <!-- ================= Type [start] =================== -->
 				     			<div class="label-fontsize form-group">
 				                    <label><?= $lang['ADD_IMAGE_FORM_TYPE']?></label>
-				                    
+
 				                    <select name="type_id" class="label-fontsize form-control" style="height: 44px">
 				                        <option>-------</option>
-				                        <?php 
+				                        <?php
 											$query = "SELECT type_id, type_name FROM tbltypes ORDER BY type_id ASC";
 											$result = mysqli_query($dbc, $query);
 											if(mysqli_num_rows($result) > 0){
 												while($types = mysqli_fetch_array($result, MYSQLI_NUM)){
-													echo "<option value='{$types[0]}'"; 
+													echo "<option value='{$types[0]}'";
 														if (isset($games['type_id']) && ($games['type_id'] == $types[0])) echo "selected='selected'";
-													echo ">".$types[1]."</option>";	
+													echo ">".$types[1]."</option>";
 												}
 											}
 										 ?>
@@ -118,16 +126,16 @@
 											<p><?= $lang['ADD_IMAGE_FORM_TYPE_REQUIRED']?></p>
 	                    				</div>
                                     <?php endif; ?>
-				                </div>  
+				                </div>
 
 								<!-- Submit & Reset Button -->
 								<center >
 									<input type="submit" name="submit" class="btncustom btn btn-success" value="<?= $lang['BUTTON_UPDATE']?>">
                                     <input type="reset" class="btncustom btn btn-warning" value="<?= $lang['BUTTON_RESET'] ?>">
                                     <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
-								</center>							
-							</form> <!-- END FORM ADD NEWS-->				 
-						</div> 
+								</center>
+							</form> <!-- END FORM ADD NEWS-->
+						</div>
 		          	</div> <!-- END PANEL BODY-->
 				</div>
 			</div>

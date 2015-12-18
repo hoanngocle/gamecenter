@@ -1,19 +1,21 @@
+<!--#####################################################################
+    #
+    #   File          : BLOG NEWS
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
-include('includes/backend/mysqli_connect.php');
-include('includes/functions.php');
-
-include('includes/frontend/header.php');
+    include('includes/backend/mysqli_connect.php');
+    include('includes/functions.php');
+    include('includes/frontend/header.php');
 ?>
-
-<!--content-->
 <div class="blog">
     <div class="container">
         <h2><?php echo ucfirst($_GET['t']) ?></h2>
         <div class="single-inline">
-
             <?php
-            //  $record = 0;
-
             if (isset($_GET['t'])) {
                 $display = 4;
                 $start = (isset($_GET['s']) && filter_var($_GET['s'], FILTER_VALIDATE_INT, array('min_range' => 1))) ? $_GET['s'] : 0;
@@ -48,7 +50,6 @@ include('includes/frontend/header.php');
                         $result = get_news_type($type, $start, $display);
                         break;
                 }
-
                 $posts = array(); // create array to save data
                 $title = $type;
 
@@ -66,34 +67,32 @@ include('includes/frontend/header.php');
                             'count' => $news['count'],
                             'content' => $news['content'],
                         );
-                        ?>          
-                        <div class="blog-to">   
-                            <div class="blog-top">
-                                <div class="blog-left">
-                                    <b><?= $posts['day'] ?></b>
-                                    <span><?= $posts['month'] ?></span>
-                                </div>
-                                <div class="top-blog">
-                                    <a class="fast" href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['title'] ?></a>
-                                    <p>Posted by <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['post_by'] ?></a> in <a href="#"><?= $posts['type_name'] ?></a> | <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['count'] ?> Comments</a></p> 
-                                    <p class="sed"><?php echo excerpt($posts['content']) ?></p> 
-                                    <br>
-                                    <a  href="single.php?nid=<?= $posts['news_id'] ?>" class="more">Readmore<span> </span></a>
-
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-
-                        <?php
+            ?>
+            <div class="blog-to">
+                <div class="blog-top">
+                    <div class="blog-left">
+                        <b><?= $posts['day'] ?></b>
+                        <span><?= $posts['month'] ?></span>
+                    </div>
+                    <div class="top-blog">
+                        <a class="fast" href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['title'] ?></a>
+                        <p>Posted by <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['post_by'] ?></a> in <a href="#"><?= $posts['type_name'] ?></a> | <a href="single.php?nid=<?= $posts['news_id'] ?>"><?= $posts['count'] ?> Comments</a></p>
+                        <p class="sed"><?php echo excerpt($posts['content']) ?></p>
+                        <br>
+                        <a  href="single.php?nid=<?= $posts['news_id'] ?>" class="more">Readmore<span> </span></a>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <?php
                     }
                 }
             } else {
                 //if dont have nid, redirect user
                 redirect_to('404.php');
             }
-            ?>    			
-            <!--Pagination [start]--> 
+            ?>
+            <!--Pagination [start]-->
             <nav>
                 <ul class="pagination">
                     <?php
@@ -101,7 +100,6 @@ include('includes/frontend/header.php');
                         $page = $_GET['p'];
                     } else {
                         $record = 20;
-                        // Nếu biến p không có, sẽ truy vấn CSDL để tìm xem có bao nhiêu page để hiển thị
                         if ($record > $display) {
                             $page = ceil($record / $display);
                         } else {
@@ -113,7 +111,7 @@ include('includes/frontend/header.php');
                         $current_page = ($start / $display) + 1;
 
                         if ($current_page != 1) {
-                            ?>  
+                            ?>
                             <li><a href='blog.php?t=<?= $_GET['t'] ?>&s=<?= $start - $display ?>&p=<?= $page ?>' aria-hidden="true">«</span></a></li>
                             <?php
                         }
@@ -137,12 +135,11 @@ include('includes/frontend/header.php');
                             <?php
                         }
                     }
-                    ?>              
+                    ?>
                 </ul>
             </nav>
-            <!--Pagination [end]--> 
+            <!--Pagination [end]-->
         </div>
     </div>
-</div>		
-
+</div>
 <?php include('includes/frontend/footer.php'); ?>

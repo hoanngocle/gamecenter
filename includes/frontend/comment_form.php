@@ -1,8 +1,16 @@
+<!--#####################################################################
+    #
+    #   File          : FRONT-END : COMMENT FORM
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
 <?php
     // Show comment from Database
     $result = show_comment($nid);
     if (($count = mysqli_num_rows($result)) > 0) {
-        ?>		
+        ?>
         <div class='single-middle'>
             <h3><?= $count ?> Comment</h3>
         <?php
@@ -10,7 +18,7 @@
         ?>
             <div class='media'>
                 <div class='media-left'>
-                    <img class='media-object' src='images/avatar/co.png' alt=''>
+                    <img class='media-object' style="width: 90px; height: 90px; "src='images/avatar/co.png' alt=''>
                 </div>
                 <div class='media-body'>
                     <h4 class='media-heading'><?= $author ?></h4>
@@ -20,13 +28,10 @@
             </div>
         <?php } ?>
         </div>
+    <?php } ?>
     <?php
-    }
-    ?>
-
-    <?php 
         if(isset($_SESSION['uid'])){
-    ?> 
+    ?>
     <div class="single-bottom">
         <h3>Leave A Comment</h3>
         <form name="comment-form" id="comment-form" action="comment.php" method="POST">
@@ -36,9 +41,8 @@
                 <button type="submit" class="btn btn-success btn-lg btn-block" style="margin: auto; width: 20%;">Send</button>
             </div>
         </form>
-    <script type="text/javascript" src="/js/comment.js"></script> 
-    </div>           
+    <script type="text/javascript" src="/js/comment.js"></script>
+    </div>
     <?php
         }
     ?>
-    
