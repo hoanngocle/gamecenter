@@ -328,7 +328,7 @@ $lang['ACTIVATE_EXPIRED'] = 'Tài khoản của bạn đã quá hạn để kíc
 // FRONT-END : GAMES
 
 $lang['GAME'] = 'Trò chơi';
-$lang['FRONT_VIDEO_POST'] = 'Đăng bởi';
+$lang['FRONT_VIDEO_POST_BY'] = 'Đăng bởi';
 $lang['FRONT_VIDEO_PUBLIC_ON'] = 'Xuất bản vào';
 
 // FRONT-END : SINGLE NEW
@@ -360,3 +360,5 @@ $lang['GAME_NO_ITEM']= "Không có game nào để hiển thị! Hãy tạo mớ
 $lang['IMAGE_NO_ITEM'] = "Không có image nào để hiển thị! Hãy upload image trước để có thể hiển thị!";
 $lang['VIDEO_NO_ITEM']= "Không có video nào để hiển thị! Hãy upload video trước để có thể hiển thị!";
 $lang['USER_NO_ITEM']= "Hiện tại không có người dùng nào là thành viên trang web!";
+
+$lang['FRONT_NO_RESULT'] = 'Không tìm thấy bài viết nào phù hợp.';
