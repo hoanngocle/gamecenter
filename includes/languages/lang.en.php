@@ -38,20 +38,20 @@ $lang['GAME_SPORT'] = 'Sport';
 $lang['GAME_RACING'] = 'Racing';
 $lang['GAME_STRATEGY'] = 'Strategy';
 
-
 // H2
+
 $lang['HEADER_NEWS'] = 'NEWS';
 $lang['HEADER_GALLERY'] = 'GALLERY';
 $lang['HEADER_VIDEO'] = 'VIDEO';
 
 // Button
+
 $lang['BUTTON_ADD'] = 'Add';
 $lang['BUTTON_RESET'] = 'Reset';
 $lang['BUTTON_BACK'] = 'Back';
 $lang['BUTTON_UPDATE'] = 'Update';
 $lang['BUTTON_EDIT'] = 'Edit';
 $lang['BUTTON_DELETE'] = 'Delete';
-
 $lang['READ_MORE'] = 'Read More';
 
 $lang['Comments'] = 'Comments';
@@ -129,6 +129,7 @@ $lang['re_pass'] = 'Confirm New Password';
 // BACK-END =================================================================
 
 // MENU
+
 $lang['Home'] = 'Home';
 
 $lang['HOME_MANAGE'] = 'Website Manager';
@@ -167,6 +168,7 @@ $lang['AD_DEL_SUCCESS'] = 'Delete item from database successfully.';
 $lang['AD_DEL_FAIL'] = 'Delete item from database failed.';
 
 // ADD GAMES PAGE
+
 $lang['ADD_GAME_PAGE_HEADER'] = 'Manage Game';
 $lang['ADD_GAME_H2'] = 'Add Game';
 $lang['ADD_GAME_LINK_HOME'] = 'Home';
@@ -259,6 +261,7 @@ $lang['ADD_VIDEO_FORM_STATUS_VAL_1'] = 'Active';
 $lang['EDIT_VIDEO_H2'] = 'Edit Video';
 $lang['ADD_VIDEO_CHECK_ID'] = 'This link is invalid.';
 $lang['ADD_VIDEO_ID_EXIST'] = 'This link has already exist';
+
 // ADD TYPE
 
 $lang['ADD_TYPE_PAGE_HEADER'] = 'Type Manage';
@@ -288,6 +291,7 @@ $lang['ADD_USER_LINK_HOME'] = 'Home';
 $lang['ADD_USER_LINK_LIST'] = 'List Member';
 
 // TABLE
+
 $lang['TABLE_ID'] = 'ID';
 $lang['TABLE_TYPE'] = 'Type';
 $lang['TABLE_CATEGORY'] = 'Category';
@@ -324,12 +328,11 @@ $lang['ACTIVATE_EXPIRED'] = 'This link has expired!';
 
 $lang['GAME'] = 'Games';
 
-// FRONT-END : GAMES
-
 $lang['FRONT_VIDEO_POST_BY'] = 'Posted by';
 $lang['FRONT_VIDEO_PUBLIC_ON'] = 'Published on';
 
 // FRONT-END : SINGLE NEW
+
 $lang['FRONT_VIDEO_NEW_SINGLE'] = 'There are currently no video in this category.';
 $lang['FRONT_RESULT'] = 'Result';
 

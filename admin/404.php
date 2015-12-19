@@ -7,9 +7,9 @@
     #
     ##################################################################### -->
 <?php
-	include('includes/backend/mysqli_connect.php');
-	include('includes/functions.php');
- 	include('includes/backend/header-admin.php');
+	include('../includes/backend/mysqli_connect.php');
+	include('../includes/functions.php');
+ 	include('../includes/backend/header-admin.php');
 ?>
 <div class="four">
 	<div class="container">
@@ -18,4 +18,5 @@
 		<a href="javascript:history.go(-1)" class="more">Go Back </a>
 	</div>
 </div>
-<?php include('includes/backend/footer-admin.php')?>
+</div>
+<?php include('../includes/backend/footer-admin.php')?>

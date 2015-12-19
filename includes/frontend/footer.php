@@ -357,7 +357,7 @@
         Design by  <a href="http://facebook.com/beo.sagittarius.93" target="_blank">Béo Sagitarius</a>
     </p>
 
-    <!-------------------------------- onTop Button ------------------------------->
+    <!-------------------------------- onTop Button -------------------------------->
     <div id="goTop">
         <script type="text/javascript">
             $(function () {
@@ -374,7 +374,7 @@
         </script>
     </div>
 
-    <!-------------------------------- onTop Button ------------------------------->
+    <!-------------------------------- onTop Button -------------------------------->
 </div>
 </body>
 </html>

@@ -62,6 +62,13 @@
             $errors[] = 'status';
         }
 
+        // validate tag
+        if (isset($_POST['tag'])) {
+        	$tag = $_POST['tag'];
+        }else{
+        	$errors[] = 'tag';
+        }
+
 		if (empty($errors)) {
             $targetava = '../images/news/'.$myAvatar;
             $targetbanner = '../images/news/'.$myBanner;
@@ -72,6 +79,54 @@
 			$result = addNews($uid, $type_id, $title, $myAvatar, $myBanner, $content, $status);
 
 			if (mysqli_affected_rows($dbc) == 1) {
+				// add tag
+				$result = get_last_rc();
+                if(mysqli_num_rows($result) == 1 ){
+                    $news = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $news_id = $news['news_id'];
+                }
+                // split tag
+                $tags = explode(',', $tag);
+                for ($i = 0; $i < count($tags); $i++) {
+                    $tag = trim($tags[$i]);
+                    // check tag exist
+                    $rs = get_tag_item_by_key($tag);
+                    // tag not exist
+                    if(mysqli_num_rows($rs) == 0){
+                        // add tag
+                        $rsadd = addTag($tag);
+                        if(mysqli_affected_rows($dbc) == 1){ // add tag success
+                            // get tag id by last record
+                            $result = get_last_rc_tag();
+                            $last_tag = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            $tag_id = $last_tag['tag_id'];
+
+                            // add tag data
+                            $query = add_tag_data($news_id, $tag_id);
+                            if(mysqli_affected_rows($dbc) == 1){
+
+                            }else {
+                                $errors[] = 'tag_error';
+                            }
+                        } else { // add tag failed
+                            $errors[] = 'tag_error';
+                        }
+                    // tag exist
+                    }else {
+                        // get tag id by keyword
+                        $rs = get_tag_id_by_key($tag);
+                        $tag = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+                        $tag_id = $tag['tag_id'];
+
+                        // add tag data
+                        $query = add_tag_data($news_id, $tag_id);
+                        if(mysqli_affected_rows($dbc) == 1){
+
+                        }else {
+                            $errors[] = 'tag_error';
+                        }
+                    }
+                }
                 echo "<script type='text/javascript'>
                         alert('{$lang['AD_NEWS_SUCCESS']}');
                         window.location = 'list_news.php';
@@ -116,7 +171,7 @@
 
                                 <!-- ================= Title [start] =================== -->
 								<div class="label-fontsize form-group" >
-                                    <label for="title"><?= $lang['Title'] ?></label>
+                                    <label for="title"><?= $lang['ADD_NEWS_FORM_TITLE_LABEL'] ?></label>
                                     <input style="height: 44px" type="text" class="label-fontsize form-control" id="title" name="title" size="20" maxlength="150" placeholder="<?= $lang['ADD_NEWS_FORM_TITLE_TEXT'] ?> " value="<?php if(isset($title)) : echo $title; endif; ?>"/>
 								<?php if(isset($errors) && in_array('title', $errors)) : ?>
                                     <div class='message alert alert-warning'>
@@ -192,6 +247,17 @@
                                         <p><?= $lang['ADD_NEWS_FORM_CONTENT_REQUIRED'] ?></p>
                                     </div>
                                 <?php endif; ?>
+								</div>
+
+								<!-- ================= Tag [start] ===================== -->
+				     			<div class="label-fontsize form-group"  >
+									<label for="tag"><?= $lang['ADD_GAME_FORM_TAG']?></label>
+									<input style="height: 44px" type="text" class="label-fontsize form-control" id="tag" name="tag" size="20" maxlength="150" placeholder="<?= $lang['ADD_TAG_FORM_TAG_TEXT'] ?>  " value="<?php if(isset($tag)) : echo $tag; endif; ?>"/>
+								<?php if(isset($errors) && in_array('tag', $errors)) : ?>
+									<div class='message alert alert-warning' >
+										<p><?= $lang['ADD_TAG_FORM_TAG_REQUIRED'] ?></p>
+									</div>
+								<?php endif; ?>
 								</div>
 
                                 <!-- ================= Status: default is 0 [start] ===================== -->

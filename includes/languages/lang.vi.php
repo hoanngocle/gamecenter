@@ -38,22 +38,21 @@ $lang['GAME_SPORT'] = 'Thể thao';
 $lang['GAME_RACING'] = 'Đua xe';
 $lang['GAME_STRATEGY'] = 'Chiến lược';
 
-
 // H2
+
 $lang['HEADER_NEWS'] = 'TIN TỨC MỚI';
 $lang['HEADER_GALLERY'] = 'THƯ VIỆN ẢNH';
 $lang['HEADER_VIDEO'] = 'THƯ VIỆN VIDEO';
 
 // Button
+
 $lang['BUTTON_ADD'] = 'Thêm';
 $lang['BUTTON_RESET'] = 'Reset';
 $lang['BUTTON_BACK'] = 'Trở lại';
 $lang['BUTTON_UPDATE'] = 'Cập nhật';
 $lang['BUTTON_EDIT'] = 'Chỉnh sửa';
 $lang['BUTTON_DELETE'] = 'Xóa';
-
 $lang['READ_MORE'] = 'Đọc thêm';
-
 
 $lang['Comments'] = 'Bình luận';
 $lang['Send'] = 'Gửi';
@@ -63,6 +62,7 @@ $lang['Submit'] = 'Gửi';
 $lang['Cancel'] = 'Hủy';
 $lang['Reset'] = 'Reset';
 $lang['Update'] = 'Cập nhật';
+
 // NEWS
 
 $lang['NEWS_NEWEST'] = 'MỚI NHẤT';
@@ -76,7 +76,6 @@ $lang['FOOTER_ABOUTUS'] = 'VỀ CHÚNG TÔI';
 $lang['FOOTER_LANGUAGE'] = 'Ngôn Ngữ';
 $lang['FOOTER_Eng'] = 'English';
 $lang['FOOTER_Viet'] = 'Tiếng Việt';
-
 
 $lang['FOOTER_SERVICE'] = 'DỊCH VỤ';
 $lang['FOOTER_ContactUs'] = 'Liên Hệ';
@@ -102,6 +101,7 @@ $lang['LOGIN_msg'] = 'Nhập tài khoản và mật khẩu.';
 $lang['REG_msg'] = 'Đăng ký tài khoản mới.';
 
 // REGISTER FORM
+
 $lang['FULLNAME'] = 'Tên';
 $lang['FIRST_NAME'] = 'Họ';
 $lang['LAST_NAME'] = 'Tên';
@@ -118,6 +118,7 @@ $lang['Bio'] = 'Tiểu sử';
 $lang['Change_pass'] = 'Đổi mật khẩu';
 
 // MESSAGE Forgot password
+
 $lang['FORGOT_Email'] = 'Nhập địa chỉ e-mail.';
 $lang['UPD_msg'] = 'Thay đổi trang cá nhân.';
 $lang['Change_msg'] = 'Đổi mật khẩu.';
@@ -167,6 +168,7 @@ $lang['AD_DEL_SUCCESS'] = 'Xóa item trong cơ sở dữ liệu thành công.';
 $lang['AD_DEL_FAIL'] = 'Xóa item trong cơ sở dữ liệu thất bại.';
 
 // ADD GAMES PAGE
+
 $lang['ADD_GAME_PAGE_HEADER'] = 'Quản lý Trò chơi';
 $lang['ADD_GAME_H2'] = 'Thêm Trò chơi mới';
 $lang['ADD_GAME_LINK_HOME'] = 'Trang chủ';
@@ -192,6 +194,7 @@ $lang['EDIT_GAME_H2'] = 'Chỉnh sửa Trò chơi';
 $lang['LIST_GAME_LINK_CREATE'] = 'Tải lên trò chơi';
 
 // ADD NEWS PAGE
+
 $lang['ADD_NEWS_PAGE_HEADER'] = 'Quản lý Tin tức';
 $lang['ADD_NEWS_H2'] = 'Thêm Tin tức mới';
 $lang['ADD_NEWS_LINK_HOME'] = 'Trang chủ';
@@ -215,8 +218,8 @@ $lang['ADD_NEWS_FORM_STATUS_VAL_0'] = 'Không được hiển thị';
 $lang['ADD_NEWS_FORM_STATUS_VAL_1'] = 'Được hiển thị';
 $lang['EDIT_NEWS_H2'] = 'Chỉnh sửa Tin tức';
 
-
 // ADD IMAGE PAGE
+
 $lang['ADD_IMAGE_PAGE_HEADER'] = 'Quản lý Thư viện ảnh';
 $lang['ADD_IMAGE_H2'] = 'Tải lên Ảnh';
 $lang['ADD_IMAGE_LINK_HOME'] = 'Trang chủ';
@@ -235,6 +238,7 @@ $lang['ADD_IMAGE_FORM_STATUS_VAL_1'] = 'Được hiển thị';
 $lang['EDIT_IMAGE_H2'] = 'Chỉnh sửa Ảnh';
 
 // ADD VIDEO PAGE
+
 $lang['ADD_VIDEO_PAGE_HEADER'] = 'Quản lý Video';
 $lang['ADD_VIDEO_H2'] = 'Tải lên Video';
 $lang['ADD_VIDEO_LINK_HOME'] = 'Trang chủ';
@@ -242,7 +246,6 @@ $lang['ADD_VIDEO_LINK_LIST'] = 'Danh sách video';
 $lang['ADD_VIDEO_FORM_ID_VIDEO'] = 'ID Video';
 $lang['ADD_VIDEO_FORM_VIDEO'] = 'Video';
 $lang['ADD_VIDEO_FORM_THUMBNAIL'] = 'Ảnh ';
-
 $lang['ADD_VIDEO_FORM_TITLE_LABEL'] = 'Tiêu đề';
 $lang['ADD_VIDEO_FORM_TITLE_TEXT'] = 'Hãy nhập tiêu đề...';
 $lang['ADD_VIDEO_FORM_TITLE_REQUIRED'] = 'Tiêu đề không được để trống.';
@@ -257,6 +260,8 @@ $lang['ADD_VIDEO_FORM_STATUS'] = 'Trạng thái';
 $lang['ADD_VIDEO_FORM_STATUS_VAL_0'] = 'Không được hiển thị';
 $lang['ADD_VIDEO_FORM_STATUS_VAL_1'] = 'Được hiển thị';
 $lang['EDIT_VIDEO_H2'] = 'Chỉnh sửa Video';
+$lang['ADD_VIDEO_CHECK_ID'] = 'Đường dẫn video không chính xác.';
+$lang['ADD_VIDEO_ID_EXIST'] = 'Đường dẫn video đã tồn tại';
 
 // ADD TYPE
 
@@ -287,6 +292,7 @@ $lang['ADD_USER_LINK_HOME'] = 'Trang chủ';
 $lang['ADD_USER_LINK_LIST'] = 'Danh sách thành viên';
 
 // TABLE
+
 $lang['TABLE_ID'] = 'ID';
 $lang['TABLE_TYPE'] = 'Thể loại';
 $lang['TABLE_CATEGORY'] = 'Nhãn';
@@ -322,13 +328,11 @@ $lang['ACTIVATE_EXPIRED'] = 'Tài khoản của bạn đã quá hạn để kíc
 // FRONT-END : GAMES
 
 $lang['GAME'] = 'Trò chơi';
-
-// FRONT-END : GAMES
-
 $lang['FRONT_VIDEO_POST'] = 'Đăng bởi';
 $lang['FRONT_VIDEO_PUBLIC_ON'] = 'Xuất bản vào';
 
 // FRONT-END : SINGLE NEW
+
 $lang['FRONT_VIDEO_NEW_SINGLE'] = 'Không có Video nào để hiển thị.';
 $lang['FRONT_RESULT'] = 'Kết quả';
 
