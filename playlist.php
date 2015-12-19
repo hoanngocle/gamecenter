@@ -1,6 +1,6 @@
 <!--#####################################################################
     #
-    #   File          : PLAYLIST VIDEO
+    #   File          : VIDEO
     #   Project       : Game Magazine Project
     #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
@@ -9,21 +9,16 @@
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
+        $result = get_video_by_id(11);
+        if(mysqli_num_rows($result) > 0 ){
+            $video = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }
     include('includes/frontend/header.php');
 ?>
 <div class="container">
     <div class="content-top" style="padding-top: 1.3em">
         <div class="video_embed" style="width: 125%; height: 510px; left: -150px; position: relative;">
             <div class="col-lg-8" id="embed_player" style="left: 19%; margin: auto ;" >
-                <?php
-                    if(isset($_GET['vid'])){
-                        $vid = $_GET['vid'];
-                        $result = get_video_by_id($vid);
-                        if(mysqli_num_rows($result) > 0 ){
-                            $video = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                        }
-                    }
-                ?>
                 <video id="example_video_1" class="video-js vjs-default-skin" controls
                     preload="auto" width="854" height="480"
                     poster=""
@@ -38,8 +33,8 @@
                     <img id="img_video" src="../images/avatar/ava_admin.jpg">
                 </div>
                 <div class="col-lg-10">
-                    <p class="text-des"><a href="#"><?= $video['name']; ?></a> in <a href="#"><?= $video['type_name']; ?></a></p>
-                    <p class="text-des"><?= $video['date'] ?></p>
+                    <p class="text-des"><?= $lang['FRONT_VIDEO_POST_BY']?> <a href="#"><?= $video['name']; ?></a> in <a href="#"><?= $video['type_name']; ?></a></p>
+                    <p class="text-des"><?= $lang['FRONT_VIDEO_PUBLIC_ON']?><?= $video['date'] ?></p>
                 </div>
             </div>
             <div class="col-lg-12"  style=" background-color: #F1F1F1; margin-bottom: 1vw;">

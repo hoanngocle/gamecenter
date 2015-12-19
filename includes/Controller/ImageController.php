@@ -24,9 +24,9 @@
         $query = " SELECT * "
                 . "FROM tblimages AS i "
                 . "INNER JOIN tbltypes AS t "
-                . "WHERE i.type_id = t.type_id and T.type_id != 17 "
+                . "WHERE i.type_id = t.type_id and t.type_id != 17 "
                 . "AND i.status = 1 AND t.cat_id = 3 "
-                . "ORDER BY i.create_date LIMIT 1";
+                . "ORDER BY i.create_date DESC LIMIT 1";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
@@ -40,9 +40,9 @@
         $query = " SELECT * "
                 . "FROM tblimages AS i "
                 . "INNER JOIN tbltypes AS t "
-                . "WHERE i.type_id = t.type_id and T.type_id != 17 "
+                . "WHERE i.type_id = t.type_id and t.type_id != 17 "
                 . "AND i.status = 1 AND t.cat_id = 3 "
-                . "ORDER BY i.create_date LIMIT 1,6";
+                . "ORDER BY i.create_date DESC LIMIT 1,6";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);

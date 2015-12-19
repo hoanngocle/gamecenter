@@ -23,14 +23,14 @@ $(function () {
             case "login-form":
                 var $lg_username = $('#login_username').val();
                 var $lg_password = $('#login_password').val();
-                
+
                 var dataString = 'username=' + $lg_username + '&password=' + $lg_password;
 
                 if ($lg_username == "") {
                     msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Username is required");
                 }else if ( $lg_password == "") {
                     msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Password is required");
-                } 
+                }
                 else {
                     $.ajax({
                         type: "POST",
@@ -48,17 +48,17 @@ $(function () {
                                         }
                                 , 3000);
 
-                            }else if (response.status == "FAIL"){                                
+                            }else if (response.status == "FAIL"){
                                 msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login Failed. Username or password is incorrect");
 
                             }
                         }
                     });
-                
+
                 }
-                return false;                    
+                return false;
                 break;
-                
+
             case "lost-form":
                 var $ls_email = $('#lost_email').val();
                 var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
@@ -84,16 +84,16 @@ $(function () {
                                         location.href = 'index.php';
                                         clearInterval(interval);
                                     }
-                                , 3000);           
-                            }else if(response.status == "FAIL"){              
+                                , 3000);
+                            }else if(response.status == "FAIL"){
                                 msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send Password Failed.");
                             }
                         }
-                    });                  
+                    });
                 }
                 return false;
                 break;
-                
+
             case "register-form":
                 var $rg_firstname = $('#register_firstname').val();
                 var $rg_lastname = $('#register_lastname').val();
@@ -111,7 +111,7 @@ $(function () {
                 var email = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
 
                 var dataString = 'firstname=' + $rg_firstname
-                                + '&lastname=' + $rg_lastname 
+                                + '&lastname=' + $rg_lastname
                                 + '&username=' + $rg_username
                                 + '&email=' + $rg_email
                                 + '&password=' + $rg_password
@@ -124,7 +124,7 @@ $(function () {
                 } else if ($rg_username == ""){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is required");
                 } else if ($rg_username.length < 6 || $rg_username.length > 22 ){
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username must be between 6 and 22 character");                    
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username must be between 6 and 22 character");
                 } else if (!username.test($rg_username)){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is invalid");
                 } else if ($rg_password == ""){
@@ -136,11 +136,11 @@ $(function () {
                 } else if ($rg_day == "" || $rg_month == "" || $rg_year == ""){
                     msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is required");
                 } else if ($rg_day == "31" && ( $rg_month == "4" || $rg_month == "6" || $rg_month == "9" || $rg_month == "11" )){
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");                    
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");
                 } else if ($rg_month == "2" && ( $rg_day == "30" || $rg_day == "31" || $rg_day == "29")){
-                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");                   
-                } 
-                          
+                    msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");
+                }
+
                 //==========================
                 else {
                     $.ajax({
@@ -157,16 +157,16 @@ $(function () {
                                         location.href = 'index.php';
                                         clearInterval(interval);
                                     }
-                                , 3000);           
-                            } else if(response.status == "FAIL"){              
+                                , 3000);
+                            } else if(response.status == "FAIL"){
                                 msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register Failed");
-                            } else if(response.status == "USER"){              
+                            } else if(response.status == "USER"){
                                 msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Username is already exits");
-                            }else if(response.status == "EMAIL"){              
+                            }else if(response.status == "EMAIL"){
                                 msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Email is already exits");
                             }
                         }
-                    }); 
+                    });
                 }
                 return false;
                 break;

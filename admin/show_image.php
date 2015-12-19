@@ -1,10 +1,10 @@
-<?php 
-	include('../includes/backend/mysqli_connect.php'); 
+<?php
+	include('../includes/backend/mysqli_connect.php');
 	include('../includes/functions.php');
 
 	if( $iid = validate_id($_GET['iid'])){
 		$set = get_image_by_id($iid);
-        
+
 		$images = array();
 		if(mysqli_num_rows($set) > 0 ) {
 		 	$images = mysqli_fetch_array($set, MYSQLI_ASSOC);
@@ -12,8 +12,8 @@
 			redirect_to('admin/list_images.php');
 		}
 	}else{
-		redirect_to('admin/list_images.php');		
-	}	
+		redirect_to('admin/list_images.php');
+	}
     $title_page = $images['type_name'];
 	include('../includes/backend/header-admin.php');
 	?>
@@ -26,24 +26,24 @@
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $images['type_name'] ?></h2>
                             <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_IMAGE_LINK_HOME']?></a> / <a href="list_images.php"><?= $lang['ADD_IMAGE_LINK_LIST']?></a></h4>
-                        </div> <!-- END PANEL HEADING--> 
+                        </div> <!-- END PANEL HEADING-->
 
                         <div class="panel-body">
-                            <div class="row" class="show-fontsize">   
-					            
+                            <div class="row" class="show-fontsize">
+
 			                  	<div class="col-md-6" >
 					                <div class="show-fontsize alert alert-success">
-					                 	<strong>News ID :  </strong> <?= $images['image_id'] ?> 
+					                 	<strong>Image ID :  </strong> <?= $images['image_id'] ?>
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
 					                <div class="show-fontsize alert alert-success">
-					                 	<strong ><?= $lang['TABLE_TYPE']?> : </strong> <?= $images['type_name'] ?> 
+					                 	<strong ><?= $lang['TABLE_TYPE']?> : </strong> <?= $images['type_name'] ?>
 					                </div>
 					            </div>
 					            <div class="col-md-6" >
 					                <div class="show-fontsize alert alert-success">
-					                 	<strong ><?= $lang['TABLE_TITLE']?> : </strong> <?= $images['title'] ?> 
+					                 	<strong ><?= $lang['TABLE_TITLE']?> : </strong> <?= $images['title'] ?>
 					                </div>
 					            </div>
                                 <div class="col-md-6" >
@@ -56,20 +56,20 @@
 					                 	<strong ><?= $lang['TABLE_POST_ON']?> : </strong> <?= $images['date'] ?>
 					                </div>
 					            </div>
-                                
+
                                 <div class="col-md-6" >
 					                <div class="show-fontsize alert alert-success">
-					                 	<strong >Status : </strong> <?= $images['status'] ?>
+					                 	<strong ><?= $lang['TABLE_STATUS'] ?> : </strong> <?= $images['status'] ?>
 					                </div>
 					            </div>
                                 <div class="col-md-12" style="margin-left: 65px ; max-width : 900px">
 									<div class="panel panel-success">
 				                        <div class="panel-heading">
-				                            <strong class="show-fontsize">Image : </strong> 
+				                            <strong class="show-fontsize"><?= $lang['TABLE_IMAGE']?> : </strong>
 				                        </div>
 				                        <div class="panel-body">
                                             <img class="img-responsive" style="margin: auto;" src="../images/gallery/<?= $images['image'] ?>" alt="<?= $images['image'] ?>">
-				                        </div>				                        
+				                        </div>
 				                    </div>
                             	</div>
                                 <div class="col-md-11" style="margin-left: 4%">
@@ -79,7 +79,7 @@
                                             echo "Inactive";
                                         }else{
                                             echo "Active";
-                                        } ?> 
+                                        } ?>
 					                </div>
 					            </div>
                             	<div class="col-md-12">
@@ -89,8 +89,8 @@
                                             <input type="button" class="btncustom btn btn-warning" onClick="check_delete_image(<?= $iid ?>)" value="<?= $lang['BUTTON_DELETE'] ?>">
                                             <input type="button" class="btncustom btn btn-danger" onclick="window.history.back();" value="<?= $lang['BUTTON_BACK'] ?>">
 						                </div>
-                            		</center>   
-					            </div>						
+                            		</center>
+					            </div>
       						</div>
                         </div> <!-- END PANEL BODY-->
                     </div> <!-- END PANEL -->

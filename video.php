@@ -9,21 +9,23 @@
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
+
+    if(isset($_GET['vid'])){
+        $vid = $_GET['vid'];
+        $result = get_video_by_id($vid);
+        if(mysqli_num_rows($result) > 0 ){
+            $video = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        }
+    }else {
+        redirect_to('index.php');
+    }
+
     include('includes/frontend/header.php');
 ?>
 <div class="container">
     <div class="content-top" style="padding-top: 1.3em">
         <div class="video_embed" style="width: 125%; height: 510px; left: -150px; position: relative;">
             <div class="col-lg-8" id="embed_player" style="left: 19%; margin: auto ;" >
-                <?php
-                    if(isset($_GET['vid'])){
-                        $vid = $_GET['vid'];
-                        $result = get_video_by_id($vid);
-                        if(mysqli_num_rows($result) > 0 ){
-                            $video = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                        }
-                    }
-                ?>
                 <video id="example_video_1" class="video-js vjs-default-skin" controls
                     preload="auto" width="854" height="480"
                     poster=""

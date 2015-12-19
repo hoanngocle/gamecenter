@@ -99,8 +99,8 @@
 
                                                 <td style='width : 100px'>
                                                 <a class='btn-action fa fa-eye' href='show_image.php?iid=<?= $images['image_id']?>' style='text-decoration: none'></a>
-                                                <a class='fa fa-pencil' href='edit_image.php?iid=<?= $images['image_id']?>' style='text-decoration: none'></a>
-                                                <a class='fa fa-trash-o' id='delete' name='delete' href='#' style='text-decoration: none' onClick='check_delete_image(<?= $images['image_id'] ?>);'></a>
+                                                <a class='btn-action fa fa-pencil' href='edit_image.php?iid=<?= $images['image_id']?>' style='text-decoration: none'></a>
+                                                <a class='btn-action fa fa-trash-o' id='delete' name='delete' href='#' style='text-decoration: none' onClick='check_delete_image(<?= $images['image_id'] ?>);'></a>
                                                 </td>
                                             </tr>
 

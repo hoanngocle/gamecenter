@@ -14,9 +14,9 @@
     <div class="four">
 		<div class="container">
             <h3>Congratulation!</h3>
-			<p>Bạn đã đăng kí thành công tài khoản ở GameCenter. <br> Vui lòng vào email để kích hoạt tài khoản.</p>
+			<p>Bạn đã kích hoạt tài khoản thành công.<br> Vui lòng đăng nhập vào hệ thống.</p>
         	<br>
-			<a href="javascript:history.go(-1)" class="more">Go Back </a>
+			<a href="index.php" class="more">Home</a>
 		</div>
 	</div>
 

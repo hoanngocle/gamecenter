@@ -13,8 +13,8 @@
 ?>
     <div class="four">
 		<div class="container">
-            <h3>OOPS! SORRY!</h3>
-			<p>Bạn đã đăng kí thành công tài khoản ở GameCenter. <br> Vui lòng vào email để kích hoạt tài khoản.</p>
+            <h3>SORRY!</h3>
+			<p>Kích hoạt tài khoản thất bại. <br> Vui lòng vào email để kiểm tra lại mã kích hoạt</p>
         	<br>
 			<a href="javascript:history.go(-1)" class="more">Go Back </a>
 		</div>

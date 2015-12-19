@@ -122,7 +122,7 @@
 								                <td style='text-align:right'><?= $list['date'] ?></td>
                                                 <td style='text-align:center'><?= $active ?></td>
 								                <td style='width : 100px'>
-								                <a class='fa fa-eye' href='show_user.php?nid=<?= $list['user_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
+								                <a class='fa fa-eye' href='show_user.php?uid=<?= $list['user_id'] ?>' style='font-size: 20px; margin-left: 5px; text-decoration: none'></a>
 								                </td>
 											</tr>
 

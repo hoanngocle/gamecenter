@@ -481,8 +481,14 @@ a.comment i{
     min-height: 477px;
 }
 .four h2{
-    color: #8fbf00;
+    color: #64C370;
     font-size: 7em;
+    font-family: 'Montserrat Alternates', sans-serif;
+    padding: 0.1em 0 0.2em;
+}
+.four h3{
+    color: #64C370;
+    font-size: 3em;
     font-family: 'Montserrat Alternates', sans-serif;
     padding: 0.1em 0 0.2em;
 }

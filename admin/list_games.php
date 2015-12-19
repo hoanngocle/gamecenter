@@ -86,9 +86,9 @@
 										if(mysqli_num_rows($result) > 0 ) :
 									 	while($games = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                                             if($games['status'] == 0):
-                                                $active = "<a class='btn-action fa fa-remove' href='#' style='text-decoration: none' onClick='change_status_news({$games['news_id']},{$games['status']})'></a>";
+                                                $active = "<a class='btn-action fa fa-remove' href='#' style='text-decoration: none' onClick='change_status_game({$games['news_id']},{$games['status']})'></a>";
                                             else :
-                                                $active = "<a class='btn-action fa fa-check' href='#' style='text-decoration: none' onClick='change_status_news({$games['news_id']},{$games['status']})'></a>";
+                                                $active = "<a class='btn-action fa fa-check' href='#' style='text-decoration: none' onClick='change_status_game({$games['news_id']},{$games['status']})'></a>";
                                             endif;
                                         ?>
 								 				<tr>

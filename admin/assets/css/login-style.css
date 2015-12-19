@@ -11,7 +11,7 @@ html, body {
 
 /*The form part*/
 .content {
-    /*A box that the form resides in - centered vertically and horizontally based on the window. The max-width and % width combo allow it to resize for small devices*/  
+    /*A box that the form resides in - centered vertically and horizontally based on the window. The max-width and % width combo allow it to resize for small devices*/
     background: #FFF;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -308,7 +308,7 @@ svg{
     transform-origin: 50px 50px;
 }
 
-/*Rotation Animation - Should be set to a factor of 360 to prevent jumpiness*/ 
+/*Rotation Animation - Should be set to a factor of 360 to prevent jumpiness*/
 @-webkit-keyframes rotator{
     to{
         -webkit-transform: rotate(360deg);

@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     File       : custom.css
     Created on : Nov 11, 2015, 10:26:53 AM
     Author     : Béo
@@ -12,19 +12,19 @@ and open the template in the editor.
 .avatar{
     display: block;
     width: 25vw;
-    height: 25vw;    
+    height: 25vw;
 }
 
 .banner {
     display: block;
     width: 70vw;
-    height: 20vw;    
+    height: 20vw;
 }
 
 .image{
     display: block;
     width: 70vw;
-    height: 39vw;    
+    height: 39vw;
 }
 
 .message {
@@ -34,7 +34,7 @@ and open the template in the editor.
 }
 
 .message-error{
-    font-size: 1.25vw; 
+    font-size: 1.25vw;
     margin: 25px 35px;
 }
 
@@ -45,7 +45,7 @@ and open the template in the editor.
 .btncustom {
     padding: 0.5vw;
     font-size: 1.25vw;
-    width: 8.5%;
+    width: 10%;
     margin-right: 5px;
 }
 
@@ -71,5 +71,32 @@ and open the template in the editor.
 }
 
 .show-banner {
-    
+
+}
+
+/*--four--*/
+.four{
+    padding: 9em 0 10em;
+    text-align: center;
+    min-height: 477px;
+}
+.four h2{
+    color: #64C370;
+    font-size: 7em;
+    font-family: 'Montserrat Alternates', sans-serif;
+    padding: 0.1em 0 0.2em;
+}
+.four p{
+    color:#2d2d2d;
+    font-size: 2em;
+}
+a.more {
+    color: #fff;
+    background: #64C370;
+    padding: 0.5em 1em;
+    display: inline-block;
+    text-decoration: none;
+}
+a.more:hover {
+    background: #2d2d2d;
 }

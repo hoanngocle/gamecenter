@@ -350,3 +350,12 @@ $lang['CONTACT_US_NAME'] = 'Name';
 $lang['CONTACT_US_EMAIL'] = 'Email';
 $lang['CONTACT_US_TITLE'] = 'Title';
 $lang['CONTACT_US_CONTENT'] = 'Message';
+
+$lang['404'] = 'Could not Find it!';
+
+$lang['NEWS_NO_ITEM'] = "Không có bài viết nào để hiển thị! Hãy tạo mới các bài viết trước để có thể hiển thị!";
+$lang['GAME_NO_ITEM']= "Không có game nào để hiển thị! Hãy tạo mới các game trước để có thể hiển thị!";
+$lang['IMAGE_NO_ITEM'] = "Không có image nào để hiển thị! Hãy upload image trước để có thể hiển thị!";
+$lang['VIDEO_NO_ITEM']= "Không có video nào để hiển thị! Hãy upload video trước để có thể hiển thị!";
+$lang['USER_NO_ITEM']= "Hiện tại không có người dùng nào là thành viên trang web!";
+

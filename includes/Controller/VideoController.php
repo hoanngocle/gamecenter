@@ -8,7 +8,7 @@
                 . " INNER JOIN tbltypes AS t "
                 . " WHERE v.type_id = t.type_id  "
                 . " AND v.status = 1 AND t.cat_id = 4 "
-                . " ORDER BY v.create_date LIMIT 1";
+                . " ORDER BY v.create_date DESC LIMIT 1";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);
@@ -25,7 +25,7 @@
                 . " INNER JOIN tbltypes AS t "
                 . " WHERE v.type_id = t.type_id  "
                 . " AND v.status = 1 AND t.cat_id = 4 "
-                . " ORDER BY v.create_date LIMIT 1,6";
+                . " ORDER BY v.create_date DESC LIMIT 1,6";
 
         $result = mysqli_query($dbc, $query);
         confirm_query($result, $query);

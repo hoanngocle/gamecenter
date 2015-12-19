@@ -185,3 +185,18 @@
 
         return $result;
     }
+
+    // FRONT-END : GET USER ==============================================================
+
+    function get_user_by_id_list($uid) {
+        global $dbc;
+
+        $query = "SELECT *, CONCAT_WS(' ', first_name, last_name) AS fullname ";
+        $query .= " FROM tblusers WHERE user_id = {$uid} ";
+        $query .= " LIMIT 1 ";
+
+        $result = mysqli_query($dbc, $query);
+        confirm_query($result, $query);
+
+        return $result;
+    }

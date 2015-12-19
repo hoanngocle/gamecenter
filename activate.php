@@ -9,7 +9,6 @@
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
-    include('includes/frontend/header.php');
 ?>
     <div class="four">
         <div class="container">
@@ -43,6 +42,8 @@
             } else {
                 redirect_to();
             }
+
+            include('includes/frontend/header.php');
             ?>
         </div>
     </div>

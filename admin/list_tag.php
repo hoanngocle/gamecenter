@@ -31,7 +31,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 style="text-align: center"><?= $lang['ADD_TAG_LINK_LIST']?></h2>
-                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_TAG_LINK_HOME']?></a> / <a href="add_tag.php"><?= $lang['ADD_TAG_H2'] ?></a></h4>
+                            <h4 style="text-align: center" ><a href="index.php"><?= $lang['ADD_TAG_LINK_HOME']?></a></h4>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -54,7 +54,7 @@
 							                <td style='text-align:center' ><?= $list['tag_id'] ?></td>
 							                <td style='text-align:left'><?= $list['keyword'] ?></td>
 							                <td style='width : 100px'>
-								                <a class='btn-action fa fa-eye' style='text-decoration: none' href='show_tag.php?tid=<?= $list['tag_id'] ?>'></a>
+
 								                <a class='btn-action fa fa-pencil' style='text-decoration: none' href='edit_tag.php?tid=<?= $list['tag_id'] ?>'></a>
 											</td>
 										</tr>

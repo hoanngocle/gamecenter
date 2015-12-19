@@ -9,6 +9,9 @@
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
+    if (!isset($_GET['t'])){
+        redirect_to();
+    }
     include('includes/frontend/header.php');
 ?>
 <div class="blog">
@@ -87,9 +90,6 @@
             <?php
                     }
                 }
-            } else {
-                //if dont have nid, redirect user
-                redirect_to('404.php');
             }
             ?>
             <!--Pagination [start]-->

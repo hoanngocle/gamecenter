@@ -9,6 +9,18 @@
 <?php
     include('includes/backend/mysqli_connect.php');
     include('includes/functions.php');
+    if (isset($_GET['tid'])) {
+        $rs = get_type_by_id($_GET['tid']);
+        $title = '';
+            if(mysqli_num_rows($rs) == 1 ){
+                $type = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+                $title = $type['type_name'];
+            }else{
+                redirect_to();
+            }
+    }else {
+        redirect_to();
+    }
     include('includes/frontend/header.php');
 ?>
     <script type="text/javascript" src="js/jssor.js"></script>
@@ -97,13 +109,7 @@
     </script>
 <div class="container" style="padding-bottom: 70px">
         <h2 style=" font-size: 3em;    font-family: 'Montserrat Alternates', sans-serif;    color: #2d2d2d;    text-align: center;    padding: 1.3em 0;">
-            <?php
-                $rs = get_type_by_id($_GET['tid']);
-                if(mysqli_num_rows($rs) == 1 ){
-                    $type = mysqli_fetch_array($rs, MYSQLI_ASSOC);
-                    echo $type['type_name'];
-                }
-            ?>
+        <?= $title?>
         </h2>
 
     <div id="slider1_container" style="position: relative;  margin: auto; width: 600px; height: 500px; background-color: #000; overflow: hidden;">

@@ -13,10 +13,9 @@
 ?>
 <div class="four">
 	<div class="container">
-		<p>OOPS! - Could not Find it</p>
+		<p>OOPS! - <?= $lang['404']?></p>
 		<h2>404</h2>
 		<a href="javascript:history.go(-1)" class="more">Go Back </a>
 	</div>
 </div>
-</div>
-<?php include('../includes/backend/footer-admin.php')?>
+<?php include('../includes/backend/footer-admin.php'); ?>

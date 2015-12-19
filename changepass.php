@@ -1,11 +1,3 @@
-<!--#####################################################################
-    #
-    #   File          : CHANGE PASS - AJAX
-    #   Project       : Game Magazine Project
-    #   Author        : Béo Sagittarius
-    #   Created       : 07/01/2015
-    #
-    ##################################################################### -->
 <?php
     include('/includes/backend/mysqli_connect.php');
     include('/includes/functions.php');

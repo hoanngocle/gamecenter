@@ -31,7 +31,7 @@
     }
     ;
 
-    // CONFIRM DELETE NEWS ======================================================== 
+    // CONFIRM DELETE NEWS ========================================================
     function check_delete_news(id) {
         var result = confirm("Do You Really Want To Delete?");
         if (result == true) {
@@ -41,7 +41,7 @@
         return false;
     }
 
-    // CONFIRM DELETE VIDEO ======================================================== 
+    // CONFIRM DELETE VIDEO ========================================================
     function check_delete_video(id) {
         var result = confirm("Do You Really Want To Delete?");
         if (result == true) {
@@ -51,7 +51,7 @@
         return false;
     }
 
-    // CONFIRM DELETE IMAGES ======================================================== 
+    // CONFIRM DELETE IMAGES ========================================================
     function check_delete_image(id) {
         var result = confirm("Do You Really Want To Delete?");
         if (result == true) {
@@ -60,8 +60,8 @@
         }
         return false;
     }
-    
-    // CONFIRM DELETE NEWS ======================================================== 
+
+    // CONFIRM DELETE NEWS ========================================================
     function check_delete_games(id) {
         var result = confirm("Do You Really Want To Delete?");
         if (result == true) {
@@ -71,7 +71,7 @@
         return false;
     }
 
-    // CHANGE STATUS USER ======================================================== 
+    // CHANGE STATUS USER ========================================================
     function change_status_user(id, stt) {
         if (stt === 1) {
             var result = confirm("Do You Really Want To Block User?");
@@ -85,18 +85,28 @@
         }
         return false;
     }
-    
-    // CHANGE STATUS USER ======================================================== 
+
+    // CHANGE STATUS USER ========================================================
     function change_status_news(id, stt) {
-        var result = confirm("Do You Really Want To Change Status?");     
+        var result = confirm("Do You Really Want To Change Status?");
         if (result == true) {
             window.location = "change_news.php?nid=" + id + "&stt=" + stt;
             return true;
         }
         return false;
     }
-    
-    // CHANGE STATUS USER ======================================================== 
+
+    // CHANGE STATUS GAMES ========================================================
+    function change_status_game(id, stt) {
+        var result = confirm("Do You Really Want To Change Status?");
+        if (result == true) {
+            window.location = "change_game.php?nid=" + id + "&stt=" + stt;
+            return true;
+        }
+        return false;
+    }
+
+    // CHANGE STATUS USER ========================================================
     function change_status_image(id, stt) {
         var result = confirm("Do You Really Want To Change Status?");
 
@@ -106,8 +116,8 @@
         }
         return false;
     }
-    
-    // CHANGE STATUS USER ======================================================== 
+
+    // CHANGE STATUS USER ========================================================
     function change_status_video(id, stt) {
         var result = confirm("Do You Really Want To Change Status?");
 
@@ -117,4 +127,3 @@
         }
         return false;
     }
-    
