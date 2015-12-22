@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : COMMENT
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    ##################################################################### -->
     include('/includes/backend/mysqli_connect.php');
     include('/includes/functions.php');
     $author = $_SESSION['fullname'];
