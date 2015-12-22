@@ -1,4 +1,5 @@
-<!--#####################################################################
+<?php
+    #####################################################################
     #
     #   File          : LOGOUT - USER
     #   Project       : Game Magazine Project
@@ -6,7 +7,6 @@
     #   Created       : 07/01/2015
     #
     ##################################################################### -->
-<?php
     $title_page = 'Logout';
 	include('/includes/backend/mysqli_connect.php');
 	include('/includes/functions.php');

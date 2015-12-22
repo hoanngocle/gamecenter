@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : VIDEO CONTROLLER
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    #####################################################################
     // FRONT-END : GET FIRST THUMBNAIL IN VIDEO
     function get_first_thumbnail() {
         global $dbc;

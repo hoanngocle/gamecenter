@@ -1,12 +1,12 @@
-<!--#####################################################################
+<?php
+    #####################################################################
     #
-    #   File          : Header Admin - Header index in website
+    #   File          : HEADER ADMIN
     #   Project       : Game Magazine Project
     #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
     #
-    ##################################################################### -->
-<?php
+    #####################################################################
     if($_SESSION['user_level'] == 1){
         redirect_to('admin/login_admin.php');
     }

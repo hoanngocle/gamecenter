@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : UTILITY
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    #####################################################################
     // DEFINE CONSTANT URL
     define('BASE_URL', 'http://www.gamecenter.dev/');
     define('LIVE', FALSE); // FALSE - DEV | TRUE - PRODUCTION

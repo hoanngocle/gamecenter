@@ -1,4 +1,5 @@
-<!--#####################################################################
+<?php
+    #####################################################################
     #
     #   File          : ACTIVE SUCCESS
     #   Project       : Game Magazine Project
@@ -6,7 +7,6 @@
     #   Created       : 07/01/2015
     #
     ##################################################################### -->
-<?php
 	include('includes/backend/mysqli_connect.php');
 	include('includes/functions.php');
  	include('includes/frontend/header.php');

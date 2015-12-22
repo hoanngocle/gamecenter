@@ -11,11 +11,11 @@ $("#contact-form").submit(function(e)
         success: function(response)
         {
             if(response.status == "OK"){
-                location.href = 'index.php';
+                location.href = 'send_success.php';
             } else if (response.status == "NULL"){
                 location.reload();
             } else if (response.status == "FAIL"){
-location.href = 'index.php';
+                location.href = 'send_fail.php';
             }
         },
 	});

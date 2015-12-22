@@ -1,7 +1,7 @@
 <?php
     #####################################################################
     #
-    #   File          : ACTIVATE FAILED
+    #   File          : SEND FAIL
     #   Project       : Game Magazine Project
     #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
@@ -14,7 +14,7 @@
     <div class="four">
 		<div class="container">
             <h3>SORRY!</h3>
-			<p>Kích hoạt tài khoản thất bại. <br> Vui lòng vào email để kiểm tra lại mã kích hoạt</p>
+			<p>Đã có lỗi xảy ra khi nhận thông tin góp ý của bạn <br> Vui lòng gửi lại nội dung vào hmf thư của chúng tôi.</p>
         	<br>
 			<a href="javascript:history.go(-1)" class="more">Go Back </a>
 		</div>
