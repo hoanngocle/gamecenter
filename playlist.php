@@ -63,7 +63,7 @@
             ?>
                 <li class="item-row-1" style="width: 100%; padding-left: 0px;">
                 <div class="col-lg-5">
-                    <a href="playlist.php?vid=<?= $video['video_id'] ?>" ><img src="images/thumbnails/<?= $video['thumbnail']?>" alt="<?= $video['title']?>" width="120" height="90"></a>
+                    <a href="video.php?vid=<?= $video['video_id'] ?>" ><img src="images/thumbnails/<?= $video['thumbnail']?>" alt="<?= $video['title']?>" width="120" height="90"></a>
                 </div>
                 <div class="col-lg-7">
                     <h5 class="title-video-row1"><?= $video['title']?></h5>

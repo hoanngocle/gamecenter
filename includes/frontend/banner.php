@@ -2,7 +2,7 @@
     #
     #   File          : Banner - Banner index in website
     #   Project       : Game Magazine Project
-    #   Author        : BÃ©o Sagittarius
+    #   Author        : Béo Sagittarius
     #   Created       : 07/01/2015
     #
     ##################################################################### -->

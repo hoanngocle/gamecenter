@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : TAG CONTROLLER
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    #####################################################################
     // BACK-END : GET TAG BY ID
     function get_tag_by_id($nid) {
         global $dbc;

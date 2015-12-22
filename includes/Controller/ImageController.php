@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : IMAGE CONTROLLER
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    #####################################################################
 	// FRONT-END - GET BANNER ==================================================================
     function get_banner() {
         global $dbc;

@@ -8,7 +8,7 @@ $("#comment-form").submit(function(e)
             type: "POST",
             dataType: "json",
             data : postData,
-            success: function(response) 
+            success: function(response)
             {
                 if(response.status == "OK"){
                     location.reload();

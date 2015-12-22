@@ -1,4 +1,12 @@
 <?php
+    #####################################################################
+    #
+    #   File          : NEW CONTROLLER
+    #   Project       : Game Magazine Project
+    #   Author        : Béo Sagittarius
+    #   Created       : 07/01/2015
+    #
+    #####################################################################
     /*  GET 1 NEW by ID
     *   FRONT-END: single.php
     *   BACK-END : show_game ; show_news

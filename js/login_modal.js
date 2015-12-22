@@ -1,13 +1,3 @@
-/* #####################################################################
- #
- #   File          : Login Modal Popup JQuery
- #   Project       : Game Magazine Project
- #   Author        : Béo Sagittarius
- #   Created       : 07/29/2015
- #   Last Change   : 10/14/2015
- #
- ##################################################################### */
-
 $(function () {
 
     var $formLogin = $('#login-form');
