@@ -1,11 +1,3 @@
-<!--#####################################################################
-    #
-    #   File          : Index
-    #   Project       : Game Magazine Project
-    #   Author        : Béo Sagittarius
-    #   Created       : 07/01/2015
-    #
-    ##################################################################### -->
 <?php
 	include('includes/backend/mysqli_connect.php');
 	include('includes/functions.php');
@@ -16,7 +8,7 @@
         <!--===================================== New game [start] =====================================-->
 		<div class="container">
 			<div class="content-top">
-				<a href="gallery.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"><?= $lang['HEADER_GAME']?></h2></a>
+				<a href="games.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"><?= $lang['HEADER_GAME']?></h2></a>
 				<div class="wrap">
 					<div class="main">
 						<ul id="og-grid" class="og-grid">
@@ -70,7 +62,7 @@
 
         <div class="featured">
 			<div class="container">
-                <a href="" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"> <?= $lang['HEADER_NEWS']?></h2></a>
+                <a href="news.php" style="text-decoration:none;"><h2 class="new" style="padding-bottom: 14px"> <?= $lang['HEADER_NEWS']?></h2></a>
                 <br>
                 <!--===================================== News [start] =====================================-->
                 <!-- =============== Newest News ============== -->

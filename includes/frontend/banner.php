@@ -1,11 +1,3 @@
-<!--#####################################################################
-    #
-    #   File          : Banner - Banner index in website
-    #   Project       : Game Magazine Project
-    #   Author        : Béo Sagittarius
-    #   Created       : 07/01/2015
-    #
-    ##################################################################### -->
 <!-- ================================== BANNER [start] ========================================== -->
 <div class="banner">
     <div class="container">

@@ -33,7 +33,7 @@ $(function () {
                                 interval = setInterval(
                                         function(){
                                             $('#login-modal').modal('hide');
-                                            location.href = 'index.php';
+                                            location.reload();
                                             clearInterval(interval);
                                         }
                                 , 3000);

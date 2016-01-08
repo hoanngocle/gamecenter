@@ -18,7 +18,15 @@
         ?>
             <div class='media'>
                 <div class='media-left'>
-                    <img class='media-object' style="width: 90px; height: 90px; "src='images/avatar/co.png' alt=''>
+                <?php
+                    $rs = get_user_by_id_list($user_id);
+                    if (mysqli_num_rows($rs) > 0 ) {
+                        $user = mysqli_fetch_array($rs, MYSQLI_ASSOC);
+                ?>
+                    <img class='media-object' style="width: 90px; height: 90px; "src='images/avatar/<?= $user['avatar'] ?>' alt=''>
+                <?php
+                    }
+                ?>
                 </div>
                 <div class='media-body'>
                     <h4 class='media-heading'><?= $author ?></h4>

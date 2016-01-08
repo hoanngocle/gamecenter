@@ -1,11 +1,3 @@
-<!--#####################################################################
-    #
-    #   File          : Header - Header index in website
-    #   Project       : Game Magazine Project
-    #   Author        : Béo Sagittarius
-    #   Created       : 07/01/2015
-    #
-    ##################################################################### -->
 <?php
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (60*60))) {
         // last login was more than 15 minutes ago

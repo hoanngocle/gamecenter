@@ -25,14 +25,14 @@ $(function () {
                 var $upd_lastname = $('#change_lastname').val();
                 var $upd_website = $('#change_website').val();
                 var $upd_bio = $('#change_bio').val();
-                
+
                 var $upd_day = $('select[name=changeday]').val();
                 var $upd_month = $('select[name=changemonth]').val();
                 var $upd_year = $('select[name=changeyear]').val();
 
                 var $upd_dateofbirth = "" +$upd_day + '-' + $upd_month + '-' + $upd_year + "";
                 var dataString = 'firstname=' + $upd_firstname
-                                + '&lastname=' + $upd_lastname 
+                                + '&lastname=' + $upd_lastname
                                 + '&website=' + $upd_website
                                 + '&bio=' + $upd_bio
                                 + '&dateofbirth=' + $upd_dateofbirth;
@@ -43,11 +43,11 @@ $(function () {
                 }  else if ($upd_day == "" || $upd_month == "" || $upd_year == ""){
                     msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is required");
                 } else if ($upd_day == "31" && ( $upd_month == "4" || $upd_month == "6" || $upd_month == "9" || $upd_month == "11" )){
-                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");                    
+                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");
                 } else if ($upd_month == "2" && ( $upd_day == "30" || $upd_day == "31" || $upd_day == "29")){
-                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");                   
-                } 
-                      
+                    msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Date Of Birth is invalid");
+                }
+
                 //==========================
                 else {
                     $.ajax({
@@ -64,17 +64,17 @@ $(function () {
                                             location.href = 'index.php';
                                             clearInterval(interval);
                                         }
-                                , 1500);             
-                            } else if(response.status == "FAIL"){              
+                                , 1500);
+                            } else if(response.status == "FAIL"){
                                 msgChange($('#div-update-msg'), $('#icon-update-msg'), $('#text-update-msg'), "error", "glyphicon-remove", "Update profile failed.");
 
                             }
                         }
-                    }); 
+                    });
                 }
                 return false;
                 break;
-                
+
             case "changepass-form":
                 var $cg_oldpass = $('#old_pass').val();
                 var $cg_newpass = $('#new_pass').val();
@@ -83,7 +83,7 @@ $(function () {
                 if ($cg_oldpass == "") {
                     msgChange($('#div-change-msg'), $('#icon-change-msg'), $('#text-change-msg'), "error", "glyphicon-remove", "Old password is required");
                 }else if ($cg_newpass == ""){
-                    msgChange($('#div-change-msg'), $('#icon-change-msg'), $('#text-change-msg'), "error", "glyphicon-remove", "New password is required"); 
+                    msgChange($('#div-change-msg'), $('#icon-change-msg'), $('#text-change-msg'), "error", "glyphicon-remove", "New password is required");
                 }else if($cg_renewpass == ""){
                     msgChange($('#div-change-msg'), $('#icon-change-msg'), $('#text-change-msg'), "error", "glyphicon-remove", "Confirm password is required");
                 }else {
@@ -101,7 +101,7 @@ $(function () {
                                             location.href = 'index.php';
                                             clearInterval(interval);
                                         }
-                                , 1500);            
+                                , 1500);
                             }else if(response.status == "FAIL"){
                                 msgChange($('#div-change-msg'), $('#icon-change-msg'), $('#text-change-msg'), "error", "glyphicon-remove", "Change password failed");
                             }else if(response.status == "CHECK FAIL") {
@@ -109,12 +109,12 @@ $(function () {
 
                             }
                         }
-                    });                  
+                    });
                 }
                 return false;
                 break;
-                
-            
+
+
             default:
                 return false;
         }

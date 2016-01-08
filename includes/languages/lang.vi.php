@@ -24,7 +24,7 @@ $lang['HEADER_CONTACTUS'] = 'Liên Hệ';
 
 $lang['FRONT_MENU_HOME'] = 'Trang Chủ';
 $lang['FRONT_MENU_NEWS'] = 'Tin Tức';
-$lang['FRONT_MENU_GAME'] = 'Trò chơi';
+$lang['FRONT_MENU_GAME'] = 'Trò Chơi';
 $lang['FRONT_MENU_GALLERY'] = 'Thư Viện Ảnh';
 $lang['FRONT_MENU_VIDEO'] = 'Video';
 $lang['FRONT_MENU_CONTACT_US'] = 'Liên Hệ';
